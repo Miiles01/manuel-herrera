@@ -17,7 +17,7 @@
 
   
     .mwg_effect105 {
-        padding: 50vh 0;
+        padding: 15vh 0;
         overflow: hidden;
     }
     .mwg_effect105 li {
@@ -460,14 +460,11 @@
       const centerY105 = window.innerHeight / 2;
 
       function updateMedia105() {
-          let closestIndex = -1;
+          let closestIndex = 0;
           let closestDist = Infinity;
 
           items105.forEach((item, i) => {
               const rect = item.getBoundingClientRect();
-              // Original logic: only detect if center is within the item
-              if (centerY105 < rect.top || centerY105 > rect.bottom) return;
-
               const dist = Math.abs(rect.top + rect.height / 2 - centerY105);
               if (dist < closestDist) {
                   closestDist = dist;
@@ -475,7 +472,7 @@
               }
           });
 
-          if (closestIndex !== currentIndex105 && closestIndex !== -1) {
+          if (closestIndex !== currentIndex105) {
               gsap.fromTo(medias105, { scale: 1.1 }, { scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2)" });
               items105.forEach((item, i) => {
                   gsap.set(item, { autoAlpha: i === closestIndex ? 1 : 0.35 });
@@ -484,11 +481,6 @@
                   gsap.set(img, { visibility: i === closestIndex ? "visible" : "hidden" });
               });
               currentIndex105 = closestIndex;
-          } else if (closestIndex === -1 && currentIndex105 !== -1) {
-              // Hide if outside bounds
-              mediaImgs105.forEach((img) => gsap.set(img, { visibility: "hidden" }));
-              items105.forEach((item) => gsap.set(item, { autoAlpha: 0.35 }));
-              currentIndex105 = -1;
           }
       }
 
