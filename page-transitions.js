@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const loader = document.getElementById("intro-loader");
-    const progressBar = document.getElementById("loader-progress");
+    const loaderGreeting = document.getElementById("loader-greeting");
     const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('cossette-loader/');
 
     // 1. ANIMACIÓN DE ENTRADA (Subpáginas)
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isIndex && loader) {
         // Nos aseguramos que inicie tapando la pantalla
         gsap.set(loader, { yPercent: 0 });
-        if (progressBar) gsap.set(progressBar, { scaleX: 1 });
+        if (loaderGreeting) gsap.set(loaderGreeting, { autoAlpha: 0 }); // Mantener limpio el telón en subpáginas
 
         // Esperamos a que cargue la ventana y levantamos el telón
         window.addEventListener('load', () => {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault();
                 
                 // Si había barra de progreso, la mostramos llena o vacía (mejor esconderla para transiciones rápidas)
-                if (progressBar) gsap.set(progressBar, { autoAlpha: 0 });
+                if (loaderGreeting) gsap.set(loaderGreeting, { autoAlpha: 0 });
 
                 // Bajar el loader para tapar la pantalla
                 gsap.to(loader, {
