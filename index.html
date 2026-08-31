@@ -25,11 +25,11 @@
     }
     .mwg_effect105 .medias {
         position: fixed;
-        top: 50%;
-        left: 2%;
-        transform: translateY(-50%);
+        top: calc(50% - 5vw);
+        left: 5%;
+        width: 15.5vw;
         height: 10vw;
-        aspect-ratio: 1.55;
+        z-index: 50;
     }
     .mwg_effect105 .medias img {
         width: 100%;
@@ -465,6 +465,7 @@
           });
 
           if (closestIndex !== currentIndex105) {
+              gsap.set(medias105, { visibility: "visible", autoAlpha: 1 });
               gsap.fromTo(medias105, {
                   scale: 1.1
               }, {
