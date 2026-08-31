@@ -17,23 +17,16 @@
 
   
     .mwg_effect105 {
-        padding: 20vh 0;
+        padding: 100vh 0;
         overflow: hidden;
     }
     .mwg_effect105 li {
         opacity: 0.35;
-        white-space: nowrap;
     }
     .mwg_effect105 .medias {
         position: fixed;
-        top: 50%;
-        left: 10%;
-        transform: translateY(-50%);
-        width: 30vw;
-        aspect-ratio: 1.2;
-        border-radius: 2vw;
-        overflow: hidden;
-        visibility: hidden; /* Hide by default */
+        height: 10vw;
+        aspect-ratio: 1.55;
     }
     .mwg_effect105 .medias img {
         width: 100%;
@@ -441,12 +434,8 @@
                   scrub: 0.3
               }
           });
-          // Note: The user requested x: offset (drifting to right), but since they are text-right, 
-          // drift left (towards image) usually looks better. Lets follow user snippet: x: offset.
-          // Wait, x: -offset drifts left. If it is right-aligned, drifting left is towards the image on the left.
-          // I will use x: -offset.
           tl.to(item, {
-              x: -offset105,
+              x: offset105,
               duration: 1,
               ease: "power1.inOut"
           });
@@ -475,8 +464,7 @@
               }
           });
 
-          if (closestIndex !== currentIndex105 && closestIndex !== -1) {
-              gsap.set(medias105, { visibility: "visible" });
+          if (closestIndex !== currentIndex105) {
               gsap.fromTo(medias105, {
                   scale: 1.1
               }, {
@@ -492,12 +480,6 @@
                   gsap.set(img, { visibility: i === closestIndex ? "visible" : "hidden" });
               });
               currentIndex105 = closestIndex;
-          } else if (closestIndex === -1 && currentIndex105 !== -1) {
-              // Hide completely when out of section
-              gsap.set(medias105, { visibility: "hidden" });
-              mediaImgs105.forEach(img => gsap.set(img, { visibility: "hidden" }));
-              items105.forEach(item => gsap.set(item, { autoAlpha: 0.35 }));
-              currentIndex105 = -1;
           }
       }
 
