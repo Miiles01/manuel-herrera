@@ -16,31 +16,7 @@
     }
 
   
-    .mwg_effect105 {
-        padding: 15vh 0;
-        overflow: hidden;
-    }
-    .mwg_effect105 li {
-        opacity: 0.35;
-        padding: 1.5rem 0; /* Replace gap with padding to avoid dead zones */
-    }
-    .mwg_effect105 .medias {
-        position: fixed;
-        top: calc(50% - 5vw);
-        left: 5%;
-        height: 10vw;
-        aspect-ratio: 1.55;
-        z-index: 50;
-    }
-    .mwg_effect105 .medias img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        visibility: hidden;
-    }
+    
 </style>
 
 </head>
@@ -133,23 +109,7 @@
     </div>
   </section>
 
-  <!-- Habilidades -->
-  <section class="mwg_effect105 relative bg-white">
-    <div class="px-8 md:px-48 lg:px-72 xl:px-[25vw] relative z-20">
-      <ul class="flex flex-col text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
-        <li>Branding</li>
-        <li>Analítica</li>
-        <li>Diseño</li>
-        <li>Estrategia</li>
-        <li>Funnels</li>
-        <li>Contenido</li>
-        <li>Social Media</li>
-      </ul>
-    </div>
-    <div class="medias pointer-events-none z-10">
-        <!-- JS will inject images -->
-    </div>
-  </section>
+  
 
 
   <!-- Mis trabajos -->
@@ -414,85 +374,7 @@
 
 
   
-    // Efecto 105 (Habilidades)
-    const root105 = document.querySelector(".mwg_effect105");
-    if(root105) {
-      const container105 = root105.querySelector("ul");
-      const medias105 = root105.querySelector(".medias");
-      
-      const tempImages = [
-        "https://picsum.photos/id/10/600/600",
-        "https://picsum.photos/id/20/600/600",
-        "https://picsum.photos/id/30/600/600",
-        "https://picsum.photos/id/40/600/600",
-        "https://picsum.photos/id/50/600/600",
-        "https://picsum.photos/id/60/600/600",
-        "https://picsum.photos/id/70/600/600"
-      ];
-      medias105.innerHTML = tempImages.map(url => `<img src="${url}" alt="Skill">`).join("");
-      
-      const mediaImgs105 = medias105.querySelectorAll("img");
-      const items105 = container105.querySelectorAll("li");
-      const offset105 = container105.clientWidth * 0.26;
-
-      items105.forEach(item => {
-          const tl = gsap.timeline({
-              scrollTrigger: {
-                  trigger: item,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: 0.3
-              }
-          });
-          tl.to(item, {
-              x: offset105,
-              duration: 1,
-              ease: "power1.inOut"
-          });
-          tl.to(item, {
-              x: 0,
-              duration: 1,
-              ease: "power1.inOut"
-          });
-      });
-
-      let currentIndex105 = -1;
-      const centerY105 = window.innerHeight / 2;
-
-      function updateMedia105() {
-          let closestIndex = 0;
-          let closestDist = Infinity;
-
-          items105.forEach((item, i) => {
-              const rect = item.getBoundingClientRect();
-              const dist = Math.abs(rect.top + rect.height / 2 - centerY105);
-              if (dist < closestDist) {
-                  closestDist = dist;
-                  closestIndex = i;
-              }
-          });
-
-          if (closestIndex !== currentIndex105) {
-              gsap.set(medias105, { autoAlpha: 1 });
-              gsap.fromTo(medias105, { scale: 1.1 }, { scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2)" });
-              items105.forEach((item, i) => {
-                  gsap.set(item, { autoAlpha: i === closestIndex ? 1 : 0.35 });
-              });
-              mediaImgs105.forEach((img, i) => {
-                  gsap.set(img, { visibility: i === closestIndex ? "visible" : "hidden" });
-              });
-              currentIndex105 = closestIndex;
-          }
-      }
-
-      ScrollTrigger.create({
-          trigger: root105,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: updateMedia105
-      });
-      updateMedia105();
-    }</script>
+    </script>
   <script src="page-transitions.js"></script>
 </body>
 </html>
