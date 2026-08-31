@@ -112,6 +112,28 @@
   
 
 
+
+  <!-- Habilidades (Effect 094) -->
+  <section class="mwg_effect094 bg-white text-black font-bold tracking-tighter">
+      <div class="container">
+          <p>Mis Habilidades <span>Estrategia y Diseño</span></p>
+          <div class="cards">
+              <img class="card" src="https://picsum.photos/id/10/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/20/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/30/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/40/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/50/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/60/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/70/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/80/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/90/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/100/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/110/600/600" alt="">
+              <img class="card" src="https://picsum.photos/id/120/600/600" alt="">
+          </div>
+      </div>
+  </section>
+
   <!-- Mis trabajos -->
   <section class="py-32 px-8 md:px-24 lg:px-32 mb-32">
     <h2 class="text-3xl md:text-4xl font-bold mb-16">Mis trabajos</h2>
@@ -374,7 +396,69 @@
 
 
   
-    </script>
+  
+    // Efecto 094 (Habilidades)
+    {
+      const root = document.querySelector('.mwg_effect094')
+      if (root) {
+        const container = root.querySelector('.container')
+        const cardsContainer = root.querySelector('.cards')
+        const cards = root.querySelectorAll('.card')
+        const distance = cardsContainer.clientWidth - window.innerWidth
+        const isPortrait = window.innerWidth < window.innerHeight
+
+        const scrollTween = gsap.to(cardsContainer, {
+            x: - distance,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: container,
+                pin: true,
+                scrub: true,
+                start: 'top top',
+                end: '+=' + distance
+            }
+        })
+
+        cards.forEach((card, i) => {
+            const sign = i % 2 === 0 ? 1 : -1
+            const rotation = (Math.random() - 0.5) * 6
+            const amplitude = isPortrait ? 0.38 : 0.48
+
+            gsap.fromTo(card, {
+                rotation: rotation
+            }, {
+                rotation: -rotation,
+                y: () => sign * -amplitude * window.innerHeight,
+                yPercent: () => sign * 50,
+                yoyo: true,
+                repeat: 1,
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: card,
+                    containerAnimation: scrollTween,
+                    start: 'left 90%',
+                    end: 'right 10%',
+                    scrub: true,
+                }
+            })
+            gsap.to(card, {
+                scale: 1.4,
+                yoyo: true,
+                repeat: 1,
+                ease: 'back.inOut(3)',
+                scrollTrigger: {
+                    trigger: card,
+                    containerAnimation: scrollTween,
+                    start: 'left 90%',
+                    end: 'right 10%',
+                    scrub: true,
+                }
+            })
+        })
+      }
+    }
+
+  </script>
   <script src="page-transitions.js"></script>
 </body>
 </html>
