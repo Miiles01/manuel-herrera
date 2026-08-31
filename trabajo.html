@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio de Manuel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { 
+      margin: 0; 
+      background-color: #ffffff; 
+      font-family: 'Manrope', sans-serif;
+    }
+    .mwg_effect105 {
+        overflow: hidden;
+    }
+    .mwg_effect105 .container {
+        list-style-type: none;
+    }
+    .mwg_effect105 li {
+        opacity: 0.35;
+    }
+    .mwg_effect105 .medias {
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        border-radius: 1vw;
+        overflow: hidden;
+    }
+    .mwg_effect105 .medias img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+    }
+  </style>
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);</script>
+
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+<script src="portfolioProjects.js"></script>
+</head>
+<body class="antialiased">
+  
+
+
+  
+
+  <!-- Logo (Izquierda) -->
+    <!-- Logo (Izquierda) -->
+  <div class="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
+    <a href="index.html" class="font-bold text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
+      Manuel Herrera
+    </a>
+  </div>
+
+  <!-- Botón Hablemos (Derecha Extrema) -->
+    <!-- Botón Hablemos (Derecha Extrema) -->
+  <div class="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
+    <a href="contacto.html" class="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
+      Hablemos
+    </a>
+  </div>
+
+  <!-- Contenedor del Menú Desplegable (Navbar) - A la izquierda de Hablemos -->
+  <div id="menu-container" class="fixed top-8 right-[100px] md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-72 md:w-96 rounded-md pointer-events-auto shadow-sm transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden max-h-[50px]">
+    <!-- Botón Superior -->
+    <button id="menu-btn" class="px-6 h-[50px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
+      <span id="menu-text" class="text-sm font-medium">Menú</span>
+      <div class="flex flex-col gap-1.5 w-8 relative">
+        <div id="line-1" class="h-px bg-gray-600 w-full transition-transform duration-300"></div>
+        <div id="line-2" class="h-px bg-gray-600 w-full transition-transform duration-300"></div>
+      </div>
+    </button>
+
+    <!-- Links del Menú -->
+    <nav id="menu-links" class="flex flex-col gap-6 px-8 pt-6 pb-12 text-2xl font-bold text-gray-900 opacity-0 transition-opacity duration-300">
+      <a href="index.html" class="hover:text-gray-500 transition-colors">Inicio</a>
+      <a href="trabajo.html" class="hover:text-gray-500 transition-colors">Proyectos</a>
+      <a href="#" class="hover:text-gray-500 transition-colors">Sobre mí</a>
+      <a href="contacto.html" class="hover:text-gray-500 transition-colors">Contacto</a>
+    </nav>
+  </div>
+        
+
+
+  
+  <main class="flex-1 px-6 md:px-12 lg:px-20 container mx-auto pt-36 md:pt-48 pb-20">
+    <!-- Header Section -->
+    <section class="mb-20 md:mb-32">
+      <p class="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero">
+        Pensamos con propósito para marcas que buscan autenticidad y escalabilidad.
+      </p>
+      <h1 class="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black fade-up-hero">
+        Proyectos
+      </h1>
+    </section>
+
+    <!-- Projects List -->
+    <section id="projects-container" class="pb-12">
+      <!-- Injected by JS -->
+    </section>
+  </main>
+<!-- Footer -->
+  <footer class="bg-gradient-to-b from-[#FFFFFF] to-[#F8F9FD] py-24 md:py-32 px-8 md:px-12 text-center overflow-hidden relative z-0">
+    <div class="w-full flex flex-col items-center justify-center relative z-10 mix-blend-difference">
+      <h2 id="footer-hablemos" class="text-white text-[34vw] font-medium leading-none tracking-tighter mb-12" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);">
+        Manu
+      </h2>
+      <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl text-gray-500 text-lg md:text-xl">
+        <p class="mb-6 md:mb-0 hover:text-black transition-colors cursor-pointer">contmanuel77@gmail.com</p>
+        <div class="flex gap-8">
+          <a href="https://www.linkedin.com/in/manuel-herrera-perfil/" target="_blank" class="hover:text-black transition-colors">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-24 text-gray-400 text-sm">
+      <p>&copy; 2026 Manuel Herrera. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts y Animaciones -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+  
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 5. Animación tipo "Manu" para la palabra "Hablemos." en el footer
+    const footerText = new SplitType("#footer-hablemos", { types: "chars" });
+    gsap.set(footerText.chars, { yPercent: 100 });
+
+    gsap.to(footerText.chars, {
+      yPercent: 0,
+      stagger: { each: 0.05, from: "random" },
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#footer-hablemos",
+        start: "top 90%",
+      }
+    });
+
+    // 5. Lógica del Menú
+    const menuBtn = document.getElementById("menu-btn");
+    const menuContainer = document.getElementById("menu-container");
+    const menuLinks = document.getElementById("menu-links");
+    const menuText = document.getElementById("menu-text");
+    const line1 = document.getElementById("line-1");
+    const line2 = document.getElementById("line-2");
+    let isMenuOpen = false;
+
+    if(menuBtn) {
+      menuBtn.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+          menuContainer.classList.remove("max-h-[50px]");
+          menuContainer.classList.add("max-h-[600px]");
+          menuLinks.classList.remove("opacity-0");
+          menuLinks.classList.add("opacity-100", "delay-100");
+          menuText.textContent = "Cerrar";
+          line1.style.transform = "translateY(3.5px) rotate(15deg)";
+          line2.style.transform = "translateY(-3.5px) rotate(-15deg)";
+        } else {
+          menuContainer.classList.remove("max-h-[600px]");
+          menuContainer.classList.add("max-h-[50px]");
+          menuLinks.classList.remove("opacity-100", "delay-100");
+          menuLinks.classList.add("opacity-0");
+          menuText.textContent = "Menú";
+          line1.style.transform = "translateY(0) rotate(0)";
+          line2.style.transform = "translateY(0) rotate(0)";
+        }
+      });
+    }
+
+    // Proyectos render logic
+    const renderProjects = () => {
+      const container = document.getElementById("projects-container");
+      const projects = Object.values(window.portfolioProjects);
+      
+      projects.forEach((proj, i) => {
+        const cover = proj.previewImages[0];
+        const secondary = [proj.previewImages[1], proj.previewImages[2]];
+        const slug = proj.slug;
+        const title = proj.title;
+        const subtitle = proj.subtitle.es;
+        
+        let html = `<div class="mb-28 md:mb-40 group project-item">
+          <!-- Main Cover -->
+          <a href="proyecto.html?id=${slug}" class="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-gray-100 transition-all project-fade-up">
+            <div class="aspect-[16/9] w-full overflow-hidden">
+              <img src="proyectos/${proj.folder}/${cover}" alt="${title}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+            </div>
+          </a>`;
+          
+        if(secondary[0] && secondary[1]) {
+          html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+            <a href="proyecto.html?id=${slug}" class="block overflow-hidden rounded-[2rem] bg-gray-100 transition-all project-fade-up">
+              <div class="aspect-[4/5] overflow-hidden">
+                <img src="proyectos/${proj.folder}/${secondary[0]}" alt="${title} preview 1" class="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
+              </div>
+            </a>
+            <a href="proyecto.html?id=${slug}" class="block overflow-hidden rounded-[2rem] bg-gray-100 transition-all project-fade-up">
+              <div class="aspect-[4/5] overflow-hidden">
+                <img src="proyectos/${proj.folder}/${secondary[1]}" alt="${title} preview 2" class="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
+              </div>
+            </a>
+          </div>`;
+        }
+        
+        html += `<!-- Project Meta Info -->
+          <div class="px-2 md:px-4 flex flex-col md:flex-row md:items-end justify-between gap-4 project-fade-up">
+            <div class="max-w-2xl">
+              <a href="proyecto.html?id=${slug}" class="inline-flex items-center gap-2 group/title">
+                <h3 class="text-3xl md:text-4xl font-normal tracking-tight leading-tight text-black transition-colors hover:text-blue-600">${title}</h3>
+              </a>
+              <p class="text-base md:text-lg font-light text-black/70 mt-2 leading-relaxed tracking-normal">${subtitle}</p>
+            </div>
+            <a href="proyecto.html?id=${slug}" class="inline-flex items-center gap-1.5 text-xs font-normal uppercase tracking-widest text-gray-400 hover:text-black transition-colors pt-2 md:pt-0">
+              Ver proyecto completo &rarr;
+            </a>
+          </div>
+        </div>`;
+        
+        container.innerHTML += html;
+      });
+      
+      // GSAP animate the newly added elements
+      gsap.utils.toArray(".project-fade-up").forEach(el => {
+        gsap.fromTo(el, { opacity: 0, y: 35 }, {
+          opacity: 1, y: 0, duration: 0.9, ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%"
+          }
+        });
+      });
+    };
+    
+    // Call render once data is loaded
+    if(document.readyState === "complete") {
+      renderProjects();
+    } else {
+      window.addEventListener("load", renderProjects);
+    }</script>
+
+
+
+
+</body></html>
