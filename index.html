@@ -457,8 +457,6 @@
 
           items105.forEach((item, i) => {
               const rect = item.getBoundingClientRect();
-              if (centerY105 < rect.top || centerY105 > rect.bottom) return;
-
               const dist = Math.abs(rect.top + rect.height / 2 - centerY105);
               if (dist < closestDist) {
                   closestDist = dist;
