@@ -327,6 +327,7 @@
     lenis.stop(); // Detener el scroll mientras carga
     
     // 3.1 Animación Cíclica de Textos ("Hola", "Hi", "Bonjour")
+    let isLoaded = false;
     const greetings = ["Hola", "Hi", "Bonjour"];
     const greetingEl = document.getElementById('loader-greeting');
     let currentGreetingIndex = 0;
@@ -366,7 +367,7 @@
     playNextGreeting();
 
     // 3.3 Función para culminar el loader y revelar la página
-    let isLoaded = false;
+
     const finishLoader = () => {
       if (isLoaded) return;
       isLoaded = true;
