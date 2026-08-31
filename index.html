@@ -17,18 +17,19 @@
 
   
     .mwg_effect105 {
-        padding: 10vh 0 60vh 0;
+        padding: 50vh 0;
         overflow: hidden;
     }
     .mwg_effect105 li {
         opacity: 0.35;
+        padding: 1.5rem 0; /* Replace gap with padding to avoid dead zones */
     }
     .mwg_effect105 .medias {
         position: fixed;
         top: calc(50% - 5vw);
         left: 5%;
-        width: 15.5vw;
         height: 10vw;
+        aspect-ratio: 1.55;
         z-index: 50;
     }
     .mwg_effect105 .medias img {
@@ -135,7 +136,7 @@
   <!-- Habilidades -->
   <section class="mwg_effect105 relative bg-white">
     <div class="px-8 md:px-48 lg:px-72 xl:px-[25vw] relative z-20">
-      <ul class="flex flex-col gap-12 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
+      <ul class="flex flex-col text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
         <li>Branding</li>
         <li>Analítica</li>
         <li>Diseño</li>
@@ -456,6 +457,9 @@
 
           items105.forEach((item, i) => {
               const rect = item.getBoundingClientRect();
+              // Original logic: only detect if center is within the item
+              if (centerY105 < rect.top || centerY105 > rect.bottom) return;
+
               const dist = Math.abs(rect.top + rect.height / 2 - centerY105);
               if (dist < closestDist) {
                   closestDist = dist;
@@ -463,16 +467,8 @@
               }
           });
 
-          if (closestIndex !== currentIndex105) {
-              gsap.set(medias105, { visibility: "visible", autoAlpha: 1 });
-              gsap.fromTo(medias105, {
-                  scale: 1.1
-              }, {
-                  scale: 1,
-                  rotation: 0,
-                  duration: 0.3,
-                  ease: "back.out(2)"
-              });
+          if (closestIndex !== currentIndex105 && closestIndex !== -1) {
+              gsap.fromTo(medias105, { scale: 1.1 }, { scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2)" });
               items105.forEach((item, i) => {
                   gsap.set(item, { autoAlpha: i === closestIndex ? 1 : 0.35 });
               });
@@ -480,6 +476,11 @@
                   gsap.set(img, { visibility: i === closestIndex ? "visible" : "hidden" });
               });
               currentIndex105 = closestIndex;
+          } else if (closestIndex === -1 && currentIndex105 !== -1) {
+              // Hide if outside bounds
+              mediaImgs105.forEach((img) => gsap.set(img, { visibility: "hidden" }));
+              items105.forEach((item) => gsap.set(item, { autoAlpha: 0.35 }));
+              currentIndex105 = -1;
           }
       }
 
