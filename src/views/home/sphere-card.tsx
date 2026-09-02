@@ -144,16 +144,6 @@ export const SphereCard = memo(({
             }}
           />
 
-          <h2 className="pointer-events-none absolute left-[4vmin] top-[4vmin] z-[4] m-0 whitespace-nowrap text-left text-[var(--sr-heading-1)] font-normal leading-[0.85] text-white">
-            <ScrollLetters
-              text={headingTop}
-              p={p}
-              styleFn={blockLetterStyle}
-              indexOffset={0}
-              totalOverride={total}
-            />
-          </h2>
-
           <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-white">
             {headingBottom.map((line, i) => (
               <span key={i}>
