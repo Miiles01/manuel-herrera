@@ -33,8 +33,8 @@ export function PortfolioHeader() {
 
         <nav className={`flex flex-col gap-6 px-8 pt-6 pb-12 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
           <TransitionLink href="/" className="hover:text-gray-500 transition-colors">Inicio</TransitionLink>
-          <TransitionLink href="/trabajo" className="hover:text-gray-500 transition-colors">Mis trabajos</TransitionLink>
-          <TransitionLink href="/contacto" className="hover:text-gray-500 transition-colors">Contactar</TransitionLink>
+          <TransitionLink href="/trabajo" className="hover:text-gray-500 transition-colors">Trabajo</TransitionLink>
+          <TransitionLink href="/contacto" className="hover:text-gray-500 transition-colors">Contacto</TransitionLink>
         </nav>
       </div>
     </>
