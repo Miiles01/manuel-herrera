@@ -88,7 +88,7 @@
   --color-watermark: var(--watermark);
 
   /* Zen Kaku Gothic New (geometric sans) + Marck Script (handwritten accent) */
-  --font-sans: var(--font-zen);
+  --font-sans: var(--font-manrope);
   --font-script: var(--font-marck);
 
   /* Radii — viewport-proportional, matching the original card geometry. */
@@ -193,6 +193,3 @@ html.lenis body {
   animation: marquee 25s linear infinite;
 }
 
-body {
-  font-family: var(--font-manrope), sans-serif;
-}

@@ -47,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${zenKaku.variable} ${marckScript.variable} ${manrope.variable}`}>
+      <body className={`${marckScript.variable} ${manrope.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
