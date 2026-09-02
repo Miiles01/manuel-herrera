@@ -32,7 +32,7 @@ export function PortfolioFooter() {
         
         <div className="flex justify-between items-center w-full mb-16 md:mb-24">
           <p className="text-2xl md:text-4xl font-medium tracking-tight text-left">Trabajemos juntos</p>
-          <a href="/contacto.html" className="bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-lg md:text-xl hover:scale-105 transition-transform inline-flex items-center justify-center">
+          <a href="/contacto" className="bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:scale-105 transition-transform inline-flex items-center justify-center">
             Contactar
           </a>
         </div>

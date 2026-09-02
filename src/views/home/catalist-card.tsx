@@ -68,12 +68,12 @@ export const CatalistCard = ({ variant, content, bg }: CatalistCardProps) => {
           {dark ? (
             <h3 className="text-[4.6vmin] font-normal leading-[1.05]">
               {content.lead}
-              <strong className="font-bold text-white">{content.leadStrong}</strong>
+              <strong className="font-semibold text-white">{content.leadStrong}</strong>
             </h3>
           ) : (
             <p className="text-[3.1vmin] font-normal leading-[1.2] text-paper">
               {content.lead}
-              <strong className="font-bold text-white">{content.leadStrong}</strong>
+              <strong className="font-semibold text-white">{content.leadStrong}</strong>
             </p>
           )}
         </div>

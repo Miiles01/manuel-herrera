@@ -71,7 +71,7 @@ export function PortfolioSkills() {
   }, { scope: rootRef });
 
   return (
-    <section ref={rootRef} className="mwg_effect094 bg-white text-black font-bold tracking-tighter relative z-20" style={{ overflow: 'hidden', position: 'relative' }}>
+    <section ref={rootRef} className="mwg_effect094 bg-white text-black font-semibold tracking-tighter relative z-20" style={{ overflow: 'hidden', position: 'relative' }}>
       <div className="skills-container flex flex-col justify-center w-full" style={{ height: '100vh' }}>
           <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[5vh] w-full whitespace-nowrap z-10 m-0 p-0">
             Mis Habilidades <span className="text-[#999]">Estrategia y Diseño</span>

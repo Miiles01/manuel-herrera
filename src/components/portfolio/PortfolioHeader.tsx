@@ -16,7 +16,7 @@ export function PortfolioHeader() {
 
       {/* Botón Hablemos (Derecha Extrema) */}
       <div className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
-        <Link href="/contacto.html" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
+        <Link href="/contacto" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
           Hablemos
         </Link>
       </div>
@@ -31,9 +31,10 @@ export function PortfolioHeader() {
           </div>
         </button>
 
-        <nav className={`flex flex-col gap-6 px-8 pt-6 pb-12 text-2xl font-bold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
-          <Link href="/trabajo.html" className="hover:text-gray-500 transition-colors">Mis trabajos</Link>
-          <Link href="/contacto.html" className="hover:text-gray-500 transition-colors">Contactar</Link>
+        <nav className={`flex flex-col gap-6 px-8 pt-6 pb-12 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
+          <Link href="/" className="hover:text-gray-500 transition-colors">Inicio</Link>
+          <Link href="/trabajo" className="hover:text-gray-500 transition-colors">Mis trabajos</Link>
+          <Link href="/contacto" className="hover:text-gray-500 transition-colors">Contactar</Link>
         </nav>
       </div>
     </>

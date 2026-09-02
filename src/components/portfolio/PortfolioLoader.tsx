@@ -103,7 +103,7 @@ export function PortfolioLoader() {
 
   return (
     <div ref={loaderRef} className="fixed inset-0 z-[200] flex items-center justify-center bg-black will-change-transform">
-      <h2 ref={greetingRef} className="text-white text-5xl md:text-7xl font-bold tracking-tighter" style={{clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'}}></h2>
+      <h2 ref={greetingRef} className="text-white text-5xl md:text-7xl font-semibold tracking-tighter" style={{clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'}}></h2>
     </div>
   );
 }
