@@ -11,12 +11,12 @@ const Strip = ({ items }: MarqueeProps) => (
   <>
     {items.map((item, i) => (
       <Fragment key={i}>
-        <span className="px-[3vw] text-[7vw] tracking-[-0.03em] text-black">
+        <span className="px-[3vw] text-[11vw] tracking-[-0.03em] text-black">
           {item}
         </span>
         <span
           aria-hidden="true"
-          className="size-[1.5vw] shrink-0 translate-y-[0.8vw] rounded-full border-2 border-black"
+          className="size-[1.5vw] shrink-0 translate-y-[1.2vw] rounded-full border-2 border-black"
         />
       </Fragment>
     ))}

@@ -90,10 +90,10 @@ export const homeContent: ShowreelContent = {
   ],
   headerCta: { label: "Get Started", href: "#get-started" },
   marquee: [
-    "Templates that work",
-    "Design that sells",
-    "Speed without compromise",
-    "AI prompts on another level",
+    "Branding",
+    "Redes Sociales",
+    "Web Coding",
+    "Analítica",
   ],
   hero: {
     lines: ["Prompts that", "think ahead"],
@@ -124,7 +124,7 @@ export const homeContent: ShowreelContent = {
     leadStrong: "all through one intelligent platform.",
   },
   carouselCta: {
-    button: "Explore the collection",
+    button: "Explorar toda la colección",
     href: "#templates",
   },
   sphere: {

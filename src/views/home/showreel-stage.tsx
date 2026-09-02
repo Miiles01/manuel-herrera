@@ -329,7 +329,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           >
             <a
               href={content.carouselCta.href}
-              className="pointer-events-auto inline-flex items-center justify-center rounded-btn bg-ink px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-paper"
+              className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-ink px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-paper"
             >
               {content.carouselCta.button}
             </a>

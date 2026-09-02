@@ -39,7 +39,7 @@ export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: C
     <p className="m-0 max-w-[26vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-paper/70">{sub}</p>
     <a
       href={href}
-      className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-btn bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] leading-none text-ink"
+      className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] leading-none text-ink"
     >
       {button}
     </a>
