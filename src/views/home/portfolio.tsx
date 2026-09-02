@@ -16,21 +16,10 @@ const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => (
   // `translateZ(0)` + `backface-visibility:hidden` keep each card (and its video)
   // on a stable GPU layer so the horizontal track-pan is a pure composite — no
   // per-frame re-raster flicker as the cards slide.
-  <article className="relative flex h-full w-[62vw] shrink-0 flex-col justify-between overflow-hidden rounded-pf bg-pf-card p-[3.5vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)]">
+  <article className="relative flex h-full w-[62vw] shrink-0 flex-col justify-between overflow-hidden rounded-pf bg-[#1e1e1e] p-[3.5vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)]">
     {/* Each clip is multi-MB; only mount it (so the browser fetches + autoplays)
         once the section is near, keeping it out of the initial page load. */}
-    {active && (
-      <video
-        className="absolute inset-0 z-0 size-full object-cover [backface-visibility:hidden] [transform:translateZ(0)]"
-        src={item.video}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
-    )}
+    
     {/* All tags on one line: client · year · discipline. */}
     <div className="relative z-[2] flex flex-wrap items-center gap-[1.4vmin] text-[1.7vmin] opacity-90">
       <span>{item.client}</span>
