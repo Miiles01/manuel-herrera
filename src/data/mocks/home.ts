@@ -92,7 +92,7 @@ export const homeContent: ShowreelContent = {
   marquee: [
     "Branding",
     "Redes Sociales",
-    "Web Coding",
+    "Vibe Coding",
     "Analítica",
   ],
   hero: {
