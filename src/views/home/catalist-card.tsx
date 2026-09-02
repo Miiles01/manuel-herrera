@@ -29,9 +29,8 @@ export const CatalistCard = ({ variant, content, bg }: CatalistCardProps) => {
   const ink = dark ? "text-cc-dark-ink" : "text-cc-light-ink";
 
   return (
-    <div className={`relative size-full overflow-hidden rounded-card ${ink}`}>
-      <Image src={bg} alt="" fill sizes="42vmin" className="object-cover" />
-
+    <div className="relative size-full overflow-hidden rounded-card bg-[#1e1e1e]">
+      
       <div className="absolute inset-0 flex flex-col p-[3.2vmin] font-sans">
         <div className="flex items-center justify-between">
           <Logo />

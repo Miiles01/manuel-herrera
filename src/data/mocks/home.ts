@@ -96,26 +96,20 @@ export const homeContent: ShowreelContent = {
     "Analítica",
   ],
   hero: {
-    lines: ["Prompts that", "think ahead"],
-    templatesTitle: "Browse our\ntemplates",
+    lines: ["Ideas que", "conectan"],
+    templatesTitle: "Creamos\nexperiencias",
     bottomBlock: {
-      leftText: "Turn engagement into conversions, trends into traffic, and views into revenue. All with a team that knows how to make social media work for you.",
-      rightText: "From crafting scroll-stopping content to engineering algorithms we help your brand break through the noise and go viral.",
-      avatars: [
-        "https://i.pravatar.cc/100?img=1",
-        "https://i.pravatar.cc/100?img=2",
-        "https://i.pravatar.cc/100?img=3",
-        "https://i.pravatar.cc/100?img=4",
-        "https://i.pravatar.cc/100?img=5",
-      ]
+      leftText: "Diseño minimalista y estrategia digital.",
+      rightText: "Desarrollo y creatividad.",
+      avatars: []
     }
   },
   catalistDark: {
-    url: "Catalist.co.uk",
-    pillLabel: "Catalist Lendings",
-    pillTitle: "Apply for Loan",
-    lead: "The Ultimate Engine for ",
-    leadStrong: "Business Lending",
+    url: "estrategia",
+    pillLabel: "Marketing",
+    pillTitle: "Redes Sociales",
+    lead: "Impulsando marcas con ",
+    leadStrong: "propósito",
   },
   catalistLight: {
     url: "Catalist.co.uk",

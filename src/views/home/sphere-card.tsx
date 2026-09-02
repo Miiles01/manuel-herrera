@@ -91,7 +91,7 @@ export const SphereCard = memo(({
       <div
         aria-hidden="true"
         className="absolute inset-0 overflow-hidden rounded-card"
-        style={{ background: "var(--card-violet)" }}
+        style={{ background: "#1e1e1e" }}
       >
         <div className="flex size-full flex-col p-[3.2vmin] font-sans text-paper">
           <div className="flex items-center justify-between">
