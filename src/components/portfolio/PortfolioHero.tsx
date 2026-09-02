@@ -90,7 +90,7 @@ export function PortfolioHero() {
           </h1>
           
           {/* Subtextos inferiores */}
-          <div className="flex justify-between w-full text-xs font-medium text-gray-500 px-2 mt-2">
+          <div className="flex justify-between w-full text-sm font-medium text-gray-500 px-2 mt-2">
             <span>Est. 2026</span>
             <span>México</span>
           </div>
