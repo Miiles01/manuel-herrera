@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { memo, useEffect } from "react";
 import { animated, useSpring, to, type SpringValue } from "@react-spring/web";
-import { HeroGradient } from "@/components/3d/hero-gradient";
 import { ScrollLetters } from "@/views/home/scroll-letters";
 import {
   heroLetterStyle,
@@ -58,8 +57,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
   }, [tiltApi]);
 
   return (
-    <div className="relative size-full overflow-hidden rounded-card bg-black">
-      <HeroGradient className="absolute inset-0 z-[1]" active={active} />
+    <div className="relative size-full overflow-hidden rounded-card bg-[#1e1e1e]">
 
       {/* Headline — top-left, sized + tracked to match the marquee. Letters
           descend + blur out on scroll (soft, no hard clip); the whole block also
@@ -138,31 +136,9 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
             <p className="opacity-90 leading-relaxed text-[16px] max-sm:text-[14px]">
               {bottomBlock.leftText}
             </p>
-            <div className="flex items-center gap-4 max-sm:flex-col max-sm:items-stretch max-sm:gap-3">
-              <button className="inline-flex items-center justify-center px-8 py-3.5 max-sm:px-5 max-sm:py-3 rounded-btn bg-white/10 backdrop-blur-md border border-white/20 transition-colors hover:bg-white/20 text-[17px] max-sm:text-[15px] leading-none">
-                See Pricing
-              </button>
-              <button className="inline-flex items-center justify-center px-8 py-3.5 max-sm:px-5 max-sm:py-3 rounded-btn bg-white text-black font-medium transition-colors hover:bg-white/90 text-[17px] max-sm:text-[15px] leading-none">
-                Start Journey
-              </button>
-            </div>
           </div>
-
-          {/* Divider + social-proof row — desktop/tablet only. On a phone the card
-              is too narrow for this second row, so it's dropped to keep the hero
-              copy + buttons clean (they fade out on scroll anyway). */}
-          <div className="w-full h-[1px] bg-white/30 my-2 max-sm:hidden" />
-
           <div className="flex justify-between items-end w-full max-sm:hidden">
-            <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full py-1.5 pl-2 pr-4 pointer-events-auto">
-              <div className="flex -space-x-2">
-                {bottomBlock.avatars.map((src, i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={i} src={src} alt="" className="w-8 h-8 rounded-full border border-white/10 object-cover" />
-                ))}
-              </div>
-              <span className="text-[14px] font-medium opacity-90 pr-2">Trusted by 4000+ creatives</span>
-            </div>
+            <div></div>
             <p className="max-w-lg opacity-90 leading-relaxed text-right text-[15px] pointer-events-auto">
               {bottomBlock.rightText}
             </p>
