@@ -171,13 +171,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           (z-40) and nav (z-100), so the aurora wraps the corners while the
           sphere/cards show through the clear centre. Fixed → stays put while the
           blocks scroll over it (ADR-0018). */}
-      <animated.div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-30"
-        style={{ opacity: s.aurora }}
-      >
-        <FlameBackground className="absolute inset-0" active={vis.aurora} />
-      </animated.div>
+
 
       <div ref={trackRef} className="relative" style={{ height: `${geo.trackVh}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden p-[4vmin]">
