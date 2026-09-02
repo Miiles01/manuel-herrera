@@ -11,6 +11,7 @@ import { Marquee } from "@/views/home/marquee";
 import { Portfolio } from "@/views/home/portfolio";
 import { CtaBlock } from "@/views/home/cta-block";
 import type { ShowreelContent } from "@/data/mocks/home";
+import { TransitionLink } from "@/components/ui/transition-link";
 import {
   GRID_ITEMS,
   card1Width,
@@ -327,12 +328,12 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
               transform: s.ctaTranslate,
             }}
           >
-            <a
+            <TransitionLink
               href={content.carouselCta.href}
               className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-ink px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-paper"
             >
               {content.carouselCta.button}
-            </a>
+            </TransitionLink>
           </animated.div>
         </div>
       </div>

@@ -119,7 +119,7 @@ export const homeContent: ShowreelContent = {
   },
   carouselCta: {
     button: "Explorar toda la colección",
-    href: "#templates",
+    href: "/trabajo",
   },
   sphere: {
     headingTop: "Beyond",
