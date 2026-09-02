@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import Link from 'next/link';
+import { TransitionLink } from "@/components/ui/transition-link";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SplitType from 'split-type';
@@ -33,9 +33,9 @@ export function PortfolioFooter() {
         
         <div className="flex justify-between items-center w-full mb-16 md:mb-24">
           <p className="text-2xl md:text-4xl font-medium tracking-tight text-left">Trabajemos juntos</p>
-          <Link href="/contacto" className="bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:scale-105 transition-transform inline-flex items-center justify-center">
+          <TransitionLink href="/contacto" className="bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:scale-105 transition-transform inline-flex items-center justify-center">
             Contactar
-          </Link>
+          </TransitionLink>
         </div>
         
         <div className="flex flex-wrap justify-center items-start gap-12 md:gap-24 w-full text-gray-400 text-lg mb-12 text-center">

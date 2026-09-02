@@ -1,7 +1,7 @@
 "use client";
 
 import { animated, type SpringValue } from "@react-spring/web";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/transition-link";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { PortfolioItem } from "@/data/mocks/home";
 import { portfolioTransform, pfTrackTransform } from "@/utils/showreel/timeline";

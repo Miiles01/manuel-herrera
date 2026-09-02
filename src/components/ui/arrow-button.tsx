@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/transition-link";
 import { useRef } from "react";
 import { Hover } from "@/components/animation/springs/hover";
 
@@ -20,7 +20,7 @@ export const ArrowButton = ({ href, label, className }: ArrowButtonProps) => {
   const ref = useRef<HTMLAnchorElement>(null);
 
   return (
-    <Link
+    <TransitionLink
       ref={ref}
       href={href}
       className={`inline-flex items-center justify-between gap-6 rounded-btn bg-ink py-1 pl-6 pr-1 font-sans text-[16px] font-medium leading-[120%] text-white ${
@@ -44,6 +44,6 @@ export const ArrowButton = ({ href, label, className }: ArrowButtonProps) => {
           className="size-4"
         />
       </Hover>
-    </Link>
+    </TransitionLink>
   );
 };

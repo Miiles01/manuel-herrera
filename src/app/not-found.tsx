@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/transition-link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
@@ -31,12 +31,12 @@ export default function NotFound() {
           Algo salió mal o la página que estás buscando no existe.
         </p>
         <div className="fade-up opacity-0">
-          <Link 
+          <TransitionLink 
             href="/" 
             className="inline-flex items-center justify-center bg-black text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-gray-800 hover:scale-105 transition-all"
           >
             Volver al inicio
-          </Link>
+          </TransitionLink>
         </div>
       </main>
 

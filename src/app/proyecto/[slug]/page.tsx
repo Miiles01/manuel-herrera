@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/transition-link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,9 +89,9 @@ export default function ProyectoPage() {
         </div>
         
         <div className="px-6 md:px-12 lg:px-20 container mx-auto mt-32 text-center project-fade-up opacity-0">
-          <Link href="/trabajo" className="inline-flex items-center gap-3 text-2xl md:text-3xl font-normal tracking-tight text-black hover:opacity-60 transition-opacity">
+          <TransitionLink href="/trabajo" className="inline-flex items-center gap-3 text-2xl md:text-3xl font-normal tracking-tight text-black hover:opacity-60 transition-opacity">
             &larr; Volver a proyectos
-          </Link>
+          </TransitionLink>
         </div>
       </main>
 

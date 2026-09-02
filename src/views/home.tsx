@@ -6,15 +6,13 @@
  */
 import { homeContent } from "@/data/mocks/home";
 import { ShowreelStage } from "@/views/home/showreel-stage";
-import { PortfolioLoader } from "@/components/portfolio/PortfolioLoader";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 
 export const HomeView = () => (
   <>
-    <PortfolioLoader />
-    <PortfolioHeader />
+        <PortfolioHeader />
     <main className="bg-white">
       <PortfolioHero />
       

@@ -11,6 +11,7 @@ import { LazyCookie } from "@/components/common/Cookie";
 import { AdaptiveGrid } from "@/components/common/grid";
 import { ReducedMotion } from "@/components/common/reduced-motion";
 import { ScrollLayout } from "@/layouts/scroll-layout";
+import { GlobalLoader } from "@/components/common/global-loader";
 
 import "@/app/globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
           <AdaptiveGrid />
           <ReducedMotion />
           <LazyCookie />
+          <GlobalLoader />
           {children}
         </ScrollLayout>
       </body>
