@@ -4,7 +4,6 @@ import { animated, useSpring } from "@react-spring/web";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useShowreelLayout } from "@/hooks/use-showreel-layout";
 import { ProgressTrigger } from "@/components/animation/springs/progress-trigger";
-import { FlameBackground } from "@/components/3d/flame-background";
 import { TargetStar } from "@/components/3d/target-star";
 import { HeroCard } from "@/views/home/hero-card";
 import { CatalistCard } from "@/views/home/catalist-card";
