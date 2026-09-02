@@ -31,11 +31,15 @@ export function PortfolioHeader() {
           </div>
         </button>
 
-        <nav className={`flex flex-col gap-6 px-8 pt-6 pb-12 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
+        <nav className={`flex flex-col gap-6 px-8 pt-6 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
           <TransitionLink href="/" className="hover:text-gray-500 transition-colors">Inicio</TransitionLink>
           <TransitionLink href="/trabajo" className="hover:text-gray-500 transition-colors">Trabajo</TransitionLink>
           <TransitionLink href="/contacto" className="hover:text-gray-500 transition-colors">Contacto</TransitionLink>
         </nav>
+        <div className={`px-8 pt-8 pb-10 flex flex-col gap-2 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
+          <a href="mailto:contmanuel77@gmail.com" className="text-sm font-normal text-gray-400 hover:text-gray-700 transition-colors">contmanuel77@gmail.com</a>
+          <a href="tel:+525610168992" className="text-sm font-normal text-gray-400 hover:text-gray-700 transition-colors">+52 56 1016 8992</a>
+        </div>
       </div>
     </>
   );
