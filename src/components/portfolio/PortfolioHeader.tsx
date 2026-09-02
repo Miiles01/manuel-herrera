@@ -22,12 +22,12 @@ export function PortfolioHeader() {
       </div>
 
       {/* Contenedor del Menú Desplegable (Navbar) */}
-      <div className={`fixed top-8 right-[100px] md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-72 md:w-96 rounded-md pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px]' : 'max-h-[50px]'}`}>
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-6 h-[50px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
+      <div className={`fixed top-8 right-[100px] md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-80 md:w-[420px] rounded-md pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px]' : 'max-h-[60px]'}`}>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
           <span className="text-sm font-medium">{isMenuOpen ? 'Cerrar' : 'Menú'}</span>
           <div className="flex flex-col gap-1.5 w-8 relative">
-            <div className={`h-px bg-gray-600 w-full transition-transform duration-300 ${isMenuOpen ? 'translate-y-[3.5px] rotate-[15deg]' : ''}`}></div>
-            <div className={`h-px bg-gray-600 w-full transition-transform duration-300 ${isMenuOpen ? 'translate-y-[-3.5px] rotate-[-15deg]' : ''}`}></div>
+            <div className={`h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? 'translate-y-[3.5px] rotate-45' : ''}`}></div>
+            <div className={`h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? 'translate-y-[-3.5px] -rotate-45' : ''}`}></div>
           </div>
         </button>
 
