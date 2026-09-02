@@ -3,6 +3,7 @@
 import { animated, type SpringValue } from "@react-spring/web";
 import { memo, useEffect, useState } from "react";
 import { useWindowSize } from "@/hooks/use-window-size";
+import { ParticleSphere } from "@/components/3d/particle-sphere";
 import { ScrollLetters } from "@/views/home/scroll-letters";
 import type { ShowreelGeo } from "@/utils/showreel/geometry";
 import {
@@ -126,6 +127,62 @@ export const SphereCard = memo(({
             ),
           }}
         >
+          {/* Sphere shell: shrinks (sphereScale) as it collapses while the star
+              logo grows; particles also scatter (sphereDisperse) into the
+              portfolio transition. */}
+          
+
+          <animated.span
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 z-[3] h-[12vh] w-[12vh] bg-white"
+            style={{
+              ...maskStyle,
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              transform: p.to(sphereLogoTransform),
+              opacity: p.to(sphereLogoOpacity),
+            }}
+          />
+
+          <h2 className="pointer-events-none absolute left-[4vmin] top-[4vmin] z-[4] m-0 whitespace-nowrap text-left text-[var(--sr-heading-1)] font-normal leading-[0.85] text-white">
+            <ScrollLetters
+              text={headingTop}
+              p={p}
+              styleFn={blockLetterStyle}
+              indexOffset={0}
+              totalOverride={total}
+            />
+          </h2>
+
+          <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-white">
+            {headingBottom.map((line, i) => (
+              <span key={i}>
+                <ScrollLetters
+                  text={line}
+                  p={p}
+                  styleFn={blockLetterStyle}
+                  indexOffset={offsets[i]}
+                  totalOverride={total}
+                />
+              </span>
+            ))}
+          </h2>
+
+          {/* Supporting copy — bottom-left, fades/rises in just after the
+              headings land. */}
+          <animated.div
+            className="pointer-events-none absolute bottom-[5vmin] left-[4vmin] z-[4] flex max-w-[var(--sr-sphere-body-w)] flex-col gap-[1.8vmin] text-left text-[var(--sr-sphere-body-text)] font-light leading-[1.45] text-white"
+            style={{
+              opacity: p.to(sphereBodyReveal),
+              transform: p.to((v) => `translateY(${(1 - sphereBodyReveal(v)) * 2.5}vmin)`),
+            }}
+          >
+            {body.map((para, i) => (
+              <p key={i} className="m-0">
+                {para}
+              </p>
+            ))}
+          </animated.div>
         </animated.div>
       </animated.div>
     </div>
