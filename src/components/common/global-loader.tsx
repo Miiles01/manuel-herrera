@@ -9,24 +9,8 @@ import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition } from "@/hooks/use-page-transition";
 
-/** Map a URL path to the word shown in the loader */
-function getLoaderLabel(url: string): string {
-  if (url === "/" || url === "") return "Hola";
-  if (url.startsWith("/trabajo")) return "Trabajo";
-  if (url.startsWith("/contacto")) return "Contacto";
-  if (url.startsWith("/proyecto/")) {
-    const slug = url.replace("/proyecto/", "");
-    return slug
-      .split("-")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" ");
-  }
-  return "Hola";
-}
-
-/** Split text and animate chars IN. Returns the chars array. */
+/** Animate chars IN (slide up from below) and call onDone when finished */
 function runIn(el: HTMLElement, onDone: () => void): SplitType {
-  // Fresh split every time
   el.innerHTML = el.textContent || "";
   const split = new SplitType(el, { types: "chars" });
   gsap.set(split.chars, { yPercent: 110 });
@@ -40,7 +24,7 @@ function runIn(el: HTMLElement, onDone: () => void): SplitType {
   return split;
 }
 
-/** Animate chars OUT. Calls onDone when done. */
+/** Animate chars OUT (slide up and away) and call onDone when finished */
 function runOut(chars: Element[] | null, delay: number, onDone: () => void) {
   if (!chars || chars.length === 0) { onDone(); return; }
   gsap.to(chars, {
@@ -58,24 +42,28 @@ export function GlobalLoader() {
 
   const setReady = useLoaderStore((s) => s.setReady);
   const setRevealed = useLoaderStore((s) => s.setRevealed);
-  const { isTransitioning, targetUrl, finishTransition } = usePageTransition();
+
+  // Read label from store — computed at click time, always the DESTINATION
+  const { isTransitioning, targetUrl, label, finishTransition } = usePageTransition();
+
   const stopScroll = useScroll((s) => s.stop);
   const startScroll = useScroll((s) => s.start);
 
   const loaderRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLHeadingElement>(null);
+
   const [phase, setPhase] = useState<"initial-loading" | "done" | "transitioning">("initial-loading");
 
-  // ─── 1. INITIAL LOAD ────────────────────────────────────────────────────────
+  // ─── 1. INITIAL LOAD: always says "Hola" ────────────────────────────────────
   useGSAP(() => {
     if (phase !== "initial-loading") return;
     if (!greetingRef.current || !loaderRef.current) return;
 
     stopScroll();
 
+    // Force "Hola" — no URL reading, no derived state
     greetingRef.current.textContent = "Hola";
 
-    let split: SplitType | null = null;
     let exitCalled = false;
 
     const slideUp = () => {
@@ -95,17 +83,19 @@ export function GlobalLoader() {
     const startExit = () => {
       if (exitCalled) return;
       exitCalled = true;
-      runOut(split?.chars ?? null, 0, slideUp);
+      runOut(split.chars, 0, slideUp);
     };
 
-    // After IN anim completes, wait for page load or 800ms timeout
-    split = runIn(greetingRef.current, () => {
+    // Letters slide IN, then wait for page load, then exit
+    const split = runIn(greetingRef.current, () => {
       if (document.readyState === "complete") {
         setTimeout(startExit, 600);
       } else {
-        const onLoad = () => { clearTimeout(safety); setTimeout(startExit, 300); };
-        const safety = setTimeout(startExit, 2000);
-        window.addEventListener("load", onLoad, { once: true });
+        const safety = setTimeout(startExit, 2500);
+        window.addEventListener("load", () => {
+          clearTimeout(safety);
+          setTimeout(startExit, 400);
+        }, { once: true });
       }
     });
   }, { scope: loaderRef, dependencies: [phase] });
@@ -119,27 +109,27 @@ export function GlobalLoader() {
     setPhase("transitioning");
     stopScroll();
 
-    const label = getLoaderLabel(targetUrl);
+    // `label` was computed at click time in the Zustand store — guaranteed correct
     greetingRef.current.textContent = label;
     gsap.set(greetingRef.current, { autoAlpha: 1 });
 
-    // Step 1: screen slides DOWN
+    // Step 1 → screen slides DOWN covering the page
     gsap.set(loaderRef.current, { yPercent: -100, display: "flex" });
     gsap.to(loaderRef.current, {
       yPercent: 0,
       duration: 0.8,
       ease: "power3.inOut",
       onComplete: () => {
-        // Step 2: letters slide IN
+        // Step 2 → letters slide IN
         const split = runIn(greetingRef.current!, () => {
-          // Step 3: navigate (behind the curtain)
+          // Step 3 → navigate while the curtain is down
           router.push(targetUrl);
           window.scrollTo(0, 0);
           useScroll.getState().lenis?.scrollTo(0, { immediate: true });
 
-          // Step 4: wait 0.5s so text is readable, then letters slide OUT
+          // Step 4 → hold 0.5s so text is readable, then letters slide OUT
           runOut(split.chars, 0.5, () => {
-            // Step 5: screen slides UP
+            // Step 5 → screen slides UP revealing the new page
             gsap.to(loaderRef.current, {
               yPercent: -100,
               duration: 0.85,
@@ -155,7 +145,7 @@ export function GlobalLoader() {
         });
       },
     });
-  }, [isTransitioning, targetUrl, phase, router, startScroll, stopScroll, finishTransition]);
+  }, [isTransitioning, targetUrl, label, phase, router, startScroll, stopScroll, finishTransition]);
 
   const isHidden = phase === "done" && !isTransitioning;
 
@@ -165,14 +155,17 @@ export function GlobalLoader() {
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
       style={{ display: isHidden ? "none" : "flex" }}
     >
+      {/* Default text "Hola" visible before any JS runs — prevents flash of empty */}
       <h2
         ref={greetingRef}
-        className="text-white font-semibold tracking-tighter leading-none"
+        className="text-white font-semibold tracking-tighter leading-none select-none"
         style={{
           fontSize: "clamp(3rem, 16vw, 14rem)",
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}
-      />
+      >
+        Hola
+      </h2>
     </div>
   );
 }
