@@ -9,7 +9,7 @@ export function PortfolioHeader() {
     <>
       {/* Logo (Izquierda) */}
       <div className="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
-        <Link href="/" className="font-semibold text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
+        <Link href="/" className="font-normal text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
           Manuel Herrera
         </Link>
       </div>
