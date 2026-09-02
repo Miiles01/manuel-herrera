@@ -79,14 +79,19 @@ function ScrollController() {
   useEffect(() => {
     if (savedPathname.current !== pathname) {
       savedPathname.current = pathname;
+      // ALWAYS RESET SCROLL ON ROUTE CHANGE (UNLESS IT'S JUST A HASH CHANGE)
+      // Actually if there's a hash, we scroll to hash, otherwise scroll to top.
       if (pathname.includes("#")) {
         const hash = pathname.split("#").pop();
         if (hash) {
           setHash(hash);
         }
+      } else {
+        window.scrollTo(0, 0);
+        lenis?.scrollTo(0, { immediate: true });
       }
     }
-  }, [pathname, setHash]);
+  }, [pathname, setHash, lenis]);
 
   return null; // This component doesn't render anything visible
 }

@@ -143,6 +143,8 @@ export function GlobalLoader() {
             onComplete: () => {
               // Trigger the Next.js route change once covered and text is showing
               router.push(targetUrl);
+              window.scrollTo(0, 0);
+              useScroll.getState().lenis?.scrollTo(0, { immediate: true });
               
               // Slide text out
               gsap.to(split.chars, {
