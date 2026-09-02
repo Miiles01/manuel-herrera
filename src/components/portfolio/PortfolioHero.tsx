@@ -38,6 +38,11 @@ export function PortfolioHero() {
         scrub: true
       }
     });
+
+    return () => {
+      heroText.revert();
+      introText.revert();
+    };
   }, { scope: heroRef });
 
   // Disparar la animación de entrada cuando el loader termina
