@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { TransitionLink } from "@/components/ui/transition-link";
-import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 
 function CopyItem({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false);
@@ -35,90 +34,59 @@ export function PortfolioHeader() {
   const headerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const hablemosRef = useRef<HTMLDivElement>(null);
-  const lenis = useScroll((s) => s.lenis);
+  const hiddenRef = useRef(false);
+  const lastYRef = useRef(0);
 
   useEffect(() => {
-    let lastScrollY = 0;
-    let hidden = false;
-    let ticking = false;
+    const THRESHOLD = 80;    // px from top before hide kicks in
+    const DELTA = 5;         // min px delta to trigger show/hide
 
-    const handleScroll = (scrollY: number) => {
-      const delta = scrollY - lastScrollY;
-      const threshold = 80; // px before hiding starts
-
-      if (scrollY < threshold) {
-        // Near top — always show
-        if (hidden) {
-          hidden = false;
-          gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
-            y: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            overwrite: true,
-          });
-        }
-      } else if (delta > 4 && !hidden && !isMenuOpen) {
-        // Scrolling DOWN — hide
-        hidden = true;
-        gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
-          y: -120,
-          duration: 0.45,
-          ease: 'power3.in',
-          overwrite: true,
-        });
-      } else if (delta < -4 && hidden) {
-        // Scrolling UP — show
-        hidden = false;
-        gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
-          y: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-          overwrite: true,
-        });
-      }
-
-      lastScrollY = scrollY;
+    const show = () => {
+      if (!hiddenRef.current) return;
+      hiddenRef.current = false;
+      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+        y: 0,
+        duration: 0.5,
+        ease: 'power3.out',
+        overwrite: true,
+      });
     };
 
-    // Use Lenis scroll event when available, native scroll as fallback
-    const onLenis = ({ scroll }: { scroll: number }) => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll(scroll);
-          ticking = false;
-        });
-        ticking = true;
-      }
+    const hide = () => {
+      if (hiddenRef.current) return;
+      hiddenRef.current = true;
+      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+        y: -120,
+        duration: 0.45,
+        ease: 'power3.in',
+        overwrite: true,
+      });
     };
 
-    const onNative = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
+    const onScroll = () => {
+      // Use pageYOffset for broadest compatibility including Lenis
+      const currentY = window.pageYOffset;
+      const delta = currentY - lastYRef.current;
+
+      if (currentY < THRESHOLD) {
+        show();
+      } else if (delta > DELTA && !isMenuOpen) {
+        hide();
+      } else if (delta < -DELTA) {
+        show();
       }
+
+      lastYRef.current = currentY;
     };
 
-    if (lenis) {
-      lenis.on('scroll', onLenis);
-    } else {
-      window.addEventListener('scroll', onNative, { passive: true });
-    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isMenuOpen]);
 
-    return () => {
-      if (lenis) {
-        lenis.off('scroll', onLenis);
-      } else {
-        window.removeEventListener('scroll', onNative);
-      }
-    };
-  }, [lenis, isMenuOpen]);
-
-  // When menu opens, always show the navbar
+  // Always show when menu opens
   useEffect(() => {
     if (isMenuOpen) {
+      hiddenRef.current = false;
       gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
         y: 0,
         duration: 0.4,
