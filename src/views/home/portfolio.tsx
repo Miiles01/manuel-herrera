@@ -14,7 +14,7 @@ export interface PortfolioProps {
 }
 
 const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
-  const CardWrapper = item.slug ? Link : "div";
+  const CardWrapper = item.slug ? TransitionLink : "div" as any;
   return (
     <CardWrapper href={item.slug ? `/proyecto/${item.slug}` : "#"} className="relative flex h-full w-[62vw] shrink-0 flex-col justify-end overflow-hidden rounded-pf bg-[#1e1e1e] p-[4vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)] block cursor-pointer group">
       {item.image && (
