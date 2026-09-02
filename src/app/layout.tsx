@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Zen_Kaku_Gothic_New, Marck_Script, Manrope } from "next/font/google";
+import { Zen_Kaku_Gothic_New, Marck_Script } from "next/font/google";
 
 import {
   generateMetadata,
@@ -24,11 +24,6 @@ const zenKaku = Zen_Kaku_Gothic_New({
 
 // Handwritten accent face — the italic "Works" in the portfolio title.
 // Portfolio specific font
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const marckScript = Marck_Script({
   variable: "--font-marck",
@@ -47,7 +42,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${marckScript.variable} ${manrope.variable}`}>
+      
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`${marckScript.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
