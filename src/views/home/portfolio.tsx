@@ -1,6 +1,7 @@
 "use client";
 
 import { animated, type SpringValue } from "@react-spring/web";
+import Link from "next/link";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { PortfolioItem } from "@/data/mocks/home";
 import { portfolioTransform, pfTrackTransform } from "@/utils/showreel/timeline";
@@ -12,28 +13,35 @@ export interface PortfolioProps {
   active: boolean;
 }
 
-const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => (
-  // `translateZ(0)` + `backface-visibility:hidden` keep each card (and its video)
-  // on a stable GPU layer so the horizontal track-pan is a pure composite — no
-  // per-frame re-raster flicker as the cards slide.
-  <article className="relative flex h-full w-[62vw] shrink-0 flex-col justify-between overflow-hidden rounded-pf bg-[#1e1e1e] p-[3.5vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)]">
-    {/* Each clip is multi-MB; only mount it (so the browser fetches + autoplays)
-        once the section is near, keeping it out of the initial page load. */}
-    
-    {/* All tags on one line: client · year · discipline. */}
-    <div className="relative z-[2] flex flex-wrap items-center gap-[1.4vmin] text-[1.7vmin] opacity-90">
-      <span>{item.client}</span>
-      <span aria-hidden="true" className="opacity-50">·</span>
-      <span>{item.year}</span>
-      <span aria-hidden="true" className="opacity-50">·</span>
-      <span>{item.discipline}</span>
-    </div>
-    {/* Case title — same scale as the section H1s (hero / final block). */}
-    <h3 className="relative z-[2] m-0 max-w-[85%] text-[7vw] font-normal capitalize leading-[0.95] tracking-[-0.03em]">
-      {item.title}
-    </h3>
-  </article>
-);
+const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
+  const CardWrapper = item.slug ? Link : "div";
+  return (
+    <CardWrapper href={item.slug ? `/proyecto/${item.slug}` : "#"} className="relative flex h-full w-[62vw] shrink-0 flex-col justify-end overflow-hidden rounded-pf bg-[#1e1e1e] p-[4vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)] block cursor-pointer group">
+      {item.image && (
+        <img
+          src={item.image}
+          alt={item.title}
+          className="absolute inset-0 size-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+        />
+      )}
+      
+      {/* Sutil sombra solo desde abajo para que el texto sea legible */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-[1]" />
+      
+      {/* Contenedor de texto en la parte inferior */}
+      <div className="relative z-[2] flex flex-col gap-2 w-full">
+        <h3 className="m-0 text-3xl md:text-4xl lg:text-[3.5vw] font-normal leading-[1.05] tracking-[-0.02em]">
+          {item.title}
+        </h3>
+        {item.subtitle && (
+          <p className="m-0 text-sm md:text-base lg:text-lg text-white/80 font-light leading-snug max-w-[85%]">
+            {item.subtitle}
+          </p>
+        )}
+      </div>
+    </CardWrapper>
+  );
+};
 
 /**
  * Fixed portfolio section. Flies up from below, scrolls its three video cards

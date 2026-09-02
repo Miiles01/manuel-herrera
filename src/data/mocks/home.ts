@@ -25,7 +25,9 @@ export interface PortfolioItem {
   client: string;
   title: string;
   discipline: string;
-  video: string;
+  image?: string;
+  slug?: string;
+  subtitle?: string;
 }
 
 export interface ShowreelContent {
@@ -139,25 +141,40 @@ export const homeContent: ShowreelContent = {
   portfolio: {
     items: [
       {
-        year: "2023",
-        client: "logan cee",
-        title: "Archin",
-        discipline: "Architecture Design · Website",
-        video: `${A}/portfolio-1.mp4`,
+        year: "2024",
+        client: "Mar & Vic",
+        title: "Mar & Vic",
+        slug: "mar-vic",
+        subtitle: "Branding sofisticado y ecosistema e-commerce para diseño de interiores.",
+        discipline: "Retail & Interior Design",
+        image: "/proyectos/Mar-Vic/portada-1.webp",
       },
       {
         year: "2024",
-        client: "zumar",
-        title: "Zumar",
-        discipline: "Web Design & Development",
-        video: `${A}/portfolio-2.mp4`,
+        client: "Original",
+        title: "Salon de Barbier",
+        slug: "original",
+        subtitle: "Dirección de arte y diseño web orientado a reservas y conversión.",
+        discipline: "Barbershop & Grooming",
+        image: "/proyectos/Original/portada-1.webp",
       },
       {
         year: "2024",
-        client: "nova",
-        title: "Nova",
-        discipline: "Brand · Motion · Web",
-        video: `${A}/portfolio-3.mp4`,
+        client: "Colorfit",
+        title: "Colorfit",
+        slug: "colorfit",
+        subtitle: "Identidad visual y branding para marca de moda y fitness contemporánea.",
+        discipline: "Fitness & Wellness",
+        image: "/proyectos/Colorfit/portada-1.webp",
+      },
+      {
+        year: "2024",
+        client: "Jambú",
+        title: "Jambú",
+        slug: "jambu",
+        subtitle: "Rediseño de identidad y packaging inspirado en la riqueza natural.",
+        discipline: "Food & Consumer Goods",
+        image: "/proyectos/Jambu/portada-1.webp",
       },
     ],
   },
