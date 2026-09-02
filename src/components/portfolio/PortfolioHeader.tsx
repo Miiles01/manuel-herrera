@@ -2,6 +2,32 @@
 import { useState } from 'react';
 import { TransitionLink } from "@/components/ui/transition-link";
 
+function CopyItem({ value, label }: { value: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 text-left text-base font-normal text-gray-600 hover:text-gray-900 transition-colors cursor-pointer group"
+    >
+      <span>{label}</span>
+      <span
+        className={`text-xs font-medium bg-gray-900 text-white px-2 py-0.5 rounded-full transition-all duration-300 ${
+          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+        }`}
+      >
+        Copiado
+      </span>
+    </button>
+  );
+}
+
 export function PortfolioHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -36,9 +62,10 @@ export function PortfolioHeader() {
           <TransitionLink href="/trabajo" className="hover:text-gray-500 transition-colors">Trabajo</TransitionLink>
           <TransitionLink href="/contacto" className="hover:text-gray-500 transition-colors">Contacto</TransitionLink>
         </nav>
-        <div className={`px-8 pt-8 pb-10 flex flex-col gap-2 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
-          <a href="mailto:contmanuel77@gmail.com" className="text-sm font-normal text-gray-400 hover:text-gray-700 transition-colors">contmanuel77@gmail.com</a>
-          <a href="tel:+525610168992" className="text-sm font-normal text-gray-400 hover:text-gray-700 transition-colors">+52 56 1016 8992</a>
+
+        <div className={`px-8 pt-8 pb-10 flex flex-col gap-3 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
+          <CopyItem value="contmanuel77@gmail.com" label="contmanuel77@gmail.com" />
+          <CopyItem value="+525610168992" label="+52 56 1016 8992" />
         </div>
       </div>
     </>
