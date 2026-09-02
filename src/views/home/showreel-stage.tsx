@@ -4,7 +4,6 @@ import { animated, useSpring } from "@react-spring/web";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useShowreelLayout } from "@/hooks/use-showreel-layout";
 import { ProgressTrigger } from "@/components/animation/springs/progress-trigger";
-import { TargetStar } from "@/components/3d/target-star";
 import { HeroCard } from "@/views/home/hero-card";
 import { CatalistCard } from "@/views/home/catalist-card";
 import { SphereCard } from "@/views/home/sphere-card";
@@ -285,14 +284,13 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
-                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-ink"
+                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#1e1e1e]"
                 style={{
                   transform: targetTransform(),
                   borderRadius: s.targetRadius,
                   opacity: s.targetOpacity,
                 }}
               >
-                <TargetStar className="absolute inset-0" active={vis.target} />
                 {/* White margin band — the same ~4vmin white area between the
                     screen edge and the content as the hero stage (its `p-[4vmin]`
                     white backdrop), now with rounded INNER corners like the hero
