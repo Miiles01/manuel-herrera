@@ -1,6 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { TransitionLink } from "@/components/ui/transition-link";
+import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 
 function CopyItem({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false);
@@ -30,25 +32,123 @@ function CopyItem({ value, label }: { value: string; label: string }) {
 
 export function PortfolioHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const hablemosRef = useRef<HTMLDivElement>(null);
+  const lenis = useScroll((s) => s.lenis);
+
+  useEffect(() => {
+    let lastScrollY = 0;
+    let hidden = false;
+    let ticking = false;
+
+    const handleScroll = (scrollY: number) => {
+      const delta = scrollY - lastScrollY;
+      const threshold = 80; // px before hiding starts
+
+      if (scrollY < threshold) {
+        // Near top — always show
+        if (hidden) {
+          hidden = false;
+          gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+            y: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: true,
+          });
+        }
+      } else if (delta > 4 && !hidden && !isMenuOpen) {
+        // Scrolling DOWN — hide
+        hidden = true;
+        gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+          y: -120,
+          duration: 0.45,
+          ease: 'power3.in',
+          overwrite: true,
+        });
+      } else if (delta < -4 && hidden) {
+        // Scrolling UP — show
+        hidden = false;
+        gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+          y: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      }
+
+      lastScrollY = scrollY;
+    };
+
+    // Use Lenis scroll event when available, native scroll as fallback
+    const onLenis = ({ scroll }: { scroll: number }) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll(scroll);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    const onNative = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    if (lenis) {
+      lenis.on('scroll', onLenis);
+    } else {
+      window.addEventListener('scroll', onNative, { passive: true });
+    }
+
+    return () => {
+      if (lenis) {
+        lenis.off('scroll', onLenis);
+      } else {
+        window.removeEventListener('scroll', onNative);
+      }
+    };
+  }, [lenis, isMenuOpen]);
+
+  // When menu opens, always show the navbar
+  useEffect(() => {
+    if (isMenuOpen) {
+      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+        y: 0,
+        duration: 0.4,
+        ease: 'power3.out',
+        overwrite: true,
+      });
+    }
+  }, [isMenuOpen]);
 
   return (
     <>
       {/* Logo (Izquierda) */}
-      <div className="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
+      <div ref={logoRef} className="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
         <TransitionLink href="/" className="font-normal text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
           Manuel Herrera
         </TransitionLink>
       </div>
 
       {/* Botón Hablemos (Derecha Extrema) */}
-      <div className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
+      <div ref={hablemosRef} className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
         <TransitionLink href="/contacto" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
           Hablemos
         </TransitionLink>
       </div>
 
       {/* Contenedor del Menú Desplegable (Navbar) */}
-      <div className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-[calc(100vw-2rem)] md:w-[420px] rounded-md pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px]' : 'max-h-[60px]'}`}>
+      <div
+        ref={headerRef}
+        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-[calc(100vw-2rem)] md:w-[420px] rounded-md pointer-events-auto transition-[max-height] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px]' : 'max-h-[60px]'}`}
+      >
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
           <span className="text-sm font-medium">{isMenuOpen ? 'Cerrar' : 'Menú'}</span>
           <div className="w-8 h-[8px] relative">
