@@ -188,7 +188,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           {/* Services marquee — behind the carousel, visible through its gaps. */}
           <animated.div
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-1/2 z-[1] w-screen -translate-y-1/2"
+            className="pointer-events-none absolute left-0 top-1/2 z-[1] w-screen -translate-y-1/2 hidden md:block"
             style={{
               opacity: s.marqueeOpacity,
               filter: s.marqueeBlur,
