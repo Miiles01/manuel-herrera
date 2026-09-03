@@ -57,7 +57,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
   }, [tiltApi]);
 
   return (
-    <div className="relative size-full overflow-hidden rounded-card" style={{ background: "linear-gradient(to bottom, #FDFDFD, #F8F9FD)" }}>
+    <div className="relative size-full overflow-hidden rounded-card" style={{ background: "linear-gradient(to bottom, #F8F9FD, #FDFDFD)" }}>
 
       {/* Headline — top-left, sized + tracked to match the marquee. Letters
           descend + blur out on scroll (soft, no hard clip); the whole block also
