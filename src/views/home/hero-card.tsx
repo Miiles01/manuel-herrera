@@ -57,7 +57,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
   }, [tiltApi]);
 
   return (
-    <div className="relative size-full overflow-hidden rounded-card bg-[#1e1e1e]">
+    <div className="relative size-full overflow-hidden rounded-card" style={{ background: "linear-gradient(to bottom, #FDFDFD, #F8F9FD)" }}>
 
       {/* Headline — top-left, sized + tracked to match the marquee. Letters
           descend + blur out on scroll (soft, no hard clip); the whole block also
@@ -67,7 +67,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
         className="pointer-events-none absolute inset-0 z-[3] flex p-[40px] max-sm:p-5"
         style={{ opacity: p.to(heroContentFade) }}
       >
-        <h1 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-white">
+        <h1 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
           {lines.map((line, i) => (
             <span key={i} className={i === 1 ? "opacity-40" : undefined}>
               <ScrollLetters text={line} p={p} styleFn={heroLetterStyle} />
@@ -81,7 +81,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
           image card (z-[7] > z-[6]) so it stays legible over the green carousel
           face; a drop shadow keeps it readable on the bright image. */}
       <div className="pointer-events-none absolute inset-0 z-[7] flex items-center justify-center">
-        <h2 className="text-center text-[3.6vmin] font-normal leading-tight text-white drop-shadow-lg [transform:rotate(-90deg)]">
+        <h2 className="text-center text-[3.6vmin] font-normal leading-tight text-gray-900 drop-shadow-sm [transform:rotate(-90deg)]">
           <ScrollLetters text={templatesTitle} p={p} styleFn={(prog, i) => templatesLetterStyle(prog, i)} />
         </h2>
       </div>
@@ -129,7 +129,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
           copy (absolutely positioned → no layout shift). */}
       {bottomBlock && (
         <animated.div
-          className="pointer-events-none absolute bottom-0 left-0 w-full p-[40px] max-sm:p-5 z-[6] flex flex-col gap-6 max-sm:gap-4 text-white font-light"
+          className="pointer-events-none absolute bottom-0 left-0 w-full p-[40px] max-sm:p-5 z-[6] flex flex-col gap-6 max-sm:gap-4 text-gray-800 font-light"
           style={{ opacity: p.to(heroContentFade) }}
         >
           <div className="flex flex-col gap-6 max-sm:gap-4 max-w-md pointer-events-auto">
