@@ -1,10 +1,36 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
+
+function CopyItem({ value, label }: { value: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-3 text-left text-xl font-light text-gray-600 hover:text-black transition-colors cursor-pointer group"
+    >
+      <span>{label}</span>
+      <span
+        className={`text-sm font-medium bg-black text-white px-3 py-1 rounded-full transition-all duration-300 ${
+          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+        }`}
+      >
+        Copiado
+      </span>
+    </button>
+  );
+}
 
 export default function ContactoPage() {
   const container = useRef(null);
@@ -43,11 +69,9 @@ export default function ContactoPage() {
           <div className="fade-up-content opacity-0">
             <h2 className="text-3xl font-normal tracking-tight mb-8">Información</h2>
             <div className="space-y-6 text-xl text-gray-600 font-light">
-              <p>
-                <a href="mailto:contmanuel77@gmail.com" className="hover:text-black transition-colors">
-                  contmanuel77@gmail.com
-                </a>
-              </p>
+              <div>
+                <CopyItem value="contmanuel77@gmail.com" label="contmanuel77@gmail.com" />
+              </div>
               <p>CDMX, México</p>
               <div className="flex gap-6 pt-4">
                 <a href="https://www.linkedin.com/in/manuel-herrera-perfil/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
