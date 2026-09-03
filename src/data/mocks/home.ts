@@ -96,7 +96,7 @@ export const homeContent: ShowreelContent = {
     "Analítica",
   ],
   hero: {
-    lines: ["Ideas que", "conectan"],
+    lines: ["Amo crear", "con intención"],
     templatesTitle: "Creamos\nexperiencias",
     bottomBlock: {
       leftText: "Diseño minimalista y estrategia digital.",
