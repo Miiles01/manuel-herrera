@@ -3,6 +3,7 @@
 import { animated, type SpringValue } from "@react-spring/web";
 import { memo } from "react";
 import { ctaReveal } from "@/utils/showreel/timeline";
+import { TransitionLink } from "@/components/ui/transition-link";
 
 export interface CtaBlockProps {
   /** Global scroll spring (0→1). */
@@ -37,12 +38,12 @@ export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: C
       <span className="opacity-40">{headingFaded}</span>
     </h2>
     <p className="m-0 max-w-[26vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-paper/70">{sub}</p>
-    <a
+    <TransitionLink
       href={href}
-      className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] leading-none text-ink"
+      className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] max-sm:text-[3.5vmin] leading-none text-ink hover:scale-105 transition-transform duration-300"
     >
       {button}
-    </a>
+    </TransitionLink>
   </animated.div>
 ));
 CtaBlock.displayName = "CtaBlock";

@@ -173,10 +173,10 @@ export const homeContent: ShowreelContent = {
     ],
   },
   cta: {
-    heading: "Build beyond",
-    headingFaded: "all limits",
-    sub: "Templates, prompts, and tools that think ahead — start shipping faster today.",
-    button: "Get started",
-    href: "#get-started",
+    heading: "Hagamos esa idea",
+    headingFaded: "realidad",
+    sub: "Escríbeme y empecemos a trabajar en ese proyecto.",
+    button: "Contactar",
+    href: "/contacto",
   },
 };
