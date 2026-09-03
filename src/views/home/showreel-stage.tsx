@@ -330,7 +330,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           >
             <TransitionLink
               href={content.carouselCta.href}
-              className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-ink px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-paper"
+              className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-gray-100 px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-gray-900 hover:bg-white transition-colors duration-200"
             >
               {content.carouselCta.button}
             </TransitionLink>
