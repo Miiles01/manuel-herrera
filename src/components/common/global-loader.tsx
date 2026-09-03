@@ -15,20 +15,15 @@
 import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition, getLoaderLabel } from "@/hooks/use-page-transition";
 
-// Flag fuera del componente: sobrevive al Strict Mode double-invoke
-// Asegura que la animación inicial sólo corra UNA vez aunque el efecto
-// se monte/desmonte dos veces en desarrollo.
-let initialAnimationPlayed = false;
-
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function splitIn(el: HTMLElement, onDone: () => void): SplitType {
-  // Resetear a texto plano antes de cada split (evita spans anidados)
   const plain = el.dataset.plain || el.textContent || "";
   el.dataset.plain = plain;
   el.textContent = plain;
@@ -67,6 +62,8 @@ export function GlobalLoader() {
 
   const setReady    = useLoaderStore((s) => s.setReady);
   const setRevealed = useLoaderStore((s) => s.setRevealed);
+  // Leemos si ya se reveló globalmente para saber si es HMR (Fast Refresh)
+  const isAlreadyRevealed = useLoaderStore((s) => s.revealed);
 
   const { isTransitioning, targetUrl, label, finishTransition } = usePageTransition();
 
@@ -75,16 +72,15 @@ export function GlobalLoader() {
 
   const loaderRef = useRef<HTMLDivElement>(null);
   const textRef   = useRef<HTMLHeadingElement>(null);
-  const phaseRef  = useRef<"initial" | "idle" | "transitioning">("initial");
+  
+  // En HMR, si ya se reveló antes, empezamos en "idle"
+  const phaseRef  = useRef<"initial" | "idle" | "transitioning">(isAlreadyRevealed ? "idle" : "initial");
 
   // ─── 1. ANIMACIÓN INICIAL ────────────────────────────────────────────────
-  useEffect(() => {
-    // Si ya se corrió (Strict Mode double-invoke, HMR), salir
-    if (initialAnimationPlayed) {
-      // Si ya está idle, sólo asegurar que el loader está oculto
-      if (phaseRef.current === "idle") {
-        gsap.set(loaderRef.current, { display: "none" });
-      }
+  useGSAP(() => {
+    // Si ya estamos idle (por ej. HMR re-mount), escondemos y salimos
+    if (phaseRef.current === "idle") {
+      gsap.set(loaderRef.current, { display: "none" });
       return;
     }
 
@@ -92,7 +88,6 @@ export function GlobalLoader() {
     const text   = textRef.current;
     if (!loader || !text) return;
 
-    initialAnimationPlayed = true;
     stopScroll();
 
     // Texto de la página actual
@@ -123,7 +118,6 @@ export function GlobalLoader() {
     };
 
     const split = splitIn(text, () => {
-      // Esperar a que termine la carga (o límite de 2.5 s)
       if (document.readyState === "complete") {
         setTimeout(startExit, 700);
       } else {
@@ -134,8 +128,8 @@ export function GlobalLoader() {
         }, { once: true });
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  }, { scope: loaderRef }); // useGSAP maneja el cleanup automático para Strict Mode
 
   // ─── 2. TRANSICIONES ENTRE PÁGINAS ──────────────────────────────────────
   useEffect(() => {
