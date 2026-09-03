@@ -25,11 +25,11 @@ const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
         />
       )}
       
-      {/* Sutil sombra solo desde abajo para que el texto sea legible */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-[1]" />
-      
+      {/* Gradiente y texto — ocultos por defecto, visibles al hover */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out" />
+
       {/* Contenedor de texto en la parte inferior */}
-      <div className="relative z-[2] flex flex-col gap-2 w-full">
+      <div className="relative z-[2] flex flex-col gap-2 w-full opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
         <h3 className="m-0 text-3xl md:text-4xl lg:text-[3.5vw] font-normal leading-[1.05] tracking-[-0.02em]">
           {item.title}
         </h3>
