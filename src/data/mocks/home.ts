@@ -100,7 +100,7 @@ export const homeContent: ShowreelContent = {
     templatesTitle: "Creamos\nexperiencias",
     bottomBlock: {
       leftText: "Mi misión es ayudar a otros a crear proyectos que transforman comunidades.",
-      rightText: "Desarrollo y creatividad.",
+      rightText: "11 años creando",
       avatars: []
     }
   },
