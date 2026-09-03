@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
-import { usePageTransition } from "@/hooks/use-page-transition";
+import { usePageTransition, getLoaderLabel } from "@/hooks/use-page-transition";
 
 /** Animate chars IN (slide up from below) and call onDone when finished */
 function runIn(el: HTMLElement, onDone: () => void): SplitType {
@@ -54,15 +54,18 @@ export function GlobalLoader() {
 
   const [phase, setPhase] = useState<"initial-loading" | "done" | "transitioning">("initial-loading");
 
-  // ─── 1. INITIAL LOAD: always says "Hola" ────────────────────────────────────
+  // ─── 1. INITIAL LOAD: shows page name based on current URL ─────────────────
+  const pathname = usePathname();
+
   useGSAP(() => {
     if (phase !== "initial-loading") return;
     if (!greetingRef.current || !loaderRef.current) return;
 
     stopScroll();
 
-    // Force "Hola" — no URL reading, no derived state
-    greetingRef.current.textContent = "Hola";
+    // Use the current route to determine the label
+    const initialLabel = getLoaderLabel(pathname);
+    greetingRef.current.textContent = initialLabel;
 
     let exitCalled = false;
 
@@ -155,7 +158,7 @@ export function GlobalLoader() {
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
       style={{ display: isHidden ? "none" : "flex" }}
     >
-      {/* Default text "Hola" visible before any JS runs — prevents flash of empty */}
+      {/* Default text visible before JS animates — matches the current page */}
       <h2
         ref={greetingRef}
         className="text-white font-semibold tracking-tighter leading-none select-none"
@@ -164,7 +167,7 @@ export function GlobalLoader() {
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}
       >
-        Hola
+        {getLoaderLabel(pathname)}
       </h2>
     </div>
   );

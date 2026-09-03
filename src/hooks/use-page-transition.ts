@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 /** Map a destination URL to the word shown in the loader */
 export function getLoaderLabel(url: string): string {
-  if (url === "/" || url === "") return "Hola";
+  if (url === "/" || url === "") return "Portafolio";
   if (url.startsWith("/trabajo")) return "Trabajo";
   if (url.startsWith("/contacto")) return "Contacto";
   if (url.startsWith("/proyecto/")) {
@@ -12,7 +12,7 @@ export function getLoaderLabel(url: string): string {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
   }
-  return "Hola";
+  return "Portafolio";
 }
 
 interface TransitionState {
