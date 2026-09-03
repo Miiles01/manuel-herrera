@@ -1,17 +1,44 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+/**
+ * GlobalLoader — página-aware, sin conflictos React/GSAP.
+ *
+ * DISEÑO CLAVE:
+ * ─────────────────────────────────────────────────────────────────────────────
+ * • El <h2> NUNCA tiene hijos JSX. Su texto lo controla SOLO JavaScript vía ref.
+ *   Esto evita que React re-renderice el h2 (causando flash) cuando pathname
+ *   cambia tras router.push().
+ *
+ * • El display del loader NUNCA lo controla React vía inline-style.
+ *   GSAP es el único responsable de show/hide. El elemento arranca como
+ *   display:flex (cubre la pantalla en el primer render) y GSAP lo oculta
+ *   al final de la animación inicial.
+ *
+ * • El state de "fase" usa useRef (no useState) para que los cambios de fase
+ *   no provoquen re-renders que interfieran con GSAP.
+ *
+ * FASES:
+ *   "initial"      → loader visible, animación de entrada de la primera carga
+ *   "idle"         → loader oculto (display:none, yPercent:-100), página visible
+ *   "transitioning"→ loader entrando/saliendo entre páginas
+ */
+
+import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition, getLoaderLabel } from "@/hooks/use-page-transition";
 
-/** Animate chars IN (slide up from below) and call onDone when finished */
-function runIn(el: HTMLElement, onDone: () => void): SplitType {
-  el.innerHTML = el.textContent || "";
+// ─── Helpers de animación ────────────────────────────────────────────────────
+
+function splitAndAnimateIn(el: HTMLElement, onDone: () => void): SplitType {
+  // Restablecer el texto plano antes de dividir (evita spans anidados)
+  const text = el.dataset.text || el.textContent || "";
+  el.dataset.text = text;
+  el.textContent = text;
+
   const split = new SplitType(el, { types: "chars" });
   gsap.set(split.chars, { yPercent: 110 });
   gsap.to(split.chars, {
@@ -24,8 +51,7 @@ function runIn(el: HTMLElement, onDone: () => void): SplitType {
   return split;
 }
 
-/** Animate chars OUT (slide up and away) and call onDone when finished */
-function runOut(chars: Element[] | null, delay: number, onDone: () => void) {
+function animateOut(chars: Element[] | null, delay: number, onDone: () => void) {
   if (!chars || chars.length === 0) { onDone(); return; }
   gsap.to(chars, {
     yPercent: -110,
@@ -37,62 +63,66 @@ function runOut(chars: Element[] | null, delay: number, onDone: () => void) {
   });
 }
 
-export function GlobalLoader() {
-  const router = useRouter();
+// ─── Componente ──────────────────────────────────────────────────────────────
 
-  const setReady = useLoaderStore((s) => s.setReady);
+export function GlobalLoader() {
+  const router    = useRouter();
+  const pathname  = usePathname();
+
+  const setReady   = useLoaderStore((s) => s.setReady);
   const setRevealed = useLoaderStore((s) => s.setRevealed);
 
-  // Read label from store — computed at click time, always the DESTINATION
   const { isTransitioning, targetUrl, label, finishTransition } = usePageTransition();
 
-  const stopScroll = useScroll((s) => s.stop);
+  const stopScroll  = useScroll((s) => s.stop);
   const startScroll = useScroll((s) => s.start);
 
-  const loaderRef = useRef<HTMLDivElement>(null);
-  const greetingRef = useRef<HTMLHeadingElement>(null);
+  const loaderRef  = useRef<HTMLDivElement>(null);
+  const textRef    = useRef<HTMLHeadingElement>(null);
+  // Ref de fase: cambios NO causan re-renders (no hay useState)
+  const phaseRef   = useRef<"initial" | "idle" | "transitioning">("initial");
 
-  const [phase, setPhase] = useState<"initial-loading" | "done" | "transitioning">("initial-loading");
-
-  // ─── 1. INITIAL LOAD: shows page name based on current URL ─────────────────
-  const pathname = usePathname();
-
-  useGSAP(() => {
-    if (phase !== "initial-loading") return;
-    if (!greetingRef.current || !loaderRef.current) return;
+  // ─── 1. CARGA INICIAL ────────────────────────────────────────────────────
+  useEffect(() => {
+    const loader = loaderRef.current;
+    const text   = textRef.current;
+    if (!loader || !text) return;
+    if (phaseRef.current !== "initial") return;
 
     stopScroll();
 
-    // Use the current route to determine the label
+    // Texto de la página actual (sin tocar JSX)
     const initialLabel = getLoaderLabel(pathname);
-    greetingRef.current.textContent = initialLabel;
+    text.textContent   = initialLabel;
+    text.dataset.text  = initialLabel;
 
-    let exitCalled = false;
+    let exited = false;
 
     const slideUp = () => {
-      gsap.to(loaderRef.current, {
+      gsap.to(loader, {
         yPercent: -100,
         duration: 0.9,
         ease: "power3.inOut",
         onComplete: () => {
+          gsap.set(loader, { display: "none" });
+          phaseRef.current = "idle";
           startScroll();
           setReady(true);
           setRevealed(true);
-          setPhase("done");
         },
       });
     };
 
     const startExit = () => {
-      if (exitCalled) return;
-      exitCalled = true;
-      runOut(split.chars, 0, slideUp);
+      if (exited) return;
+      exited = true;
+      animateOut(split.chars, 0, slideUp);
     };
 
-    // Letters slide IN, then wait for page load, then exit
-    const split = runIn(greetingRef.current, () => {
+    const split = splitAndAnimateIn(text, () => {
+      // Esperar a que la página termine de cargar (o máximo 2.5 s)
       if (document.readyState === "complete") {
-        setTimeout(startExit, 600);
+        setTimeout(startExit, 700);
       } else {
         const safety = setTimeout(startExit, 2500);
         window.addEventListener("load", () => {
@@ -101,74 +131,80 @@ export function GlobalLoader() {
         }, { once: true });
       }
     });
-  }, { scope: loaderRef, dependencies: [phase] });
 
+    // Cleanup: matar tweens si el componente se desmonta (HMR, StrictMode)
+    return () => { gsap.killTweensOf(split.chars); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Intencional: sólo en mount
 
-  // ─── 2. PAGE TRANSITION ─────────────────────────────────────────────────────
+  // ─── 2. TRANSICIONES ENTRE PÁGINAS ──────────────────────────────────────
   useEffect(() => {
-    if (!isTransitioning || !targetUrl || phase !== "done") return;
-    if (!greetingRef.current || !loaderRef.current) return;
+    if (!isTransitioning || !targetUrl) return;
+    if (phaseRef.current !== "idle") return;
 
-    setPhase("transitioning");
+    const loader = loaderRef.current;
+    const text   = textRef.current;
+    if (!loader || !text) return;
+
+    phaseRef.current = "transitioning";
     stopScroll();
 
-    // `label` was computed at click time in the Zustand store — guaranteed correct
-    greetingRef.current.textContent = label;
-    gsap.set(greetingRef.current, { autoAlpha: 1 });
+    // Texto de destino → escrito en el DOM directamente (React nunca lo toca)
+    text.textContent  = label;
+    text.dataset.text = label;
 
-    // Step 1 → screen slides DOWN covering the page
-    gsap.set(loaderRef.current, { yPercent: -100, display: "flex" });
-    gsap.to(loaderRef.current, {
+    // Paso 1: pantalla baja desde arriba cubriendo el contenido
+    gsap.set(loader, { display: "flex", yPercent: -100 });
+    gsap.to(loader, {
       yPercent: 0,
       duration: 0.8,
       ease: "power3.inOut",
       onComplete: () => {
-        // Step 2 → letters slide IN
-        const split = runIn(greetingRef.current!, () => {
-          // Step 3 → navigate while the curtain is down
+        // Paso 2: letras entran
+        const split = splitAndAnimateIn(text, () => {
+          // Paso 3: navegar mientras la cortina está abajo
           router.push(targetUrl);
           window.scrollTo(0, 0);
           useScroll.getState().lenis?.scrollTo(0, { immediate: true });
 
-          // Step 4 → hold 0.5s so text is readable, then letters slide OUT
-          runOut(split.chars, 0.5, () => {
-            // Step 5 → screen slides UP revealing the new page
-            gsap.to(loaderRef.current, {
+          // Paso 4: pausa de lectura → letras salen
+          animateOut(split.chars, 0.5, () => {
+            // Paso 5: pantalla sube revelando la nueva página
+            gsap.to(loader, {
               yPercent: -100,
               duration: 0.85,
               ease: "power3.inOut",
               onComplete: () => {
-                gsap.set(loaderRef.current, { display: "none" });
+                gsap.set(loader, { display: "none" });
+                phaseRef.current = "idle";
                 startScroll();
                 finishTransition();
-                setPhase("done");
               },
             });
           });
         });
       },
     });
-  }, [isTransitioning, targetUrl, label, phase, router, startScroll, stopScroll, finishTransition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTransitioning, targetUrl]); // Solo estas dos disparan la transición
 
-  const isHidden = phase === "done" && !isTransitioning;
-
+  // ─── Render ───────────────────────────────────────────────────────────────
+  // IMPORTANTE: sin display inline-style (GSAP lo controla)
+  // IMPORTANTE: h2 sin hijos JSX (JS lo controla vía ref)
   return (
     <div
       ref={loaderRef}
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
-      style={{ display: isHidden ? "none" : "flex" }}
     >
-      {/* Default text visible before JS animates — matches the current page */}
       <h2
-        ref={greetingRef}
+        ref={textRef}
+        suppressHydrationWarning
         className="text-white font-semibold tracking-tighter leading-none select-none"
         style={{
           fontSize: "clamp(3rem, 16vw, 14rem)",
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
         }}
-      >
-        {getLoaderLabel(pathname)}
-      </h2>
+      />
     </div>
   );
 }
