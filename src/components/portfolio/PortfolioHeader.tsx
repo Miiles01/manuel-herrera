@@ -105,10 +105,10 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
         </TransitionLink>
       </div>
 
-      {/* Botón {lang === 'en' ? 'Let'''s talk' : 'Hablemos'} (Derecha Extrema) */}
+      {/* Botón {lang === 'en' ? "Let's talk" : 'Hablemos'} (Derecha Extrema) */}
       <div ref={hablemosRef} className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
         <TransitionLink href={lang === 'en' ? '/en/contact' : '/es/contacto'} className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
-          {lang === 'en' ? 'Let'''s talk' : 'Hablemos'}
+          {lang === 'en' ? "Let's talk" : 'Hablemos'}
         </TransitionLink>
       </div>
 
