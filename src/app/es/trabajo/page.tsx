@@ -107,7 +107,7 @@ export default function TrabajoPage() {
                 <div className="px-2 md:px-4 flex flex-col md:flex-row md:items-end justify-between gap-4 project-fade-up opacity-0">
                   <div className="max-w-2xl">
                     <TransitionLink href={`/es/proyecto/${slug}`} className="inline-flex items-center gap-2 group/title">
-                      <h3 className="text-3xl md:text-4xl font-normal tracking-tight leading-tight text-black transition-colors hover:text-blue-600">{title}</h3>
+                      <h2 className="text-3xl md:text-4xl font-normal tracking-tight leading-tight text-black transition-colors hover:text-blue-600">{title}</h2>
                     </TransitionLink>
                     <p className="text-base md:text-lg font-light text-black/70 mt-2 leading-relaxed tracking-normal">{subtitle}</p>
                   </div>

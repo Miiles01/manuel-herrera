@@ -67,13 +67,13 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
         className="pointer-events-none absolute inset-0 z-[3] flex p-[40px] max-sm:p-5"
         style={{ opacity: p.to(heroContentFade) }}
       >
-        <h1 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
+        <h2 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
           {lines.map((line, i) => (
             <span key={i} className={i === 1 ? "opacity-40" : undefined}>
               <ScrollLetters text={line} p={p} styleFn={heroLetterStyle} />
             </span>
           ))}
-        </h1>
+        </h2>
       </animated.header>
 
 

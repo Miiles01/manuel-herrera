@@ -71,7 +71,7 @@ export default function ProyectoPage() {
 
         <div className="px-6 md:px-12 lg:px-20 container mx-auto my-20 md:my-32 project-fade-up opacity-0">
           <div className="max-w-3xl">
-            <p className="text-xs tracking-widest text-gray-400 mb-4 font-normal uppercase">Sobre el proyecto</p>
+            <h2 className="text-xs tracking-widest text-gray-400 mb-4 font-normal uppercase">Sobre el proyecto</h2>
             <p className="text-xl md:text-2xl font-light leading-relaxed text-black/85 whitespace-pre-line tracking-normal">
               {project.description.es}
             </p>

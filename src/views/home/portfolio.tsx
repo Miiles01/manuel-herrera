@@ -30,9 +30,9 @@ const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
 
       {/* Contenedor de texto en la parte inferior */}
       <div className="relative z-[2] flex flex-col gap-2 w-full opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 ease-out">
-        <h3 className="m-0 text-3xl md:text-4xl lg:text-[3.5vw] font-normal leading-[1.05] tracking-[-0.02em]">
+        <h2 className="m-0 text-3xl md:text-4xl lg:text-[3.5vw] font-normal leading-[1.05] tracking-[-0.02em]">
           {item.title}
-        </h3>
+        </h2>
         {item.subtitle && (
           <p className="m-0 text-sm md:text-base lg:text-lg text-white/80 font-light leading-snug max-w-[85%]">
             {item.subtitle}
