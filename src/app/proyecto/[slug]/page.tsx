@@ -15,7 +15,7 @@ export default function ProyectoPage() {
   const container = useRef(null);
   const params = useParams();
   const slug = params.slug as string;
-  const project = portfolioProjects[slug];
+  const project = Object.values(portfolioProjects).find(p => p.slug === slug);
 
   useGSAP(() => {
     if (!project) return;
