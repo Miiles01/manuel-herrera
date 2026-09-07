@@ -145,12 +145,12 @@ export const homeContent: ShowreelContent = {
       },
       {
         year: "2024",
-        client: "Original",
-        title: "Salon de Barbier",
-        slug: "original",
-        subtitle: "Dirección de arte y diseño web orientado a reservas y conversión.",
-        discipline: "Barbershop & Grooming",
-        image: "/proyectos/Original/portada-1.webp",
+        client: "Miiles AI",
+        title: "Miiles AI",
+        slug: "miiles",
+        subtitle: "Plataforma de gestión de talento y reclutamiento inteligente.",
+        discipline: "AI & Consulting",
+        image: "/proyectos/Miiles/portada-1.webp",
       },
       {
         year: "2024",
