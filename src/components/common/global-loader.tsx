@@ -152,6 +152,11 @@ export function GlobalLoader() {
     text.textContent  = lbl;
     text.dataset.plain = lbl;
 
+    // PREPARAR TEXTO Y OCULTARLO INMEDIATAMENTE ANTES DE QUE BAJE EL TELÓN
+    splitRef.current = new SplitType(text, { types: "chars" });
+    const chars = splitRef.current.chars ?? [];
+    gsap.set(chars, { yPercent: 110 });
+
     // Paso 1: pantalla baja cubriendo el contenido
     gsap.set(loader, { display: "flex", yPercent: -100 });
     gsap.to(loader, {
@@ -159,15 +164,19 @@ export function GlobalLoader() {
       duration: 0.8,
       ease: "power3.inOut",
       onComplete: () => {
-        // Paso 2: letras entran
-        splitRef.current = splitIn(text, () => {
-          // Paso 3: Disparar la navegación en Next.js
-          router.push(targetUrl);
-          
-          // Extraemos solo el path del targetUrl para compararlo con `pathname` de Next
-          // (ignorando posibles query params o hashes en targetUrl por si acaso)
-          const targetPathname = targetUrl.split('?')[0].split('#')[0];
-          setWaitingForPath(targetPathname);
+        // Paso 2: letras entran desde abajo
+        gsap.to(chars, {
+          yPercent: 0,
+          stagger: { each: 0.06, from: "start" },
+          duration: 0.65,
+          ease: "power3.out",
+          onComplete: () => {
+            // Paso 3: Disparar la navegación en Next.js
+            router.push(targetUrl);
+            
+            const targetPathname = targetUrl.split('?')[0].split('#')[0];
+            setWaitingForPath(targetPathname);
+          }
         });
       },
     });
