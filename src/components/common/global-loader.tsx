@@ -12,14 +12,14 @@
  *    sobrevivir al double-invoke de React 18 Strict Mode en desarrollo.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
-import { usePageTransition, getLoaderLabel } from "@/hooks/use-page-transition";
+import { usePageTransition } from "@/hooks/use-page-transition";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -65,22 +65,26 @@ export function GlobalLoader() {
   // Leemos si ya se reveló globalmente para saber si es HMR (Fast Refresh)
   const isAlreadyRevealed = useLoaderStore((s) => s.revealed);
 
-  const { isTransitioning, targetUrl, label, finishTransition } = usePageTransition();
+  const { isTransitioning, targetUrl, finishTransition } = usePageTransition();
 
   const stopScroll  = useScroll((s) => s.stop);
   const startScroll = useScroll((s) => s.start);
 
   const loaderRef = useRef<HTMLDivElement>(null);
   const textRef   = useRef<HTMLHeadingElement>(null);
+  const splitRef  = useRef<SplitType | null>(null);
   
   // En HMR, si ya se reveló antes, empezamos en "idle"
-  const phaseRef  = useRef<"initial" | "idle" | "transitioning">(isAlreadyRevealed ? "idle" : "initial");
+  const phaseRef  = useRef<"initial" | "idle" | "transitioning">("initial");
+
+  const [waitingForPath, setWaitingForPath] = useState<string | null>(null);
 
   // ─── 1. ANIMACIÓN INICIAL ────────────────────────────────────────────────
   useGSAP(() => {
-    // Si ya estamos idle (por ej. HMR re-mount), escondemos y salimos
-    if (phaseRef.current === "idle") {
+    // Si ya estamos idle (por ej. HMR re-mount) o ya se reveló antes
+    if (phaseRef.current === "idle" || isAlreadyRevealed) {
       gsap.set(loaderRef.current, { display: "none" });
+      phaseRef.current = "idle";
       return;
     }
 
@@ -90,8 +94,8 @@ export function GlobalLoader() {
 
     stopScroll();
 
-    // Texto de la página actual
-    const lbl = getLoaderLabel(pathname);
+    // Texto fijo según petición
+    const lbl = "Manu";
     text.textContent  = lbl;
     text.dataset.plain = lbl;
 
@@ -114,10 +118,10 @@ export function GlobalLoader() {
     const startExit = () => {
       if (exited) return;
       exited = true;
-      splitOut(split.chars, 0, slideUp);
+      splitOut(splitRef.current?.chars || null, 0, slideUp);
     };
 
-    const split = splitIn(text, () => {
+    splitRef.current = splitIn(text, () => {
       if (document.readyState === "complete") {
         setTimeout(startExit, 700);
       } else {
@@ -129,9 +133,9 @@ export function GlobalLoader() {
       }
     });
 
-  }, { scope: loaderRef }); // useGSAP maneja el cleanup automático para Strict Mode
+  }, { scope: loaderRef });
 
-  // ─── 2. TRANSICIONES ENTRE PÁGINAS ──────────────────────────────────────
+  // ─── 2. INICIAR TRANSICIÓN A OTRA PÁGINA ────────────────────────────────
   useEffect(() => {
     if (!isTransitioning || !targetUrl) return;
     if (phaseRef.current !== "idle") return;
@@ -143,9 +147,10 @@ export function GlobalLoader() {
     phaseRef.current = "transitioning";
     stopScroll();
 
-    // Escribir el texto de destino directamente en el DOM (React nunca lo toca)
-    text.textContent  = label;
-    text.dataset.plain = label;
+    // Siempre dice "Manu"
+    const lbl = "Manu";
+    text.textContent  = lbl;
+    text.dataset.plain = lbl;
 
     // Paso 1: pantalla baja cubriendo el contenido
     gsap.set(loader, { display: "flex", yPercent: -100 });
@@ -155,36 +160,51 @@ export function GlobalLoader() {
       ease: "power3.inOut",
       onComplete: () => {
         // Paso 2: letras entran
-        const split = splitIn(text, () => {
-          // Paso 3: navegar mientras la cortina está cerrada
+        splitRef.current = splitIn(text, () => {
+          // Paso 3: Disparar la navegación en Next.js
           router.push(targetUrl);
-          window.scrollTo(0, 0);
-          useScroll.getState().lenis?.scrollTo(0, { immediate: true });
-
-          // Paso 4: pausa legible → letras salen
-          splitOut(split.chars, 0.5, () => {
-            // Paso 5: pantalla sube revelando la nueva página
-            gsap.to(loader, {
-              yPercent: -100,
-              duration: 0.85,
-              ease: "power3.inOut",
-              onComplete: () => {
-                gsap.set(loader, { display: "none" });
-                phaseRef.current = "idle";
-                startScroll();
-                finishTransition();
-              },
-            });
-          });
+          
+          // Extraemos solo el path del targetUrl para compararlo con `pathname` de Next
+          // (ignorando posibles query params o hashes en targetUrl por si acaso)
+          const targetPathname = targetUrl.split('?')[0].split('#')[0];
+          setWaitingForPath(targetPathname);
         });
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTransitioning, targetUrl]);
 
+  // ─── 3. REVELAR CUANDO LA PÁGINA CARGÓ ──────────────────────────────────
+  useEffect(() => {
+    if (waitingForPath && pathname === waitingForPath) {
+      setWaitingForPath(null);
+
+      // Reseteamos el scroll al principio de la nueva página
+      window.scrollTo(0, 0);
+      useScroll.getState().lenis?.scrollTo(0, { immediate: true });
+
+      const loader = loaderRef.current;
+      if (!loader) return;
+
+      // Paso 4: Pausa mínima legible, letras salen
+      splitOut(splitRef.current?.chars || null, 0.3, () => {
+        // Paso 5: pantalla sube revelando la nueva página YA CARGADA
+        gsap.to(loader, {
+          yPercent: -100,
+          duration: 0.85,
+          ease: "power3.inOut",
+          onComplete: () => {
+            gsap.set(loader, { display: "none" });
+            phaseRef.current = "idle";
+            startScroll();
+            finishTransition();
+          },
+        });
+      });
+    }
+  }, [pathname, waitingForPath, startScroll, finishTransition]);
+
   // ─── Render ──────────────────────────────────────────────────────────────
-  // Sin display inline (GSAP lo controla)
-  // Sin hijos en h2 (JS lo controla vía ref)
   return (
     <div
       ref={loaderRef}
