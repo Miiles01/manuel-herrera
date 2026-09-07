@@ -118,7 +118,7 @@ export const homeContent: ShowreelContent = {
     leadStrong: "all through one intelligent platform.",
   },
   carouselCta: {
-    button: "Explorar toda la colección",
+    button: "Ver proyectos",
     href: "/trabajo",
   },
   sphere: {
