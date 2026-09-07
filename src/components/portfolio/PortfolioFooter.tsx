@@ -34,7 +34,7 @@ export function PortfolioFooter() {
         <div className="flex flex-wrap justify-center items-start gap-12 md:gap-24 w-full text-gray-400 text-lg mb-12 text-center pt-8">
           <div className="flex flex-col items-center">
             <span className="text-white font-semibold mb-2">Zona horaria</span>
-            <span>Ciudad de México</span>
+            <span>Ciudad de México (GMT-6)</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-white font-semibold mb-2">+52 56 10168992</span>
