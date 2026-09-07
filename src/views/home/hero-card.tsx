@@ -111,16 +111,28 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
             className="absolute left-full top-0 size-full overflow-hidden"
             style={{ transform: p.to((v) => `translateX(${heroSlidePan(v)}%)`) }}
           >
-            {/* The card flips 90°, so this image is counter-rotated to read
-                upright; scale(1.65) > the card's aspect ratio guarantees it
-                covers the rotated frame with no shader/black gap at the edges. */}
-            <Image
-              src={images.rotated}
-              alt=""
-              fill
-              sizes="66vmin"
-              className="object-cover [transform:rotate(-90deg)_scale(1.65)]"
-            />
+            {/* The card flips 90°, so this image needs to be counter-rotated.
+                Instead of rotating the <img> (which breaks object-cover framing),
+                we rotate a swapped-dimension wrapper so the <img> naturally fills
+                a portrait box, perfectly framing the user's portrait images. */}
+            <animated.div
+              className="absolute"
+              style={{
+                width: p.to(heroSliderHeight),
+                height: p.to(heroSliderWidth),
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%) rotate(-90deg)",
+              }}
+            >
+              <Image
+                src={images.rotated}
+                alt=""
+                fill
+                sizes="66vmin"
+                className="object-cover"
+              />
+            </animated.div>
           </animated.div>
         </animated.div>
       </div>
