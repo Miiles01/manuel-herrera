@@ -58,7 +58,7 @@ export default function ContactoPage() {
       <main className="flex-1 px-6 md:px-12 lg:px-20 container mx-auto pt-36 md:pt-48 pb-20">
         <section className="mb-20 md:mb-32">
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
-            Construyamos algo increíble juntos.
+            Construyamos algo increíble juntos
           </p>
           <h1 className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black fade-up-hero opacity-0">
             Contacto
