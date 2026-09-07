@@ -317,6 +317,43 @@ export const portfolioProjects: Record<string, Project> = {
     ],
   },
 
+  colorfit: {
+    slug: "colorfit",
+    title: "Colorfit",
+    folder: "Colorfit",
+    subtitle: {
+      es: "Identidad visual y branding para marca de moda y fitness contemporánea.",
+      en: "Visual identity and branding for contemporary fashion and fitness brand.",
+    },
+    industry: {
+      es: "Fitness, Wellness y Salud",
+      en: "Fitness, Wellness & Health",
+    },
+    role: {
+      es: "Estrategia de Identidad de Marca",
+      en: "Brand Identity Strategy",
+    },
+    description: {
+      es: "Creamos la identidad visual y lineamientos de marca de Colorfit para proyectar energía y sofisticación en el sector fitness. Diseñamos un sistema gráfico versátil y escalable, adaptado con precisión tanto para su línea textil y merchandising como para sus canales digitales.",
+      en: "We created Colorfit's visual identity and brand guidelines to project energy and sophistication in the fitness industry. We designed a versatile, scalable graphic system, precisely tailored for both their apparel line and digital touchpoints.",
+    },
+    previewImages: [
+      "portada-1.webp",
+      "colorfit-2.webp",
+      "mockup-ropa-2.webp",
+    ],
+    images: [
+      { src: "portada-1.webp", alt: "Colorfit — Cover", aspect: "wide" },
+      { src: "diferentes-mockups.webp", alt: "Colorfit — Mockups", aspect: "wide" },
+      { src: "mockup-ropa-1.webp", alt: "Colorfit — Apparel Mockup 1", aspect: "wide" },
+      { src: "mockup-ropa-2.webp", alt: "Colorfit — Apparel Mockup 2", aspect: "wide" },
+      { src: "mockup-tote-bag.webp", alt: "Colorfit — Tote Bag Mockup", aspect: "wide" },
+    ],
+    participation: [
+      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
+    ],
+  },
+
   jambu: {
     slug: "jambu",
     title: "Jambú",
