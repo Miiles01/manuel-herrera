@@ -37,8 +37,8 @@ export default function TrabajoPage() {
     <div className="bg-white min-h-screen text-black" ref={container}>
       <PortfolioHeader />
       
-      <main className="flex-1 px-6 md:px-12 lg:px-20 container mx-auto pt-36 md:pt-48 pb-20">
-        <section className="mb-20 md:mb-32">
+      <main className="flex-1 pt-36 md:pt-48 pb-20">
+        <section className="px-6 md:px-12 lg:px-20 container mx-auto mb-20 md:mb-32">
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
             Pensamos con propósito para marcas que buscan autenticidad y escalabilidad.
           </p>
@@ -47,7 +47,7 @@ export default function TrabajoPage() {
           </h1>
         </section>
 
-        <section className="pb-12">
+        <section className="px-4 md:px-8 lg:px-12 pb-12">
           {projects.map(proj => {
             const cover = proj.previewImages[0];
             const secondary = [proj.previewImages[1], proj.previewImages[2]];
