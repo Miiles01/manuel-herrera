@@ -10,6 +10,8 @@ import { SphereCard } from "@/views/home/sphere-card";
 import { Marquee } from "@/views/home/marquee";
 import { Portfolio } from "@/views/home/portfolio";
 import { CtaBlock } from "@/views/home/cta-block";
+import { Serigraph } from "@/components/ui/serigraph";
+import Image from "next/image";
 import type { ShowreelContent } from "@/data/mocks/home";
 import { TransitionLink } from "@/components/ui/transition-link";
 import {
@@ -285,13 +287,22 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
-                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#1e1e1e]"
+                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#08060c]"
                 style={{
                   transform: targetTransform(),
                   borderRadius: s.targetRadius,
                   opacity: s.targetOpacity,
                 }}
               >
+                <Serigraph />
+                <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
+                  <Image 
+                    src="/assets/showreel/slide-16-9-1.png" 
+                    alt="Hagamos esa idea realidad" 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
                 {/* White margin band — the same ~4vmin white area between the
                     screen edge and the content as the hero stage (its `p-[4vmin]`
                     white backdrop), now with rounded INNER corners like the hero
