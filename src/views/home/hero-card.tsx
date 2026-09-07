@@ -76,15 +76,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
         </h1>
       </animated.header>
 
-      {/* "Browse our templates" — centred + counter-rotated so it reads upright
-          once the card flips 90°. Animates in late in phase 1. Sits ABOVE the
-          image card (z-[7] > z-[6]) so it stays legible over the green carousel
-          face; a drop shadow keeps it readable on the bright image. */}
-      <div className="pointer-events-none absolute inset-0 z-[7] flex items-center justify-center">
-        <h2 className="text-center text-[3.6vmin] font-normal leading-tight text-gray-900 drop-shadow-sm [transform:rotate(-90deg)]">
-          <ScrollLetters text={templatesTitle} p={p} styleFn={(prog, i) => templatesLetterStyle(prog, i)} />
-        </h2>
-      </div>
+
 
       {/* Image card — floats OVER the headline (z-[6]) with a cursor-driven 3D
           tilt (perspective parent). Pans left + grows to fully cover the card so
