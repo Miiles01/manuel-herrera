@@ -154,12 +154,12 @@ export const homeContent: ShowreelContent = {
       },
       {
         year: "2024",
-        client: "Colorfit",
-        title: "Colorfit",
-        slug: "colorfit",
-        subtitle: "Identidad visual y branding para marca de moda y fitness contemporánea.",
-        discipline: "Fitness & Wellness",
-        image: "/proyectos/Colorfit/portada-1.webp",
+        client: "Virreinal Tepeyac",
+        title: "Virreinal Tepeyac",
+        slug: "virreinal-tepeyac",
+        subtitle: "Construcción de marca y diseño web para un venue boutique de alto calibre.",
+        discipline: "Events & Boutique Venue",
+        image: "/proyectos/virreinal-tepeyac/portada.webp",
       },
       {
         year: "2024",
