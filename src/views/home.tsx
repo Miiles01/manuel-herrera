@@ -4,21 +4,21 @@
  * composes the fixed nav and the scroll stage; all motion/3D lives in the
  * client leaves under `views/home/` and `components/3d/`.
  */
-import { homeContent } from "@/data/mocks/home";
+import { homeContent, homeContentEn } from "@/data/mocks/home";
 import { ShowreelStage } from "@/views/home/showreel-stage";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 
-export const HomeView = () => (
+export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => (
   <>
-        <PortfolioHeader />
+    <PortfolioHeader lang={lang} />
     <main className="bg-white">
-      <PortfolioHero />
+      <PortfolioHero lang={lang} />
       
       {/* The new immersive experience from AI Studio */}
-      <div className="relative z-20"><ShowreelStage content={homeContent} /></div>
+      <div className="relative z-20"><ShowreelStage content={lang === "en" ? homeContentEn : homeContent} /></div>
     </main>
-    <PortfolioFooter />
+    <PortfolioFooter lang={lang} />
   </>
 );

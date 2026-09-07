@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function FooterCopyItem({ value, title, subtitle }: { value: string; title: string; subtitle: string }) {
+function FooterCopyItem({ value, title, subtitle, copiedText = "{copiedText}" }: { value: string; title: string; subtitle: string; copiedText?: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -28,13 +28,13 @@ function FooterCopyItem({ value, title, subtitle }: { value: string; title: stri
           copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
         }`}
       >
-        Copiado
+        {copiedText}
       </div>
     </div>
   );
 }
 
-export function PortfolioFooter() {
+export function PortfolioFooter({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   const footerRef = useRef(null);
 
   useGSAP(() => {
@@ -59,20 +59,20 @@ export function PortfolioFooter() {
         
         <div className="flex flex-wrap justify-center items-start gap-12 md:gap-24 w-full text-gray-400 text-lg mb-12 text-center pt-8">
           <div className="flex flex-col items-center">
-            <span className="text-white font-semibold mb-2">Zona horaria</span>
-            <span>Ciudad de México (GMT-6)</span>
+            <span className="text-white font-semibold mb-2">{lang === 'en' ? 'Time zone' : 'Zona horaria'}</span>
+            <span>{lang === 'en' ? 'Mexico City (GMT-6)' : 'Ciudad de México (GMT-6)'}</span>
           </div>
           
           <FooterCopyItem 
             value="+52 56 10168992" 
             title="+52 56 10168992" 
-            subtitle="Mensajería" 
+            subtitle={lang === 'en' ? 'Messaging' : 'Mensajería'} copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
           />
 
           <FooterCopyItem 
             value="contmanuel77@gmail.com" 
             title="contmanuel77@gmail.com" 
-            subtitle="Email" 
+            subtitle="Email" copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
           />
 
           <div className="flex flex-col items-center">
@@ -88,7 +88,7 @@ export function PortfolioFooter() {
         </div>
 
         <div className="w-full flex justify-center text-gray-400 text-sm text-center">
-          <p className="text-white">&copy; 2026 Manuel Herrera. Todos los derechos reservados.</p>
+          <p className="text-white"><p className="text-white">&copy; 2026 Manuel Herrera. Todos los derechos reservados.</p>copy; 2026 Manuel Herrera. {lang === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}</p>
         </div>
 
       </div>

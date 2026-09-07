@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Custom ease used in the original project
 
-export function PortfolioHero() {
+export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   const heroRef = useRef(null);
   const isRevealed = useLoaderStore((s) => s.revealed);
   
@@ -92,7 +92,7 @@ export function PortfolioHero() {
           {/* Subtextos inferiores */}
           <div className="flex justify-between w-full text-sm md:text-base font-medium text-gray-500 px-2 mt-2">
             <span>Est. 2026</span>
-            <span>México</span>
+            <span>{lang === 'en' ? 'Mexico' : 'México'}</span>
           </div>
         </div>
       </section>

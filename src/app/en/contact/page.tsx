@@ -1,0 +1,142 @@
+"use client";
+
+import { useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
+import { useLoaderStore } from "@/hooks/use-loader";
+import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
+import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
+
+function CopyItem({ value, label, copiedText = "Copied" }: { value: string; label: string; copiedText?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-3 text-left text-xl font-light text-gray-600 hover:text-black transition-colors cursor-pointer group"
+    >
+      <span>{label}</span>
+      <span
+        className={`text-sm font-medium bg-black text-white px-3 py-1 rounded-full transition-all duration-300 ${
+          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+        }`}
+      >
+        {copiedText}
+      </span>
+    </button>
+  );
+}
+
+export default function ContactPage() {
+  const container = useRef(null);
+  const isRevealed = useLoaderStore((s) => s.revealed);
+
+  useGSAP(() => {
+    // Initial static fade-up for paragraph
+    gsap.utils.toArray("p.fade-up-hero").forEach((el: any, i) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 1, delay: i * 0.1, ease: "power3.out" }
+      );
+    });
+
+    const titleText = new SplitType("#page-title", { types: "chars" });
+    gsap.set(titleText.chars, { yPercent: 100 });
+
+    gsap.utils.toArray(".fade-up-content").forEach((el: any, i) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 1, delay: 0.3 + (i * 0.1), ease: "power3.out" }
+      );
+    });
+    return () => {
+      titleText.revert();
+    };
+
+  }, { scope: container });
+
+  useGSAP(() => {
+    if (isRevealed) {
+      const titleChars = document.querySelectorAll("#page-title .char");
+      if (titleChars.length) {
+        gsap.to(titleChars, {
+          yPercent: 0,
+          stagger: { each: 0.05, from: "random" },
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      }
+    }
+  }, [isRevealed]);
+
+
+  return (
+    <div className="bg-white min-h-screen text-black" ref={container}>
+      <PortfolioHeader lang="en" />
+      
+      <main className="flex-1 px-6 md:px-12 lg:px-20 container mx-auto pt-36 md:pt-48 pb-20">
+        <section className="mb-20 md:mb-32">
+          <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
+            Let's build something incredible together
+          </p>
+          <h1 id="page-title" className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}>
+            Contacto
+          </h1>
+        </section>
+        
+        <section className="pb-12 grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="fade-up-content opacity-0">
+            <h2 className="text-3xl font-normal tracking-tight mb-8">Information</h2>
+            <div className="space-y-6 text-xl text-gray-600 font-light">
+              <div>
+                <CopyItem value="contmanuel77@gmail.com" label="contmanuel77@gmail.com" />
+              </div>
+              <p>Mexico City, Mexico</p>
+              <div className="flex gap-6 pt-4">
+                <a href="https://www.linkedin.com/in/manuel-herrera-perfil/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="fade-up-content opacity-0">
+            <h2 className="text-3xl font-normal tracking-tight mb-8">Send me a message</h2>
+            <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+              <input 
+                type="text" 
+                placeholder="Full name" 
+                className="w-full bg-gray-100 border-none rounded-xl px-6 py-4 text-lg focus:ring-2 focus:ring-black outline-none transition-all placeholder:text-gray-400 font-light"
+              />
+              <input 
+                type="email" 
+                placeholder="Email address" 
+                className="w-full bg-gray-100 border-none rounded-xl px-6 py-4 text-lg focus:ring-2 focus:ring-black outline-none transition-all placeholder:text-gray-400 font-light"
+              />
+              <textarea 
+                rows={5} 
+                placeholder="¿Cómo te puedo ayudar?" 
+                className="w-full bg-gray-100 border-none rounded-xl px-6 py-4 text-lg focus:ring-2 focus:ring-black outline-none transition-all placeholder:text-gray-400 font-light resize-y"
+              ></textarea>
+              <button 
+                type="submit" 
+                className="bg-black text-white rounded-full px-8 py-4 text-lg font-normal hover:bg-gray-800 transition-colors w-max"
+              >
+                Enviar mensaje
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <PortfolioFooter lang="en" />
+    </div>
+  );
+}

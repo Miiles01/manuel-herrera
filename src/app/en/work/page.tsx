@@ -61,7 +61,7 @@ export default function WorkPage() {
 
   return (
     <div className="bg-white min-h-screen text-black" ref={container}>
-      <PortfolioHeader />
+      <PortfolioHeader lang="en" />
       
       <main className="flex-1 pt-36 md:pt-48 pb-20">
         <section className="px-6 md:px-12 lg:px-20 container mx-auto mb-20 md:mb-32">
@@ -121,7 +121,7 @@ export default function WorkPage() {
         </section>
       </main>
       
-      <PortfolioFooter />
+      <PortfolioFooter lang="en" />
     </div>
   );
 }

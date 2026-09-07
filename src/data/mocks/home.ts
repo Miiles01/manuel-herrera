@@ -180,3 +180,86 @@ export const homeContent: ShowreelContent = {
     href: "/contacto",
   },
 };
+
+export const homeContentEn: ShowreelContent = {
+  ...homeContent,
+  marquee: [
+    "Branding",
+    "Social Media",
+    "Vibe Coding",
+    "Analytics",
+  ],
+  hero: {
+    ...homeContent.hero,
+    lines: ["I love creating with", "intention"],
+    templatesTitle: "We create\nexperiences",
+    bottomBlock: {
+      leftText: "My mission is to help others create projects that transform communities.",
+      rightText: "11 years creating",
+      avatars: []
+    }
+  },
+  catalistDark: {
+    ...homeContent.catalistDark,
+    url: "strategy",
+    pillLabel: "Marketing",
+    pillTitle: "Social Media",
+    lead: "Empowering brands with ",
+    leadStrong: "purpose",
+  },
+  carouselCta: {
+    button: "View projects",
+    href: "/en/work",
+  },
+  sphere: {
+    ...homeContent.sphere,
+    cardHeading: "Intelligence beyond limits",
+  },
+  portfolio: {
+    items: [
+      {
+        year: "2024",
+        client: "Mar & Vic",
+        title: "Mar & Vic",
+        slug: "mar-vic",
+        subtitle: "Sophisticated branding and e-commerce ecosystem for interior design.",
+        discipline: "Retail & Interior Design",
+        image: "/proyectos/Mar-Vic/portada-1.webp",
+      },
+      {
+        year: "2024",
+        client: "Miiles AI",
+        title: "Miiles AI",
+        slug: "miiles",
+        subtitle: "Intelligent talent management and recruitment platform.",
+        discipline: "AI & Consulting",
+        image: "/proyectos/Miiles/portada-1.webp",
+      },
+      {
+        year: "2024",
+        client: "Virreinal Tepeyac",
+        title: "Virreinal Tepeyac",
+        slug: "virreinal-tepeyac",
+        subtitle: "Brand building and web design for a high-caliber boutique venue.",
+        discipline: "Events & Boutique Venue",
+        image: "/proyectos/virreinal-tepeyac/portada-home.webp",
+      },
+      {
+        year: "2024",
+        client: "Jambú",
+        title: "Jambú",
+        slug: "jambu",
+        subtitle: "Identity redesign and packaging inspired by natural richness.",
+        discipline: "Food & Consumer Goods",
+        image: "/proyectos/Jambu/portada-1.webp",
+      },
+    ],
+  },
+  cta: {
+    heading: "Let's make that idea",
+    headingFaded: "a reality",
+    sub: "Write to me and let's start working on that project.",
+    button: "Contact",
+    href: "/en/contact",
+  },
+};
