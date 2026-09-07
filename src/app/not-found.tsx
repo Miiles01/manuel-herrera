@@ -32,7 +32,7 @@ export default function NotFound() {
         </p>
         <div className="fade-up opacity-0">
           <TransitionLink 
-            href="/" 
+            href="/es" 
             className="inline-flex items-center justify-center bg-black text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-gray-800 hover:scale-105 transition-all"
           >
             Volver al inicio

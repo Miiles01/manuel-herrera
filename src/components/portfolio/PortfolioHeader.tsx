@@ -100,14 +100,14 @@ export function PortfolioHeader() {
     <>
       {/* Logo (Izquierda) */}
       <div ref={logoRef} className="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
-        <TransitionLink href="/" className="font-normal text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
+        <TransitionLink href="/es" className="font-normal text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
           Manuel Herrera
         </TransitionLink>
       </div>
 
       {/* Botón Hablemos (Derecha Extrema) */}
       <div ref={hablemosRef} className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
-        <TransitionLink href="/contacto" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
+        <TransitionLink href="/es/contacto" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
           Hablemos
         </TransitionLink>
       </div>
@@ -126,9 +126,9 @@ export function PortfolioHeader() {
         </button>
 
         <nav className={`flex flex-col gap-6 px-8 pt-6 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
-          <TransitionLink href="/" className="hover:text-gray-500 transition-colors">Inicio</TransitionLink>
-          <TransitionLink href="/trabajo" className="hover:text-gray-500 transition-colors">Trabajo</TransitionLink>
-          <TransitionLink href="/contacto" className="hover:text-gray-500 transition-colors">Contacto</TransitionLink>
+          <TransitionLink href="/es" className="hover:text-gray-500 transition-colors">Inicio</TransitionLink>
+          <TransitionLink href="/es/trabajo" className="hover:text-gray-500 transition-colors">Trabajo</TransitionLink>
+          <TransitionLink href="/es/contacto" className="hover:text-gray-500 transition-colors">Contacto</TransitionLink>
         </nav>
 
         <div className={`px-8 pt-8 pb-10 flex flex-col gap-3 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
