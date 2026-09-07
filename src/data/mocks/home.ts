@@ -128,9 +128,9 @@ export const homeContent: ShowreelContent = {
       "Superconscious is a neural engine that turns intent into action — anticipating your next move before you make it, across every device you already own.",
       "One model, every surface: wearable, neural, and beyond. No ceilings, no limits — just intelligence that keeps pace with the way you think.",
     ],
-    cardLabel: "Neural Core",
-    cardUrl: "superconscious.ai",
-    cardHeading: "Intelligence, beyond limits",
+    cardLabel: "",
+    cardUrl: "",
+    cardHeading: "Inteligencia sin límites",
   },
   portfolio: {
     items: [

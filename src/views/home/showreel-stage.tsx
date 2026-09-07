@@ -224,8 +224,8 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     p={p}
                     lines={content.hero.lines}
                     templatesTitle={content.hero.templatesTitle}
+                    images={{ stone: `${A}/1.png`, rotated: `${A}/2.png` }}
                     bottomBlock={content.hero.bottomBlock}
-                    images={{ stone: `${A}/stone.jpg`, rotated: `${A}/hero-image-2.png` }}
                     active={vis.hero}
                   />
                 </animated.div>
@@ -239,7 +239,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     opacity: s.card1Opacity,
                   }}
                 >
-                  <CatalistCard variant="dark" content={content.catalistDark} bg={`${A}/card-2.jpg`} />
+                  <CatalistCard variant="dark" content={content.catalistDark} bg={`${A}/3.png`} />
                 </animated.div>
 
                 {/* Card 3 — Catalist (light) */}
@@ -251,7 +251,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     opacity: s.card1Opacity,
                   }}
                 >
-                  <CatalistCard variant="light" content={content.catalistLight} bg={`${A}/card-3.jpg`} />
+                  <CatalistCard variant="light" content={content.catalistLight} bg={`${A}/4.png`} />
                 </animated.div>
 
                 {/* Card 4 — sphere. The SphereCard renders the violet card face
