@@ -159,7 +159,7 @@ export const homeContent: ShowreelContent = {
         slug: "virreinal-tepeyac",
         subtitle: "Construcción de marca y diseño web para un venue boutique de alto calibre.",
         discipline: "Events & Boutique Venue",
-        image: "/proyectos/virreinal-tepeyac/portada.webp",
+        image: "/proyectos/virreinal-tepeyac/portada-home.webp",
       },
       {
         year: "2024",
