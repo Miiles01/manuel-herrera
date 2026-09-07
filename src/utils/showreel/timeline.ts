@@ -197,11 +197,20 @@ export const marqueeOpacity = (p: number) => {
 export const marqueeBlur = (p: number) => (1 - phase1(p)) * 20; // px
 
 /**
- * White stage backdrop opacity. Phases 1–4 sit on white (matching the original
- * `html` background); it fades to reveal the black page + flame shader as the
- * sphere fully opens (gp 0.72→0.75).
+ * Tracks the "hero" sequence (phases 1–4). 1 means white backdrop, 0 means black.
+ * Fades to 0 (black page) just before portfolio starts, as the card flips and the
+ * sphere fully opens (gp 0.72→0.75). Fades back to 1 (white) after the portfolio
+ * ends (vScroll 3100→3300) so the camera flight happens over white.
  */
-export const stageBackdropOpacity = (p: number) => clamp01((0.75 - gp(p)) / 0.03);
+export const stageBackdropOpacity = (p: number) => {
+  const v = vScroll(p);
+  // Fades out (white -> black) between 1440 and 1500
+  const fadeOutWhite = clamp01((1500 - v) / 60);
+  // Fades in (black -> white) between 3100 and 3300 (after portfolio)
+  const fadeInWhite = clamp01((v - 3100) / 200);
+  
+  return clamp01(fadeOutWhite + fadeInWhite);
+};
 
 // ── Unified aurora background (sphere + portfolio) ──────────────────────────
 // One pinned mesh-gradient ("northern lights") shared by the sphere scene and
