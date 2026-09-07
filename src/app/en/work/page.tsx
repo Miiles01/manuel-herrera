@@ -3,23 +3,31 @@ import { useEffect, useRef } from "react";
 import { TransitionLink } from "@/components/ui/transition-link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { portfolioProjects } from "@/data/portfolio";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
+import { useLoaderStore } from "@/hooks/use-loader";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
   const container = useRef(null);
+  const isRevealed = useLoaderStore((s) => s.revealed);
 
   useGSAP(() => {
-    gsap.utils.toArray(".fade-up-hero").forEach((el: any, i) => {
+    // Initial static fade-up for paragraph
+    gsap.utils.toArray("p.fade-up-hero").forEach((el: any, i) => {
       gsap.fromTo(el, 
         { opacity: 0, y: 30 }, 
         { opacity: 1, y: 0, duration: 1, delay: i * 0.1, ease: "power3.out" }
       );
     });
+
+    // Setup SplitType for title
+    const titleText = new SplitType('#page-title', { types: 'chars' });
+    gsap.set(titleText.chars, { yPercent: 100 });
 
     gsap.utils.toArray(".project-fade-up").forEach((el: any) => {
       gsap.fromTo(el, 
@@ -29,7 +37,25 @@ export default function WorkPage() {
         }
       );
     });
+
+    return () => {
+      titleText.revert();
+    };
   }, { scope: container });
+
+  useGSAP(() => {
+    if (isRevealed) {
+      const titleChars = document.querySelectorAll('#page-title .char');
+      if (titleChars.length) {
+        gsap.to(titleChars, {
+          yPercent: 0,
+          stagger: { each: 0.05, from: "random" },
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      }
+    }
+  }, [isRevealed]);
 
   const projects = Object.values(portfolioProjects);
 
@@ -42,7 +68,7 @@ export default function WorkPage() {
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
             Purpose-driven thinking for brands seeking authenticity and scalability.
           </p>
-          <h1 className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black fade-up-hero opacity-0">
+          <h1 id="page-title" className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}>
             Projects
           </h1>
         </section>

@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
+import { useLoaderStore } from "@/hooks/use-loader";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 
@@ -34,14 +36,19 @@ function CopyItem({ value, label }: { value: string; label: string }) {
 
 export default function ContactoPage() {
   const container = useRef(null);
+  const isRevealed = useLoaderStore((s) => s.revealed);
 
   useGSAP(() => {
-    gsap.utils.toArray(".fade-up-hero").forEach((el: any, i) => {
+    // Initial static fade-up for paragraph
+    gsap.utils.toArray("p.fade-up-hero").forEach((el: any, i) => {
       gsap.fromTo(el, 
         { opacity: 0, y: 30 }, 
         { opacity: 1, y: 0, duration: 1, delay: i * 0.1, ease: "power3.out" }
       );
     });
+
+    const titleText = new SplitType("#page-title", { types: "chars" });
+    gsap.set(titleText.chars, { yPercent: 100 });
 
     gsap.utils.toArray(".fade-up-content").forEach((el: any, i) => {
       gsap.fromTo(el, 
@@ -49,7 +56,26 @@ export default function ContactoPage() {
         { opacity: 1, y: 0, duration: 1, delay: 0.3 + (i * 0.1), ease: "power3.out" }
       );
     });
+    return () => {
+      titleText.revert();
+    };
+
   }, { scope: container });
+
+  useGSAP(() => {
+    if (isRevealed) {
+      const titleChars = document.querySelectorAll("#page-title .char");
+      if (titleChars.length) {
+        gsap.to(titleChars, {
+          yPercent: 0,
+          stagger: { each: 0.05, from: "random" },
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      }
+    }
+  }, [isRevealed]);
+
 
   return (
     <div className="bg-white min-h-screen text-black" ref={container}>
@@ -60,7 +86,7 @@ export default function ContactoPage() {
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
             Construyamos algo increíble juntos
           </p>
-          <h1 className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black fade-up-hero opacity-0">
+          <h1 id="page-title" className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}>
             Contacto
           </h1>
         </section>
