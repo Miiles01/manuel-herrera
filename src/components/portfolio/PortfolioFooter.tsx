@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -7,6 +7,32 @@ import SplitType from 'split-type';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+function FooterCopyItem({ value, title, subtitle }: { value: string; title: string; subtitle: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex flex-col items-center relative cursor-pointer group" onClick={handleCopy}>
+      <span className="text-white font-semibold mb-2 group-hover:text-gray-200 transition-colors">{title}</span>
+      <span>{subtitle}</span>
+      
+      {/* Etiqueta de copiado (tooltip) */}
+      <div 
+        className={`absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-semibold px-3 py-1 rounded-full pointer-events-none transition-all duration-300 ease-out shadow-lg ${
+          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+        }`}
+      >
+        Copiado
+      </div>
+    </div>
+  );
+}
 
 export function PortfolioFooter() {
   const footerRef = useRef(null);
@@ -36,14 +62,19 @@ export function PortfolioFooter() {
             <span className="text-white font-semibold mb-2">Zona horaria</span>
             <span>Ciudad de México (GMT-6)</span>
           </div>
-          <div className="flex flex-col items-center">
-            <span className="text-white font-semibold mb-2">+52 56 10168992</span>
-            <span className="text-sm">solo para mensajes</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-white font-semibold mb-2">Email</span>
-            <a href="mailto:contmanuel77@gmail.com" className="hover:text-white transition-colors">contmanuel77@gmail.com</a>
-          </div>
+          
+          <FooterCopyItem 
+            value="+52 56 10168992" 
+            title="+52 56 10168992" 
+            subtitle="Mensajería" 
+          />
+
+          <FooterCopyItem 
+            value="contmanuel77@gmail.com" 
+            title="contmanuel77@gmail.com" 
+            subtitle="Email" 
+          />
+
           <div className="flex flex-col items-center">
             <span className="text-white font-semibold mb-2">Social</span>
             <a href="https://www.linkedin.com/in/manuel-herrera-perfil/" target="_blank" className="hover:text-white transition-colors">LinkedIn</a>
