@@ -88,7 +88,7 @@ export function PortfolioFooter({ lang = 'es' }: { lang?: 'es' | 'en' }) {
         </div>
 
         <div className="w-full flex justify-center text-gray-400 text-sm text-center">
-          <p className="text-white"><p className="text-white">&copy; 2026 Manuel Herrera. Todos los derechos reservados.</p>copy; 2026 Manuel Herrera. {lang === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}</p>
+          <p className="text-white">&copy; 2026 Manuel Herrera. {lang === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}</p>
         </div>
 
       </div>
