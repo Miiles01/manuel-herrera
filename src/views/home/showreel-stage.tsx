@@ -128,8 +128,8 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           aria-hidden="true"
           className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center"
           style={{
-            width: item.w,
-            height: item.h,
+            width: `max(280px, ${item.w})`,
+            aspectRatio: '4/5',
             backgroundImage: `url(${item.image})`,
             transform: gridItemTransform(item),
             borderRadius: gridItemRadius(item),
