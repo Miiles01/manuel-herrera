@@ -395,6 +395,46 @@ export const portfolioProjects: Record<string, Project> = {
       { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
     ],
   },
+
+  "the-decant-society": {
+    slug: "the-decant-society",
+    title: "The Decant Society",
+    folder: "the-decant-society",
+    subtitle: {
+      es: "Identidad de marca sofisticada y plataforma e-commerce para perfumería premium.",
+      en: "Sophisticated brand identity and e-commerce platform for premium perfumery.",
+    },
+    industry: {
+      es: "Perfumería, Belleza y E-commerce Premium",
+      en: "Perfumery, Beauty & Premium E-commerce",
+    },
+    role: {
+      es: "Estrategia de Identidad de Marca y E-commerce",
+      en: "Brand Identity Strategy & E-commerce",
+    },
+    description: {
+      es: "Desarrollamos una identidad visual sofisticada y memorable para The Decant Society, elevando su presencia en el mercado de la perfumería y fragancias premium. Diseñamos un sistema gráfico elegante y construimos una plataforma de e-commerce optimizada, capturando la exclusividad de la marca. Visita el proyecto en https://thedecantsociety.com/",
+      en: "We developed a sophisticated and memorable visual identity for The Decant Society, elevating its presence in the premium perfumery and fragrance market. We designed an elegant graphic system and built an optimized e-commerce platform, capturing the brand's exclusivity. Visit the project at https://thedecantsociety.com/",
+    },
+    previewImages: [
+      "portada.webp",
+      "mini-1.webp",
+      "mini-2.webp",
+    ],
+    images: [
+      { src: "portada.webp", alt: "The Decant Society — Cover", aspect: "wide" },
+      { src: "1.webp", alt: "The Decant Society — 1", aspect: "wide" },
+      { src: "2.webp", alt: "The Decant Society — 2", aspect: "wide" },
+      { src: "3.webp", alt: "The Decant Society — 3", aspect: "wide" },
+      { src: "4.webp", alt: "The Decant Society — 4", aspect: "wide" },
+      { src: "5.webp", alt: "The Decant Society — 5", aspect: "wide" },
+      { src: "6.webp", alt: "The Decant Society — 6", aspect: "wide" },
+      { src: "7.webp", alt: "The Decant Society — 7", aspect: "wide" },
+    ],
+    participation: [
+      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
+      { icon: "star", text: { es: "E-commerce", en: "E-commerce" } },
+    ],
+  },
+
 };
-
-
