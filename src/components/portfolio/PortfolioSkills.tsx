@@ -32,7 +32,7 @@ export function PortfolioSkills() {
         }
     });
 
-    cards.forEach((card, i) => {
+    cards.forEach((card: any, i: number) => {
         const sign = i % 2 === 0 ? 1 : -1;
         const rotation = (Math.random() - 0.5) * 6;
         const amplitude = isPortrait ? 0.38 : 0.48;
