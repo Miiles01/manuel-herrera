@@ -19,7 +19,7 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
     const heroText = new SplitType('#hero-name', { types: 'chars' });
     gsap.set(heroText.chars, { yPercent: 100 });
 
-    const introText = new SplitType('#intro-text', { types: 'lines, words' });
+    const introText = new SplitType('#intro-text', { types: 'lines,words' });
     introText.lines?.forEach(line => {
       line.style.overflow = 'hidden';
       line.style.paddingBottom = '0.2em';
