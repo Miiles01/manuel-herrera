@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 import { usePageTransition } from "@/hooks/use-page-transition";
 
 interface TransitionLinkProps extends LinkProps {
@@ -11,7 +11,8 @@ interface TransitionLinkProps extends LinkProps {
   href: string;
 }
 
-export function TransitionLink({ children, href, className, ...props }: TransitionLinkProps) {
+export const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>(
+  function TransitionLink({ children, href, className, ...props }, ref) {
   const pathname = usePathname();
   const startTransition = usePageTransition((s) => s.startTransition);
 
@@ -31,8 +32,8 @@ export function TransitionLink({ children, href, className, ...props }: Transiti
   };
 
   return (
-    <Link href={href} onClick={handleClick} className={className} {...props}>
+    <Link ref={ref} href={href} onClick={handleClick} className={className} {...props}>
       {children}
     </Link>
   );
-}
+});
