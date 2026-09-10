@@ -7,9 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export function PortfolioSkills() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement | any>(null);
 
   useGSAP(() => {
+    if (!rootRef.current) return;
     const container = rootRef.current.querySelector('.skills-container');
     const cardsContainer = rootRef.current.querySelector('.skills-cards');
     const cards = rootRef.current.querySelectorAll('.skills-card');
