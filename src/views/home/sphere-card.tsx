@@ -9,6 +9,7 @@ import type { ShowreelGeo } from "@/utils/showreel/geometry";
 import {
   blackScreenTransform,
   sphereSceneScale,
+  sphereSceneTransform,
   starMaskSize,
   sphereLogoTransform,
   sphereLogoOpacity,
@@ -127,7 +128,7 @@ export const SphereCard = memo(({
           className="absolute left-1/2 top-1/2 h-screen w-screen"
           style={{
             transform: p.to(
-              (v) => `translate(-50%, -50%) scale(${sphereSceneScale(v, vmin, geo)})`,
+              (v) => sphereSceneTransform(v, vmin, geo),
             ),
           }}
         >

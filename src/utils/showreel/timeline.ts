@@ -56,7 +56,7 @@ const gp = (p: number) => clamp01(vScroll(p) / OLD_MAX);
 const phase1 = (p: number) => clamp01(gp(p) / (2 / 15)); // 0 – 13.33%
 const phase2 = (p: number) => clamp01((gp(p) - 0.1) / 0.05); // 10 – 15%
 const phase3 = (p: number) => clamp01((gp(p) - 0.15) / 0.25); // 15 – 40%
-const phase4 = (p: number) => clamp01((gp(p) - 0.4) / 0.35); // 40 – 75%
+export const phase4 = (p: number) => clamp01((gp(p) - 0.4) / 0.35); // 40 – 75%
 
 // ── Card 1 (hero) ──────────────────────────────────────────────────────────
 // The hero card is rotated 90°, so its box width = the side-card *height*
@@ -151,12 +151,18 @@ export const blackScreenTransform = (p: number, vmin: number, geo: ShowreelGeo =
   const scale = (PERSP - flyBackZpx(p, vmin, geo)) / PERSP;
   const up = clamp01((vScroll(p) - PS) / 400);
   const upY = smooth(up) * 100; // vh — sphere block scrolls up to meet portfolio
-  return `translate(-50%, calc(-50% - ${upY}vh)) scale(${scale})`;
+  const rot = smooth(phase4(p)) * 180;
+  return `translate(-50%, calc(-50% - ${upY}vh)) scale(${scale}) rotate(${rot}deg)`;
 };
 export const sphereSceneScale = (p: number, vmin: number, geo: ShowreelGeo = DESKTOP_GEO) => {
   const fly = flyBackZpx(p, vmin, geo);
   const radius = geo.carouselRVmin * vmin;
   return (PERSP - fly - radius) / (PERSP - fly);
+};
+export const sphereSceneTransform = (p: number, vmin: number, geo: ShowreelGeo = DESKTOP_GEO) => {
+  const scale = sphereSceneScale(p, vmin, geo);
+  const rot = smooth(phase4(p)) * 180;
+  return `translate(-50%, -50%) rotate(${-rot}deg) scale(${scale})`;
 };
 export const sphereLogoEase = (p: number) => {
   const inP = clamp01((phase3(p) - 0.6) / 0.4);
@@ -177,8 +183,10 @@ export const sphereCollapse = (p: number) => smooth(clamp01((gp(p) - 0.52) / 0.2
  *  scattered particles aren't clipped by the canvas edge). */
 export const sphereScale = (p: number) => 1 + 0.5 * sphereCollapse(p);
 
-export const sphereLogoTransform = (p: number) =>
-  `translate(-50%, -50%) scale(${0.12 + 0.88 * sphereLogoEase(p) - 0.55 * sphereCollapse(p)})`;
+export const sphereLogoTransform = (p: number) => {
+  const rot = smooth(phase4(p)) * 180;
+  return `translate(-50%, -50%) rotate(${rot}deg) scale(${0.12 + 0.88 * sphereLogoEase(p) - 0.55 * sphereCollapse(p)})`;
+};
 export const sphereLogoOpacity = (p: number) => sphereLogoEase(p);
 
 /**
