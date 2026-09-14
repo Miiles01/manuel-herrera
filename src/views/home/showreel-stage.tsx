@@ -271,7 +271,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     headingTop={content.sphere.headingTop}
                     headingBottom={content.sphere.headingBottom}
                     body={content.sphere.body}
-                    star={`${A}/star-sharp.svg`}
+                    star={`${A}/manu-estrella.svg`}
                     cardLabel={content.sphere.cardLabel}
                     cardUrl={content.sphere.cardUrl}
                     cardHeading={content.sphere.cardHeading}
