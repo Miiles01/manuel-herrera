@@ -22,6 +22,7 @@ interface MetadataProps {
   twitterHandle?: string;
   author?: string;
   siteName?: string;
+  locale?: string;
 }
 
 /**
@@ -37,6 +38,7 @@ export function generateMetadata({
   twitterHandle = siteConfig.twitterHandle,
   author = siteConfig.author,
   siteName = siteConfig.name,
+  locale = "es_MX",
 }: MetadataProps = {}): Metadata {
   return {
     // Resolves every relative URL below to an absolute one.
@@ -58,7 +60,7 @@ export function generateMetadata({
       description,
       url,
       siteName,
-      locale: "en_US",
+      locale,
       type: "website",
     },
     twitter: {
