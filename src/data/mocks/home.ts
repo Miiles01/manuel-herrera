@@ -125,8 +125,11 @@ export const homeContent: ShowreelContent = {
     headingTop: "Beyond",
     headingBottom: ["all", "limits"],
     body: [
-      "Superconscious is a neural engine that turns intent into action — anticipating your next move before you make it, across every device you already own.",
-      "One model, every surface: wearable, neural, and beyond. No ceilings, no limits — just intelligence that keeps pace with the way you think.",
+      "Naabi Kanabi — Co-Fundador | Marketing Manager: posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.",
+      "Miiles AI — CEO: funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Google/Facebook/LinkedIn Ads, A/B testing, content e influencer marketing. Lifecycle marketing, campañas outbound, configuración de email (DMARC/DKIM).",
+      "Claro Pay — Diseñador de Experiencia del Usuario: investigación UX para app de pagos, benchmarking, pruebas de usabilidad.",
+      "BRIX Agency — Diseñador de Experiencia del Usuario: diseño UX/UI en Figma, pruebas de usabilidad.",
+      "Fiverr — Branding Freelancer: +50 clientes en LATAM, identidad visual, colaboraciones con influencers."
     ],
     cardLabel: "",
     cardUrl: "",
@@ -213,7 +216,7 @@ export const homeContentEn: ShowreelContent = {
   },
   sphere: {
     ...homeContent.sphere,
-    cardHeading: "Intelligence beyond limits",
+    cardHeading: "From idea to execution",
   },
   portfolio: {
     items: [
