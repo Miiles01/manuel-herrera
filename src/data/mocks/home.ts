@@ -122,8 +122,8 @@ export const homeContent: ShowreelContent = {
     href: "/trabajo",
   },
   sphere: {
-    headingTop: "Beyond",
-    headingBottom: ["all", "limits"],
+    headingTop: "",
+    headingBottom: ["Piensa", "diferente"],
     body: [
       "Naabi Kanabi <span class=\"opacity-50\">—</span> <strong>Co-Fundador | Marketing Manager</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.</span>",
       "Miiles AI <span class=\"opacity-50\">—</span> <strong>CEO</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Ads, A/B testing, lifecycle marketing y configuración email.</span>",
