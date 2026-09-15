@@ -136,12 +136,12 @@ export const homeContent: ShowreelContent = {
     items: [
       {
         year: "2024",
-        client: "Mar & Vic",
-        title: "Mar & Vic",
-        slug: "mar-vic",
-        subtitle: "Branding sofisticado y ecosistema e-commerce para diseño de interiores.",
-        discipline: "Retail & Interior Design",
-        image: "/proyectos/Mar-Vic/portada-1.webp",
+        client: "Naabi Kanabi",
+        title: "Naabi Kanabi",
+        slug: "naabi-kanabi",
+        subtitle: "Diseño de experiencia y branding para productos de bienestar natural.",
+        discipline: "Skincare y Dermocosmética",
+        image: "/proyectos/Naabi-Kanabi/portada-1.webp",
       },
       {
         year: "2024",
@@ -219,12 +219,12 @@ export const homeContentEn: ShowreelContent = {
     items: [
       {
         year: "2024",
-        client: "Mar & Vic",
-        title: "Mar & Vic",
-        slug: "mar-vic",
-        subtitle: "Sophisticated branding and e-commerce ecosystem for interior design.",
-        discipline: "Retail & Interior Design",
-        image: "/proyectos/Mar-Vic/portada-1.webp",
+        client: "Naabi Kanabi",
+        title: "Naabi Kanabi",
+        slug: "naabi-kanabi",
+        subtitle: "Experience design and branding for natural wellness products.",
+        discipline: "Skincare & Dermocosmetics",
+        image: "/proyectos/Naabi-Kanabi/portada-1.webp",
       },
       {
         year: "2024",
