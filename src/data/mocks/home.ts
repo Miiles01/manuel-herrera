@@ -125,11 +125,11 @@ export const homeContent: ShowreelContent = {
     headingTop: "Beyond",
     headingBottom: ["all", "limits"],
     body: [
-      "Naabi Kanabi — Co-Fundador | Marketing Manager: posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.",
-      "Miiles AI — CEO: funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Google/Facebook/LinkedIn Ads, A/B testing, content e influencer marketing. Lifecycle marketing, campañas outbound, configuración de email (DMARC/DKIM).",
-      "Claro Pay — Diseñador de Experiencia del Usuario: investigación UX para app de pagos, benchmarking, pruebas de usabilidad.",
-      "BRIX Agency — Diseñador de Experiencia del Usuario: diseño UX/UI en Figma, pruebas de usabilidad.",
-      "Fiverr — Branding Freelancer: +50 clientes en LATAM, identidad visual, colaboraciones con influencers."
+      "Naabi Kanabi <span class=\"opacity-50\">—</span> <strong>Co-Fundador | Marketing Manager</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.</span>",
+      "Miiles AI <span class=\"opacity-50\">—</span> <strong>CEO</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Ads, A/B testing, lifecycle marketing y configuración email.</span>",
+      "Claro Pay <span class=\"opacity-50\">—</span> <strong>Diseñador de Experiencia del Usuario</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Investigación UX para app de pagos, benchmarking, pruebas de usabilidad.</span>",
+      "BRIX Agency <span class=\"opacity-50\">—</span> <strong>Diseñador de Experiencia del Usuario</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Diseño UX/UI en Figma, pruebas de usabilidad.</span>",
+      "Fiverr <span class=\"opacity-50\">—</span> <strong>Branding Freelancer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">+50 clientes en LATAM, identidad visual, colaboraciones con influencers.</span>"
     ],
     cardLabel: "",
     cardUrl: "",

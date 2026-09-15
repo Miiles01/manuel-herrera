@@ -173,9 +173,7 @@ export const SphereCard = memo(({
             }}
           >
             {body.map((para, i) => (
-              <p key={i} className="m-0">
-                {para}
-              </p>
+              <p key={i} className="m-0" dangerouslySetInnerHTML={{ __html: para }} />
             ))}
           </animated.div>
         </animated.div>
