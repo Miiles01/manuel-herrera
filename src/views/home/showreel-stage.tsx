@@ -327,25 +327,6 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
               </animated.div>
             </animated.div>
           </div>
-
-          {/* Carousel CTA — pinned under the 4-card carousel (the second block).
-              A sibling overlay of the 3D scene (not inside its perspective
-              transform), revealed the moment the card snaps vertical. Its bottom
-              offset matches the header's top offset (2vmin from the screen edge). */}
-          <animated.div
-            className="pointer-events-none absolute inset-x-0 bottom-[2vmin] z-[3] flex justify-center px-[4vmin]"
-            style={{
-              opacity: s.ctaReveal,
-              transform: s.ctaTranslate,
-            }}
-          >
-            <TransitionLink
-              href={content.carouselCta.href}
-              className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-gray-100 px-[4.2vmin] py-[2vmin] text-[2.1vmin] leading-none text-gray-900 hover:bg-white transition-colors duration-200"
-            >
-              {content.carouselCta.button}
-            </TransitionLink>
-          </animated.div>
         </div>
       </div>
 
