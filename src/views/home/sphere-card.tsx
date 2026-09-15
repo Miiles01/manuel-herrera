@@ -166,7 +166,7 @@ export const SphereCard = memo(({
           {/* Supporting copy — bottom-left, fades/rises in just after the
               headings land. */}
           <animated.div
-            className="pointer-events-none absolute bottom-[5vmin] left-[4vmin] z-[4] flex max-w-[70vw] max-sm:max-w-[90vw] flex-col gap-[1.2vmin] text-left text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-[1.3] text-white"
+            className="pointer-events-none absolute bottom-[5vmin] left-[4vmin] z-[4] flex max-w-[var(--sr-sphere-body-w)] flex-col gap-[1.8vmin] text-left text-[var(--sr-sphere-body-text)] font-light leading-[1.45] text-white"
             style={{
               opacity: p.to(sphereBodyReveal),
               transform: p.to((v) => `translateY(${(1 - sphereBodyReveal(v)) * 2.5}vmin)`),
