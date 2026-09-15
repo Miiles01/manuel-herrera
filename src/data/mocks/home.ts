@@ -176,7 +176,7 @@ export const homeContent: ShowreelContent = {
     heading: "Hagamos esa idea",
     headingFaded: "realidad",
     sub: "Escríbeme y empecemos a trabajar en ese proyecto.",
-    button: "Contactar",
+    button: "Ver proyectos",
     href: "/contacto",
   },
 };

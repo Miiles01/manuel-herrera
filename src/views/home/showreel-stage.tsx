@@ -297,7 +297,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                 <Serigraph />
                 <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
                   <Image 
-                    src="/assets/showreel/slide-16-9-1.png" 
+                    src="/assets/showreel/slide-16-9-2.webp" 
                     alt="Hagamos esa idea realidad" 
                     fill 
                     className="object-cover" 
