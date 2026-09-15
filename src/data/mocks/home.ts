@@ -130,7 +130,7 @@ export const homeContent: ShowreelContent = {
     ],
     cardLabel: "",
     cardUrl: "",
-    cardHeading: "Inteligencia sin límites",
+    cardHeading: "Desde la idea hasta la ejecución",
   },
   portfolio: {
     items: [
