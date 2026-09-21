@@ -337,6 +337,8 @@ const GRID_IMAGES = [
   "/assets/grid-images/image-7.webp",
   "/assets/grid-images/image-8.webp",
   "/assets/grid-images/image-9.webp",
+  "/assets/grid-images/image-10.webp",
+  "/assets/grid-images/image-11.webp",
 ];
 
 /** The 14 placeholder positions from the original markup, with deterministic
