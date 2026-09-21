@@ -73,15 +73,23 @@ export function Testimonials() {
 
   return (
     <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
-      <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide opacity-70 mb-[3vmin]">
-        Testimonios
-      </h4>
+      <a 
+        href="https://www.linkedin.com/in/manuel-herrera-perfil/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mb-[3vmin] inline-flex self-start opacity-70 hover:opacity-100 hover:text-[#0A66C2] transition-colors"
+        aria-label="Ver perfil en LinkedIn"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-[3vmin] h-[3vmin] max-sm:w-[5vmin] max-sm:h-[5vmin]">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
       <div className="relative h-[32vmin] max-sm:h-[48vmin] w-full flex items-center">
         {transitions((style, i) => {
           const item = TESTIMONIALS[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
-              <p className="text-[2.1vmin] max-sm:text-[3.2vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-5">
+              <p className="text-[2.1vmin] max-sm:text-[3.2vmin] font-light leading-snug mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-5">
                 "{item.text}"
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
