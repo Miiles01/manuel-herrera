@@ -12,14 +12,10 @@ const TESTIMONIALS = [
     image: "/assets/testimonials/testimonio-1.webp"
   },
   {
-    text: "Su proceso de diseño y desarrollo es increíblemente fluido y los resultados hablan por sí solos. Llevó nuestra marca al siguiente nivel con una visión única.",
-    author: "Cliente 2",
-    role: "Founder, Startup"
-  },
-  {
-    text: "Vibe coding en su máxima expresión. Entendió perfectamente lo que necesitábamos y superó nuestras expectativas.",
-    author: "Cliente 3",
-    role: "Marketing Manager"
+    text: "Trabajar con Manuel no solamente fue compartir trabajos universitarios dentro de clase, sino también fue compartir visión. Es de esas personas que no solo hacen su parte, sino que elevan el estándar de todo el equipo. Tiene una habilidad única para convertir ideas sueltas en acciones con impacto real, y lo hace con una naturalidad que inspira. Ya sea resolviendo problemas en tiempo récord o proponiendo nuevas formas de hacer las cosas, Manuel siempre está un paso adelante. Si buscas a alguien que combine inteligencia práctica, creatividad, sensatez y una vibra auténticamente profesional, no busques más.",
+    author: "Armando García",
+    role: "Brand Associate Mental Health at IFA Celtics",
+    image: "/assets/testimonials/testimonio-2.webp"
   }
 ];
 
@@ -47,12 +43,12 @@ export function Testimonials() {
       <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide uppercase opacity-70 mb-[3vmin]">
         Testimonios
       </h4>
-      <div className="relative h-[22vmin] max-sm:h-[35vmin] w-full flex items-center">
+      <div className="relative h-[28vmin] max-sm:h-[45vmin] w-full flex items-center">
         {transitions((style, i) => {
           const item = TESTIMONIALS[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
-              <p className="text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-4">
+              <p className="text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-6">
                 "{item.text}"
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
