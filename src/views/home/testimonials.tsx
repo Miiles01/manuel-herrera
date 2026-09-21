@@ -37,30 +37,33 @@ export function Testimonials() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((state) => (state + 1) % TESTIMONIALS.length);
-    }, 6000); // 6 seconds for longer reading time
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
+  const handleNext = () => setIndex((state) => (state + 1) % TESTIMONIALS.length);
+  const handlePrev = () => setIndex((state) => (state - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+
   const transitions = useTransition(index, {
     key: index,
-    from: { opacity: 0, transform: "translateY(10px)" },
-    enter: { opacity: 1, transform: "translateY(0px)" },
-    leave: { opacity: 0, transform: "translateY(-10px)" },
-    config: { tension: 220, friction: 120 },
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { tension: 300, friction: 30, clamp: true },
     exitBeforeEnter: true,
   });
 
   return (
     <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-xl text-ink overflow-hidden">
-      <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide uppercase opacity-70 mb-[3vmin]">
+      <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide opacity-70 mb-[3vmin]">
         Testimonios
       </h4>
-      <div className="relative h-[40vmin] max-sm:h-[60vmin] w-full flex items-center">
+      <div className="relative h-[32vmin] max-sm:h-[48vmin] w-full flex items-center">
         {transitions((style, i) => {
           const item = TESTIMONIALS[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
-              <p className="text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-[12]">
+              <p className="text-[2.1vmin] max-sm:text-[3.2vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-5">
                 "{item.text}"
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
@@ -79,6 +82,14 @@ export function Testimonials() {
             </animated.div>
           );
         })}
+      </div>
+      <div className="absolute bottom-[4vmin] right-[4vmin] flex gap-[1vmin] z-10">
+        <button onClick={handlePrev} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors">
+          <svg width="2vmin" height="2vmin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button onClick={handleNext} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors">
+          <svg width="2vmin" height="2vmin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   );
