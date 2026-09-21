@@ -7,8 +7,8 @@ import Image from "next/image";
 const TESTIMONIALS = [
   {
     text: "Manu es un apasionado del marketing que siempre va un paso más allá. Trabajamos juntos en varios proyectos académicos y su capacidad para aportar valor y superar las expectativas fue una constante. Su dedicación, creatividad y enfoque en resultados lo distinguen de los demás. Recomiendo totalmente su perfil para cualquier reto profesional en el área comercial o de mercadotecnia.",
-    author: "Compañera de Proyectos",
-    role: "Marketing / Academia",
+    author: "Marlen",
+    role: "Especialista en Logística & Marketing Digital",
     image: "/assets/testimonials/testimonio-1.webp"
   },
   {
