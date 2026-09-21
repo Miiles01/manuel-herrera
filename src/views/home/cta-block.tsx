@@ -25,25 +25,33 @@ export interface CtaBlockProps {
  */
 // `memo`: props are stable, so it mounts once and its interpolations are never
 // re-created by the stage's visibility re-renders (avoids a one-frame reset).
+import { Testimonials } from "./testimonials";
+
 export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: CtaBlockProps) => (
   <animated.div
-    className="pointer-events-none absolute inset-0 z-[2] flex flex-col items-start justify-center gap-[2.5vmin] p-[9vmin]"
+    className="pointer-events-none absolute inset-0 z-[2] flex flex-col md:flex-row items-start md:items-center justify-between gap-[5vmin] p-[9vmin]"
     style={{
       opacity: p.to(ctaReveal),
       transform: p.to((v) => `translateY(${(1 - ctaReveal(v)) * 6}vh)`),
     }}
   >
-    <h2 className="m-0 flex max-w-[60vw] max-sm:max-w-[88vw] flex-col items-start text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-paper">
-      <span>{heading}</span>
-      <span className="opacity-40">{headingFaded}</span>
-    </h2>
-    <p className="m-0 max-w-[26vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-paper/70">{sub}</p>
-    <TransitionLink
-      href={href}
-      className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] max-sm:text-[3.5vmin] leading-none text-ink hover:scale-105 transition-transform duration-300"
-    >
-      {button}
-    </TransitionLink>
+    <div className="flex flex-col items-start gap-[2.5vmin] max-w-[50vw] max-sm:max-w-full">
+      <h2 className="m-0 flex flex-col items-start text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-paper">
+        <span>{heading}</span>
+        <span className="opacity-90">{headingFaded}</span>
+      </h2>
+      <p className="m-0 max-w-[30vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-paper opacity-90">{sub}</p>
+      <TransitionLink
+        href={href}
+        className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] max-sm:text-[3.5vmin] leading-none text-ink hover:scale-105 transition-transform duration-300"
+      >
+        {button}
+      </TransitionLink>
+    </div>
+
+    <div className="pointer-events-auto w-[35vw] max-sm:w-full max-sm:mt-[4vmin] flex flex-col">
+      <Testimonials />
+    </div>
   </animated.div>
 ));
 CtaBlock.displayName = "CtaBlock";

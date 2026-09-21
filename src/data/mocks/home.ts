@@ -176,8 +176,8 @@ export const homeContent: ShowreelContent = {
     ],
   },
   cta: {
-    heading: "Hagamos esa idea",
-    headingFaded: "realidad",
+    heading: "Hagamos esa",
+    headingFaded: "idea realidad",
     sub: "Escríbeme y empecemos a trabajar en ese proyecto.",
     button: "Ver proyectos",
     href: "/contacto",
