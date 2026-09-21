@@ -34,6 +34,12 @@ const TESTIMONIALS = [
     author: "Angelica Villanueva",
     role: "Asistente Directivo at AM Seguridad",
     image: "/assets/testimonials/testimonio-5.webp"
+  },
+  {
+    text: "Tengo la suerte de poder trabajar con Manuel, quien no solo está interesado en generar resultados, sino en establecer una relación estrecha a futuro con sus colaboradores y clientes. Además cuenta con muchas habilidades que ayudan al crecimiento de la marca, así como mejorar guiones lo que nos permitió trabajar con grandes compañías.",
+    author: "David Martín Jiménez Viveros",
+    role: "Project Manager Assistant",
+    image: "/assets/testimonials/testimonio-6.webp"
   }
 ];
 
