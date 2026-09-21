@@ -30,10 +30,7 @@ import { Testimonials } from "./testimonials";
 export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: CtaBlockProps) => (
   <animated.div
     className="pointer-events-none absolute inset-0 z-[2] flex flex-col md:flex-row items-start md:items-center justify-between gap-[5vmin] p-[9vmin]"
-    style={{
-      opacity: p.to(ctaReveal),
-      transform: p.to((v) => `translateY(${(1 - ctaReveal(v)) * 6}vh)`),
-    }}
+    style={{ opacity: 1, transform: 'translateY(0)' }}
   >
     <div className="flex flex-col items-start gap-[2.5vmin] max-w-[50vw] max-sm:max-w-full">
       <h2 className="m-0 flex flex-col items-start text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-paper">
