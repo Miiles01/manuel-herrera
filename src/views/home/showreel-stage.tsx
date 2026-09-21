@@ -295,14 +295,10 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                 }}
               >
                 <Serigraph />
-                <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
-                  <Image 
-                    src="/assets/showreel/slide-16-9-2.webp" 
-                    alt="Hagamos esa idea realidad" 
-                    fill 
-                    className="object-cover" 
-                  />
-                </div>
+                <div 
+                  className="absolute inset-0 pointer-events-none z-[1]"
+                  style={{ background: "linear-gradient(to bottom, #94B6F1, #FFE7CE)" }}
+                />
                 {/* White margin band — the same ~4vmin white area between the
                     screen edge and the content as the hero stage (its `p-[4vmin]`
                     white backdrop), now with rounded INNER corners like the hero
