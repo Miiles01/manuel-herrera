@@ -54,7 +54,7 @@ export function Testimonials() {
   });
 
   return (
-    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-xl text-ink overflow-hidden">
+    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
       <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide opacity-70 mb-[3vmin]">
         Testimonios
       </h4>
