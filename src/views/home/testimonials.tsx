@@ -28,6 +28,12 @@ const TESTIMONIALS = [
     author: "Leonardo Gama",
     role: "Product Manager at FonYou",
     image: "/assets/testimonials/testimonio-4.webp"
+  },
+  {
+    text: "Trabajar con Manuel en diversos proyectos de marketing fue una experiencia que dejó huella. Su creatividad no solo aportó ideas innovadoras, sino que transformó estrategias completas, logrando resultados sorprendentes. Tiene un talento único para identificar y aprovechar tendencias antes de que se vuelvan masivas, lo que lo convierte en un verdadero estratega del marketing. Si buscas a alguien con visión, iniciativa y un enfoque fresco, Manuel es la persona indicada.",
+    author: "Angelica Villanueva",
+    role: "Asistente Directivo at AM Seguridad",
+    image: "/assets/testimonials/testimonio-5.webp"
   }
 ];
 
