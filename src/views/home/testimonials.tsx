@@ -16,6 +16,12 @@ const TESTIMONIALS = [
     author: "Armando García",
     role: "Brand Associate Mental Health at IFA Celtics",
     image: "/assets/testimonials/testimonio-2.webp"
+  },
+  {
+    text: "Tuve la oportunidad de conocer a Manuel en la universidad, y desde entonces ha sido evidente su enfoque a resultados, su inteligencia y su pasión por el marketing. Es de esas personas que no solo destacan por su conocimiento, sino por la manera en que lo aplican con propósito y estrategia. Manuel tiene un talento excepcional para el branding: entiende cómo construir marcas con significado, conecta con las personas desde lo emocional y sabe cómo traducir ideas en ejecuciones poderosas. Es inspirador, claro en su comunicación y siempre propositivo. Además de su capacidad profesional, es una gran persona: comprometido, colaborativo y con una calidad humana que lo convierte en un colega que todos quieren tener cerca. Estoy seguro de que será un activo valioso en cualquier equipo o proyecto en el que participe.",
+    author: "Juan Pablo García",
+    role: "Marketer at Pfizer",
+    image: "/assets/testimonials/testimonio-3.webp"
   }
 ];
 
@@ -43,12 +49,12 @@ export function Testimonials() {
       <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide uppercase opacity-70 mb-[3vmin]">
         Testimonios
       </h4>
-      <div className="relative h-[28vmin] max-sm:h-[45vmin] w-full flex items-center">
+      <div className="relative h-[40vmin] max-sm:h-[60vmin] w-full flex items-center">
         {transitions((style, i) => {
           const item = TESTIMONIALS[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
-              <p className="text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-6">
+              <p className="text-[1.8vmin] max-sm:text-[2.8vmin] font-light leading-snug italic mb-[3vmin] opacity-90 line-clamp-[12]">
                 "{item.text}"
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
