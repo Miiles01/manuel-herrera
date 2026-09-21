@@ -51,7 +51,7 @@ export function Testimonials() {
   });
 
   return (
-    <div className="relative flex flex-col w-full bg-white/20 backdrop-blur-md border border-white/20 rounded-[2.5vmin] p-[4vmin] shadow-sm text-paper overflow-hidden">
+    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-xl text-ink overflow-hidden">
       <h4 className="text-[1.8vmin] max-sm:text-[2.8vmin] font-medium tracking-wide uppercase opacity-70 mb-[3vmin]">
         Testimonios
       </h4>
@@ -65,11 +65,11 @@ export function Testimonials() {
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
                 {item.image ? (
-                  <div className="relative size-[5vmin] max-sm:size-[8vmin] rounded-full overflow-hidden shrink-0 border border-white/30 bg-black/10">
+                  <div className="relative size-[5vmin] max-sm:size-[8vmin] rounded-full overflow-hidden shrink-0 border border-ink/10 bg-black/5">
                     <Image src={item.image} alt={item.author} fill className="object-cover" />
                   </div>
                 ) : (
-                  <div className="size-[5vmin] max-sm:size-[8vmin] rounded-full shrink-0 border border-white/30 bg-white/10" />
+                  <div className="size-[5vmin] max-sm:size-[8vmin] rounded-full shrink-0 border border-ink/10 bg-black/5" />
                 )}
                 <div className="flex flex-col">
                   <strong className="block text-[1.8vmin] max-sm:text-[2.6vmin] font-medium leading-tight">{item.author}</strong>
