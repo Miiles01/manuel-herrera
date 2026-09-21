@@ -144,7 +144,7 @@ export const homeContent: ShowreelContent = {
         slug: "naabi-kanabi",
         subtitle: "Diseño de experiencia y branding para productos de bienestar natural.",
         discipline: "Skincare y Dermocosmética",
-        image: "/proyectos/Naabi-Kanabi/portada-1.webp",
+        image: "/proyectos/Naabi-Kanabi/portada-home-v2.webp",
       },
       {
         year: "2024",
@@ -227,7 +227,7 @@ export const homeContentEn: ShowreelContent = {
         slug: "naabi-kanabi",
         subtitle: "Experience design and branding for natural wellness products.",
         discipline: "Skincare & Dermocosmetics",
-        image: "/proyectos/Naabi-Kanabi/portada-1.webp",
+        image: "/proyectos/Naabi-Kanabi/portada-home-v2.webp",
       },
       {
         year: "2024",
