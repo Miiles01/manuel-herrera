@@ -37,7 +37,7 @@ export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: C
         <span>{heading}</span>
         <span>{headingFaded}</span>
       </h2>
-      <p className="m-0 max-w-[30vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-white opacity-90">{sub}</p>
+      {sub && <p className="m-0 max-w-[30vw] max-sm:max-w-[80vw] text-[2.2vmin] max-sm:text-[3.4vmin] leading-snug text-white opacity-90">{sub}</p>}
       <TransitionLink
         href={href}
         className="pointer-events-auto mt-[1.5vmin] inline-flex items-center justify-center rounded-full bg-paper px-[4.6vmin] py-[2.2vmin] text-[2.5vmin] max-sm:text-[3.5vmin] leading-none text-ink hover:scale-105 transition-transform duration-300"
