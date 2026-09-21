@@ -22,6 +22,12 @@ const TESTIMONIALS = [
     author: "Juan Pablo García",
     role: "Marketer at Pfizer",
     image: "/assets/testimonials/testimonio-3.webp"
+  },
+  {
+    text: "Trabajar con Manuel fue de lo mejor en Claro Pay, su habilidad en el diseño le permite generar soluciones creativas en tiempos muy cortos, y su pro actividad acelera el cumplimiento de objetivos. Muy bueno comunicando visualmente gracias a su ojo de diseñador, un colaborador organizado, y un autodidacta que le gusta estar al tanto de las tendencias y novedades de la industria.",
+    author: "Leonardo Gama",
+    role: "Product Manager at FonYou",
+    image: "/assets/testimonials/testimonio-4.webp"
   }
 ];
 
