@@ -15,12 +15,27 @@ function CopyItem({ value, label, copiedText = "{copiedText}" }: { value: string
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-2 text-left text-base font-normal text-gray-600 hover:text-gray-900 transition-colors cursor-pointer group"
+      className="relative flex items-center gap-2 text-left text-base font-normal text-gray-600 hover:text-gray-900 transition-colors cursor-pointer group w-fit"
     >
       <span>{label}</span>
+      
+      {/* Icono de copiar (aparece al hacer hover, desaparece al copiar) */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className={`w-4 h-4 transition-all duration-300 ${copied ? 'opacity-0 scale-75' : 'opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100'}`}
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 16.5V19.5A2.25 2.25 0 0 1 13.5 21.75h-9a2.25 2.25 0 0 1-2.25-2.25v-9A2.25 2.25 0 0 1 4.5 8.25H7.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5h9A2.25 2.25 0 0 1 19.5 6.75v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9A2.25 2.25 0 0 1 8.25 4.5Z" />
+      </svg>
+      
+      {/* Etiqueta de copiado */}
       <span
-        className={`text-xs font-medium bg-gray-900 text-white px-2 py-0.5 rounded-full transition-all duration-300 ${
-          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
+        className={`absolute left-full ml-1 text-xs font-medium bg-gray-900 text-white px-2 py-0.5 rounded-full transition-all duration-300 whitespace-nowrap ${
+          copied ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 pointer-events-none'
         }`}
       >
         {copiedText}

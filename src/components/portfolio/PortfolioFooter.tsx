@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function FooterCopyItem({ value, title, subtitle, copiedText = "{copiedText}" }: { value: string; title: string; subtitle: string; copiedText?: string }) {
+function FooterCopyItem({ value, title, subtitle, copiedText = "{copiedText}", copyText = "Copiar" }: { value: string; title: string; subtitle: string; copiedText?: string; copyText?: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -22,13 +22,19 @@ function FooterCopyItem({ value, title, subtitle, copiedText = "{copiedText}" }:
       <span className="text-white font-semibold mb-2 group-hover:text-gray-200 transition-colors">{title}</span>
       <span>{subtitle}</span>
       
-      {/* Etiqueta de copiado (tooltip) */}
+      {/* Tooltip Hover / Copiado */}
       <div 
-        className={`absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-semibold px-3 py-1 rounded-full pointer-events-none transition-all duration-300 ease-out shadow-lg ${
-          copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+        className={`absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full pointer-events-none transition-all duration-300 ease-out shadow-lg whitespace-nowrap ${
+          copied ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 scale-95 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2'
         }`}
       >
-        {copiedText}
+        {!copied && (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 16.5V19.5A2.25 2.25 0 0 1 13.5 21.75h-9a2.25 2.25 0 0 1-2.25-2.25v-9A2.25 2.25 0 0 1 4.5 8.25H7.5" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5h9A2.25 2.25 0 0 1 19.5 6.75v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9A2.25 2.25 0 0 1 8.25 4.5Z" />
+          </svg>
+        )}
+        <span>{copied ? copiedText : copyText}</span>
       </div>
     </div>
   );
@@ -66,13 +72,17 @@ export function PortfolioFooter({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           <FooterCopyItem 
             value="+52 56 10168992" 
             title="+52 56 10168992" 
-            subtitle={lang === 'en' ? 'Messaging' : 'Mensajería'} copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
+            subtitle={lang === 'en' ? 'Messaging' : 'Mensajería'} 
+            copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
+            copyText={lang === 'en' ? 'Copy' : 'Copiar'}
           />
 
           <FooterCopyItem 
             value="contmanuel77@gmail.com" 
             title="contmanuel77@gmail.com" 
-            subtitle="Email" copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
+            subtitle="Email" 
+            copiedText={lang === 'en' ? 'Copied' : 'Copiado'} 
+            copyText={lang === 'en' ? 'Copy' : 'Copiar'}
           />
 
           <div className="flex flex-col items-center">
