@@ -43,7 +43,7 @@ const TESTIMONIALS = [
   },
   {
     text: "Tengo el gusto de estudiar y compartir algunas clases y proyectos escolares con Manuel durante nuestra formación en la carrera de Administración. Ha demostrado ser un gran estudiante, responsable, amigable y muy dedicado en lo que hace. Impacta por su gran creatividad en la creacion de post en redes sociales y por sus conocimientos en el área de Mercadotecnia. Recomiendo ampliamente a Manuel, será un gran aporte en cualquier organización y no tengo duda de que su ética de trabajo y actitud positiva lo llevaran muy lejos.",
-    author: "Compañera (Falta Nombre)",
+    author: "María Marín",
     role: "Analista en Crédito y Cobranza at Office Depot México",
     image: "/assets/testimonials/testimonio-7.webp"
   }
