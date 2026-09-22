@@ -145,11 +145,11 @@ export const SphereCard = memo(({
               WebkitMaskSize: "contain",
               maskSize: "contain",
               transform: p.to(sphereLogoTransform),
-              opacity: p.to(sphereLogoOpacity),
+              opacity: p.to(sphereLogoOpacity).to(o => (width && width < 640) ? (1 - o) : o),
             }}
           />
 
-          <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-white">
+          <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-white max-sm:hidden">
             {headingBottom.map((line, i) => (
               <span key={i}>
                 <ScrollLetters
