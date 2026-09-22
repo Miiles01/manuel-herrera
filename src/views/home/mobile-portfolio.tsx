@@ -27,15 +27,10 @@ export const MobilePortfolio = ({ content }: { content: any }) => {
               )}
               {/* Gradiente y texto */}
               <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[1]" />
-              <div className="relative z-[2] flex flex-col justify-end gap-2 w-full h-full opacity-100">
-                <h3 className="m-0 text-3xl font-normal leading-[1.05] tracking-[-0.02em]">
+              <div className="relative z-[2] flex flex-col justify-end gap-1 w-full h-full opacity-100">
+                <h3 className="m-0 text-2xl font-normal leading-[1.05] tracking-[-0.02em]">
                   {item.title}
                 </h3>
-                {item.subtitle && (
-                  <p className="m-0 text-base text-white/80 font-light leading-snug">
-                    {item.subtitle}
-                  </p>
-                )}
               </div>
             </CardWrapper>
           );
