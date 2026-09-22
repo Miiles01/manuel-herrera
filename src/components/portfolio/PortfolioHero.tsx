@@ -79,7 +79,7 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           <div className="w-full flex justify-end mb-0 translate-y-6 md:translate-y-10 relative z-10">
             <div className="max-w-xs md:max-w-sm md:mr-16">
               <p id="intro-text" className="text-base md:text-lg text-gray-800 font-medium leading-snug">
-                Soy Manuel, Marketer y me dedico a escalar negocios.
+                {lang === 'en' ? "Hi! I'm Manuel, entrepreneur, visual creator, and strategist. I'm dedicated to scaling businesses." : '¡Hola! Soy Manuel, emprendedor, creador visual y estratega. Me dedico a escalar negocios.'}
               </p>
             </div>
           </div>
