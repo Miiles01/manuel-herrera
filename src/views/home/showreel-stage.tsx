@@ -251,7 +251,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     opacity: s.card1Opacity,
                   }}
                 >
-                  <CatalistCard variant="light" content={content.catalistLight} bg={`${A}/hero-4.webp`} />
+                  <CatalistCard variant="light" content={content.catalistLight} bg={`${A}/3.png`} />
                 </animated.div>
 
                 {/* Card 4 — sphere. The SphereCard renders the violet card face
