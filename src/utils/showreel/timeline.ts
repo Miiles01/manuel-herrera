@@ -342,7 +342,7 @@ export interface GridItem {
 const GRID_IMAGES = [
   "/assets/grid-images/image-1.webp",
   "/assets/grid-images/image-2.webp",
-  "/assets/grid-images/image-3.png",
+  "/assets/grid-images/image-3.webp",
   "/assets/grid-images/image-4.webp",
   "/assets/grid-images/image-5.webp",
   "/assets/grid-images/image-6.webp",
