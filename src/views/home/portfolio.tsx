@@ -71,8 +71,14 @@ export const Portfolio = memo(({ p, items, active, ctaContent }: PortfolioProps)
     const update = () => {
       const vp = el.parentElement;
       if (!vp) return;
+      const isMobile = window.innerWidth < 640;
       const rightGap = (3 * Math.min(window.innerWidth, window.innerHeight)) / 100;
-      const next = Math.max(0, el.scrollWidth - vp.clientWidth + rightGap);
+      let next = 0;
+      if (isMobile) {
+        next = Math.max(0, el.scrollHeight - vp.clientHeight + rightGap);
+      } else {
+        next = Math.max(0, el.scrollWidth - vp.clientWidth + rightGap);
+      }
       setMaxPan((prev) => (prev === next ? prev : next));
     };
     const observer = new ResizeObserver(update);

@@ -232,7 +232,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
                 {/* Card 2 — Catalist (dark) */}
                 <animated.div
-                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)]"
+                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)] pointer-events-none"
                   style={{
                     transform: s.side90,
                     zIndex: s.z1,
@@ -244,7 +244,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
                 {/* Card 3 — Catalist (light) */}
                 <animated.div
-                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)]"
+                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)] pointer-events-none"
                   style={{
                     transform: s.side180,
                     zIndex: s.z2,
