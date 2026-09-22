@@ -76,8 +76,8 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
       <section id="hero-section" className="min-h-[75vh] md:h-[90vh] w-full flex flex-col justify-start md:justify-end px-4 md:px-12 lg:px-16 pb-16 md:pb-4 pt-[18vh] md:pt-32 relative z-0">
         <div id="hero-content" className="w-full relative flex flex-col">
           
-          {/* Texto pequeño a la derecha (arriba en desktop, abajo en mobile) */}
-          <div className="order-3 md:order-1 w-full flex justify-start md:justify-end mt-12 md:mt-0 mb-0 translate-y-0 md:translate-y-10 relative z-10">
+          {/* Texto pequeño a la derecha (arriba en desktop, centro en mobile) */}
+          <div className="order-2 md:order-1 w-full flex justify-start md:justify-end mt-8 md:mt-0 mb-0 translate-y-0 md:translate-y-10 relative z-10 max-sm:px-3">
             <div className="max-w-[85vw] md:max-w-sm md:mr-16">
               <p id="intro-text" className="text-[5vw] md:text-lg text-gray-800 font-medium leading-[1.3] md:leading-snug">
                 {lang === 'en' ? "Hi! I'm Manuel Herrera, entrepreneur, visual creator, and strategist. I'm dedicated to scaling businesses." : '¡Hola! Soy Manuel Herrera, emprendedor, creador visual y estratega. Me dedico a escalar negocios.'}
@@ -90,8 +90,8 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
             Manu
           </h1>
           
-          {/* Subtextos inferiores (debajo de Manu) */}
-          <div className="order-2 md:order-3 flex justify-between w-full text-sm md:text-base font-medium text-gray-500 px-2 mt-2">
+          {/* Subtextos inferiores (debajo de intro en mobile, debajo de Manu en desktop) */}
+          <div className="order-3 flex justify-between w-full text-sm md:text-base font-medium text-gray-500 max-sm:px-4 md:px-2 mt-8 md:mt-2">
             <span>Est. 2026</span>
             <span>{lang === 'en' ? 'Mexico' : 'México'}</span>
           </div>
