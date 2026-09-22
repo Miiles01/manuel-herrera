@@ -13,6 +13,7 @@ import {
   starMaskSize,
   sphereLogoTransform,
   sphereLogoOpacity,
+  phase4,
   sphereScale,
   sphereDisperse,
   sphereBodyReveal,
@@ -145,7 +146,15 @@ export const SphereCard = memo(({
               WebkitMaskSize: "contain",
               maskSize: "contain",
               transform: p.to(sphereLogoTransform),
-              opacity: p.to(sphereLogoOpacity).to(o => (width && width < 640) ? (1 - o) : o),
+              opacity: p.to(v => {
+                const baseOpacity = sphereLogoOpacity(v);
+                const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+                if (isMobile) {
+                  // On mobile, fade out as the mask expands (phase 4)
+                  return baseOpacity * (1 - phase4(v));
+                }
+                return baseOpacity;
+              }),
             }}
           />
 
