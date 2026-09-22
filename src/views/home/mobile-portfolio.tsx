@@ -22,7 +22,7 @@ export const MobilePortfolio = ({ content }: { content: any }) => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="absolute inset-0 size-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                  className="absolute inset-0 size-full object-cover object-center"
                 />
               )}
               {/* Gradiente y texto */}

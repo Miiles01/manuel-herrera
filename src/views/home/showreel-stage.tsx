@@ -176,7 +176,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
 
       <div ref={trackRef} className="relative" style={{ height: `${geo.trackVh}vh` }}>
-        <div className="sticky top-0 h-screen overflow-hidden p-[4vmin]">
+        <div className="sticky top-0 h-\[100dvh\] overflow-hidden p-[4vmin]">
           {/* White backdrop for phases 1–4; fades to the black page at gp 0.72. */}
                     <animated.div
             aria-hidden="true"
@@ -287,7 +287,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
-                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#08060c] max-sm:!hidden"
+                className="absolute left-1/2 top-1/2 z-[-1] h-\[100dvh\] w-screen overflow-hidden bg-[#08060c] max-sm:!hidden"
                 style={{
                   transform: targetTransform(),
                   borderRadius: s.targetRadius,
