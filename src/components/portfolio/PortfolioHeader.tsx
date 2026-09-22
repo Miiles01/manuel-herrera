@@ -116,7 +116,8 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
       {/* Logo (Izquierda) */}
       <div ref={logoRef} className="fixed top-8 left-4 md:left-12 z-50 mix-blend-difference pointer-events-none mt-2 md:mt-3">
         <TransitionLink href={lang === 'en' ? '/en' : '/es'} className="font-normal text-white text-xl md:text-2xl tracking-tighter pointer-events-auto hover:opacity-75 transition-opacity block">
-          Manuel Herrera
+          <span className="md:hidden">Manu</span>
+          <span className="hidden md:inline">Manuel Herrera</span>
         </TransitionLink>
       </div>
 
@@ -130,9 +131,9 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
       {/* Contenedor del Menú Desplegable (Navbar) */}
       <div
         ref={headerRef}
-        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm w-[calc(100vw-2rem)] md:w-[420px] rounded-md pointer-events-auto transition-[max-height] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px]' : 'max-h-[60px]'}`}
+        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[115px]'}`}
       >
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-5 md:px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
           <span className="text-sm font-medium">{isMenuOpen ? (lang === 'en' ? 'Close' : 'Cerrar') : (lang === 'en' ? 'Menu' : 'Menú')}</span>
           <div className="w-8 h-[8px] relative">
             <div className={`absolute top-0 left-0 h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? 'translate-y-[3.5px] rotate-[15deg]' : ''}`}></div>
