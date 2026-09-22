@@ -131,7 +131,8 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
       {/* Contenedor del Menú Desplegable (Navbar) */}
       <div
         ref={headerRef}
-        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
+        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
+        style={{ transitionProperty: "max-height, width" }}
       >
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-5 md:px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
           <span className="text-sm font-medium">{isMenuOpen ? (lang === 'en' ? 'Close' : 'Cerrar') : (lang === 'en' ? 'Menu' : 'Menú')}</span>
