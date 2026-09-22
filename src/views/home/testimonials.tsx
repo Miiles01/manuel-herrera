@@ -72,7 +72,7 @@ export function Testimonials() {
   });
 
   return (
-    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] p-[4vmin] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
+    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] max-sm:rounded-[24px] p-[4vmin] max-sm:p-[6vw] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
       <a 
         href="https://www.linkedin.com/in/manuel-herrera-perfil/"
         target="_blank"
@@ -89,7 +89,7 @@ export function Testimonials() {
           const item = TESTIMONIALS[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
-              <p className="text-[2.1vmin] max-sm:text-[3.2vmin] font-light leading-snug mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-6">
+              <p className="text-[2.1vmin] max-sm:text-[4vw] font-light leading-snug mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-6">
                 "{item.text}"
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
@@ -101,8 +101,8 @@ export function Testimonials() {
                   <div className="size-[5vmin] max-sm:size-[8vmin] rounded-full shrink-0 border border-ink/10 bg-black/5" />
                 )}
                 <div className="flex flex-col">
-                  <strong className="block text-[1.8vmin] max-sm:text-[2.6vmin] font-medium leading-tight">{item.author}</strong>
-                  <span className="text-[1.4vmin] max-sm:text-[2.2vmin] opacity-70 leading-tight">{item.role}</span>
+                  <strong className="block text-[1.8vmin] max-sm:text-[3.5vw] font-medium leading-tight">{item.author}</strong>
+                  <span className="text-[1.4vmin] max-sm:text-[3vw] opacity-70 leading-tight">{item.role}</span>
                 </div>
               </div>
             </animated.div>

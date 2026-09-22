@@ -9,6 +9,7 @@ import { ShowreelStage } from "@/views/home/showreel-stage";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
+import { MobilePortfolio } from "@/views/home/mobile-portfolio";
 
 export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => (
   <>
@@ -17,7 +18,10 @@ export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => (
       <PortfolioHero lang={lang} />
       
       {/* The new immersive experience from AI Studio */}
-      <div className="relative z-20"><ShowreelStage content={lang === "en" ? homeContentEn : homeContent} /></div>
+      <div className="relative z-20">
+        <ShowreelStage content={lang === "en" ? homeContentEn : homeContent} />
+        <MobilePortfolio content={lang === "en" ? homeContentEn : homeContent} />
+      </div>
     </main>
     <PortfolioFooter lang={lang} />
   </>

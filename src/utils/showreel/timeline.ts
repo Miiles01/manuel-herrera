@@ -51,7 +51,9 @@ const smooth = (t: number) => t * t * (3 - 2 * t);
 
 const vScroll = (p: number) => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-  return clamp01(p) * (isMobile ? PF_END : VSCROLL_MAX);
+  // On mobile, the 3D timeline stops entirely at OLD_MAX (2000), which is the end of the Sphere phase.
+  // The subsequent Portfolio and CTA phases are rendered statically in a standard scrolling flow.
+  return clamp01(p) * (isMobile ? OLD_MAX : VSCROLL_MAX);
 };
 const gp = (p: number) => clamp01(vScroll(p) / OLD_MAX);
 

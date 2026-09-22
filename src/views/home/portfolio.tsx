@@ -93,7 +93,7 @@ export const Portfolio = memo(({ p, items, active, ctaContent }: PortfolioProps)
 
   return (
     <animated.section
-      className="fixed inset-0 z-40 flex flex-col overflow-hidden pb-[8vmin] pt-[9vmin] text-paper-alt will-change-transform"
+      className="fixed inset-0 z-40 flex flex-col overflow-hidden pb-[8vmin] pt-[9vmin] text-paper-alt will-change-transform max-sm:hidden"
       style={{ transform: sectionTransform }}
     >
       {/* No own background: the section sits on the shared pinned aurora behind
