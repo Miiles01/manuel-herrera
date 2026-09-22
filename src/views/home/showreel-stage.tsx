@@ -239,7 +239,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     opacity: s.card1Opacity,
                   }}
                 >
-                  <CatalistCard variant="dark" content={content.catalistDark} bg={`${A}/hero-3.webp`} />
+                  <CatalistCard variant="dark" content={content.catalistDark} bg={`${A}/hero-3-v2.webp`} />
                 </animated.div>
 
                 {/* Card 3 — Catalist (light) */}
