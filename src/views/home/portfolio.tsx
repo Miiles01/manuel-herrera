@@ -2,6 +2,7 @@
 
 import { animated, type SpringValue } from "@react-spring/web";
 import { TransitionLink } from "@/components/ui/transition-link";
+import { CtaBlock } from "@/views/home/cta-block";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { PortfolioItem } from "@/data/mocks/home";
 import { portfolioTransform, pfTrackTransform } from "@/utils/showreel/timeline";
@@ -11,6 +12,7 @@ export interface PortfolioProps {
   items: PortfolioItem[];
   /** Whether the portfolio is within its scroll range — gates video loading. */
   active: boolean;
+  ctaContent?: any;
 }
 
 const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
@@ -51,7 +53,7 @@ const PfCard = ({ item, active }: { item: PortfolioItem; active: boolean }) => {
  */
 // `memo` so the stage's visibility re-renders don't re-render the portfolio
 // (and reconcile its videos) when only an unrelated scene flag flips.
-export const Portfolio = memo(({ p, items, active }: PortfolioProps) => {
+export const Portfolio = memo(({ p, items, active, ctaContent }: PortfolioProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [maxPan, setMaxPan] = useState(0);
 
@@ -94,12 +96,24 @@ export const Portfolio = memo(({ p, items, active }: PortfolioProps) => {
       <div className="relative z-[1] min-h-0 flex-1 overflow-hidden">
         <animated.div
           ref={trackRef}
-          className="flex h-full gap-[3vmin] pl-[3vmin] will-change-transform"
+          className="flex h-full max-sm:h-auto max-sm:flex-col gap-[3vmin] max-sm:gap-[6vmin] pl-[3vmin] max-sm:px-[5vw] max-sm:pt-[10vh] will-change-transform"
           style={{ transform: trackTransform }}
         >
           {items.map((item) => (
             <PfCard key={item.title} item={item} active={active} />
           ))}
+          {ctaContent && (
+            <div className="sm:hidden w-[90vw] shrink-0 mt-[10vh] pb-[20vh]">
+              <CtaBlock
+                p={p}
+                heading={ctaContent.heading}
+                headingFaded={ctaContent.headingFaded}
+                sub={ctaContent.sub}
+                button={ctaContent.button}
+                href={ctaContent.href}
+              />
+            </div>
+          )}
         </animated.div>
       </div>
     </animated.section>

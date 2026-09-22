@@ -283,11 +283,11 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
               {/* Parallax grid + target live in the CAMERA-RIG frame (siblings of
                   the carousel, as in the original markup) so they don't inherit
                   the carousel's rotateY/flyback — the camera flight reads true. */}
-              {gridTiles}
+              <div className="max-sm:hidden">{gridTiles}</div>
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
-                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#08060c]"
+                className="absolute left-1/2 top-1/2 z-[-1] h-screen w-screen overflow-hidden bg-[#08060c] max-sm:!hidden"
                 style={{
                   transform: targetTransform(),
                   borderRadius: s.targetRadius,
@@ -328,7 +328,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
       {/* Fixed portfolio section (driven by the same spring). `active` gates the
           heavy video loading to the portfolio's scroll range. */}
-      <Portfolio p={p} items={content.portfolio.items} active={vis.portfolio} />
+      <Portfolio p={p} items={content.portfolio.items} active={vis.portfolio} ctaContent={content.cta} />
 
       {/* Single scroll driver. `frameInterval={0}` updates progress EVERY frame
           so it tracks the scroll 1:1 — the default 10ms throttle drops to ~60fps

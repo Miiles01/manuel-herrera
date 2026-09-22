@@ -49,7 +49,10 @@ const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** Smoothstep (cubic hermite). */
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-const vScroll = (p: number) => clamp01(p) * VSCROLL_MAX;
+const vScroll = (p: number) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  return clamp01(p) * (isMobile ? PF_END : VSCROLL_MAX);
+};
 const gp = (p: number) => clamp01(vScroll(p) / OLD_MAX);
 
 // Phase progresses (gp-relative), matching the original breakpoints.
@@ -243,12 +246,19 @@ export const portfolioActive = (p: number) => vScroll(p) > PS;
 export const portfolioTransform = (p: number) => {
   if (!portfolioActive(p)) return "translateY(100%)";
   const ty = (1 - pfEnter(p)) * 100;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  if (isMobile) return `translateY(${ty}%)`;
+  
   const sc = 1 - pfExit(p) * 0.62;
   const tx = -pfExit(p) * 130;
   return `translate(${tx}vw, ${ty}%) scale(${sc})`;
 };
-export const pfTrackTransform = (p: number, maxPan: number) =>
-  `translateX(${-pfSlide(p) * maxPan}px)`;
+export const pfTrackTransform = (p: number, maxPan: number) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  return isMobile
+    ? `translateY(${-pfSlide(p) * maxPan}px)`
+    : `translateX(${-pfSlide(p) * maxPan}px)`;
+};
 
 // ── Camera-rig flight + target block (phases 6–7) ──────────────────────────
 const flightActive = (p: number) => vScroll(p) > GRID_START;

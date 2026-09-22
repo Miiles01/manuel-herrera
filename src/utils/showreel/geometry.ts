@@ -91,7 +91,7 @@ const TABLET: ShowreelGeo = {
 // Portrait phone (<640px). Largest cards relative to the (width-bound) vmin and
 // the smallest heading scales.
 const MOBILE: ShowreelGeo = {
-  trackVh: 1300,
+  trackVh: 850,
   cardWVmin: 64,
   cardHVmin: 94,
   carouselRVmin: 41,
