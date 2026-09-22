@@ -126,7 +126,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
         <animated.div
           key={i}
           aria-hidden="true"
-          className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center"
+          className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center max-sm:hidden"
           style={{
             width: `max(280px, ${item.w})`,
             aspectRatio: '4/5',
@@ -283,7 +283,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
               {/* Parallax grid + target live in the CAMERA-RIG frame (siblings of
                   the carousel, as in the original markup) so they don't inherit
                   the carousel's rotateY/flyback — the camera flight reads true. */}
-              <div className="max-sm:hidden">{gridTiles}</div>
+              {gridTiles}
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
