@@ -3,7 +3,7 @@ import { memo } from "react";
 export const MobileShowreel = memo(({ content }: { content: any }) => {
   return (
     <section 
-      className="sm:hidden w-full relative z-10 flex flex-col items-center justify-center px-6 py-20 min-h-[90vh] overflow-hidden rounded-b-[40px]"
+      className="sm:hidden w-full relative z-10 flex flex-col items-center justify-center px-6 py-20 min-h-[90vh] overflow-hidden "
       style={{ background: "linear-gradient(to bottom, #F8F9FD, #FDFDFD)" }}
     >
       <div className="relative z-10 w-full flex flex-col items-start h-full">
