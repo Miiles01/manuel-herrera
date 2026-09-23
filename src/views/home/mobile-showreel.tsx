@@ -3,11 +3,11 @@ import { memo } from "react";
 export const MobileShowreel = memo(({ content }: { content: any }) => {
   return (
     <section 
-      className="sm:hidden w-full relative z-10 flex flex-col items-center justify-center px-6 py-20 min-h-[90vh] overflow-hidden "
+      className="sm:hidden w-full relative z-10 flex flex-col items-center justify-center px-6 py-20 min-h-[90vh] overflow-hidden"
       style={{ background: "linear-gradient(to bottom, #F8F9FD, #FDFDFD)" }}
     >
       <div className="relative z-10 w-full flex flex-col items-start h-full">
-        <h2 className="text-[14vw] leading-[1.0] tracking-[-0.03em] font-normal text-[#08060c] mb-12">
+        <h2 className="text-4xl font-medium tracking-tight text-[#08060c] mb-12 ml-2">
           {content.hero.lines.map((line: string, i: number) => (
             <div key={i} className={i === 1 ? "text-gray-400" : ""}>
               {line}
@@ -15,11 +15,11 @@ export const MobileShowreel = memo(({ content }: { content: any }) => {
           ))}
         </h2>
         
-        <div className="w-full aspect-[4/5] relative rounded-[20px] overflow-hidden bg-gray-200 mb-16 flex-shrink-0 mx-auto max-w-[85%] shadow-sm">
+        <div className="w-full aspect-[3/4] relative rounded-[20px] overflow-hidden bg-gray-200 mb-16 flex-shrink-0 mx-auto shadow-sm">
           <img 
-            src="/assets/showreel/1.png" 
-            alt="Manuel Herrera" 
-            className="absolute inset-0 w-full h-full object-cover object-center "
+            src="/assets/showreel/mobile-amo-crear.png" 
+            alt="Manuel Herrera - Amo crear con intención" 
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
         </div>
 
