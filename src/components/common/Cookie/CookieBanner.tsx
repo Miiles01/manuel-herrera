@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { animated, useTransition } from "@react-spring/web";
 
 import { CookieButton } from "./CookieButton";
@@ -14,6 +15,9 @@ export const CookieBanner = () => {
   const acceptAll = useCookieStore((s) => s.acceptAll);
   const rejectAll = useCookieStore((s) => s.rejectAll);
   const openModal = useCookieStore((s) => s.openModal);
+
+  const pathname = usePathname();
+  const isEn = pathname?.startsWith('/en');
 
   // Banner shows only after hydration confirmed no prior consent. Hidden while
   // the preferences modal is up so the two surfaces never compete for focus.
@@ -39,12 +43,18 @@ export const CookieBanner = () => {
         className="fixed bottom-4 left-4 right-4 z-50 flex flex-col gap-3 rounded-xl border border-foreground/10 bg-background/95 p-5 font-sans text-foreground shadow-2xl backdrop-blur-xl sm:bottom-12 sm:left-auto sm:right-12 sm:w-[420px] sm:p-6"
       >
         <h2 className="text-base font-medium leading-snug sm:text-lg">
-          This website uses cookies
+          {isEn ? "This website uses cookies" : "Este sitio web utiliza cookies"}
         </h2>
         <p className="text-sm leading-relaxed text-foreground/70">
-          We use cookies to keep the site working, learn how it&apos;s used, and
+          {isEn ? (
+          <>We use cookies to keep the site working, learn how it&apos;s used, and
           improve what we ship next. Accept everything, reject the non-essential,
-          or pick category by category. See our{" "}
+          or pick category by category. See our{" "}</>
+        ) : (
+          <>Utilizamos cookies para que el sitio funcione, aprender cómo se usa y
+          mejorar nuestro contenido. Acepta todas, rechaza las no esenciales
+          o elige por categoría. Lee nuestra{" "}</>
+        )}
           <Link
             href="/privacy-policy"
             target="_blank"
@@ -56,7 +66,7 @@ export const CookieBanner = () => {
           .
         </p>
         <div className="mt-1 flex flex-wrap items-center gap-2">
-          <CookieButton onClick={acceptAll}>Accept all</CookieButton>
+          <CookieButton onClick={acceptAll}>{isEn ? "Accept all" : "Aceptar todas"}</CookieButton>
           <CookieButton variant="secondary" onClick={rejectAll}>
             Reject all
           </CookieButton>

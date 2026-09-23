@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 
@@ -19,28 +20,39 @@ interface Category {
   required?: boolean;
 }
 
-const CATEGORIES: Category[] = [
-  {
-    key: "necessary",
-    title: "Strictly necessary",
-    body: "Required for the site to work — sign-in, security, page navigation. These can't be turned off.",
-    required: true,
-  },
-  {
-    key: "analytics",
-    title: "Analytics",
-    body: "Anonymised usage stats so we know which pages help and which fall flat. No personal profile is built.",
-  },
-  {
-    key: "marketing",
-    title: "Marketing",
-    body: "Lets us measure ad performance and re-show content you didn't get to finish reading. Opt out anytime.",
-  },
-];
+
 
 const TITLE_ID = "cookie-preferences-title";
 
 export const CookiePreferencesModal = () => {
+  const pathname = usePathname();
+  const isEn = pathname?.startsWith('/en');
+
+  const CATEGORIES: Category[] = [
+    {
+      key: "necessary",
+      title: isEn ? "Strictly necessary" : "Estrictamente necesarias",
+      body: isEn 
+        ? "Required for the site to work — sign-in, security, page navigation. These can't be turned off."
+        : "Requeridas para que el sitio funcione: navegación, seguridad. No se pueden desactivar.",
+      required: true,
+    },
+    {
+      key: "analytics",
+      title: isEn ? "Analytics" : "Analíticas",
+      body: isEn
+        ? "Anonymised usage stats so we know which pages help and which fall flat. No personal profile is built."
+        : "Estadísticas anónimas para saber qué páginas son útiles. No se crea perfil personal.",
+    },
+    {
+      key: "marketing",
+      title: "Marketing",
+      body: isEn
+        ? "Lets us measure ad performance and re-show content you didn't get to finish reading. Opt out anytime."
+        : "Nos permite medir rendimiento y mostrarte contenido relevante. Cancela en cualquier momento.",
+    },
+  ];
+
   const open = useCookieStore((s) => s.modalOpen);
   const consent = useCookieStore((s) => s.consent);
   const closeModal = useCookieStore((s) => s.closeModal);
@@ -121,7 +133,7 @@ export const CookiePreferencesModal = () => {
             <button
               type="button"
               onClick={closeModal}
-              aria-label="Close cookie preferences"
+              aria-label={isEn ? "Close cookie preferences" : "Cerrar preferencias"}
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-foreground/10 text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
@@ -136,7 +148,7 @@ export const CookiePreferencesModal = () => {
           </header>
 
           <p className="text-sm leading-relaxed text-foreground/60">
-            Choose which categories of cookies we&apos;re allowed to use. You can
+            {isEn ? "Choose which categories of cookies we're allowed to use. You can " : "Elige qué categorías de cookies podemos usar. Puedes "}
             change this any time. See our{" "}
             <Link
               href="/privacy-policy"
