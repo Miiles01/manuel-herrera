@@ -72,7 +72,8 @@ export function Testimonials() {
   });
 
   return (
-    <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] max-sm:rounded-[24px] p-[4vmin] max-sm:p-[6vw] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
+    <div className="flex flex-col w-full items-center gap-6">
+      <div className="relative flex flex-col w-full bg-white rounded-[2.5vmin] max-sm:rounded-[24px] p-[4vmin] max-sm:p-[6vw] shadow-[0_1.5vmin_4vmin_rgba(60,30,90,0.08)] text-ink overflow-hidden">
       <a 
         href="https://www.linkedin.com/in/manuel-herrera-perfil/"
         target="_blank"
@@ -109,14 +110,24 @@ export function Testimonials() {
           );
         })}
       </div>
-      <div className="absolute bottom-[4vmin] right-[4vmin] flex gap-[1vmin] z-10">
-        <button onClick={handlePrev} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors">
+      <div className="absolute bottom-[4vmin] right-[4vmin] flex gap-[1vmin] z-10 max-sm:hidden">
+        <button onClick={handlePrev} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors cursor-pointer pointer-events-auto">
           <svg width="2vmin" height="2vmin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <button onClick={handleNext} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors">
+        <button onClick={handleNext} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors cursor-pointer pointer-events-auto">
           <svg width="2vmin" height="2vmin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
+    </div>
+    {/* Mobile buttons outside */}
+    <div className="sm:hidden flex items-center justify-center gap-6 mt-4 z-10 w-full">
+      <button onClick={handlePrev} className="p-3 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors cursor-pointer pointer-events-auto">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button onClick={handleNext} className="p-3 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors cursor-pointer pointer-events-auto">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
     </div>
   );
 }
