@@ -73,11 +73,11 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
 
   return (
     <div ref={heroRef} className="relative z-10 bg-[#FFFFFF]">
-      <section id="hero-section" className="min-h-[75vh] md:h-[90vh] w-full flex flex-col justify-start md:justify-end px-4 md:px-12 lg:px-16 pb-32 md:pb-4 pt-[18vh] md:pt-32 relative z-0">
+      <section id="hero-section" className="min-h-[75vh] md:h-[90vh] w-full flex flex-col justify-start md:justify-end px-4 md:px-12 lg:px-16 pb-32 md:pb-4 pt-[18vh] md:pt-48 lg:pt-[20vh] relative z-0">
         <div id="hero-content" className="w-full relative flex flex-col">
           
           {/* Texto pequeño a la derecha (arriba en desktop, centro en mobile) */}
-          <div className="order-2 md:order-1 w-full flex justify-start md:justify-end mt-8 md:mt-0 mb-0 translate-y-0 md:translate-y-10 relative z-10 max-sm:px-3">
+          <div className="order-2 md:order-1 w-full flex justify-start md:justify-end mt-8 md:mt-16 lg:mt-24 mb-0 translate-y-0 md:translate-y-16 relative z-10 max-sm:px-3">
             <div className="max-w-[85vw] md:max-w-sm md:mr-16">
               <p id="intro-text" className="text-[5vw] md:text-lg text-gray-800 font-medium leading-[1.3] md:leading-snug">
                 {lang === 'en' ? "Hi! I'm Manuel Herrera, entrepreneur, visual creator, and strategist. I'm dedicated to scaling businesses." : '¡Hola! Soy Manuel Herrera, emprendedor, creador visual y estratega. Me dedico a escalar negocios.'}
