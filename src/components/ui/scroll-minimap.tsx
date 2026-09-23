@@ -14,7 +14,6 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Aparece al bajar 100px
       if (window.scrollY > 100) {
         setIsVisible(true);
       } else {
@@ -65,12 +64,12 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
 
   return (
     <div
-      className={`fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isVisible ? "translate-x-0" : "-translate-x-32"
+      className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isVisible ? "translate-x-0" : "translate-x-32"
       }`}
     >
-      {/* Contenedor tipo "churro" / pill */}
-      <div className="group/menu relative flex flex-col items-start gap-3 py-5 px-3 rounded-[32px] bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-[40px] hover:w-[220px] overflow-hidden">
+      {/* Contenedor tipo "churro" / pill. Disminuye su borde redondeado en hover */}
+      <div className="group/menu relative flex flex-col items-end gap-4 py-6 px-3 rounded-[32px] group-hover/menu:rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-[40px] hover:w-[260px] overflow-hidden">
         
         {items.map((item) => {
           const isActive = activeId === item.id;
@@ -78,10 +77,17 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="w-full flex items-center justify-start gap-4 cursor-pointer outline-none group/btn"
+              className="w-full flex items-center justify-end gap-5 cursor-pointer outline-none group/btn"
               aria-label={`Scroll to ${item.label}`}
             >
-              {/* Línea / Marcador (siempre visible a la izquierda) */}
+              {/* Texto (Más grande y alineado a la izquierda del punto) */}
+              <span 
+                className="text-base font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap opacity-0 group-hover/menu:opacity-100 transition-all duration-500 ease-out translate-x-4 group-hover/menu:translate-x-0"
+              >
+                {item.label}
+              </span>
+
+              {/* Línea / Marcador (siempre visible a la derecha) */}
               <span
                 className={`h-[3px] rounded-full shrink-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   isActive 
@@ -89,13 +95,6 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
                     : "w-2 bg-gray-300 group-hover/btn:bg-gray-400 group-hover/btn:w-4"
                 }`}
               />
-              
-              {/* Texto (solo visible al expandir el contenedor, alineado a la derecha de la línea) */}
-              <span 
-                className="text-sm font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap opacity-0 group-hover/menu:opacity-100 transition-all duration-500 ease-out -translate-x-4 group-hover/menu:translate-x-0"
-              >
-                {item.label}
-              </span>
             </button>
           );
         })}
