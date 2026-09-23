@@ -2,7 +2,7 @@
 import { CtaBlock } from "@/views/home/cta-block";
 import { TransitionLink } from "@/components/ui/transition-link";
 
-export const MobilePortfolio = ({ content }: { content: any }) => {
+export const MobilePortfolio = ({ content, lang = "es" }: { content: any, lang?: "es"|"en" }) => {
   return (
     <section className="sm:hidden w-full bg-[#08060c] flex flex-col pt-12 pb-24 px-4 z-10 relative">
       <h2 className="text-4xl font-medium tracking-tight text-white mb-8 ml-2 mt-8">
@@ -15,7 +15,7 @@ export const MobilePortfolio = ({ content }: { content: any }) => {
           return (
             <CardWrapper 
               key={item.title} 
-              href={item.slug ? `/proyecto/${item.slug}` : "#"} 
+              href={item.slug ? (lang === "en" ? `/en/project/${item.slug}` : `/es/proyecto/${item.slug}`) : "#"} 
               className="relative flex w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-[#1e1e1e] p-6 text-white block cursor-pointer group"
             >
               {item.image && (

@@ -24,7 +24,7 @@ export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => (
           <ShowreelStage content={lang === "en" ? homeContentEn : homeContent} />
         </div>
         <MobileShowreel content={lang === "en" ? homeContentEn : homeContent} />
-        <MobilePortfolio content={lang === "en" ? homeContentEn : homeContent} />
+        <MobilePortfolio content={lang === "en" ? homeContentEn : homeContent} lang={lang} />
       </div>
     </main>
     <PortfolioFooter lang={lang} />
