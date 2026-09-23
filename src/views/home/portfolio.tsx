@@ -93,7 +93,7 @@ export const Portfolio = memo(({ p, items, active, ctaContent }: PortfolioProps)
 
   return (
     <animated.section
-      className="fixed inset-0 z-40 flex flex-col overflow-hidden pb-[8vmin] pt-[9vmin] text-paper-alt will-change-transform max-sm:hidden"
+      className="fixed inset-0 z-40 flex flex-col overflow-hidden pb-[8vmin] pt-[9vmin] text-paper-alt will-change-transform max-sm:hidden pointer-events-none"
       style={{ transform: sectionTransform }}
     >
       {/* No own background: the section sits on the shared pinned aurora behind
@@ -102,7 +102,7 @@ export const Portfolio = memo(({ p, items, active, ctaContent }: PortfolioProps)
       <div className="relative z-[1] min-h-0 flex-1 overflow-hidden">
         <animated.div
           ref={trackRef}
-          className="flex h-full max-sm:h-auto max-sm:flex-col gap-[3vmin] max-sm:gap-[6vmin] pl-[3vmin] max-sm:px-[5vw] max-sm:pt-[10vh] will-change-transform"
+          className="flex h-full max-sm:h-auto max-sm:flex-col gap-[3vmin] max-sm:gap-[6vmin] pl-[3vmin] max-sm:px-[5vw] max-sm:pt-[10vh] will-change-transform pointer-events-auto"
           style={{ transform: trackTransform }}
         >
           {items.map((item) => (
