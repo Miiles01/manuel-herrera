@@ -9,6 +9,7 @@ import { portfolioProjects } from "@/data/portfolio";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 import { useLoaderStore } from "@/hooks/use-loader";
+import { ScrollMinimap } from "@/components/ui/scroll-minimap";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,10 +59,12 @@ export default function WorkPage() {
   }, [isRevealed]);
 
   const projects = Object.values(portfolioProjects);
+  const minimapItems = projects.map(p => ({ id: p.slug, label: p.title }));
 
   return (
     <div className="bg-white min-h-screen text-black" ref={container}>
       <PortfolioHeader lang="en" />
+      <ScrollMinimap items={minimapItems} />
       
       <main className="flex-1 pt-36 md:pt-48 pb-20">
         <section className="px-6 md:px-12 lg:px-20 container mx-auto mb-20 md:mb-32">
@@ -82,7 +85,7 @@ export default function WorkPage() {
             const subtitle = proj.subtitle.en;
             
             return (
-              <div key={slug} className="mb-28 md:mb-40 group project-item">
+              <div key={slug} id={slug} className="mb-28 md:mb-40 group project-item">
                 <TransitionLink href={`/en/project/${slug}`} className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-gray-100 transition-all project-fade-up opacity-0">
                   <div className="aspect-[16/9] w-full overflow-hidden">
                     <img src={`/proyectos/${proj.folder}/${cover}`} alt={title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
