@@ -18,7 +18,7 @@ export interface PortfolioProps {
 const PfCard = ({ item, active, lang = "es" }: { item: PortfolioItem; active: boolean, lang?: "es"|"en" }) => {
   const CardWrapper = item.slug ? TransitionLink : "div" as any;
   return (
-    <CardWrapper href={item.slug ? (lang === "en" ? `/en/project/${item.slug}` : `/es/proyecto/${item.slug}`) : "#"} className="relative flex h-full w-[62vw] shrink-0 flex-col justify-end overflow-hidden rounded-pf bg-[#1e1e1e] p-[4vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)] block cursor-pointer group">
+    <CardWrapper href={item.slug ? (lang === "en" ? `/en/project/${item.slug}` : `/es/proyecto/${item.slug}`) : "#"} className="pointer-events-auto relative flex h-full w-[62vw] shrink-0 flex-col justify-end overflow-hidden rounded-pf bg-[#1e1e1e] p-[4vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)] block cursor-pointer group">
       {item.image && (
         <img
           src={item.image}
