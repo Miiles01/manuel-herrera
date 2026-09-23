@@ -91,7 +91,7 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           </h1>
           
           {/* Subtextos inferiores (debajo de intro en mobile, debajo de Manu en desktop) */}
-          <div className="order-3 flex justify-between w-full text-sm md:text-base font-medium text-gray-500 max-sm:px-0 md:px-2 mt-8 md:mt-2">
+          <div className="order-3 flex justify-between w-full text-sm md:text-lg font-medium text-gray-500 max-sm:px-0 md:px-2 mt-8 md:mt-2">
             <span>Est. 2026</span>
             <span>{lang === 'en' ? 'Mexico' : 'México'}</span>
           </div>
