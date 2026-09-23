@@ -37,8 +37,8 @@ function ScrollController() {
     window.scrollTo(0, 0);
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: 0.07, // Menor valor = más fricción/suavidad
-      wheelMultiplier: 0.7, // Reduce la velocidad/distancia por cada scroll (ideal para trackpads rápidos)
+      lerp: 0.04, // MUCHO menor valor = extremadamente suave y "pesado"
+      wheelMultiplier: 0.4, // MUCHO menor velocidad por scroll físico
       // syncTouch: true,
     });
     (window as typeof window & { lenis: Lenis }).lenis = lenis;
