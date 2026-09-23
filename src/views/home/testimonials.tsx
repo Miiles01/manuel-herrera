@@ -49,18 +49,63 @@ const TESTIMONIALS = [
   }
 ];
 
-export function Testimonials() {
+const TESTIMONIALS_EN = [
+  {
+    text: "Manuel is a professional in every sense of the word, very passionate about his work, dedicated, and organized. Without a doubt, he makes incredible designs that exceed any brand's expectations.",
+    author: "Ana Laura Garcia",
+    role: "CEO at Naabi Kanabi",
+    image: "/assets/testimonials/testimonio-1.webp"
+  },
+  {
+    text: "Working with Manuel Herrera has been an exceptional experience. With an extremely creative approach, he managed to transform our abstract ideas into a solid and compelling identity for our company. His ability to understand the brand's core and translate it into visual elements is truly impressive. He is a professional who is passionate about what he does.",
+    author: "Ricardo Alavez",
+    role: "CEO at Miiles",
+    image: "/assets/testimonials/testimonio-2.webp"
+  },
+  {
+    text: "I had the opportunity to manage several digital marketing projects for renowned pharmaceutical brands with Manuel, and I can assure you he is an incredible professional. During our time working together, he demonstrated excellent creative skills and outstanding proactivity to resolve issues. Always willing to give his 100%, Manuel adds great value to the teams he collaborates with.",
+    author: "Juan Pablo García",
+    role: "Marketer at Pfizer",
+    image: "/assets/testimonials/testimonio-3.webp"
+  },
+  {
+    text: "Working with Manuel at Claro Pay was the best; his design skills allow him to generate creative solutions in very short times, and his proactivity accelerates objective fulfillment. He's very good at visual communication thanks to his designer's eye, an organized collaborator, and an autodidact who likes to stay up-to-date with industry trends.",
+    author: "Leonardo Gama",
+    role: "Product Manager at FonYou",
+    image: "/assets/testimonials/testimonio-4.webp"
+  },
+  {
+    text: "Working with Manuel on various marketing projects was a memorable experience. His creativity didn't just bring innovative ideas; it transformed entire strategies, achieving surprising results. He has a unique talent for identifying and leveraging trends before they go mainstream. If you're looking for someone with vision, initiative, and a fresh approach, Manuel is the one.",
+    author: "Angelica Villanueva",
+    role: "Executive Assistant at AM Seguridad",
+    image: "/assets/testimonials/testimonio-5.webp"
+  },
+  {
+    text: "I am lucky to work with Manuel, who is not only interested in generating results but also in building a close, long-term relationship with his collaborators and clients. He also has many skills that help brand growth, as well as improving scripts, which allowed us to work with major companies.",
+    author: "David Jiménez",
+    role: "Project Manager Assistant",
+    image: "/assets/testimonials/testimonio-6.webp"
+  },
+  {
+    text: "I had the pleasure of studying and sharing some classes and school projects with Manuel during our Business Administration studies. He proved to be a great student, responsible, friendly, and very dedicated to what he does. He impresses with his great creativity in social media posts and his Marketing knowledge. I highly recommend Manuel; he will be a great asset to any organization.",
+    author: "María Marín",
+    role: "Credit & Collection Analyst at Office Depot Mexico",
+    image: "/assets/testimonials/testimonio-7.webp"
+  }
+];
+
+export function Testimonials({ lang = "es" }: { lang?: "es" | "en" }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((state) => (state + 1) % TESTIMONIALS.length);
+      setIndex((state) => (state + 1) % (lang === "en" ? TESTIMONIALS_EN : TESTIMONIALS).length);
     }, 6000);
     return () => clearInterval(timer);
   }, []);
 
-  const handleNext = () => setIndex((state) => (state + 1) % TESTIMONIALS.length);
-  const handlePrev = () => setIndex((state) => (state - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  const handleNext = () => setIndex((state) => (state + 1) % (lang === "en" ? TESTIMONIALS_EN : TESTIMONIALS).length);
+  const handlePrev = () => setIndex((state) => (state - 1 + (lang === "en" ? TESTIMONIALS_EN : TESTIMONIALS).length) % (lang === "en" ? TESTIMONIALS_EN : TESTIMONIALS).length);
 
   const transitions = useTransition(index, {
     key: index,
@@ -79,7 +124,7 @@ export function Testimonials() {
         target="_blank"
         rel="noopener noreferrer"
         className="mb-[3vmin] inline-flex self-start opacity-70 hover:opacity-100 hover:text-[#0A66C2] transition-colors"
-        aria-label="Ver perfil en LinkedIn"
+        aria-label={lang === "en" ? "View LinkedIn profile" : "Ver perfil en LinkedIn"}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-[3vmin] h-[3vmin] max-sm:w-8 max-sm:h-8">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -87,7 +132,8 @@ export function Testimonials() {
       </a>
       <div className="relative h-[22vmin] max-sm:h-[38vmin] w-full flex items-center">
         {transitions((style, i) => {
-          const item = TESTIMONIALS[i];
+          const arr = lang === "en" ? TESTIMONIALS_EN : TESTIMONIALS;
+          const item = arr[i];
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
               <p className="text-[2.1vmin] max-sm:text-[4vw] font-light leading-snug mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-6">

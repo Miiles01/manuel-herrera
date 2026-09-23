@@ -122,7 +122,7 @@ export default function ContactPage() {
               />
               <textarea 
                 rows={5} 
-                placeholder="¿Cómo te puedo ayudar?" 
+                placeholder="How can I help you?" 
                 className="w-full bg-gray-100 border-none rounded-xl px-6 py-4 text-lg focus:ring-2 focus:ring-black outline-none transition-all placeholder:text-gray-400 font-light resize-y"
               ></textarea>
               <button 

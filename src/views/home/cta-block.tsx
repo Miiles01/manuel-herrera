@@ -27,7 +27,7 @@ export interface CtaBlockProps {
 // re-created by the stage's visibility re-renders (avoids a one-frame reset).
 import { Testimonials } from "./testimonials";
 
-export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: CtaBlockProps) => (
+export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href, lang = "es" }: CtaBlockProps & { lang?: "es" | "en" }) => (
   <animated.div
     className="pointer-events-auto absolute max-sm:relative inset-0 max-sm:inset-auto z-[2] flex flex-col md:flex-row items-start md:items-center justify-between gap-[5vmin] p-[9vmin] max-sm:p-0 max-sm:w-full max-sm:h-auto"
     style={{ opacity: 1, transform: 'translateY(0)' }}
@@ -47,7 +47,7 @@ export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: C
     </div>
 
     <div className="pointer-events-auto w-[35vw] max-sm:w-full max-sm:mt-[4vmin] flex flex-col">
-      <Testimonials />
+      <Testimonials lang={lang} />
     </div>
   </animated.div>
 ));

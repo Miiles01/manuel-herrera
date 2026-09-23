@@ -312,7 +312,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                   className="pointer-events-none absolute inset-[-4vmin] z-[3] rounded-[11vmin] border-[8vmin] border-white"
                   style={{ opacity: s.finalFrame }}
                 />
-                <CtaBlock
+                <CtaBlock lang={content.hero.lines[0] === "Create with" ? "en" : "es"}
                   p={p}
                   heading={content.cta.heading}
                   headingFaded={content.cta.headingFaded}

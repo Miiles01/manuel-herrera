@@ -90,7 +90,7 @@ export default function ProjectPage() {
         
         <div className="px-6 md:px-12 lg:px-20 container mx-auto mt-32 text-center project-fade-up opacity-0">
           <TransitionLink href="/en/work" className="inline-flex items-center gap-3 text-2xl md:text-3xl font-normal tracking-tight text-black hover:opacity-60 transition-opacity">
-            &larr; Volver a proyectos
+            &larr; Back to projects
           </TransitionLink>
         </div>
       </main>
