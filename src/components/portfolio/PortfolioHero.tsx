@@ -73,7 +73,7 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
 
   return (
     <div ref={heroRef} className="relative z-10 bg-[#FFFFFF]">
-      <section id="hero-section" className="min-h-[75vh] md:h-[90vh] w-full flex flex-col justify-start md:justify-end px-4 md:px-12 lg:px-16 pb-32 md:pb-4 pt-[18vh] md:pt-48 lg:pt-[20vh] relative z-0">
+      <section id="hero-section" className="min-h-[75vh] md:h-[90vh] w-full flex flex-col justify-start md:justify-end px-6 md:px-12 lg:px-16 pb-32 md:pb-4 pt-[18vh] md:pt-48 lg:pt-[20vh] relative z-0">
         <div id="hero-content" className="w-full relative flex flex-col">
           
           {/* Texto pequeño a la derecha (arriba en desktop, centro en mobile) */}
