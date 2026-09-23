@@ -126,7 +126,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
         <animated.div
           key={i}
           aria-hidden="true"
-          className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center max-sm:hidden"
+          className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center max-sm:hidden pointer-events-none"
           style={{
             width: `max(280px, ${item.w})`,
             aspectRatio: '4/5',
@@ -206,7 +206,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
               style={{ transform: s.cameraRig }}
             >
               <animated.div
-                className="relative flex size-full items-center justify-center [transform-style:preserve-3d]"
+                className="relative flex size-full items-center justify-center [transform-style:preserve-3d] pointer-events-none"
                 style={{ transform: s.carousel }}
               >
                 {/* Card 1 — hero */}
