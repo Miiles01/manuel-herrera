@@ -81,6 +81,9 @@ export function GlobalLoader() {
 
   // ─── 1. ANIMACIÓN INICIAL ────────────────────────────────────────────────
   useGSAP(() => {
+    // Prevención fundamental: si estamos en transición de página, NO TOQUES NADA.
+    if (phaseRef.current === "transitioning") return;
+
     // Si ya estamos idle (por ej. HMR re-mount) o ya se reveló antes
     if (phaseRef.current === "idle" || isAlreadyRevealed) {
       gsap.set(loaderRef.current, { display: "none" });
@@ -133,7 +136,7 @@ export function GlobalLoader() {
       }
     });
 
-  }, { scope: loaderRef });
+  }, { scope: loaderRef, dependencies: [] });
 
   // ─── 2. INICIAR TRANSICIÓN A OTRA PÁGINA ────────────────────────────────
   useEffect(() => {
@@ -221,6 +224,7 @@ export function GlobalLoader() {
     >
       <h2
         ref={textRef}
+        dangerouslySetInnerHTML={{ __html: "" }}
         suppressHydrationWarning
         className="text-white font-semibold tracking-tighter leading-none select-none"
         style={{
