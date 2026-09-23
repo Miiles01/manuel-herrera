@@ -33,7 +33,7 @@ export const CtaBlock = memo(({ p, heading, headingFaded, sub, button, href }: C
     style={{ opacity: 1, transform: 'translateY(0)' }}
   >
     <div className="flex flex-col items-start gap-[2.5vmin] max-w-[50vw] max-sm:max-w-full">
-      <h2 className="m-0 flex flex-col items-start text-[7vw] max-sm:text-[13vw] font-normal leading-[0.95] tracking-[-0.03em] text-white">
+      <h2 className="m-0 flex flex-col items-start text-[7vw] max-sm:text-4xl max-sm:font-medium max-sm:tracking-tight max-sm:leading-[1.1] font-normal leading-[0.95] tracking-[-0.03em] text-white">
         <span>{heading}</span>
         <span>{headingFaded}</span>
       </h2>
