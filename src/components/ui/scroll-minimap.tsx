@@ -14,22 +14,18 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show minimap after scrolling down 100px
+      // Aparece al bajar 100px
       if (window.scrollY > 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
 
-      // Determine active section
       let currentId = "";
-      // Loop through items to find the one currently in view
-      // We check from bottom to top so the first one that is above the middle of the screen wins
       for (let i = items.length - 1; i >= 0; i--) {
         const el = document.getElementById(items[i].id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          // If the top of the element is above the middle of the screen
           if (rect.top <= window.innerHeight * 0.5) {
             currentId = items[i].id;
             break;
@@ -37,7 +33,6 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
         }
       }
       
-      // If we haven't reached the first project, don't highlight any
       if (currentId) {
         setActiveId(currentId);
       } else if (items.length > 0) {
@@ -70,35 +65,42 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
 
   return (
     <div
-      className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-end gap-3 transition-opacity duration-500 ${
-        isVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isVisible ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-12"
       }`}
     >
-      {items.map((item) => {
-        const isActive = activeId === item.id;
-        return (
-          <button
-            key={item.id}
-            onClick={() => scrollTo(item.id)}
-            className="group relative flex items-center justify-end py-2 cursor-pointer outline-none"
-            aria-label={`Scroll to ${item.label}`}
-          >
-            {/* Tooltip */}
-            <span className="absolute right-full mr-4 text-xs font-medium text-black bg-white shadow-sm border border-black/5 px-2.5 py-1 rounded-md opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap pointer-events-none">
-              {item.label}
-            </span>
-            
-            {/* Line / Mark */}
-            <span
-              className={`h-[2px] rounded-full transition-all duration-300 ease-out origin-right ${
-                isActive 
-                  ? "w-8 bg-black" 
-                  : "w-3 bg-black/20 group-hover:w-6 group-hover:bg-black/50"
-              }`}
-            />
-          </button>
-        );
-      })}
+      {/* Contenedor tipo "churro" / pill */}
+      <div className="group/menu relative flex flex-col items-end gap-3 py-5 px-3 rounded-[32px] bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-[40px] hover:w-[220px] overflow-hidden">
+        
+        {items.map((item) => {
+          const isActive = activeId === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="w-full flex items-center justify-end gap-4 cursor-pointer outline-none group/btn"
+              aria-label={`Scroll to ${item.label}`}
+            >
+              {/* Texto (solo visible al expandir el contenedor) */}
+              <span 
+                className="text-sm font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap opacity-0 group-hover/menu:opacity-100 transition-all duration-500 ease-out translate-x-4 group-hover/menu:translate-x-0"
+              >
+                {item.label}
+              </span>
+              
+              {/* Línea / Marcador (siempre visible) */}
+              <span
+                className={`h-[3px] rounded-full shrink-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isActive 
+                    ? "w-6 bg-black" 
+                    : "w-2 bg-gray-300 group-hover/btn:bg-gray-400 group-hover/btn:w-4"
+                }`}
+              />
+            </button>
+          );
+        })}
+
+      </div>
     </div>
   );
 }
