@@ -45,7 +45,7 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // init
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [items]);
 
@@ -68,8 +68,8 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
         isVisible ? "translate-x-0" : "translate-x-32"
       }`}
     >
-      {/* Contenedor tipo "churro" / pill. Disminuye su borde redondeado en hover */}
-      <div className="group/menu relative flex flex-col items-end gap-4 py-6 px-3 rounded-[32px] group-hover/menu:rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-[40px] hover:w-[260px] overflow-hidden">
+      {/* Contenedor: width es "hug" (w-max), borde cuadrado con redondeo tipo navbar (rounded-md) */}
+      <div className="group/menu relative flex flex-col items-end gap-3 py-4 px-3 rounded-md bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-max">
         
         {items.map((item) => {
           const isActive = activeId === item.id;
@@ -77,14 +77,16 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="w-full flex items-center justify-end gap-5 cursor-pointer outline-none group/btn"
+              className="w-full flex items-center justify-end gap-3 cursor-pointer outline-none group/btn"
               aria-label={`Scroll to ${item.label}`}
             >
-              {/* Texto (Más grande y alineado a la izquierda del punto) */}
-              <span 
-                className="text-base font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap opacity-0 group-hover/menu:opacity-100 transition-all duration-500 ease-out translate-x-4 group-hover/menu:translate-x-0"
-              >
-                {item.label}
+              {/* Contenedor del texto que se expande de max-w-0 a max-w-[500px] */}
+              <span className="overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-0 group-hover/menu:max-w-[400px] opacity-0 group-hover/menu:opacity-100 flex justify-end">
+                <span 
+                  className="text-base font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap pl-1"
+                >
+                  {item.label}
+                </span>
               </span>
 
               {/* Línea / Marcador (siempre visible a la derecha) */}
