@@ -64,8 +64,8 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
 
   return (
     <div
-      className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isVisible ? "translate-x-0" : "translate-x-32"
+      className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isVisible ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-[150%] opacity-0 pointer-events-none"
       }`}
     >
       {/* Contenedor: width es "hug" (w-max), borde cuadrado con redondeo tipo navbar (rounded-md) */}
