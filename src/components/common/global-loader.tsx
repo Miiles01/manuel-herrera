@@ -1,4 +1,3 @@
-import React, { memo } from "react";
 "use client";
 
 /**
@@ -13,7 +12,7 @@ import React, { memo } from "react";
  *    sobrevivir al double-invoke de React 18 Strict Mode en desarrollo.
  */
 
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useRef, useState, memo, forwardRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -24,7 +23,7 @@ import { usePageTransition } from "@/hooks/use-page-transition";
 
 
 const LoaderText = memo(
-  React.forwardRef<HTMLHeadingElement, {}>((props, ref) => (
+  forwardRef<HTMLHeadingElement, {}>((props, ref) => (
     <h2
       ref={ref}
       className="text-white font-semibold tracking-tighter leading-none select-none"
