@@ -123,9 +123,9 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
 
       {/* Botón {lang === 'en' ? "Let's talk" : 'Hablemos'} (Derecha Extrema) */}
       <div ref={hablemosRef} className="fixed top-8 right-4 md:right-12 z-50 mix-blend-difference pointer-events-none mt-3 md:mt-4 hidden md:block">
-        <TransitionLink href={lang === 'en' ? '/en/contact' : '/es/contacto'} className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
+        <a href="mailto:contmanuel77@gmail.com" className="font-medium text-sm text-white pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity block">
           {lang === 'en' ? "Let's talk" : 'Hablemos'}
-        </TransitionLink>
+        </a>
       </div>
 
       {/* Contenedor del Menú Desplegable (Navbar) */}
@@ -145,12 +145,17 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
         <nav className={`flex flex-col gap-6 px-8 pt-6 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
           <TransitionLink href={lang === 'en' ? '/en' : '/es'} className="hover:text-gray-500 transition-colors">{lang === 'en' ? 'Home' : 'Inicio'}</TransitionLink>
           <TransitionLink href={lang === 'en' ? '/en/work' : '/es/trabajo'} className="hover:text-gray-500 transition-colors">{lang === 'en' ? 'Work' : 'Trabajo'}</TransitionLink>
-          <TransitionLink href={lang === 'en' ? '/en/contact' : '/es/contacto'} className="hover:text-gray-500 transition-colors">{lang === 'en' ? 'Contact' : 'Contacto'}</TransitionLink>
-        </nav>
+                  </nav>
 
         <div className={`px-8 pt-8 pb-10 flex flex-col gap-3 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
           <CopyItem value="contmanuel77@gmail.com" label="contmanuel77@gmail.com" copiedText={lang === 'en' ? 'Copied' : 'Copiado'} />
           <CopyItem value="+525610168992" label="+52 56 1016 8992" copiedText={lang === 'en' ? 'Copied' : 'Copiado'} />
+          <a href="https://www.linkedin.com/in/manuel-herrera-perfil/" target="_blank" rel="noopener noreferrer" className="text-left text-base font-normal text-gray-600 hover:text-gray-900 transition-colors w-fit pt-1 flex items-center gap-2">
+            LinkedIn
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 opacity-50">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </a>
         </div>
       </div>
     </>
