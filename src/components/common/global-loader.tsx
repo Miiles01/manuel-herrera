@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 "use client";
 
 /**
@@ -20,6 +21,23 @@ import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition } from "@/hooks/use-page-transition";
+
+
+const LoaderText = memo(
+  React.forwardRef<HTMLHeadingElement, {}>((props, ref) => (
+    <h2
+      ref={ref}
+      className="text-white font-semibold tracking-tighter leading-none select-none"
+      style={{
+        fontSize: "clamp(3rem, 16vw, 14rem)",
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+      }}
+    >
+      Manu
+    </h2>
+  )),
+  () => true // Never re-render this component, protecting it from React's reconciliation
+);
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -60,17 +78,7 @@ function splitOut(chars: Element[] | null, delay: number, onDone: () => void) {
 
 
 
-function ensureTextElement(loader: HTMLElement, textRef: React.MutableRefObject<HTMLDivElement | null>) {
-  if (textRef.current) return textRef.current;
-  const h2 = document.createElement("h2");
-  h2.className = "text-white font-semibold tracking-tighter leading-none select-none";
-  h2.style.fontSize = "clamp(3rem, 16vw, 14rem)";
-  h2.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
-  h2.textContent = "Manu";
-  loader.appendChild(h2);
-  textRef.current = h2 as any;
-  return textRef.current!;
-}
+
 
 export function GlobalLoader() {
   const router    = useRouter();
@@ -113,7 +121,7 @@ export function GlobalLoader() {
 
     const loader = loaderRef.current;
     if (!loader) return;
-    const text = ensureTextElement(loader, textRef);
+    const text = textRef.current; if (!text) return;
     stopScroll();
 
     // Texto fijo según petición
@@ -164,7 +172,7 @@ export function GlobalLoader() {
 
     const loader = loaderRef.current;
     if (!loader) return;
-    const text = ensureTextElement(loader, textRef);
+    const text = textRef.current; if (!text) return;
 
     phaseRef.current = "transitioning";
     stopScroll();
@@ -241,7 +249,7 @@ export function GlobalLoader() {
       ref={loaderRef}
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
     >
-      {/* El texto se inyecta por DOM puro para que React no borre los spans de SplitType al re-renderizar */}
+      <LoaderText ref={textRef as any} />
     </div>
   );
 }
