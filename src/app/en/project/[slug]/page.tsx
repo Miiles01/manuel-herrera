@@ -68,11 +68,12 @@ export default function ProjectPage() {
             <img src={basePath + project.images[0].src} className="w-full h-auto object-cover" alt="Cover" />
             
             {project.images[0].cta && (
-              <div className="absolute inset-0 flex flex-col justify-end items-center pb-[8vmin] md:pb-[6vmin] pointer-events-none">
-                <a href={project.images[0].cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto flex items-center justify-center gap-2 bg-black text-white px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-black/90 transition-all shadow-[0_1vmin_3vmin_rgba(0,0,0,0.3)] z-10">
+              <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                <a href={project.images[0].cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group/btn flex items-center justify-center gap-2 bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-gray-50 transition-all shadow-[0_2vmin_5vmin_rgba(0,0,0,0.15)] z-10">
                   {project.images[0].cta.label.en}
-                  <svg className="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 opacity-80 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
                   </svg>
                 </a>
               </div>
@@ -96,11 +97,12 @@ export default function ProjectPage() {
                 <img src={basePath + img.src} className="w-full h-auto object-cover" loading="lazy" alt={`Project detail ${i + 1}`} />
                 
                 {img.cta && (
-                  <div className="absolute inset-0 flex flex-col justify-end items-center pb-[8vmin] md:pb-[6vmin] pointer-events-none">
-                    <a href={img.cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto flex items-center justify-center gap-2 bg-black text-white px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-black/90 transition-all shadow-[0_1vmin_3vmin_rgba(0,0,0,0.3)] z-10">
+                  <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                    <a href={img.cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group/btn flex items-center justify-center gap-2 bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-gray-50 transition-all shadow-[0_2vmin_5vmin_rgba(0,0,0,0.15)] z-10">
                       {img.cta.label.en}
-                      <svg className="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 opacity-80 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
                       </svg>
                     </a>
                   </div>
