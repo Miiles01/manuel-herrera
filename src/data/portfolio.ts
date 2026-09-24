@@ -25,6 +25,48 @@ export interface Project {
 }
 
 export const portfolioProjects: Record<string, Project> = {
+  tulum: {
+    slug: "tulum",
+    title: "Tulum",
+    folder: "Tulum",
+    subtitle: {
+      es: "Dishes that tell a story. Every recipe holds a piece of our heritage.",
+      en: "Dishes that tell a story. Every recipe holds a piece of our heritage.",
+    },
+    industry: {
+      es: "Gastronomía",
+      en: "Gastronomy",
+    },
+    role: {
+      es: "Dirección de Arte y Diseño Web",
+      en: "Art Direction & Web Design",
+    },
+    description: {
+      es: "Sourced daily and prepared with passion, these are the flavors that define Tulum.",
+      en: "Sourced daily and prepared with passion, these are the flavors that define Tulum.",
+    },
+    previewImages: [
+      "scallops.jpg",
+      "pizza.jpg",
+      "combo.jpg",
+      "scallops.jpg"
+    ],
+    images: [
+      { src: "scallops.jpg", alt: "Tulum Dish 1", aspect: "wide" },
+      { src: "pizza.jpg", alt: "Tulum Dish 2", aspect: "wide" },
+      { src: "combo.jpg", alt: "Tulum Dish 3", aspect: "wide" }
+    ],
+    participation: [
+      {
+        icon: "🎨",
+        text: { es: "Dirección de Arte", en: "Art Direction" }
+      },
+      {
+        icon: "💻",
+        text: { es: "Diseño Web", en: "Web Design" }
+      }
+    ]
+  },
   miiles: {
     slug: "miiles",
     title: "Miiles AI",
