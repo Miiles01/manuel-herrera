@@ -142,9 +142,9 @@ export const homeContent: ShowreelContent = {
         client: "Tulum",
         title: "Tulum",
         slug: "tulum",
-        subtitle: "Dishes that tell a story.",
-        discipline: "Gastronomía",
-        image: "/proyectos/Tulum/scallops.jpg",
+        subtitle: "Diseño de identidad visual y experiencia digital.",
+        discipline: "Hospitality",
+        image: "/proyectos/Tulum/Portada.png",
       },
 
       {
@@ -235,9 +235,9 @@ export const homeContentEn: ShowreelContent = {
         client: "Tulum",
         title: "Tulum",
         slug: "tulum",
-        subtitle: "Dishes that tell a story.",
-        discipline: "Gastronomía",
-        image: "/proyectos/Tulum/scallops.jpg",
+        subtitle: "Diseño de identidad visual y experiencia digital.",
+        discipline: "Hospitality",
+        image: "/proyectos/Tulum/Portada.png",
       },
 
       {

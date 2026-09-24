@@ -30,31 +30,36 @@ export const portfolioProjects: Record<string, Project> = {
     title: "Tulum",
     folder: "Tulum",
     subtitle: {
-      es: "Dishes that tell a story. Every recipe holds a piece of our heritage.",
-      en: "Dishes that tell a story. Every recipe holds a piece of our heritage.",
+      es: "Desarrollo de identidad visual y diseño estratégico.",
+      en: "Visual identity development and strategic design.",
     },
     industry: {
-      es: "Gastronomía",
-      en: "Gastronomy",
+      es: "Hospitality & Real Estate",
+      en: "Hospitality & Real Estate",
     },
     role: {
       es: "Dirección de Arte y Diseño Web",
       en: "Art Direction & Web Design",
     },
     description: {
-      es: "Sourced daily and prepared with passion, these are the flavors that define Tulum.",
-      en: "Sourced daily and prepared with passion, these are the flavors that define Tulum.",
+      es: "Trabajé en la creación de una identidad visual inmersiva que captura la esencia y energía del proyecto, desarrollando interfaces modernas y optimizadas para transmitir su propuesta de valor única.",
+      en: "I worked on creating an immersive visual identity that captures the project's essence and energy, developing modern and optimized interfaces to convey its unique value proposition.",
     },
     previewImages: [
-      "scallops.jpg",
-      "pizza.jpg",
-      "combo.jpg",
-      "scallops.jpg"
+      "1.png",
+      "Mini-1.png",
+      "Mini-2.png",
+      "2.png"
     ],
     images: [
-      { src: "scallops.jpg", alt: "Tulum Dish 1", aspect: "wide" },
-      { src: "pizza.jpg", alt: "Tulum Dish 2", aspect: "wide" },
-      { src: "combo.jpg", alt: "Tulum Dish 3", aspect: "wide" }
+      { src: "Portada.png", alt: "Tulum Portada", aspect: "wide" },
+      { src: "1.png", alt: "Tulum 1", aspect: "wide" },
+      { src: "2.png", alt: "Tulum 2", aspect: "wide" },
+      { src: "3.png", alt: "Tulum 3", aspect: "wide" },
+      { src: "4.png", alt: "Tulum 4", aspect: "wide" },
+      { src: "5.png", alt: "Tulum 5", aspect: "wide" },
+      { src: "6.png", alt: "Tulum 6", aspect: "wide" },
+      { src: "7.png", alt: "Tulum 7", aspect: "wide" }
     ],
     participation: [
       {
