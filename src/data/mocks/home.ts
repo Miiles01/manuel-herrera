@@ -97,7 +97,7 @@ export const homeContent: ShowreelContent = {
   ],
   hero: {
     lines: ["Crear con", "intención"],
-    templatesTitle: "Creamos\nexperiencias",
+    templatesTitle: "Creo\nexperiencias",
     bottomBlock: {
       leftText: "Mi misión es ayudar a otros a crear proyectos que transforman comunidades.",
       rightText: "11 años creando",

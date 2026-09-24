@@ -69,7 +69,7 @@ export default function TrabajoPage() {
       <main className="flex-1 pt-36 md:pt-48 pb-20">
         <section className="px-6 md:px-12 lg:px-20 container mx-auto mb-20 md:mb-32">
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
-            Pensamos con propósito para marcas que buscan autenticidad y escalabilidad.
+            Pienso con propósito para marcas que buscan autenticidad y escalabilidad.
           </p>
           <h1 id="page-title" className="text-6xl md:text-8xl lg:text-[7.5vw] font-normal tracking-tight leading-[1.05] text-black" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}>
             Proyectos

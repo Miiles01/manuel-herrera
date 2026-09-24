@@ -42,8 +42,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnels, Brand Identity Strategy & AI Automation",
     },
     description: {
-      es: "Lideramos la creación y escalamiento de la marca mediante soluciones de prospección en frío y embudos de alta conversión impulsados por agentes de IA conversacional. Desarrollamos la identidad visual completa, la arquitectura de ventas y las estrategias de crecimiento multicanal para posicionar a Miiles como referente en automatización comercial.",
-      en: "We led the brand's creation and scaling through cold outreach solutions and high-conversion funnels powered by conversational AI agents. We developed the complete visual identity, sales architecture, and multi-channel growth strategies to position Miiles as a leader in commercial automation.",
+      es: "Lideré la creación y escalamiento de la marca mediante soluciones de prospección en frío y embudos de alta conversión impulsados por agentes de IA conversacional. Desarrollé la identidad visual completa, la arquitectura de ventas y las estrategias de crecimiento multicanal para posicionar a Miiles como referente en automatización comercial.",
+      en: "I led the brand's creation and scaling through cold outreach solutions and high-conversion funnels powered by conversational AI agents. I developed the complete visual identity, sales architecture, and multi-channel growth strategies to position Miiles as a leader in commercial automation.",
     },
     previewImages: [
       "portada-1.webp",
@@ -170,8 +170,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnel & Brand Identity Strategy",
     },
     description: {
-      es: "Transformamos la identidad y estrategia visual de ERPXtender para posicionarlo como una solución ágil e innovadora en la industria corporativa. Diseñamos una interfaz web centrada en UX y producimos activos visuales de alto impacto optimizados para un embudo de ventas B2B que acelera la toma de decisiones.",
-      en: "We transformed ERPXtender's visual identity and strategy to position it as an agile, innovative solution in the corporate industry. We designed a UX-centered web interface and produced high-impact visual assets optimized for a B2B sales funnel that accelerates decision-making.",
+      es: "Transformamos la identidad y estrategia visual de ERPXtender para posicionarlo como una solución ágil e innovadora en la industria corporativa. Diseñé una interfaz web centrada en UX y producimos activos visuales de alto impacto optimizados para un embudo de ventas B2B que acelera la toma de decisiones.",
+      en: "I transformed ERPXtender's visual identity and strategy to position it as an agile, innovative solution in the corporate industry. I designed a UX-centered web interface and produced high-impact visual assets optimized for a B2B sales funnel that accelerates decision-making.",
     },
     previewImages: [
       "portada-1.webp",
@@ -210,8 +210,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnels, Brand Identity Strategy & AI Automation",
     },
     description: {
-      es: "Construimos el ecosistema digital y la tienda oficial en Shopify de la marca, implementando flujos automatizados de email marketing y nutrición de clientes. Desarrollamos la identidad visual sofisticada, dirección de arte fotográfica y lineamientos de marca para ofrecer una experiencia de compra premium y memorable.",
-      en: "We built the brand's digital ecosystem and official Shopify store, implementing automated email marketing and lead nurturing flows. We developed the sophisticated visual identity, photographic art direction, and brand guidelines to deliver a premium, memorable shopping experience.",
+      es: "Construí el ecosistema digital y la tienda oficial en Shopify de la marca, implementando flujos automatizados de email marketing y nutrición de clientes. Desarrollé la identidad visual sofisticada, dirección de arte fotográfica y lineamientos de marca para ofrecer una experiencia de compra premium y memorable.",
+      en: "I built the brand's digital ecosystem and official Shopify store, implementing automated email marketing and lead nurturing flows. I developed the sophisticated visual identity, photographic art direction, and brand guidelines to deliver a premium, memorable shopping experience.",
     },
     previewImages: [
       "portada-1.webp",
@@ -250,8 +250,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnels & Brand Identity Strategy",
     },
     description: {
-      es: "Desarrollamos una identidad de marca distintiva y una plataforma web orientada al agendamiento rápido sin fricciones. Mediante dirección fotográfica profesional y un layout de embudo optimizado, transformamos la presencia digital del salón para maximizar la captación y recurrencia de clientes.",
-      en: "We developed a distinctive brand identity and a frictionless booking-oriented web platform. Through professional photographic direction and an optimized funnel layout, we transformed the salon's digital presence to maximize client acquisition and retention.",
+      es: "Desarrollé una identidad de marca distintiva y una plataforma web orientada al agendamiento rápido sin fricciones. Mediante dirección fotográfica profesional y un layout de embudo optimizado, transformé la presencia digital del salón para maximizar la captación y recurrencia de clientes.",
+      en: "I developed a distinctive brand identity and a frictionless booking-oriented web platform. Through professional photographic direction and an optimized funnel layout, I transformed the salon's digital presence to maximize client acquisition and retention.",
     },
     previewImages: [
       "portada-1.webp",
@@ -336,8 +336,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Brand Identity Strategy",
     },
     description: {
-      es: "Creamos la identidad visual y lineamientos de marca de Colorfit para proyectar energía y sofisticación en el sector fitness. Diseñamos un sistema gráfico versátil y escalable, adaptado con precisión tanto para su línea textil y merchandising como para sus canales digitales.",
-      en: "We created Colorfit's visual identity and brand guidelines to project energy and sophistication in the fitness industry. We designed a versatile, scalable graphic system, precisely tailored for both their apparel line and digital touchpoints.",
+      es: "Creé la identidad visual y lineamientos de marca de Colorfit para proyectar energía y sofisticación en el sector fitness. Diseñé un sistema gráfico versátil y escalable, adaptado con precisión tanto para su línea textil y merchandising como para sus canales digitales.",
+      en: "I created Colorfit's visual identity and brand guidelines to project energy and sophistication in the fitness industry. I designed a versatile, scalable graphic system, precisely tailored for both their apparel line and digital touchpoints.",
     },
     previewImages: [
       "portada-1.webp",
@@ -373,8 +373,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Brand Identity Strategy",
     },
     description: {
-      es: "Diseñamos un ecosistema de marca completo y empaques con alto impacto visual ('Shelf-Impact') para el sector alimentario y de consumo masivo. Desarrollamos manuales técnicos de identidad que garantizan una coherencia absoluta entre el packaging físico y la presencia digital de la marca.",
-      en: "We designed a complete brand ecosystem and high-impact packaging ('Shelf-Impact') for the food and consumer goods sector. We developed technical identity manuals ensuring absolute consistency between physical packaging and the brand's digital presence.",
+      es: "Diseñé un ecosistema de marca completo y empaques con alto impacto visual ('Shelf-Impact') para el sector alimentario y de consumo masivo. Desarrollé manuales técnicos de identidad que garantizan una coherencia absoluta entre el packaging físico y la presencia digital de la marca.",
+      en: "I designed a complete brand ecosystem and high-impact packaging ('Shelf-Impact') for the food and consumer goods sector. I developed technical identity manuals ensuring absolute consistency between physical packaging and the brand's digital presence.",
     },
     previewImages: [
       "portada-1.webp",
@@ -415,8 +415,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Brand Identity Strategy & E-commerce",
     },
     description: {
-      es: "Desarrollamos una identidad visual sofisticada y memorable para The Decant Society, elevando su presencia en el mercado de la perfumería y fragancias premium. Diseñamos un sistema gráfico elegante y construimos una plataforma de e-commerce optimizada, capturando la exclusividad de la marca. Visita el proyecto en https://thedecantsociety.com/",
-      en: "We developed a sophisticated and memorable visual identity for The Decant Society, elevating its presence in the premium perfumery and fragrance market. We designed an elegant graphic system and built an optimized e-commerce platform, capturing the brand's exclusivity. Visit the project at https://thedecantsociety.com/",
+      es: "Desarrollé una identidad visual sofisticada y memorable para The Decant Society, elevando su presencia en el mercado de la perfumería y fragancias premium. Diseñé un sistema gráfico elegante y construí una plataforma de e-commerce optimizada, capturando la exclusividad de la marca. Visita el proyecto en https://thedecantsociety.com/",
+      en: "I developed a sophisticated and memorable visual identity for The Decant Society, elevating its presence in the premium perfumery and fragrance market. I designed an elegant graphic system and built an optimized e-commerce platform, capturing the brand's exclusivity. Visit the project at https://thedecantsociety.com/",
     },
     previewImages: [
       "portada.webp",
