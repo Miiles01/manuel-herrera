@@ -235,7 +235,7 @@ export const portfolioProjects: Record<string, Project> = {
 
   original: {
     slug: "original",
-    title: "Original — Salon de Barbier",
+    title: "Original",
     folder: "Original",
     subtitle: {
       es: "Dirección de arte y diseño web orientado a reservas y conversión.",
