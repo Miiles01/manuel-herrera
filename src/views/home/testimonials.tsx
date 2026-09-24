@@ -156,7 +156,7 @@ export function Testimonials({ lang = "es" }: { lang?: "es" | "en" }) {
           );
         })}
       </div>
-      <div className="absolute bottom-[4vmin] right-[4vmin] flex gap-[1vmin] z-10 max-sm:hidden">
+      <div className="absolute bottom-[4vmin] right-[4vmin] hidden z-10">
         <button onClick={handlePrev} className="p-[1vmin] rounded-full border border-ink/20 hover:bg-ink/5 transition-colors cursor-pointer pointer-events-auto">
           <svg width="2vmin" height="2vmin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
