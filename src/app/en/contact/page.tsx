@@ -6,7 +6,6 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
-import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 
 function CopyItem({ value, label, copiedText = "Copied" }: { value: string; label: string; copiedText?: string }) {
   const [copied, setCopied] = useState(false);
@@ -136,7 +135,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <PortfolioFooter lang="en" />
+      {/* Footer temporarily disabled on contact page */}
     </div>
   );
 }
