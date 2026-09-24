@@ -69,7 +69,7 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
       }`}
     >
       {/* Contenedor: width es "hug" (w-max), borde cuadrado con redondeo tipo navbar (rounded-2xl) */}
-      <div className="group/menu relative flex flex-col items-end gap-3 py-4 px-3 rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-max">
+      <div className="group/menu relative flex flex-col items-end gap-3 py-4 px-3 rounded-2xl bg-gray-50/90 backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-max">
         
         {items.map((item) => {
           const isActive = activeId === item.id;
