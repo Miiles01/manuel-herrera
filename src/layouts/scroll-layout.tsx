@@ -37,8 +37,8 @@ function ScrollController() {
     window.scrollTo(0, 0);
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: 0.055, // Punto medio de suavidad
-      wheelMultiplier: 0.55, // Velocidad equilibrada, ni tan rápido ni tan pesado
+      lerp: 0.045, // Punto medio de suavidad
+      wheelMultiplier: 0.45, // Velocidad equilibrada, ni tan rápido ni tan pesado
       // syncTouch: true,
     });
     (window as typeof window & { lenis: Lenis }).lenis = lenis;
