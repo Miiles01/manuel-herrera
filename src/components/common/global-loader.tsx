@@ -59,6 +59,19 @@ function splitOut(chars: Element[] | null, delay: number, onDone: () => void) {
 
 
 
+
+function ensureTextElement(loader: HTMLElement, textRef: React.MutableRefObject<HTMLDivElement | null>) {
+  if (textRef.current) return textRef.current;
+  const h2 = document.createElement("h2");
+  h2.className = "text-white font-semibold tracking-tighter leading-none select-none";
+  h2.style.fontSize = "clamp(3rem, 16vw, 14rem)";
+  h2.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
+  h2.textContent = "Manu";
+  loader.appendChild(h2);
+  textRef.current = h2 as any;
+  return textRef.current!;
+}
+
 export function GlobalLoader() {
   const router    = useRouter();
   const pathname  = usePathname();
@@ -83,27 +96,7 @@ export function GlobalLoader() {
 
   const [waitingForPath, setWaitingForPath] = useState<string | null>(null);
 
-  // ─── 0. INYECCIÓN PURA DE DOM ────────────────────────────────────────────
-  useEffect(() => {
-    const loader = loaderRef.current;
-    if (!loader) return;
-    
-    // Crear el elemento fuera del Virtual DOM de React
-    const h2 = document.createElement("h2");
-    h2.className = "text-white font-semibold tracking-tighter leading-none select-none";
-    h2.style.fontSize = "clamp(3rem, 16vw, 14rem)";
-    h2.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
-    h2.textContent = "Manu"; // Texto inicial
-    
-    loader.appendChild(h2);
-    textRef.current = h2 as any;
-    
-    return () => {
-      if (loader.contains(h2)) {
-        loader.removeChild(h2);
-      }
-    };
-  }, []);
+
 
 
   // ─── 1. ANIMACIÓN INICIAL ────────────────────────────────────────────────
@@ -119,9 +112,8 @@ export function GlobalLoader() {
     }
 
     const loader = loaderRef.current;
-    const text   = textRef.current;
-    if (!loader || !text) return;
-
+    if (!loader) return;
+    const text = ensureTextElement(loader, textRef);
     stopScroll();
 
     // Texto fijo según petición
@@ -171,8 +163,8 @@ export function GlobalLoader() {
     if (phaseRef.current !== "idle") return;
 
     const loader = loaderRef.current;
-    const text   = textRef.current;
-    if (!loader || !text) return;
+    if (!loader) return;
+    const text = ensureTextElement(loader, textRef);
 
     phaseRef.current = "transitioning";
     stopScroll();
