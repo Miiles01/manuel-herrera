@@ -9,6 +9,10 @@ export interface ProjectImage {
   src: string;
   alt: string;
   aspect: "wide" | "square" | "portrait";
+  cta?: {
+    label: LanguageString;
+    href: string;
+  };
 }
 
 export interface Project {
@@ -52,7 +56,15 @@ export const portfolioProjects: Record<string, Project> = {
     ],
     images: [
       { src: "Portada.png", alt: "Tulum Portada", aspect: "wide" },
-      { src: "1.png", alt: "Tulum 1", aspect: "wide" },
+      { 
+        src: "1.png", 
+        alt: "Tulum 1", 
+        aspect: "wide",
+        cta: {
+          label: { es: "Ver demo", en: "View demo" },
+          href: "https://lightblue-wasp-875646.hostingersite.com/"
+        }
+      },
       { src: "2.png", alt: "Tulum 2", aspect: "wide" },
       { src: "3.png", alt: "Tulum 3", aspect: "wide" },
       { src: "4.png", alt: "Tulum 4", aspect: "wide" },
