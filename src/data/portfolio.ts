@@ -46,10 +46,9 @@ export const portfolioProjects: Record<string, Project> = {
       en: "I worked on creating an immersive visual identity that captures the project's essence and energy, developing modern and optimized interfaces to convey its unique value proposition.",
     },
     previewImages: [
-      "1.png",
+      "Portada.png",
       "Mini-1.png",
-      "Mini-2.png",
-      "2.png"
+      "Mini-2.png"
     ],
     images: [
       { src: "Portada.png", alt: "Tulum Portada", aspect: "wide" },
