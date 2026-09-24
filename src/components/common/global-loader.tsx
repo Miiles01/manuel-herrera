@@ -12,7 +12,7 @@
  *    sobrevivir al double-invoke de React 18 Strict Mode en desarrollo.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -55,6 +55,20 @@ function splitOut(chars: Element[] | null, delay: number, onDone: () => void) {
 }
 
 // ─── Componente ──────────────────────────────────────────────────────────────
+
+
+// ─── Memoized Text to prevent React from wiping SplitType DOM nodes ──────────
+const LoaderText = memo(({ textRef }: { textRef: React.RefObject<HTMLHeadingElement> }) => (
+  <h2
+    ref={textRef}
+    suppressHydrationWarning
+    className="text-white font-semibold tracking-tighter leading-none select-none"
+    style={{
+      fontSize: "clamp(3rem, 16vw, 14rem)",
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+    }}
+  />
+), () => true);
 
 export function GlobalLoader() {
   const router    = useRouter();
@@ -222,16 +236,7 @@ export function GlobalLoader() {
       ref={loaderRef}
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
     >
-      <h2
-        ref={textRef}
-        dangerouslySetInnerHTML={{ __html: "" }}
-        suppressHydrationWarning
-        className="text-white font-semibold tracking-tighter leading-none select-none"
-        style={{
-          fontSize: "clamp(3rem, 16vw, 14rem)",
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-        }}
-      />
+      <LoaderText textRef={textRef} />
     </div>
   );
 }
