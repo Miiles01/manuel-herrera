@@ -275,7 +275,7 @@ export const cameraRigTransform = (p: number) => {
   if (!flightActive(p)) return "translate(0vw, 0vh) translateZ(0px)";
   const rigX = -250 * Math.sin((p6(p) * Math.PI) / 2);
   const rigY = -100 * (1 - Math.cos((p6(p) * Math.PI) / 2));
-  const rigZ = 1000 * easeP7(p);
+  const rigZ = 2250 * easeP7(p);
   return `translate(${rigX}vw, ${rigY}vh) translateZ(${rigZ}px)`;
 };
 export const targetOpacity = (p: number) => (flightActive(p) ? 1 : 0);
@@ -322,8 +322,8 @@ export const sceneVisibility = (p: number): SceneVisibility => {
   };
 };
 export const targetTransform = () =>
-  "translate(calc(-50% + 250vw), calc(-50% + 100vh)) translateZ(-1000px) scale(0.85)";
-export const targetRadius = (p: number) => (flightActive(p) ? 32 : 32);
+  "translate(calc(-50% + 250vw), calc(-50% + 100vh)) translateZ(-2250px)";
+export const targetRadius = (p: number) => (flightActive(p) ? 30 * (1 - easeP7(p)) : 30);
 
 // ── Parallax grid items ─────────────────────────────────────────────────────
 export interface GridItem {

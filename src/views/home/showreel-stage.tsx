@@ -200,7 +200,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
           </animated.div>
 
           {/* 3D scene. */}
-          <div className="relative z-[2] flex size-full items-center justify-center [perspective:1500px]">
+          <div className="relative z-[2] flex size-full items-center justify-center [perspective:3000px]">
             <animated.div
               className="absolute inset-0 [transform-style:preserve-3d]"
               style={{ transform: s.cameraRig }}
