@@ -287,7 +287,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
               {/* Target block — the chrome star we fly into. */}
               <animated.div
-                className="absolute left-1/2 top-1/2 z-[1] h-[100dvh] w-screen overflow-hidden bg-[#08060c] max-sm:!hidden pointer-events-auto"
+                className="absolute left-1/2 top-1/2 z-[1] h-[75vh] w-[85vw] lg:w-[75vw] lg:h-[70vh] overflow-hidden bg-[#08060c] max-sm:!hidden pointer-events-auto shadow-2xl"
                 style={{
                   transform: targetTransform(),
                   borderRadius: s.targetRadius,
