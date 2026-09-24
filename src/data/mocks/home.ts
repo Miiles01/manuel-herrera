@@ -119,7 +119,7 @@ export const homeContent: ShowreelContent = {
   },
   carouselCta: {
     button: "Ver proyectos",
-    href: "/trabajo",
+    href: "/es/trabajo",
   },
   sphere: {
     headingTop: "",
@@ -180,7 +180,7 @@ export const homeContent: ShowreelContent = {
     headingFaded: "idea realidad",
     sub: "",
     button: "Ver proyectos",
-    href: "/trabajo",
+    href: "/es/trabajo",
   },
 };
 
