@@ -57,18 +57,7 @@ function splitOut(chars: Element[] | null, delay: number, onDone: () => void) {
 // ─── Componente ──────────────────────────────────────────────────────────────
 
 
-// ─── Memoized Text to prevent React from wiping SplitType DOM nodes ──────────
-const LoaderText = memo(({ textRef }: { textRef: React.RefObject<HTMLHeadingElement> }) => (
-  <h2
-    ref={textRef}
-    suppressHydrationWarning
-    className="text-white font-semibold tracking-tighter leading-none select-none"
-    style={{
-      fontSize: "clamp(3rem, 16vw, 14rem)",
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-    }}
-  />
-), () => true);
+
 
 export function GlobalLoader() {
   const router    = useRouter();
@@ -85,13 +74,37 @@ export function GlobalLoader() {
   const startScroll = useScroll((s) => s.start);
 
   const loaderRef = useRef<HTMLDivElement>(null);
-  const textRef   = useRef<HTMLHeadingElement>(null);
+  const textRef   = useRef<HTMLDivElement>(null);
   const splitRef  = useRef<SplitType | null>(null);
   
   // En HMR, si ya se reveló antes, empezamos en "idle"
   const phaseRef  = useRef<"initial" | "idle" | "transitioning">("initial");
 
+
   const [waitingForPath, setWaitingForPath] = useState<string | null>(null);
+
+  // ─── 0. INYECCIÓN PURA DE DOM ────────────────────────────────────────────
+  useEffect(() => {
+    const loader = loaderRef.current;
+    if (!loader) return;
+    
+    // Crear el elemento fuera del Virtual DOM de React
+    const h2 = document.createElement("h2");
+    h2.className = "text-white font-semibold tracking-tighter leading-none select-none";
+    h2.style.fontSize = "clamp(3rem, 16vw, 14rem)";
+    h2.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
+    h2.textContent = "Manu"; // Texto inicial
+    
+    loader.appendChild(h2);
+    textRef.current = h2 as any;
+    
+    return () => {
+      if (loader.contains(h2)) {
+        loader.removeChild(h2);
+      }
+    };
+  }, []);
+
 
   // ─── 1. ANIMACIÓN INICIAL ────────────────────────────────────────────────
   useGSAP(() => {
@@ -236,7 +249,7 @@ export function GlobalLoader() {
       ref={loaderRef}
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
     >
-      <LoaderText textRef={textRef} />
+      {/* El texto se inyecta por DOM puro para que React no borre los spans de SplitType al re-renderizar */}
     </div>
   );
 }
