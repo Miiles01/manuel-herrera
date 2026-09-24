@@ -322,8 +322,8 @@ export const sceneVisibility = (p: number): SceneVisibility => {
   };
 };
 export const targetTransform = () =>
-  "translate(calc(-50% + 250vw), calc(-50% + 100vh)) translateZ(-1000px)";
-export const targetRadius = (p: number) => 32;
+  "translate(calc(-50% + 250vw), calc(-50% + 100vh)) translateZ(-1000px) scale(0.85)";
+export const targetRadius = (p: number) => (flightActive(p) ? 32 : 32);
 
 // ── Parallax grid items ─────────────────────────────────────────────────────
 export interface GridItem {
