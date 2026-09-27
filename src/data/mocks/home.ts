@@ -167,6 +167,15 @@ export const homeContent: ShowreelContent = {
       },
       {
         year: "2024",
+        client: "Tapp Telcel",
+        title: "Tapp Telcel",
+        slug: "tapp-telcel",
+        subtitle: "Diseño UI/UX para eSIM y gestión de línea móvil.",
+        discipline: "App Móvil / UI UX",
+        image: "/proyectos/tapp-telcel/Portada.png",
+      },
+      {
+        year: "2024",
         client: "Virreinal Tepeyac",
         title: "Virreinal Tepeyac",
         slug: "virreinal-tepeyac",

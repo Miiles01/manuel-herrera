@@ -125,6 +125,55 @@ export const portfolioProjects: Record<string, Project> = {
       { icon: "eye", text: { es: "Automatización con IA", en: "AI Automation" } },
     ],
   },
+  "tapp-telcel": {
+    slug: "tapp-telcel",
+    title: "Tapp Telcel",
+    folder: "tapp-telcel",
+    subtitle: {
+      es: "Diseño UI y UX integral para onboarding, adquisición de eSIM y gestión de línea.",
+      en: "Comprehensive UI and UX design for onboarding, eSIM acquisition, and line management.",
+    },
+    industry: {
+      es: "Telecomunicaciones / App Móvil",
+      en: "Telecommunications / Mobile App",
+    },
+    role: {
+      es: "Diseño UI/UX",
+      en: "UI/UX Design",
+    },
+    description: {
+      es: "Tapp Telcel es la nueva app de Telcel que te permite obtener un eSIM y gestionar tu línea. Una experiencia desafiante en la que me enfoqué en diseñar el UI y UX de todo el onboarding, adquisición de eSIM y compra de paquetes. Desarrollé todo el diseño visual en Figma, incluyendo animaciones e íconos, y trabajé colaborativamente con desarrolladores para su correcta ejecución, además de presentar los mockups a nivel ejecutivo.",
+      en: "Tapp Telcel is Telcel's new app that allows you to obtain an eSIM and manage your line. A challenging experience where I focused on designing the UI and UX for the entire onboarding, eSIM acquisition, and package purchasing. I developed all visual design in Figma, including animations and icons, working closely with developers for proper execution, and presenting mockups to executives.",
+    },
+    previewImages: [
+      "Portada.png",
+      "Mini-1.png",
+      "Mini-2.png"
+    ],
+    images: [
+      { src: "Portada.png", alt: "Tapp Telcel Portada", aspect: "wide" },
+      { src: "1.png", alt: "Tapp Telcel 1", aspect: "wide" },
+      { src: "2.png", alt: "Tapp Telcel 2", aspect: "wide" },
+      { src: "3.png", alt: "Tapp Telcel 3", aspect: "wide" },
+      { src: "4.png", alt: "Tapp Telcel 4", aspect: "wide" },
+      { src: "5.png", alt: "Tapp Telcel 5", aspect: "wide" },
+      { src: "6.png", alt: "Tapp Telcel 6", aspect: "wide" },
+      { src: "7.mp4", alt: "Tapp Telcel Video", aspect: "wide" },
+      { src: "8.png", alt: "Tapp Telcel 8", aspect: "wide" },
+      { src: "9.png", alt: "Tapp Telcel 9", aspect: "wide" },
+      { src: "10.png", alt: "Tapp Telcel 10", aspect: "wide" }
+    ],
+    participation: [
+      {
+        icon: "📱",
+        text: { es: "Diseño UI/UX", en: "UI/UX Design" }
+      },
+      {
+        icon: "✨",
+        text: { es: "Animaciones y Prototipado", en: "Animations & Prototyping" }
+      }
+    ]
+  },
 
   "naabi-kanabi": {
     slug: "naabi-kanabi",
