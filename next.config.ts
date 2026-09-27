@@ -5,12 +5,6 @@ const nextConfig: NextConfig = {
   // Drop the `X-Powered-By: Next.js` response header.
   poweredByHeader: false,
 
-  // Pin the workspace root to this project. A stray `package-lock.json` in a
-  // parent folder makes Next/Turbopack infer the wrong root (and emit a build
-  // warning); this anchors it to the app directory.
-  turbopack: {
-    root: fileURLToPath(new URL(".", import.meta.url)),
-  },
 
   compiler: {
     // Strip `console.*` from production bundles, keeping error/warn for
