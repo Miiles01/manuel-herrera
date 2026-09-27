@@ -1,40 +1,19 @@
-import re
+with open('src/data/mocks/home.ts', 'r') as f:
+    code = f.read()
 
-with open('src/components/portfolio/PortfolioHero.tsx', 'r') as f:
-    content = f.read()
+# ES version
+old_es = 'lines: ["Amo crear con", "intención"],'
+new_es = 'lines: ["Crear con", "intención"],'
+code = code.replace(old_es, new_es)
 
-target = """    // Parallax del Hero
-    gsap.to('#hero-content', {
-      yPercent: 50,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-  }, { scope: heroRef });"""
+# Let's also check if there is an EN version to fix, like "I love creating with intention"
+# It currently says: 'lines: ["I love creating with", "intention"]'
+# Maybe change to 'lines: ["Create with", "intention"]'
+old_en = 'lines: ["I love creating with", "intention"],'
+new_en = 'lines: ["Create with", "intention"],'
+code = code.replace(old_en, new_en)
 
-replacement = """    // Parallax del Hero
-    gsap.to('#hero-content', {
-      yPercent: 50,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
+with open('src/data/mocks/home.ts', 'w') as f:
+    f.write(code)
 
-    return () => {
-      heroText.revert();
-      introText.revert();
-    };
-  }, { scope: heroRef });"""
-
-content = content.replace(target, replacement)
-
-with open('src/components/portfolio/PortfolioHero.tsx', 'w') as f:
-    f.write(content)
+print("Updated hero lines in home.ts")

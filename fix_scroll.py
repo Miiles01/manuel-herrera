@@ -1,15 +1,9 @@
-import re
+with open('src/layouts/scroll-layout.tsx', 'r') as f:
+    code = f.read()
 
-with open('src/components/common/global-loader.tsx', 'r') as f:
-    content = f.read()
+# Replace lenis configs
+code = code.replace('lerp: 0.055', 'lerp: 0.045')
+code = code.replace('wheelMultiplier: 0.55', 'wheelMultiplier: 0.45')
 
-# Add standard scroll reset after router push
-scroll_fix = """              // Trigger the Next.js route change once covered and text is showing
-              router.push(targetUrl);
-              window.scrollTo(0, 0);
-              useScroll.getState().lenis?.scrollTo(0, { immediate: true });"""
-
-content = content.replace('              // Trigger the Next.js route change once covered and text is showing\n              router.push(targetUrl);', scroll_fix)
-
-with open('src/components/common/global-loader.tsx', 'w') as f:
-    f.write(content)
+with open('src/layouts/scroll-layout.tsx', 'w') as f:
+    f.write(code)
