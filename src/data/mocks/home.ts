@@ -139,16 +139,6 @@ export const homeContent: ShowreelContent = {
     items: [
       {
         year: "2024",
-        client: "Tulum",
-        title: "Tulum",
-        slug: "tulum",
-        subtitle: "Diseño de identidad visual y experiencia digital.",
-        discipline: "Hospitality",
-        image: "/proyectos/Tulum/Portada.png",
-      },
-
-      {
-        year: "2024",
         client: "Naabi Kanabi",
         title: "Naabi Kanabi",
         slug: "naabi-kanabi",
@@ -230,16 +220,6 @@ export const homeContentEn: ShowreelContent = {
   },
   portfolio: {
     items: [
-      {
-        year: "2024",
-        client: "Tulum",
-        title: "Tulum",
-        slug: "tulum",
-        subtitle: "Diseño de identidad visual y experiencia digital.",
-        discipline: "Hospitality",
-        image: "/proyectos/Tulum/Portada.png",
-      },
-
       {
         year: "2024",
         client: "Naabi Kanabi",
