@@ -3,6 +3,13 @@ tags: [frontend, page, stable]
 updated: 2026-06-27
 ---
 
+> [!warning] 2026-10-01 — the 4-card 3D carousel (hero flip, marquee, Catalist cards,
+> carousel rotation) described below was **removed** on desktop/tablet. The hero card
+> is static and the star mask grows out of the portrait photo, then the scene continues
+> as before (sphere → portfolio → grid flight → CTA). See [[changelog]]. The scene
+> table rows for `Marquee` / `CatalistCard` and the carousel parts of `HeroCard` /
+> `ShowreelStage` are historical.
+
 # Home Page — Showreel ("Prompts that think ahead")
 
 The landing page on route `/`, a **1:1 rebuild** of a vanilla scroll-driven

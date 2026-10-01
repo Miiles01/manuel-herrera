@@ -61,7 +61,7 @@ export interface ShowreelGeo {
 }
 
 const DESKTOP: ShowreelGeo = {
-  trackVh: 2000,
+  trackVh: 1760,
   cardWVmin: 42,
   cardHVmin: 62,
   carouselRVmin: 27,
@@ -76,7 +76,7 @@ const DESKTOP: ShowreelGeo = {
 // Portrait tablet (~640–1024px). Cards grow toward the narrow width; headings
 // shrink so the nowrap sphere titles stop overflowing.
 const TABLET: ShowreelGeo = {
-  trackVh: 1700,
+  trackVh: 1500,
   cardWVmin: 54,
   cardHVmin: 80,
   carouselRVmin: 35,

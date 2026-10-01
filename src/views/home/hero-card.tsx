@@ -2,44 +2,30 @@
 
 import Image from "next/image";
 import { memo, useEffect } from "react";
-import { animated, useSpring, to, type SpringValue } from "@react-spring/web";
-import { ScrollLetters } from "@/views/home/scroll-letters";
-import {
-  heroLetterStyle,
-  heroSlidePan,
-  templatesLetterStyle,
-  heroSliderWidth,
-  heroSliderHeight,
-  heroTiltFade,
-  heroContentFade,
-} from "@/utils/showreel/timeline";
+import { animated, useSpring, to } from "@react-spring/web";
 
 export interface HeroCardProps {
-  p: SpringValue<number>;
   lines: string[];
-  templatesTitle: string;
-  images: { stone: string; rotated: string };
+  image: string;
   bottomBlock?: {
     leftText: string;
     rightText: string;
     avatars: string[];
   };
-  /** Whether the hero is on-screen — gates the shader render loop. */
+  /** Whether the hero is on-screen. */
   active?: boolean;
 }
 
 /**
- * Hero card (carousel slot 1). Mesh-gradient shader background, a headline that
- * descends + blurs out on scroll, and a paired image card that floats **over**
- * the headline with a cursor-reactive 3D perspective tilt — then pans + grows to
- * cover the card as it flips into the carousel. All scroll motion is driven by
- * the global spring `p`; the tilt is its own pointer-driven spring.
+ * Hero card. Static: headline, mission copy and the portrait photo (floating
+ * over the headline with a cursor-driven 3D perspective tilt). The star panel
+ * (`SphereCard`) grows out of the centre of the photo as the page scrolls.
  */
 // `memo` so the stage's visibility re-renders (when an unrelated scene flag
 // flips) don't re-render the hero and re-create its springs.
-export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, active = true }: HeroCardProps) => {
+export const HeroCard = memo(({ lines, image, bottomBlock }: HeroCardProps) => {
   // Cursor-reactive tilt: a spring eased toward the pointer position (mapped
-  // from the window). Faded out by `heroTiltFade(p)` as the card flips away.
+  // from the window).
   const [tilt, tiltApi] = useSpring(() => ({
     rx: 0,
     ry: 0,
@@ -63,18 +49,15 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
           descend + blur out on scroll (soft, no hard clip); the whole block also
           fades on scroll so the hero copy clears cleanly (no layout shift — it's
           absolutely positioned). Sits BELOW the image card. */}
-      <animated.header
-        className="pointer-events-none absolute inset-0 z-[3] flex p-[40px] max-sm:p-5"
-        style={{ opacity: p.to(heroContentFade) }}
-      >
+      <header className="pointer-events-none absolute inset-0 z-[3] flex p-[40px] max-sm:p-5">
         <h2 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
           {lines.map((line, i) => (
             <span key={i} className={i === 1 ? "opacity-40" : undefined}>
-              <ScrollLetters text={line} p={p} styleFn={heroLetterStyle} />
+              {line}
             </span>
           ))}
         </h2>
-      </animated.header>
+      </header>
 
 
 
@@ -85,57 +68,19 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
         <animated.div
           className="absolute left-1/2 top-1/2 overflow-hidden rounded-slider shadow-2xl will-change-transform"
           style={{
-            width: p.to(heroSliderWidth),
-            height: p.to(heroSliderHeight),
-            transform: to([p, tilt.rx, tilt.ry], (pv, rx, ry) => {
-              const f = heroTiltFade(pv);
-              return `translate(-50%, -50%) rotateX(${rx * f}deg) rotateY(${ry * f}deg)`;
-            }),
+            width: "min(90vw, 46vh)",
+            height: "62vh",
+            transform: to([tilt.rx, tilt.ry], (rx, ry) => `translate(-50%, -50%) rotateX(${rx}deg) rotateY(${ry}deg)`),
           }}
         >
-          <animated.div
-            className="absolute inset-0"
-            style={{ transform: p.to((v) => `translateX(${heroSlidePan(v)}%)`) }}
-          >
-            <Image src={images.stone} alt="" fill sizes="64vmin" className="object-cover" priority />
-          </animated.div>
-          <animated.div
-            className="absolute left-full top-0 size-full overflow-hidden"
-            style={{ transform: p.to((v) => `translateX(${heroSlidePan(v)}%)`) }}
-          >
-            {/* The card flips 90°, so this image needs to be counter-rotated.
-                Instead of rotating the <img> (which breaks object-cover framing),
-                we rotate a swapped-dimension wrapper so the <img> naturally fills
-                a portrait box, perfectly framing the user's portrait images. */}
-            <animated.div
-              className="absolute"
-              style={{
-                width: p.to(heroSliderHeight),
-                height: p.to(heroSliderWidth),
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%) rotate(-90deg)",
-              }}
-            >
-              <Image
-                src={images.rotated}
-                alt=""
-                fill
-                sizes="66vmin"
-                className="object-cover"
-              />
-            </animated.div>
-          </animated.div>
+          <Image src={image} alt="" fill sizes="64vmin" className="object-cover" priority />
         </animated.div>
       </div>
 
       {/* Bottom Content Block — fades out on scroll with the rest of the hero
           copy (absolutely positioned → no layout shift). */}
       {bottomBlock && (
-        <animated.div
-          className="pointer-events-none absolute bottom-0 left-0 w-full p-[40px] max-sm:p-5 z-[6] flex flex-col gap-6 max-sm:gap-4 text-gray-800 font-light"
-          style={{ opacity: p.to(heroContentFade) }}
-        >
+        <div className="pointer-events-none absolute bottom-0 left-0 w-full p-[40px] max-sm:p-5 z-[6] flex flex-col gap-6 max-sm:gap-4 text-gray-800 font-light">
           <div className="flex flex-col gap-6 max-sm:gap-4 max-w-md pointer-events-auto">
             <p className="opacity-90 leading-relaxed text-[16px] max-sm:text-[14px]">
               {bottomBlock.leftText}
@@ -147,7 +92,7 @@ export const HeroCard = memo(({ p, lines, templatesTitle, images, bottomBlock, a
               {bottomBlock.rightText}
             </p>
           </div>
-        </animated.div>
+        </div>
       )}
     </div>
   );

@@ -8,6 +8,22 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-01 (Home — carousel removed, star grows from the hero photo)
+
+- **Removed the 3D carousel from the desktop/tablet Showreel** (hero flip, the
+  Branding / Redes Sociales marquee, the Catalist and violet cards, carousel
+  rotation + fly-back). The hero card (headline, mission copy, portrait photo) is
+  now static. The star mask (`SphereCard`) is centred on the photo: it appears and
+  spins in (gp 30–40%), then grows and rotates 180° until the screen goes black
+  (gp 40–75%) — everything after (sphere scene, portfolio, grid flight, CTA) is
+  unchanged. Mobile (<640px) is untouched.
+- `timeline.ts`: the virtual-scroll axis now starts at `VSCROLL_START = 600`
+  (all later thresholds keep their absolute values); the track is shorter
+  (`TRACK_VH` / `geo.trackVh` desktop 1760, tablet 1500). Removed the carousel,
+  marquee, hero-letter and optical counter-scale helpers.
+- Deleted from the stage: `Marquee` and `CatalistCard` are no longer rendered
+  (files still exist); `HeroCard` lost its scroll-driven props.
+
 ## 2026-06-29 (Responsive Showreel — tablet & portrait mobile)
 
 - **Made the Showreel responsive for portrait phones + tablets** without touching

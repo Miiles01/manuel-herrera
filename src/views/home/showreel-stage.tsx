@@ -5,9 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useShowreelLayout } from "@/hooks/use-showreel-layout";
 import { ProgressTrigger } from "@/components/animation/springs/progress-trigger";
 import { HeroCard } from "@/views/home/hero-card";
-import { CatalistCard } from "@/views/home/catalist-card";
 import { SphereCard } from "@/views/home/sphere-card";
-import { Marquee } from "@/views/home/marquee";
 import { Portfolio } from "@/views/home/portfolio";
 import { CtaBlock } from "@/views/home/cta-block";
 import { Serigraph } from "@/components/ui/serigraph";
@@ -16,15 +14,10 @@ import type { ShowreelContent } from "@/data/mocks/home";
 import { TransitionLink } from "@/components/ui/transition-link";
 import {
   GRID_ITEMS,
-  card1Width,
-  card1Height,
-  card1Transform,
+  HERO_CARD_WIDTH,
+  HERO_CARD_HEIGHT,
   card1Opacity,
-  sideCardTransform,
   card4Opacity,
-  cardZIndex,
-  carouselTransform,
-  carouselCtaReveal,
   cameraRigTransform,
   gridItemTransform,
   gridItemRadius,
@@ -33,8 +26,6 @@ import {
   targetRadius,
   targetOpacity,
   finalFrameReveal,
-  marqueeOpacity,
-  marqueeBlur,
   auroraOpacity,
   stageBackdropOpacity,
   sceneVisibility,
@@ -51,7 +42,7 @@ export interface ShowreelStageProps {
  * The scroll-driven core. ONE spring (`p`, 0→1) is scrubbed by a single
  * `ProgressTrigger` off the tall track; every scene reads `p.to(selector)` from
  * the timeline. A sticky stage pins the 3D scene while the track scrolls:
- * hero → 4-card carousel (cosine z-sorted) → particle sphere → portfolio →
+ * hero (photo) → star that grows over it → particle sphere → portfolio →
  * camera-flight through a parallax grid to the chrome-star target.
  */
 export const ShowreelStage = ({ content }: ShowreelStageProps) => {
@@ -82,28 +73,13 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
     () => ({
       aurora: p.to(auroraOpacity),
       backdrop: p.to(stageBackdropOpacity),
-      marqueeOpacity: p.to(marqueeOpacity),
-      marqueeBlur: p.to((v) => `blur(${marqueeBlur(v)}px)`),
       cameraRig: p.to(cameraRigTransform),
-      carousel: p.to(carouselTransform),
-      card1Width: p.to(card1Width),
-      card1Height: p.to(card1Height),
-      card1Transform: p.to(card1Transform),
       card1Opacity: p.to(card1Opacity),
       card4Opacity: p.to(card4Opacity),
-      z0: p.to((v) => cardZIndex(v, 0)),
-      z1: p.to((v) => cardZIndex(v, 1)),
-      z2: p.to((v) => cardZIndex(v, 2)),
-      z3: p.to((v) => cardZIndex(v, 3)),
-      side90: p.to((v) => sideCardTransform(v, 90)),
-      side180: p.to((v) => sideCardTransform(v, 180)),
-      side270: p.to((v) => sideCardTransform(v, 270)),
       gridOpacity: p.to(gridOpacity),
       targetRadius: p.to((v) => `${targetRadius(v)}px`),
       targetOpacity: p.to(targetOpacity),
       finalFrame: p.to(finalFrameReveal),
-      ctaReveal: p.to(carouselCtaReveal),
-      ctaTranslate: p.to((v) => `translateY(${(1 - carouselCtaReveal(v)) * 2.5}vh)`),
     }),
     [p],
   );
@@ -187,98 +163,45 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
             }}
           />
 
-          {/* Services marquee — behind the carousel, visible through its gaps. */}
-          <animated.div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-1/2 z-[1] w-screen -translate-y-1/2 hidden md:block"
-            style={{
-              opacity: s.marqueeOpacity,
-              filter: s.marqueeBlur,
-            }}
-          >
-            <Marquee items={content.marquee} />
-          </animated.div>
-
           {/* 3D scene. */}
           <div className="relative z-[2] flex size-full items-center justify-center [perspective:3000px]">
             <animated.div
               className="absolute inset-0 [transform-style:preserve-3d]"
               style={{ transform: s.cameraRig }}
             >
-              <animated.div
-                className="relative flex size-full items-center justify-center [transform-style:preserve-3d] pointer-events-none"
-                style={{ transform: s.carousel }}
-              >
-                {/* Card 1 — hero */}
+              {/* Flat plane (z = 0): the hero card with the star panel growing out
+                  of its photo. No carousel — the star is the only transition. */}
+              <div className="relative flex size-full items-center justify-center pointer-events-none">
                 <animated.div
-                  className="absolute overflow-hidden"
+                  className="absolute z-[1] overflow-hidden"
                   style={{
-                    width: s.card1Width,
-                    height: s.card1Height,
-                    transform: s.card1Transform,
-                    zIndex: s.z0,
+                    width: HERO_CARD_WIDTH,
+                    height: HERO_CARD_HEIGHT,
                     opacity: s.card1Opacity,
                   }}
                 >
                   <HeroCard
-                    p={p}
                     lines={content.hero.lines}
-                    templatesTitle={content.hero.templatesTitle}
-                    images={{ stone: `${A}/hero-1.webp`, rotated: `${A}/hero-2.webp` }}
+                    image={`${A}/hero-1.webp`}
                     bottomBlock={content.hero.bottomBlock}
                     active={vis.hero}
                   />
                 </animated.div>
 
-                {/* Card 2 — Catalist (dark) */}
                 <animated.div
-                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)] pointer-events-none"
-                  style={{
-                    transform: s.side90,
-                    zIndex: s.z1,
-                    opacity: s.card1Opacity,
-                  }}
-                >
-                  <CatalistCard variant="dark" content={content.catalistDark} bg={`${A}/empower-app.png`} />
-                </animated.div>
-
-                {/* Card 3 — Catalist (light) */}
-                <animated.div
-                  className="absolute h-[var(--sr-card-h)] w-[var(--sr-card-w)] pointer-events-none"
-                  style={{
-                    transform: s.side180,
-                    zIndex: s.z2,
-                    opacity: s.card1Opacity,
-                  }}
-                >
-                  <CatalistCard variant="light" content={content.catalistLight} bg={`${A}/3.png`} />
-                </animated.div>
-
-                {/* Card 4 — sphere. The SphereCard renders the violet card face
-                    (so it reads as a real 4th card during the flip); its masked
-                    black panel escapes via overflow-visible. */}
-                <animated.div
-                  className="absolute flex h-[var(--sr-card-h)] w-[var(--sr-card-w)] items-center justify-center [overflow:visible]"
-                  style={{
-                    transform: s.side270,
-                    zIndex: s.z3,
-                    opacity: s.card4Opacity,
-                  }}
+                  className="absolute inset-0 z-[2] [overflow:visible]"
+                  style={{ opacity: s.card4Opacity }}
                 >
                   <SphereCard
                     p={p}
-                    geo={geo}
                     headingTop={content.sphere.headingTop}
                     headingBottom={content.sphere.headingBottom}
                     body={content.sphere.body}
                     star={`${A}/manu-estrella.svg`}
-                    cardLabel={content.sphere.cardLabel}
-                    cardUrl={content.sphere.cardUrl}
-                    cardHeading={content.sphere.cardHeading}
                     active={vis.sphere}
                   />
                 </animated.div>
-              </animated.div>
+              </div>
 
               {/* Parallax grid + target live in the CAMERA-RIG frame (siblings of
                   the carousel, as in the original markup) so they don't inherit
