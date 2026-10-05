@@ -208,7 +208,7 @@ export const portfolioProjects: Record<string, Project> = {
         aspect: "wide",
         cta: {
           label: { es: "Ver página", en: "View site" },
-          href: "https://whitesmoke-cormorant-104128.hostingersite.com/"
+          href: "https://naabikanabi.com/"
         }
       },
       { src: "nk-1.webp", alt: "Naabi Kanabi — Detail 1", aspect: "wide" },
