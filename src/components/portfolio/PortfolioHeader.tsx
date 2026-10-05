@@ -1,8 +1,8 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { TransitionLink } from "@/components/ui/transition-link";
-import { LanguageSwitcher, MobileLanguageLinks } from "@/components/portfolio/LanguageSwitcher";
+import { LanguageButton, LanguagePanel } from "@/components/portfolio/LanguageSwitcher";
 
 function CopyItem({ value, label, copiedText = "{copiedText}" }: { value: string; label: string; copiedText?: string }) {
   const [copied, setCopied] = useState(false);
@@ -50,9 +50,10 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   const headerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const hablemosRef = useRef<HTMLDivElement>(null);
-  const langRef = useRef<HTMLDivElement>(null);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const closeLang = useCallback(() => setIsLangOpen(false), []);
   const slideTargets = () =>
-    [headerRef.current, logoRef.current, hablemosRef.current, langRef.current].filter(Boolean);
+    [headerRef.current, logoRef.current, hablemosRef.current].filter(Boolean);
   const hiddenRef = useRef(false);
   const lastYRef = useRef(0);
 
@@ -132,21 +133,31 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
         </a>
       </div>
 
-      <LanguageSwitcher ref={langRef} lang={lang} />
-
-      {/* Contenedor del Menú Desplegable (Navbar) */}
+      {/* Contenedor del Menú Desplegable (Navbar). El wrapper exterior (sin overflow)
+          ancla el dropdown de idioma; la caja interior anima la altura/ancho. */}
+      <div ref={headerRef} className="fixed top-8 right-4 md:right-[140px] z-50">
       <div
-        ref={headerRef}
-        className={`fixed top-8 right-4 md:right-[196px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
+        className={`bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
         style={{ transitionProperty: "max-height, width" }}
       >
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-5 md:px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
-          <span className="text-sm font-medium">{isMenuOpen ? (lang === 'en' ? 'Close' : 'Cerrar') : (lang === 'en' ? 'Menu' : 'Menú')}</span>
-          <div className="w-8 h-[8px] relative">
-            <div className={`absolute top-0 left-0 h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? 'translate-y-[3.5px] rotate-[15deg]' : ''}`}></div>
-            <div className={`absolute bottom-0 left-0 h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? '-translate-y-[3.5px] -rotate-[15deg]' : ''}`}></div>
+        <div className="px-5 md:px-6 h-[60px] w-full flex justify-between items-center text-gray-600">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="h-full flex-1 text-left text-sm font-medium hover:text-gray-900 transition-colors cursor-pointer">
+            {isMenuOpen ? (lang === 'en' ? 'Close' : 'Cerrar') : (lang === 'en' ? 'Menu' : 'Menú')}
+          </button>
+          <div className="flex h-full items-center gap-5">
+            <LanguageButton lang={lang} open={isLangOpen} onToggle={() => setIsLangOpen((o) => !o)} />
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? (lang === 'en' ? 'Close menu' : 'Cerrar menú') : (lang === 'en' ? 'Open menu' : 'Abrir menú')}
+              className="h-full flex items-center hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <div className="w-8 h-[8px] relative">
+                <div className={`absolute top-0 left-0 h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? 'translate-y-[3.5px] rotate-[15deg]' : ''}`}></div>
+                <div className={`absolute bottom-0 left-0 h-px bg-gray-600 w-full transition-all duration-300 origin-center ${isMenuOpen ? '-translate-y-[3.5px] -rotate-[15deg]' : ''}`}></div>
+              </div>
+            </button>
           </div>
-        </button>
+        </div>
 
         <nav className={`flex flex-col gap-6 px-8 pt-6 text-2xl font-semibold text-gray-900 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 delay-100' : 'opacity-0'}`}>
           <TransitionLink href={lang === 'en' ? '/en' : '/es'} className="hover:text-gray-500 transition-colors">{lang === 'en' ? 'Home' : 'Inicio'}</TransitionLink>
@@ -162,8 +173,9 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
             </svg>
           </a>
-          <MobileLanguageLinks lang={lang} />
         </div>
+      </div>
+      <LanguagePanel lang={lang} open={isLangOpen} onClose={closeLang} />
       </div>
     </>
   );

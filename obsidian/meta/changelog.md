@@ -10,9 +10,10 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-10-05 (Language switcher, full English, Naabi Kanabi)
 
-- **Language switcher** (`components/portfolio/LanguageSwitcher.tsx`): ES/EN dropdown in
-  the header on desktop (next to "Hablemos"/"Let's talk"), language links inside the open
-  menu on mobile. It maps the current URL to the equivalent page via
+- **Language switcher** (`components/portfolio/LanguageSwitcher.tsx`): an "ES ▾" button
+  **inside the navbar bar** (between "Menú" and the menu icon, desktop and mobile); its
+  dropdown hangs from the bar (rendered outside the bar's `overflow-hidden` box so it
+  isn't clipped). It maps the current URL to the equivalent page via
   `localizedPath()` in `utils/seo/routes.ts` (e.g. `/es/proyecto/x` ↔ `/en/project/x`).
   Spanish stays the default (`/` → `/es`). A switch is a full page load (separate root
   layouts); a `sessionStorage` flag makes `GlobalLoader` skip the intro afterwards.
