@@ -26,7 +26,7 @@ const LoaderText = memo(
   forwardRef<HTMLHeadingElement, {}>((props, ref) => (
     <h2
       ref={ref}
-      className="text-white font-semibold tracking-tighter leading-none select-none"
+      className="text-black font-semibold tracking-tighter leading-none select-none"
       style={{
         fontSize: "clamp(3rem, 16vw, 14rem)",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
@@ -262,7 +262,7 @@ export function GlobalLoader() {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-[999] flex items-center justify-center bg-black will-change-transform"
+      className="fixed inset-0 z-[999] flex items-center justify-center bg-[var(--loader-bg)] will-change-transform"
     >
       <LoaderText ref={textRef as any} />
     </div>

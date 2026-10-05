@@ -83,7 +83,7 @@ export function LanguagePanel({
   if (!open) return null;
 
   return (
-    <div data-lang-switcher className="absolute right-2 top-[64px] z-10 min-w-[150px] rounded-md bg-gray-50/95 backdrop-blur-sm p-1.5 shadow-lg">
+    <div data-lang-switcher className="absolute right-2 top-[64px] z-10 min-w-[150px] rounded-md bg-gray-50/95 backdrop-blur-sm p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.06)]">
       <ul>
         {LANGS.map((l) => (
           <li key={l}>
@@ -96,7 +96,11 @@ export function LanguagePanel({
               className={`flex items-center justify-between gap-6 rounded px-3 py-2 text-sm hover:bg-gray-200/70 transition-colors ${l === lang ? 'font-semibold text-gray-900' : 'font-normal text-gray-600'}`}
             >
               {LABELS[l].name}
-              {l === lang && <span aria-hidden="true">✓</span>}
+              {l === lang && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} className="w-4 h-4 text-gray-900" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m5 12.5 4.5 4.5L19 7.5" />
+                </svg>
+              )}
             </a>
           </li>
         ))}
