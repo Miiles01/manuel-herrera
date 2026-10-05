@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { TransitionLink } from "@/components/ui/transition-link";
+import { LanguageSwitcher, MobileLanguageLinks } from "@/components/portfolio/LanguageSwitcher";
 
 function CopyItem({ value, label, copiedText = "{copiedText}" }: { value: string; label: string; copiedText?: string }) {
   const [copied, setCopied] = useState(false);
@@ -49,6 +50,9 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   const headerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const hablemosRef = useRef<HTMLDivElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
+  const slideTargets = () =>
+    [headerRef.current, logoRef.current, hablemosRef.current, langRef.current].filter(Boolean);
   const hiddenRef = useRef(false);
   const lastYRef = useRef(0);
 
@@ -59,7 +63,7 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
     const show = () => {
       if (!hiddenRef.current) return;
       hiddenRef.current = false;
-      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+      gsap.to(slideTargets(), {
         y: 0,
         duration: 0.5,
         ease: 'power3.out',
@@ -70,7 +74,7 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
     const hide = () => {
       if (hiddenRef.current) return;
       hiddenRef.current = true;
-      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+      gsap.to(slideTargets(), {
         y: -120,
         duration: 0.45,
         ease: 'power3.in',
@@ -102,7 +106,7 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   useEffect(() => {
     if (isMenuOpen) {
       hiddenRef.current = false;
-      gsap.to([headerRef.current, logoRef.current, hablemosRef.current], {
+      gsap.to(slideTargets(), {
         y: 0,
         duration: 0.4,
         ease: 'power3.out',
@@ -128,10 +132,12 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
         </a>
       </div>
 
+      <LanguageSwitcher ref={langRef} lang={lang} />
+
       {/* Contenedor del Menú Desplegable (Navbar) */}
       <div
         ref={headerRef}
-        className={`fixed top-8 right-4 md:right-[140px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
+        className={`fixed top-8 right-4 md:right-[196px] z-50 bg-gray-50/90 backdrop-blur-sm md:w-[420px] rounded-md pointer-events-auto duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden ${isMenuOpen ? 'max-h-[600px] w-[calc(100vw-2rem)]' : 'max-h-[60px] w-[calc(100vw-6.5rem)]'}`}
         style={{ transitionProperty: "max-height, width" }}
       >
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="px-5 md:px-6 h-[60px] w-full flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
@@ -156,6 +162,7 @@ export function PortfolioHeader({ lang = 'es' }: { lang?: 'es' | 'en' }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
             </svg>
           </a>
+          <MobileLanguageLinks lang={lang} />
         </div>
       </div>
     </>

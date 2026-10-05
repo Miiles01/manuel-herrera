@@ -20,7 +20,7 @@ const PfCard = ({ item, active, lang = "es" }: { item: PortfolioItem; active: bo
   return (
     <CardWrapper href={item.slug ? (lang === "en" ? `/en/project/${item.slug}` : `/es/proyecto/${item.slug}`) : "#"} className="pointer-events-auto relative flex h-full w-[62vw] shrink-0 flex-col justify-end overflow-hidden rounded-pf bg-[#1e1e1e] p-[4vmin] text-white [backface-visibility:hidden] [transform:translateZ(0)] block cursor-pointer group">
       {item.image && (
-        <img
+        <img loading="lazy" decoding="async"
           src={item.image}
           alt={item.title}
           className="absolute inset-0 size-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.03]"

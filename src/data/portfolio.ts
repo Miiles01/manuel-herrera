@@ -50,14 +50,14 @@ export const portfolioProjects: Record<string, Project> = {
       en: "I worked on creating an immersive visual identity that captures the project's essence and energy, developing modern and optimized interfaces to convey its unique value proposition.",
     },
     previewImages: [
-      "Portada.png",
-      "Mini-1.png",
-      "Mini-2.png"
+      "Portada.webp",
+      "Mini-1.webp",
+      "Mini-2.webp"
     ],
     images: [
-      { src: "Portada.png", alt: "Tulum Portada", aspect: "wide" },
+      { src: "Portada.webp", alt: "Tulum Portada", aspect: "wide" },
       { 
-        src: "1.png", 
+        src: "1.webp", 
         alt: "Tulum 1", 
         aspect: "wide",
         cta: {
@@ -65,12 +65,12 @@ export const portfolioProjects: Record<string, Project> = {
           href: "https://lightblue-wasp-875646.hostingersite.com/"
         }
       },
-      { src: "2.png", alt: "Tulum 2", aspect: "wide" },
-      { src: "3.png", alt: "Tulum 3", aspect: "wide" },
-      { src: "4.png", alt: "Tulum 4", aspect: "wide" },
-      { src: "5.png", alt: "Tulum 5", aspect: "wide" },
-      { src: "6.png", alt: "Tulum 6", aspect: "wide" },
-      { src: "7.png", alt: "Tulum 7", aspect: "wide" }
+      { src: "2.webp", alt: "Tulum 2", aspect: "wide" },
+      { src: "3.webp", alt: "Tulum 3", aspect: "wide" },
+      { src: "4.webp", alt: "Tulum 4", aspect: "wide" },
+      { src: "5.webp", alt: "Tulum 5", aspect: "wide" },
+      { src: "6.webp", alt: "Tulum 6", aspect: "wide" },
+      { src: "7.webp", alt: "Tulum 7", aspect: "wide" }
     ],
     participation: [
       {
@@ -146,22 +146,22 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Tapp Telcel is Telcel's new app that allows you to obtain an eSIM and manage your line. A challenging experience where I focused on designing the UI and UX for the entire onboarding, eSIM acquisition, and package purchasing. I developed all visual design in Figma, including animations and icons, working closely with developers for proper execution, and presenting mockups to executives.",
     },
     previewImages: [
-      "Portada.png",
-      "Mini-1.png",
-      "Mini-2.png"
+      "Portada.webp",
+      "Mini-1.webp",
+      "Mini-2.webp"
     ],
     images: [
-      { src: "Portada.png", alt: "Tapp Telcel Portada", aspect: "wide" },
-      { src: "1.png", alt: "Tapp Telcel 1", aspect: "wide" },
-      { src: "2.png", alt: "Tapp Telcel 2", aspect: "wide" },
-      { src: "3.png", alt: "Tapp Telcel 3", aspect: "wide" },
-      { src: "5.png", alt: "Tapp Telcel 5", aspect: "wide" },
-      { src: "4.png", alt: "Tapp Telcel 4", aspect: "wide" },
-      { src: "6.png", alt: "Tapp Telcel 6", aspect: "wide" },
+      { src: "Portada.webp", alt: "Tapp Telcel Portada", aspect: "wide" },
+      { src: "1.webp", alt: "Tapp Telcel 1", aspect: "wide" },
+      { src: "2.webp", alt: "Tapp Telcel 2", aspect: "wide" },
+      { src: "3.webp", alt: "Tapp Telcel 3", aspect: "wide" },
+      { src: "5.webp", alt: "Tapp Telcel 5", aspect: "wide" },
+      { src: "4.webp", alt: "Tapp Telcel 4", aspect: "wide" },
+      { src: "6.webp", alt: "Tapp Telcel 6", aspect: "wide" },
       { src: "7.mp4", alt: "Tapp Telcel Video", aspect: "wide" },
-      { src: "8.png", alt: "Tapp Telcel 8", aspect: "wide" },
-      { src: "9.png", alt: "Tapp Telcel 9", aspect: "wide" },
-      { src: "10.png", alt: "Tapp Telcel 10", aspect: "wide" }
+      { src: "8.webp", alt: "Tapp Telcel 8", aspect: "wide" },
+      { src: "9.webp", alt: "Tapp Telcel 9", aspect: "wide" },
+      { src: "10.webp", alt: "Tapp Telcel 10", aspect: "wide" }
     ],
     participation: [
       {
@@ -202,12 +202,20 @@ export const portfolioProjects: Record<string, Project> = {
     ],
     images: [
       { src: "portada-v2.webp", alt: "Naabi Kanabi — Cover", aspect: "wide" },
+      {
+        src: "nk-7.webp",
+        alt: "Naabi Kanabi — Diagnóstico facial en tablet",
+        aspect: "wide",
+        cta: {
+          label: { es: "Ver página", en: "View site" },
+          href: "https://whitesmoke-cormorant-104128.hostingersite.com/"
+        }
+      },
       { src: "nk-1.webp", alt: "Naabi Kanabi — Detail 1", aspect: "wide" },
       { src: "nk-3.webp", alt: "Naabi Kanabi — Detail 3", aspect: "wide" },
       { src: "nk-4.webp", alt: "Naabi Kanabi — Detail 4", aspect: "wide" },
       { src: "nk-5.webp", alt: "Naabi Kanabi — Detail 5", aspect: "wide" },
       { src: "nk-6.webp", alt: "Naabi Kanabi — Detail 6", aspect: "wide" },
-      { src: "nk-7.webp", alt: "Naabi Kanabi — Detail 7", aspect: "wide" },
       { src: "nk-8.webp", alt: "Naabi Kanabi — Detail 8", aspect: "wide" },
       { src: "nk-9.webp", alt: "Naabi Kanabi — Detail 9", aspect: "wide" },
       { src: "nk-10.webp", alt: "Naabi Kanabi — Detail 10", aspect: "wide" },

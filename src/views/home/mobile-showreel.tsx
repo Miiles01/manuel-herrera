@@ -17,8 +17,8 @@ export const MobileShowreel = memo(({ content }: { content: any }) => {
         
         <div className="w-full aspect-[3/4] relative rounded-[20px] overflow-hidden bg-gray-200 mb-16 flex-shrink-0 mx-auto shadow-sm">
           <img 
-            src="/assets/showreel/mobile-amo-crear.png" 
-            alt="Manuel Herrera - Amo crear con intención" 
+            src="/assets/showreel/mobile-amo-crear.webp" 
+            alt={content.hero.photoAlt ?? ""} 
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
         </div>

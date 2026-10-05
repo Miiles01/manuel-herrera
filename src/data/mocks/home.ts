@@ -40,6 +40,8 @@ export interface ShowreelContent {
   hero: { 
     lines: string[]; 
     templatesTitle: string;
+    /** Alt text for the hero portrait. */
+    photoAlt?: string;
     bottomBlock?: {
       leftText: string;
       rightText: string;
@@ -97,6 +99,7 @@ export const homeContent: ShowreelContent = {
   ],
   hero: {
     lines: ["Crear con", "intención"],
+    photoAlt: "Retrato en blanco y negro de Manuel Herrera sentado en una silla junto a una ventana",
     templatesTitle: "Creo\nexperiencias",
     bottomBlock: {
       leftText: "Mi misión es ayudar a otros a crear proyectos que transforman comunidades.",
@@ -195,6 +198,7 @@ export const homeContentEn: ShowreelContent = {
   hero: {
     ...homeContent.hero,
     lines: ["Create with", "intention"],
+    photoAlt: "Black and white portrait of Manuel Herrera sitting on a chair by a window",
     templatesTitle: "We create\nexperiences",
     bottomBlock: {
       leftText: "My mission is to help others create projects that transform communities.",
@@ -216,6 +220,14 @@ export const homeContentEn: ShowreelContent = {
   },
   sphere: {
     ...homeContent.sphere,
+    headingBottom: ["Think", "different"],
+    body: [
+      "Naabi Kanabi <span class=\"opacity-50\">—</span> <strong>Co-Founder | Marketing Manager</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Brand positioning, SEO/SEM and paid media, social content, vibe coding.</span>",
+      "Miiles AI <span class=\"opacity-50\">—</span> <strong>CEO</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">AI-powered acquisition funnels, B2B corporate sales, vibe coding and automation. Ads campaigns, A/B testing, lifecycle marketing and email setup.</span>",
+      "Claro Pay <span class=\"opacity-50\">—</span> <strong>User Experience Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX research for a payments app, benchmarking, usability testing.</span>",
+      "BRIX Agency <span class=\"opacity-50\">—</span> <strong>User Experience Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX/UI design in Figma, usability testing.</span>",
+      "Fiverr <span class=\"opacity-50\">—</span> <strong>Freelance Branding Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">50+ clients across LATAM, visual identity, influencer collaborations.</span>",
+    ],
     cardHeading: "From idea to execution",
   },
   portfolio: {

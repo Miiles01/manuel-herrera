@@ -121,6 +121,22 @@ export function GlobalLoader() {
     const loader = loaderRef.current;
     if (!loader) return;
     const text = textRef.current; if (!text) return;
+
+    // Language switch: skip the intro (the page reloads because each language is
+    // its own root layout, but the visitor has already seen it).
+    let skipIntro = false;
+    try {
+      skipIntro = sessionStorage.getItem("skip-intro") === "1";
+      if (skipIntro) sessionStorage.removeItem("skip-intro");
+    } catch { /* storage unavailable */ }
+    if (skipIntro) {
+      gsap.set(loader, { display: "none" });
+      phaseRef.current = "idle";
+      setReady(true);
+      setRevealed(true);
+      return;
+    }
+
     stopScroll();
 
     // Texto fijo según petición

@@ -19,7 +19,7 @@ export const MobilePortfolio = ({ content, lang = "es" }: { content: any, lang?:
               className="relative flex w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-[#1e1e1e] p-6 text-white block cursor-pointer group"
             >
               {item.image && (
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 size-full object-cover object-center"
@@ -44,6 +44,7 @@ export const MobilePortfolio = ({ content, lang = "es" }: { content: any, lang?:
           sub={content.cta.sub}
           button={content.cta.button}
           href={content.cta.href}
+          lang={lang}
         />
       </div>
     </section>

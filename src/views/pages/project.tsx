@@ -1,0 +1,133 @@
+"use client";
+import { useEffect, useRef } from "react";
+import { TransitionLink } from "@/components/ui/transition-link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { portfolioProjects } from "@/data/portfolio";
+import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
+import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
+import { useParams, notFound } from "next/navigation";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function ProjectPage() {
+  const container = useRef(null);
+  const params = useParams();
+  const slug = params.slug as string;
+  const project = Object.values(portfolioProjects).find(p => p.slug === slug);
+
+  useGSAP(() => {
+    if (!project) return;
+    
+    gsap.utils.toArray(".project-fade-up").forEach((el: any, i) => {
+      // First few elements without scroll trigger, just fade up
+      if (i < 2) {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 35 }, 
+          { opacity: 1, y: 0, duration: 0.9, delay: i * 0.15, ease: "power2.out" }
+        );
+      } else {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 35 }, 
+          { opacity: 1, y: 0, duration: 0.9, ease: "power2.out",
+            scrollTrigger: { trigger: el, start: "top 90%" }
+          }
+        );
+      }
+    });
+  }, { scope: container, dependencies: [project] });
+
+  if (!project) return notFound();
+
+  const basePath = `/proyectos/${project.folder}/`;
+
+  return (
+    <div className="bg-white min-h-screen text-black" ref={container}>
+      <PortfolioHeader lang="en" />
+      
+      <main className="flex-1 pt-32 md:pt-44 pb-24">
+        <header className="px-6 md:px-12 lg:px-20 container mx-auto mb-16 md:mb-24">
+          <h1 className="text-6xl md:text-8xl lg:text-[8vw] font-normal tracking-tight leading-tight mb-8 text-black project-fade-up opacity-0">
+            {project.title}
+          </h1>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 max-w-4xl project-fade-up opacity-0">
+            <div>
+              <p className="text-xs tracking-widest text-gray-400 mb-2 font-normal uppercase">Industry</p>
+              <p className="text-lg md:text-xl font-light leading-relaxed text-black/85">{project.industry.en}</p>
+            </div>
+            <div>
+              <p className="text-xs tracking-widest text-gray-400 mb-2 font-normal uppercase">What we did</p>
+              <p className="text-lg md:text-xl font-light leading-relaxed text-black/85">{project.role.en}</p>
+            </div>
+          </div>
+        </header>
+
+        <div className="px-4 md:px-8 lg:px-12 mb-8 project-fade-up opacity-0">
+          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl bg-gray-100 relative group">
+            {project.images[0].src.endsWith('.mp4') ? (
+              <video src={basePath + project.images[0].src} className="w-full h-auto object-cover" autoPlay loop muted playsInline />
+            ) : (
+              <img loading="lazy" decoding="async" src={basePath + project.images[0].src} className="w-full h-auto object-cover" alt="Cover" />
+            )}
+            
+            {project.images[0].cta && (
+              <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                <a href={project.images[0].cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group/btn flex items-center justify-center gap-2 bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-gray-50 transition-all shadow-[0_2vmin_5vmin_rgba(0,0,0,0.15)] z-10">
+                  {project.images[0].cta.label.en}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 opacity-80 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="px-6 md:px-12 lg:px-20 container mx-auto my-20 md:my-32 project-fade-up opacity-0">
+          <div className="max-w-3xl">
+            <h2 className="text-xs tracking-widest text-gray-400 mb-4 font-normal uppercase">About the project</h2>
+            <p className="text-xl md:text-2xl font-light leading-relaxed text-black/85 whitespace-pre-line tracking-normal">
+              {project.description.en}
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6 md:space-y-8">
+          {project.images.slice(1).map((img, i) => (
+            <div key={i} className="px-4 md:px-8 lg:px-12 project-fade-up opacity-0">
+              <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl bg-gray-100 relative group">
+                {img.src.endsWith('.mp4') ? (
+                  <video src={basePath + img.src} className="w-full h-auto object-cover" autoPlay loop muted playsInline />
+                ) : (
+                  <img src={basePath + img.src} className="w-full h-auto object-cover" loading="lazy" alt={`Project detail ${i + 1}`} />
+                )}
+                
+                {img.cta && (
+                  <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                    <a href={img.cta.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto group/btn flex items-center justify-center gap-2 bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium hover:scale-105 hover:bg-gray-50 transition-all shadow-[0_2vmin_5vmin_rgba(0,0,0,0.15)] z-10">
+                      {img.cta.label.en}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 opacity-80 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="px-6 md:px-12 lg:px-20 container mx-auto mt-32 text-center project-fade-up opacity-0">
+          <TransitionLink href="/en/work" className="inline-flex items-center gap-3 text-2xl md:text-3xl font-normal tracking-tight text-black hover:opacity-60 transition-opacity">
+            &larr; Back to projects
+          </TransitionLink>
+        </div>
+      </main>
+
+      <PortfolioFooter lang="en" />
+    </div>
+  );
+}

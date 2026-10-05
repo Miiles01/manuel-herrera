@@ -86,8 +86,11 @@ export function PortfolioHero({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           </div>
 
           {/* Texto Gigante (abajo en desktop, arriba en mobile) */}
-          <h1 id="hero-name" className="order-1 md:order-2 text-[34vw] font-medium text-black leading-none tracking-tighter max-sm:text-left md:text-center" style={{clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'}}>
-            Manu
+          <h1 className="order-1 md:order-2 text-[34vw] font-medium text-black leading-none tracking-tighter max-sm:text-left md:text-center" style={{clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'}}>
+            <span id="hero-name" aria-hidden="true" className="block">Manu</span>
+            <span className="sr-only">
+              {lang === 'en' ? 'Manuel Herrera — brand strategist and visual creator' : 'Manuel Herrera — estratega de marca y creador visual'}
+            </span>
           </h1>
           
           {/* Subtextos inferiores (debajo de intro en mobile, debajo de Manu en desktop) */}

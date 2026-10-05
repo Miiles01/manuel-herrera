@@ -87,9 +87,15 @@
   --color-hairline: var(--hairline);
   --color-watermark: var(--watermark);
 
-  /* Zen Kaku Gothic New (geometric sans) + Marck Script (handwritten accent) */
-  --font-sans: 'Manrope', sans-serif;
+  /* Manrope (sans, via next/font) + Marck Script (handwritten accent) */
+  --font-sans: var(--font-manrope), 'Manrope', sans-serif;
   --font-script: var(--font-marck);
+
+  /* Hero photo box + the free horizontal gutter to its left (headline / mission
+     copy are sized to fit inside it so they never collide with the photo). */
+  --hero-photo-w: min(90vw, 46vh);
+  --hero-photo-h: 62vh;
+  --hero-free: max(0px, calc(50vw - var(--hero-photo-w) / 2 - 7vmin - 40px));
 
   /* Radii — viewport-proportional, matching the original card geometry. */
   --radius-btn: 8px; /* buttons + header (fixed 8px, per design request) */

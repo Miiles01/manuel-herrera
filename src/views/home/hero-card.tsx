@@ -7,6 +7,8 @@ import { animated, useSpring, to } from "@react-spring/web";
 export interface HeroCardProps {
   lines: string[];
   image: string;
+  /** Accessible description of the portrait. */
+  imageAlt: string;
   bottomBlock?: {
     leftText: string;
     rightText: string;
@@ -23,7 +25,7 @@ export interface HeroCardProps {
  */
 // `memo` so the stage's visibility re-renders (when an unrelated scene flag
 // flips) don't re-render the hero and re-create its springs.
-export const HeroCard = memo(({ lines, image, bottomBlock }: HeroCardProps) => {
+export const HeroCard = memo(({ lines, image, imageAlt, bottomBlock }: HeroCardProps) => {
   // Cursor-reactive tilt: a spring eased toward the pointer position (mapped
   // from the window).
   const [tilt, tiltApi] = useSpring(() => ({
@@ -50,7 +52,7 @@ export const HeroCard = memo(({ lines, image, bottomBlock }: HeroCardProps) => {
           fades on scroll so the hero copy clears cleanly (no layout shift — it's
           absolutely positioned). Sits BELOW the image card. */}
       <header className="pointer-events-none absolute inset-0 z-[3] flex p-[40px] max-sm:p-5">
-        <h2 className="flex flex-col items-start text-left text-[7vw] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
+        <h2 className="flex flex-col items-start text-left text-[7vw] landscape:text-[clamp(1.75rem,calc(var(--hero-free)/4.8),7vw)] font-normal leading-[0.95] tracking-[-0.03em] text-gray-900">
           {lines.map((line, i) => (
             <span key={i} className={i === 1 ? "opacity-40" : undefined}>
               {line}
@@ -68,12 +70,12 @@ export const HeroCard = memo(({ lines, image, bottomBlock }: HeroCardProps) => {
         <animated.div
           className="absolute left-1/2 top-1/2 overflow-hidden rounded-slider shadow-2xl will-change-transform"
           style={{
-            width: "min(90vw, 46vh)",
-            height: "62vh",
+            width: "var(--hero-photo-w)",
+            height: "var(--hero-photo-h)",
             transform: to([tilt.rx, tilt.ry], (rx, ry) => `translate(-50%, -50%) rotateX(${rx}deg) rotateY(${ry}deg)`),
           }}
         >
-          <Image src={image} alt="" fill sizes="64vmin" className="object-cover" priority />
+          <Image src={image} alt={imageAlt} fill sizes="64vmin" className="object-cover" priority />
         </animated.div>
       </div>
 
@@ -81,7 +83,7 @@ export const HeroCard = memo(({ lines, image, bottomBlock }: HeroCardProps) => {
           copy (absolutely positioned → no layout shift). */}
       {bottomBlock && (
         <div className="pointer-events-none absolute bottom-0 left-0 w-full p-[40px] max-sm:p-5 z-[6] flex flex-col gap-6 max-sm:gap-4 text-gray-800 font-light">
-          <div className="flex flex-col gap-6 max-sm:gap-4 max-w-md pointer-events-auto">
+          <div className="flex flex-col gap-6 max-sm:gap-4 max-w-md landscape:max-w-[min(28rem,max(var(--hero-free),10rem))] pointer-events-auto">
             <p className="opacity-90 leading-relaxed text-[16px] max-sm:text-[14px]">
               {bottomBlock.leftText}
             </p>

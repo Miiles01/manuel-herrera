@@ -183,6 +183,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                   <HeroCard
                     lines={content.hero.lines}
                     image={`${A}/hero-1.webp`}
+                    imageAlt={content.hero.photoAlt ?? ""}
                     bottomBlock={content.hero.bottomBlock}
                     active={vis.hero}
                   />

@@ -8,6 +8,42 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-05 (Language switcher, full English, Naabi Kanabi)
+
+- **Language switcher** (`components/portfolio/LanguageSwitcher.tsx`): ES/EN dropdown in
+  the header on desktop (next to "Hablemos"/"Let's talk"), language links inside the open
+  menu on mobile. It maps the current URL to the equivalent page via
+  `localizedPath()` in `utils/seo/routes.ts` (e.g. `/es/proyecto/x` ↔ `/en/project/x`).
+  Spanish stays the default (`/` → `/es`). A switch is a full page load (separate root
+  layouts); a `sessionStorage` flag makes `GlobalLoader` skip the intro afterwards.
+- **English completed:** sphere experience copy + "Think different" heading, contact
+  page title/button, mobile hero alt text, and the mobile CTA now passes `lang` so the
+  testimonials render in English.
+- **Naabi Kanabi:** new tablet mockup ("Diagnóstico facial") replaces `nk-7.webp` and is
+  the 2nd image, with a "Ver página / View site" button (same `cta` mechanism as Tulum).
+
+## 2026-10-01 (SEO, fonts, images, hero overlap)
+
+- **Per-language root layouts.** `app/(es)/layout.tsx` and `app/(en)/layout.tsx` both
+  render `layouts/root-shell.tsx`, so `<html lang>` is `es`/`en` in the server HTML.
+  `/` redirects (307) to `/es`; unmatched URLs use `app/global-not-found.tsx`
+  (`experimental.globalNotFound`). Switching language is a full page load by design.
+- **Metadata per page.** The `trabajo`/`work`, `contacto`/`contact`, `proyecto`/`project`
+  pages moved to `views/pages/*` (client) with thin server `page.tsx` wrappers that
+  export metadata. Project pages are now SSG (`generateStaticParams`,
+  `dynamicParams = false`) with per-project title/description/OG image. Canonical +
+  `hreflang` (es-MX / en-US / x-default) come from `utils/seo/routes.ts`.
+- **Sitemap** lists every page in both languages with hreflang alternates. JSON-LD is
+  now `Person` + `WebSite`. Removed the placeholder Twitter handle.
+- **Fonts.** Dropped the unused Zen Kaku Gothic New (≈240 `.woff2`, ~2.9 MB). Manrope now
+  comes from `next/font` (latin, variable) instead of a Google Fonts `<link>`.
+- **Images.** Tulum, Tapp Telcel and `mobile-amo-crear` PNGs converted to webp
+  (≤2400px, q80): e.g. 13 MB → 114 KB. Plain `<img>` tags got `loading="lazy"`.
+  The old PNG/JPG originals are still in `public/` (unreferenced) pending removal.
+- **Hero.** Headline and mission copy are sized to the free gutter left of the photo
+  (`--hero-free` in `globals.css`) so they never overlap it. `h1` now carries
+  "Manuel Herrera — brand strategist…" (sr-only) and the photo has real `alt`.
+
 ## 2026-10-01 (Home — carousel removed, star grows from the hero photo)
 
 - **Removed the 3D carousel from the desktop/tablet Showreel** (hero flip, the

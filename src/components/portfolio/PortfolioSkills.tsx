@@ -83,7 +83,7 @@ export function PortfolioSkills() {
                 "3183150", "3183153", "3182773", "3182781",
                 "3182812", "3182829", "3182833", "3182834"
               ].map((id, index) => (
-                <img 
+                <img loading="lazy" decoding="async" 
                   key={index} 
                   className="skills-card relative w-[12vw] h-auto rounded-[0.5vw] aspect-square object-cover" 
                   src={`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600`} 

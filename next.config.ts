@@ -25,6 +25,17 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
+  // Each language is its own root layout (correct <html lang>), so unmatched URLs
+  // need a standalone 404 page.
+  experimental: {
+    globalNotFound: true,
+  },
+
+  // "/" has no page of its own: send it to the default (Spanish) home.
+  async redirects() {
+    return [{ source: "/", destination: "/es", permanent: false }];
+  },
+
   // React Compiler (automatic memoisation) is an opt-in performance win.
   // It requires the `babel-plugin-react-compiler` dev dependency and routes
   // the build through Babel — enable once installed:

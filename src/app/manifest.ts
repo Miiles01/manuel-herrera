@@ -12,13 +12,13 @@ export default function manifest(): MetadataRoute.Manifest {
     name: siteConfig.name,
     short_name: siteConfig.name,
     description: siteConfig.description,
-    start_url: "/",
+    start_url: "/es",
     display: "standalone",
     background_color: siteConfig.themeColor,
     theme_color: siteConfig.themeColor,
     icons: [
       {
-        src: "/icon",
+        src: "/icon.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",

@@ -137,7 +137,7 @@ export function Testimonials({ lang = "es" }: { lang?: "es" | "en" }) {
           return (
             <animated.div style={style} className="absolute inset-0 flex flex-col justify-start">
               <p className="text-[2.1vmin] max-sm:text-[4vw] font-light leading-snug mb-[3vmin] opacity-90 line-clamp-4 max-sm:line-clamp-6">
-                "{item.text}"
+                &ldquo;{item.text}&rdquo;
               </p>
               <div className="mt-auto flex items-center gap-[2vmin]">
                 {item.image ? (

@@ -1,74 +1,74 @@
 /**
  * @fileoverview Standardised metadata + viewport generators for pages.
  *
- * `generateMetadata` builds a Next.js `Metadata` object — basic meta tags,
- * OpenGraph, Twitter cards, canonical URL, icons, robots. `metadataBase` is
- * always set (from `siteConfig`) so relative URLs (OG image, canonical)
- * resolve to absolute — required by social scrapers.
+ * `generateMetadata` builds a Next.js `Metadata` object — title, description,
+ * OpenGraph, Twitter card, **per-page canonical + hreflang alternates**, robots.
+ * `metadataBase` is always set (from `siteConfig`) so relative URLs resolve to
+ * absolute — required by social scrapers.
  *
- * `generateViewport` builds the `Viewport` export. `themeColor` lives here, not
- * in `Metadata` — Next deprecated it on the metadata object.
+ * Pass `route` (+ `slug` for projects) so the canonical points at the page itself
+ * and `hreflang` links the ES/EN versions. `title` is the FULL document title
+ * (rendered as-is, no template).
  */
 
 import { Metadata, Viewport } from "next";
 
 import { siteConfig } from "@/lib/site";
+import {
+  alternatesFor,
+  OG_LOCALE,
+  type Lang,
+  type RouteKey,
+} from "@/utils/seo/routes";
 
 interface MetadataProps {
+  lang?: Lang;
+  /** Full document title. */
   title?: string;
   description?: string;
-  /** Canonical path (e.g. `/about`) or absolute URL for this page. */
-  url?: string;
-  twitterHandle?: string;
-  author?: string;
-  siteName?: string;
-  locale?: string;
+  route?: RouteKey;
+  slug?: string;
+  /** Share image (path under `public/` or absolute URL). Falls back to the generated OG card. */
+  image?: string;
 }
 
-/**
- * Icons (`icon`/`apple-icon`) and share images (`opengraph-image`/
- * `twitter-image`) are generated from the brand mark by the matching file
- * conventions in `src/app/` — Next injects those tags automatically, so they're
- * intentionally absent here.
- */
 export function generateMetadata({
+  lang = "es",
   title = `${siteConfig.name} — ${siteConfig.tagline}`,
   description = siteConfig.description,
-  url = "/",
-  twitterHandle = siteConfig.twitterHandle,
-  author = siteConfig.author,
-  siteName = siteConfig.name,
-  locale = "es_MX",
+  route = "home",
+  slug,
+  image,
 }: MetadataProps = {}): Metadata {
+  const alternates = alternatesFor(route, lang, slug);
+  const otherLang: Lang = lang === "es" ? "en" : "es";
+  const images = image ? [{ url: image, alt: title }] : undefined;
+
   return {
     // Resolves every relative URL below to an absolute one.
     metadataBase: new URL(siteConfig.url),
-    title: {
-      default: title,
-      template: `%s — ${siteConfig.name}`,
-    },
+    title: { absolute: title },
     description,
     applicationName: siteConfig.name,
-    authors: [{ name: author }],
-    creator: author,
-    publisher: author,
-    alternates: {
-      canonical: url,
-    },
+    authors: [{ name: siteConfig.author }],
+    creator: siteConfig.author,
+    publisher: siteConfig.author,
+    alternates,
     openGraph: {
       title,
       description,
-      url,
-      siteName,
-      locale,
+      url: alternates.canonical,
+      siteName: siteConfig.name,
+      locale: OG_LOCALE[lang],
+      alternateLocale: [OG_LOCALE[otherLang]],
       type: "website",
+      ...(images && { images }),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      site: twitterHandle,
-      creator: twitterHandle,
+      ...(images && { images: images.map((i) => i.url) }),
     },
     manifest: "/manifest.webmanifest",
     robots: {
