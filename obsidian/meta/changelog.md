@@ -12,7 +12,8 @@ This is a human-curated log — not a mirror of `git log`.
 
 - Phones (<640px) no longer get the pinned stage (it didn't work well there). They
   get the plain scroll-only version again: the "Crear con intención" card, the
-  featured projects as an image list, and the experience ("Piensa diferente" + roles)
+  featured projects as an image list, and the experience (headed "Experiencia" on
+  phones instead of "Piensa diferente", + roles)
   — now on white instead of the dark section — followed by the same testimonials
   `CtaSection` as desktop. Tablet/desktop unchanged.
 

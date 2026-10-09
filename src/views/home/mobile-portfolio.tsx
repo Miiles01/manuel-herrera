@@ -5,7 +5,7 @@ import type { ShowreelContent } from "@/data/mocks/home";
 /**
  * Phones only (`sm:hidden`): a plain, white, scroll-only version of the home —
  * no pinned stage, no star. Featured projects as an image list, then the
- * experience ("Piensa diferente" + roles). The testimonials CTA section is
+ * experience (an "Experiencia" heading + roles). The testimonials CTA section is
  * shared with desktop and follows this in home.tsx.
  */
 export const MobilePortfolio = ({ content, lang = "es" }: { content: ShowreelContent; lang?: "es" | "en" }) => {
@@ -49,10 +49,8 @@ export const MobilePortfolio = ({ content, lang = "es" }: { content: ShowreelCon
       </section>
 
       <section aria-label={lang === "en" ? "Experience" : "Experiencia"} className="flex flex-col gap-8 px-6 pt-8 pb-8 text-sphere-ink">
-        <h2 className="m-0 flex flex-col text-4xl font-medium leading-[1.05] tracking-tight">
-          {content.sphere.headingBottom.map((line, i) => (
-            <span key={i} className={i === 1 ? "opacity-40" : undefined}>{line}</span>
-          ))}
+        <h2 className="m-0 text-4xl font-medium leading-[1.05] tracking-tight">
+          {lang === "en" ? "Experience" : "Experiencia"}
         </h2>
         <div className="flex flex-col gap-5 text-[15px] font-light leading-[1.45]">
           {content.sphere.body.map((para, i) => (
