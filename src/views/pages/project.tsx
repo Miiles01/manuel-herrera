@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { portfolioProjects } from "@/data/portfolio";
+import { arrivesWithPageTransition } from "@/utils/page-entrance";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 import { useParams, notFound } from "next/navigation";
@@ -21,6 +22,13 @@ export default function ProjectPage() {
     if (!project) return;
     
     gsap.utils.toArray(".project-fade-up").forEach((el: any, i) => {
+      // Arriving through the page transition, first-screen content is shown as
+      // is — the slide is its entrance (a fade here would play unseen under the
+      // transition snapshot and then pop in at the end).
+      if (arrivesWithPageTransition(el)) {
+        gsap.set(el, { opacity: 1, y: 0 });
+        return;
+      }
       // First few elements without scroll trigger, just fade up
       if (i < 2) {
         gsap.fromTo(el, 

@@ -38,8 +38,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Visual identity development and strategic design.",
     },
     industry: {
-      es: "Hospitality & Real Estate",
-      en: "Hospitality & Real Estate",
+      es: "Restaurante",
+      en: "Restaurant",
     },
     role: {
       es: "Dirección de Arte y Diseño Web",

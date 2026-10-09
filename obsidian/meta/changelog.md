@@ -8,6 +8,16 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (Project pages: no pop at the end of the transition)
+
+- Project pages fade their content up from opacity 0 (GSAP). Arriving through the
+  page transition, the snapshot was taken at opacity 0: an empty page slid in, the
+  fade played unseen underneath, and everything popped in when the transition
+  ended. Now first-screen content is shown as is when arriving via the transition
+  (`utils/page-entrance.ts` → `arrivesWithPageTransition`); the slide is its
+  entrance. Direct loads and below-the-fold content keep their fade-ups.
+- Tulum's industry: "Restaurante" / "Restaurant".
+
 ## 2026-10-09 (No flash on page change, phones)
 
 - `::view-transition-new(root)` now starts at `translateY(100%)` in CSS, so the
