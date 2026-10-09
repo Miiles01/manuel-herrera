@@ -8,5 +8,5 @@ export const siteConfig = {
     "Portafolio creativo de Manuel Herrera. Desarrollo, diseño de interfaces y experiencias digitales sin límites.",
   url: publicEnv.NEXT_PUBLIC_SITE_URL ?? "https://meetmanuel.com",
   author: "Manuel Herrera",
-  themeColor: "#000000",
+  themeColor: "#ffffff", // browser UI tint (status bar / overscroll) — matches the white page
 } as const;

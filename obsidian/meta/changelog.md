@@ -8,6 +8,13 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (White page canvas — no black when over-scrolling)
+
+- `html`/`body` used `--background` (#000, from the original dark showreel), so on
+  iOS pulling past the top or the footer showed black. They now use a new `--page`
+  token (#fff); `--background` stays for the dark cookie UI. `themeColor` (browser
+  UI tint) is now white too.
+
 ## 2026-10-09 (Page transition smooth on phones)
 
 - The outgoing page's darkening was an animated `filter: brightness()` on the

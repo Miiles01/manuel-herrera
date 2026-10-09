@@ -9,7 +9,9 @@
    Never hardcode a hex/rgba in className — add a token here first.
    ────────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: #000000; /* page backdrop behind the fixed flame shader */
+  --background: #000000; /* dark UI surface (cookie banner/modal) */
+  --page: #ffffff; /* the page canvas: html/body — also what iOS shows when you
+                      over-scroll past the top or the footer */
   --foreground: #f5f1ec; /* default off-white ink */
 
   /* Surfaces */
@@ -113,8 +115,12 @@
   --radius-target: 30px; /* target block (pre-flythrough) */
 }
 
+html {
+  background: var(--page);
+}
+
 body {
-  background: var(--background);
+  background: var(--page);
   color: var(--foreground);
   min-height: 100vh;
   width: 100%;
