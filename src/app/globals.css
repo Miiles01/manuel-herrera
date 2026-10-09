@@ -19,6 +19,9 @@
   --paper: #f5f1ec; /* off-white card/UI text */
   --paper-alt: #f3f1ec; /* portfolio section ink */
   --nav-ink: #1a1a1a; /* nav-pill links (on light pill) */
+  --sphere-start: #000000; /* star colour as it starts growing… */
+  --sphere-surface: #fdfdfd; /* …turning into this: star reveal + "Piensa diferente" block */
+  --sphere-ink: #111111; /* headings, copy and star logo on that surface */
   --cc-dark-ink: #f5f1ec; /* catalist dark-card ink */
   --cc-light-ink: #1a1714; /* catalist light-card ink */
   --cc-light-muted: #9a948d; /* catalist light-card secondary copy */
@@ -72,6 +75,8 @@
   --color-paper: var(--paper);
   --color-paper-alt: var(--paper-alt);
   --color-nav-ink: var(--nav-ink);
+  --color-sphere-surface: var(--sphere-surface);
+  --color-sphere-ink: var(--sphere-ink);
   --color-cc-dark-ink: var(--cc-dark-ink);
   --color-cc-light-ink: var(--cc-light-ink);
   --color-cc-light-muted: var(--cc-light-muted);
@@ -200,3 +205,29 @@ html.lenis body {
   animation: marquee 25s linear infinite;
 }
 
+
+/* Scroll gallery: the system cursor is replaced by a "Ver" label over the frame
+   (ScrollGallery toggles this class on <html>). */
+.cursor-label,
+.cursor-label * {
+  cursor: none !important;
+}
+
+/* ── Page transition (View Transitions API) ──────────────────────────────────
+   After Haven: the incoming page rises from below and covers the outgoing one,
+   which drifts up and darkens underneath. The motion itself is driven from
+   GlobalLoader (Web Animations on these pseudo-elements, ADR-0025). Here we only
+   switch off the browser's default cross-fade and put the NEW page on top. The navbar has its own name
+   (PortfolioHeader) so it stays put while the pages slide; the logo slides with
+   the page — it uses mix-blend-difference, which a separate layer would lose. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}

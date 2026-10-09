@@ -8,6 +8,180 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 ("Ver" cursor fixes + on the work page)
+
+- **Home:** the "Ver" cursor no longer shows over the navbar, its open menu or the
+  language panel when they sit above the gallery frame — besides the frame box, the
+  element under the pointer must belong to the stage (`elementFromPoint`).
+- **Work page:** the same "Ver" cursor over every project image
+  (`components/ui/cursor-label.tsx`: `<CursorLabel />` + `data-cursor-label`);
+  style and fades shared with the home's.
+- **"Crear" / "Escalar"** fade out just before touching the screen edge (measured
+  label widths), so they're never cut off on narrow screens; no horizontal scroll
+  at 375px or 700px.
+
+## 2026-10-08 (Projects minimap opens like the navbar menu)
+
+- The work page's content navigator (`components/ui/scroll-minimap.tsx`) no longer
+  snaps its labels open with a `max-width: 0 → 400px` transition (which ran out
+  within the first frames). Each label's column now grows to its real width (grid
+  0fr → 1fr, 0.5s cubic-bezier(.4,0,.2,1)) and the text rises from below its
+  clipped edge (0.6s cubic-bezier(.65,0,0,1)), 40ms apart per row — the navbar
+  menu's choreography. Also opens on keyboard focus.
+
+## 2026-10-08 ("Hagamos esa idea realidad": plain section + testimonials carousel)
+
+- The CTA is now a plain section (`views/home/cta-section.tsx`, desktop/tablet):
+  background from `--sphere-surface` (#FDFDFD, the colour the previous block ends
+  on) down to white, so the two meet without a seam; dark heading (second line at
+  40%) + a dark "Ver proyectos" pill.
+- Below it, a **testimonials carousel**: every review as a plain white card (no
+  border, no shadow), a native horizontal scroller with snap per card (trackpad /
+  touch), and prev/next arrows that step one card and grey out at either end.
+  Reviews reuse the data exported from `testimonials.tsx` (`TESTIMONIALS`,
+  `TESTIMONIALS_EN`).
+- Under the carousel, a "Reseñas de mi LinkedIn" link to the LinkedIn
+  recommendations (`cta.reviewsLabel` / `cta.reviewsHref`, new tab).
+- Mobile keeps its existing CTA at the end of `MobilePortfolio`.
+
+## 2026-10-08 (Square corners on the gallery frame and the hero photo)
+
+- The scroll-gallery frame and the "Crear con intención" photo no longer have
+  rounded corners (`galleryRadius` removed; `rounded-slider` dropped from the
+  hero photo).
+
+## 2026-10-08 (Page transitions start right away: prefetch on intent)
+
+- A click held the old page frozen for ~1.2s (dev) while the destination route
+  loaded, then slid — it read as a hard jump. Routes are now warmed before the
+  click: `TransitionLink` calls `router.prefetch(href)` on hover/focus, and the
+  scroll gallery prefetches the work page the first time "Ver" shows. Measured from
+  the gallery: new page ready 1243ms → 317ms after the click in `next dev`
+  (production, with static pages, is faster still).
+
+## 2026-10-08 (Scroll gallery: "Ver" cursor + click to work)
+
+- Over the growing frame the mouse cursor is replaced by a white **"Ver"** label
+  (6vmin, the size of the "Crear"/"Escalar" labels, `mix-blend-difference` like the
+  navbar logo so it inverts the cover under it) that follows the pointer —
+  fading in (0.4s) and out (0.5s, also when the star takes over or on click) — and a
+  **click goes to the work page** (`/es/trabajo`, `/en/work`) through the page
+  transition. Content: `gallery.cursor` / `gallery.href` in `home.ts`.
+- The star layer sits above the gallery and takes the pointer events, so the frame
+  is hit-tested against the pointer on move and on scroll (it grows under a still
+  mouse); active from the section's entry until the star starts covering it
+  (`galleryCursorActive`). The label is portalled to `<body>` (the stage's
+  transforms would break `position: fixed`); `html.cursor-label` hides the system
+  cursor. Mouse/trackpad only — nothing on touch.
+
+## 2026-10-08 (Intro loader: no flash, no stutter)
+
+- **No flash:** "Manu" is now server-rendered as one span per letter, already hidden
+  below the heading's clip — before, the server painted the word visible, then
+  hydration hid it and animated it back in (it appeared, vanished, came back).
+- **No stutter:** letters in/out and the curtain slide moved from GSAP (ticked on
+  the main thread, which is busiest during hydration + the home mounting) to the
+  Web Animations API, transform-only, so they run on the compositor. Same
+  choreography and timings (power3 eases, 60/40ms staggers, 0.9s curtain).
+- **Starts once** under Strict Mode (module-level flag). `gsap` and `split-type` are
+  no longer used by `GlobalLoader`.
+- Measured on a production build: first paint ~190ms, letters moving by ~250ms,
+  page revealed at ~3.4s. (In `next dev` the 2.6MB dev bundle delays the start by
+  ~0.9s — dev only.)
+
+## 2026-10-08 (Star reveal in #FDFDFD)
+
+- The growing star now starts **black and turns #FDFDFD** as it grows (20%→60% of
+  its growth, `starPanelColor`, a `color-mix` of `--sphere-start` and
+  `--sphere-surface`), fully light before the copy comes in. New tokens
+  `--sphere-surface` (#fdfdfd) and `--sphere-ink` (#111) in `globals.css`. The
+  "Piensa diferente" block (heading, experience list, centre star logo) switched to
+  dark ink on it. The stage backdrop no longer fades to black under the panel
+  (`stageBackdropOpacity` → always 1), so no dark edge can show.
+
+## 2026-10-08 (Navbar menu: Haven-style opening, glass blur restored)
+
+- **Glass blur back on the navbar.** The page-transition name (`site-nav`) was on
+  the wrapper; an element with a view-transition-name isolates its descendants'
+  backdrop, so the glass box's `backdrop-blur` saw nothing. The name now sits on
+  the glass box itself.
+- **Menu opens like Haven's:** the body grows to its real height (grid rows
+  0fr → 1fr, 0.5s cubic-bezier(.4,0,.2,1) — no more arbitrary `max-height`), and
+  each item rises from below the panel's clipped edge (30px + 50px, 0.6s
+  cubic-bezier(.65,0,0,1)) in a 40ms stagger — links first, then contacts. No
+  fades. While closed the body is `inert` (no tabbing into hidden links).
+
+## 2026-10-08 (Page transitions + image reveal)
+
+- **Navigating between pages no longer shows the "Manu" loader** (it stays for the
+  first visit). After Haven (havenconstructions.com.au): the new page rises from
+  below on top and covers the current one, which drifts up 20% and darkens
+  underneath (a soft black overlay, `brightness(0.65)`); 1s easeInOutQuart. Built on
+  the View Transitions API, starting only once
+  the new route has rendered (3.5 s budget, then it just swaps). The navbar stays put.
+- **Images fade up as they load** after a navigation (`image-reveal.ts`, 32px rise,
+  0.9s ease-out-quint): cached ones in a 75ms stagger when the slide lands, the rest as each one finishes
+  loading. Text keeps its own entrance animations. See ADR-0025.
+
+## 2026-10-07 (Scroll gallery: no "magnet", full-bleed last cover, big star)
+
+- **No more "magnet" at the hero.** The hero card used to hold still for a stretch
+  once the stage pinned, then move at a different speed — it felt like the page
+  grabbed it. Now it scrolls up at exactly the native speed (`VIEWPORT_V` in
+  `timeline.ts`, derived from `trackVh`; tablet now shares desktop's 742vh) and the
+  gallery section scrolls in behind it; the stage only stays still while the frame
+  grows.
+- **Last cover is full-bleed:** the frame grows to 100vw × 100dvh (scale 0.38 → 1;
+  started at 0.26, bumped so it reads bigger at first)
+  and its corners straighten as it grows (`galleryRadius`).
+- **Star: one continuous growth.** It isn't there while the covers flick or when the
+  last cover fills the screen; one scroll later it is born at size 0 and grows
+  continuously (cubic, 0 → 1500vmin, turning 180°) until it covers the screen —
+  no intermediate size, no pop-in, no pause (`starGrow`, vScroll 760 → 1500).
+- **Labels:** dropped "Est. 2026" / "México" above and below the frame; only
+  "Crear" / "Escalar" at the sides remain (`gallery.left/right` in `home.ts`).
+
+## 2026-10-07 (Lighter home: carousel, image grid and camera flight removed)
+
+- **Removed from the desktop stage:** the fixed featured-projects carousel
+  (`Portfolio`), the 14 scattered parallax-grid images and the camera flight into
+  the target block. They were the main source of scroll lag.
+- **The stage now ends on "Piensa diferente"** (`VSCROLL_MAX` 4750 → 1750, a short
+  hold after the block is revealed); the black block no longer slides up to meet the
+  portfolio. Track: desktop 2015 → 742vh, tablet 1717 → 633vh.
+- **"Hagamos esa idea realidad" is a normal section** after the stage
+  (`views/home.tsx`): same blue→peach gradient card with `CtaBlock` (heading, "Ver
+  proyectos", testimonials), no WebGL. `CtaBlock`'s `p` prop is now optional.
+- `views/home/portfolio.tsx` and the grid/flight helpers in `timeline.ts` are no
+  longer used on the home (kept for now; mobile is unchanged).
+
+## 2026-10-07 (Scroll gallery with the star)
+
+- **Scroll gallery** (`views/home/scroll-gallery.tsx`, after Haven's "ScrollGallery"):
+  a section of its own after the "Crear con intención" hero. As you scroll, the hero
+  card moves up and away while the gallery section (small frame + labels) scrolls in
+  from below; then it pins and the frame grows (scale 0.28 → full hero-card size)
+  while project covers flick through it fast (`gallery.images` in `home.ts`, the last
+  one stays). Labels — "Est. 2026" / "México" above and below, "Crear" / "Escalar" at
+  the sides — slide outwards as it grows and fade near full size.
+- **Star:** no longer grows from 0 on the hero photo. It stays hidden while the
+  covers flick and spins in to its base size (18vmin) on the last cover, then
+  explodes over the screen into the "Piensa diferente" block exactly as before.
+- **Timeline:** `VSCROLL_START` 600 → 0; the gallery owns virtual 0–800vh
+  (hero leaves / gallery enters 60–260, frame grows 260–710, star appears on the
+  last cover, hold to 800); every later threshold is unchanged. The track grew in
+  proportion (desktop 1760 → 2015vh, tablet 1500 → 1717vh) so the later scenes keep
+  their pace. Mobile (<640px, the static `MobileShowreel`) is untouched.
+
+## 2026-10-07 (Navbar: remove "Hablemos")
+
+- **Navbar CTA removed.** The "Hablemos / Let's talk" link at the far right of the
+  header (`components/portfolio/PortfolioHeader.tsx`) is gone: it only opened a
+  `mailto:` and read as a dead button. The menu bar now sits at the right edge
+  (`md:right-12` instead of `md:right-[140px]`) so no gap is left, and its
+  hide-on-scroll slide no longer targets the removed element. The large footer
+  "Hablemos" heading is unchanged.
+
 ## 2026-10-05 (Language switcher, full English, Naabi Kanabi)
 
 - **Language switcher** (`components/portfolio/LanguageSwitcher.tsx`): an "ES ▾" button

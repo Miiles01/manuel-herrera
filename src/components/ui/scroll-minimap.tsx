@@ -71,7 +71,7 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
       {/* Contenedor: width es "hug" (w-max), borde cuadrado con redondeo tipo navbar (rounded-2xl) */}
       <div className="group/menu relative flex flex-col items-end gap-3 py-4 px-3 rounded-2xl bg-gray-50/90 backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] w-max">
         
-        {items.map((item) => {
+        {items.map((item, i) => {
           const isActive = activeId === item.id;
           return (
             <button
@@ -80,12 +80,18 @@ export function ScrollMinimap({ items }: { items: MinimapItem[] }) {
               className="w-full flex items-center justify-end gap-3 cursor-pointer outline-none group/btn"
               aria-label={`Scroll to ${item.label}`}
             >
-              {/* Contenedor del texto que se expande de max-w-0 a max-w-[500px] */}
-              <span className="overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-0 group-hover/menu:max-w-[400px] opacity-0 group-hover/menu:opacity-100 flex justify-end">
-                <span 
-                  className="text-base font-medium text-gray-400 group-hover/btn:text-black whitespace-nowrap pl-1"
-                >
-                  {item.label}
+              {/* Label opens like the navbar menu (after Haven): its column grows to
+                  the label's real width (grid 0fr → 1fr, 0.5s), and the text rises
+                  from below its clipped edge (0.6s long ease), 40ms apart per row.
+                  Opens on hover and on keyboard focus. */}
+              <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/menu:grid-cols-[1fr] group-focus-within/menu:grid-cols-[1fr]">
+                <span className="min-w-0 overflow-hidden">
+                  <span
+                    className="block translate-y-[110%] whitespace-nowrap pl-1 text-right text-base font-medium text-gray-400 transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0,1)] group-hover/menu:translate-y-0 group-focus-within/menu:translate-y-0 group-hover/btn:text-black"
+                    style={{ transitionDelay: `${i * 40}ms` }}
+                  >
+                    {item.label}
+                  </span>
                 </span>
               </span>
 

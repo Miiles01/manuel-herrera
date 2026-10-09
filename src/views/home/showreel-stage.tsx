@@ -6,27 +6,14 @@ import { useShowreelLayout } from "@/hooks/use-showreel-layout";
 import { ProgressTrigger } from "@/components/animation/springs/progress-trigger";
 import { HeroCard } from "@/views/home/hero-card";
 import { SphereCard } from "@/views/home/sphere-card";
-import { Portfolio } from "@/views/home/portfolio";
-import { CtaBlock } from "@/views/home/cta-block";
-import { Serigraph } from "@/components/ui/serigraph";
-import Image from "next/image";
+import { ScrollGallery } from "@/views/home/scroll-gallery";
 import type { ShowreelContent } from "@/data/mocks/home";
-import { TransitionLink } from "@/components/ui/transition-link";
 import {
-  GRID_ITEMS,
   HERO_CARD_WIDTH,
   HERO_CARD_HEIGHT,
   card1Opacity,
+  heroCardTransform,
   card4Opacity,
-  cameraRigTransform,
-  gridItemTransform,
-  gridItemRadius,
-  gridOpacity,
-  targetTransform,
-  targetRadius,
-  targetOpacity,
-  finalFrameReveal,
-  auroraOpacity,
   stageBackdropOpacity,
   sceneVisibility,
   type SceneVisibility,
@@ -42,8 +29,9 @@ export interface ShowreelStageProps {
  * The scroll-driven core. ONE spring (`p`, 0→1) is scrubbed by a single
  * `ProgressTrigger` off the tall track; every scene reads `p.to(selector)` from
  * the timeline. A sticky stage pins the 3D scene while the track scrolls:
- * hero (photo) → star that grows over it → particle sphere → portfolio →
- * camera-flight through a parallax grid to the chrome-star target.
+ * hero (photo) → scroll gallery growing from the centre → star that grows over
+ * the screen → "Piensa diferente". The CTA is a normal section after the stage
+ * (home.tsx); the featured carousel, image grid and camera flight were removed.
  */
 export const ShowreelStage = ({ content }: ShowreelStageProps) => {
   // Mount client-only. The stage is a wall of react-spring `animated.div`s whose
@@ -71,49 +59,12 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
   // bound to the same value, so a re-render never disturbs the live transforms.
   const s = useMemo(
     () => ({
-      aurora: p.to(auroraOpacity),
       backdrop: p.to(stageBackdropOpacity),
-      cameraRig: p.to(cameraRigTransform),
       card1Opacity: p.to(card1Opacity),
+      heroCard: p.to(heroCardTransform),
       card4Opacity: p.to(card4Opacity),
-      gridOpacity: p.to(gridOpacity),
-      targetRadius: p.to((v) => `${targetRadius(v)}px`),
-      targetOpacity: p.to(targetOpacity),
-      finalFrame: p.to(finalFrameReveal),
     }),
     [p],
-  );
-
-  // The 14 parallax-grid tiles are built ONCE. They're inline in this component,
-  // which re-renders on every `setVis` flip below; without memoising, React would
-  // reconcile all 14 `animated.div`s and re-apply their (static) 3D transforms
-  // each time, flashing the tiles for a frame as you scroll past scene
-  // boundaries. Only `opacity` is live (the stable `s.gridOpacity`), so the
-  // elements never need to change.
-  //
-  // NO `will-change`/`backface-visibility` layer-promotion here: the real
-  // scroll-flicker was the Lenis↔ticker rAF desync (ADR-0023). Promoting these
-  // tiles instead pinned each to a persistent GPU layer that the camera flight
-  // scales to many screens wide — 14 enormous layers re-compositing on scroll-back
-  // = severe lag. Plain tiles + the synced rAF render smoothly without the cost.
-  const gridTiles = useMemo(
-    () =>
-      GRID_ITEMS.map((item, i) => (
-        <animated.div
-          key={i}
-          aria-hidden="true"
-          className="absolute left-1/2 top-1/2 z-[-1] overflow-hidden bg-cover bg-center max-sm:hidden pointer-events-none"
-          style={{
-            width: `max(280px, ${item.w})`,
-            aspectRatio: '4/5',
-            backgroundImage: `url(${item.image})`,
-            transform: gridItemTransform(item),
-            borderRadius: gridItemRadius(item),
-            opacity: s.gridOpacity,
-          }}
-        />
-      )),
-    [s.gridOpacity],
   );
 
   // Which scenes are on-screen. Recomputed every scroll frame but only committed
@@ -143,12 +94,6 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
   return (
     <>
-      {/* Single pinned "northern lights" corner shader shared by the sphere
-          scene and the portfolio. It's an OVERLAY (alpha — clear centre, glowing
-          corners) sitting above the black sphere panel but below the portfolio
-          (z-40) and nav (z-100), so the aurora wraps the corners while the
-          sphere/cards show through the clear centre. Fixed → stays put while the
-          blocks scroll over it (ADR-0018). */}
 
 
       <div ref={trackRef} className="relative" style={{ height: `${geo.trackVh}vh` }}>
@@ -165,12 +110,9 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
 
           {/* 3D scene. */}
           <div className="relative z-[2] flex size-full items-center justify-center [perspective:3000px]">
-            <animated.div
-              className="absolute inset-0 [transform-style:preserve-3d]"
-              style={{ transform: s.cameraRig }}
-            >
-              {/* Flat plane (z = 0): the hero card with the star panel growing out
-                  of its photo. No carousel — the star is the only transition. */}
+            <div className="absolute inset-0">
+              {/* Flat plane (z = 0): the hero card, then the scroll gallery frame
+                  growing from the centre with the star panel on top of it. */}
               <div className="relative flex size-full items-center justify-center pointer-events-none">
                 <animated.div
                   className="absolute z-[1] overflow-hidden"
@@ -178,6 +120,7 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     width: HERO_CARD_WIDTH,
                     height: HERO_CARD_HEIGHT,
                     opacity: s.card1Opacity,
+                    transform: s.heroCard,
                   }}
                 >
                   <HeroCard
@@ -188,6 +131,17 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                     active={vis.hero}
                   />
                 </animated.div>
+
+                <div className="absolute inset-0 z-[1]">
+                  <ScrollGallery
+                    p={p}
+                    left={content.gallery.left}
+                    right={content.gallery.right}
+                    cursor={content.gallery.cursor}
+                    href={content.gallery.href}
+                    images={content.gallery.images}
+                  />
+                </div>
 
                 <animated.div
                   className="absolute inset-0 z-[2] [overflow:visible]"
@@ -204,55 +158,11 @@ export const ShowreelStage = ({ content }: ShowreelStageProps) => {
                 </animated.div>
               </div>
 
-              {/* Parallax grid + target live in the CAMERA-RIG frame (siblings of
-                  the carousel, as in the original markup) so they don't inherit
-                  the carousel's rotateY/flyback — the camera flight reads true. */}
-              {gridTiles}
-
-              {/* Target block — the chrome star we fly into. */}
-              <animated.div
-                className="absolute left-1/2 top-1/2 z-[1] h-[100dvh] w-screen overflow-hidden bg-[#08060c] max-sm:!hidden pointer-events-auto"
-                style={{
-                  transform: targetTransform(),
-                  borderRadius: s.targetRadius,
-                  opacity: s.targetOpacity,
-                }}
-              >
-                <Serigraph />
-                <div 
-                  className="absolute inset-0 pointer-events-none z-[1]"
-                  style={{ background: "linear-gradient(to bottom, #94B6F1, #FFE7CE)" }}
-                />
-                {/* White margin band — the same ~4vmin white area between the
-                    screen edge and the content as the hero stage (its `p-[4vmin]`
-                    white backdrop), now with rounded INNER corners like the hero
-                    card. It overhangs the block by 4vmin so the rounded *outer*
-                    corners are clipped square by the block's overflow (the band
-                    still reaches the screen corners), while the inner radius
-                    (11−8=3vmin, matching `rounded-card`) stays visible. Visible
-                    band = 8−4 = 4vmin. Revealed at the very end (`finalFrameReveal`). */}
-                <animated.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-[-4vmin] z-[3] rounded-[11vmin] border-[8vmin] border-white"
-                  style={{ opacity: s.finalFrame }}
-                />
-                <CtaBlock lang={content.hero.lines[0] === "Create with" ? "en" : "es"}
-                  p={p}
-                  heading={content.cta.heading}
-                  headingFaded={content.cta.headingFaded}
-                  sub={content.cta.sub}
-                  button={content.cta.button}
-                  href={content.cta.href}
-                />
-              </animated.div>
-            </animated.div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Fixed portfolio section (driven by the same spring). `active` gates the
-          heavy video loading to the portfolio's scroll range. */}
-      <Portfolio p={p} items={content.portfolio.items} active={vis.portfolio} ctaContent={content.cta} />
 
       {/* Single scroll driver. `frameInterval={0}` updates progress EVERY frame
           so it tracks the scroll 1:1 — the default 10ms throttle drops to ~60fps

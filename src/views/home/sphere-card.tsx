@@ -8,6 +8,7 @@ import {
   blackScreenTransform,
   sphereSceneTransform,
   starMaskSize,
+  starPanelColor,
   sphereLogoTransform,
   sphereLogoOpacity,
   phase4,
@@ -61,17 +62,19 @@ export const SphereCard = memo(({
 
   return (
     <div className="size-full">
-      {/* The star mask reveals this BLACK panel: it is the dark backdrop under
-          the sphere and it covers the green card-4 face behind it. The corner
+      {/* The star mask reveals this panel: black as the star starts growing,
+          turning near-white (--sphere-surface) — the backdrop of the "Piensa
+          diferente" block, with dark ink on top (starPanelColor). The corner
           aurora (pinned, behind the sticky stage) shows through the star's
           concave corners during the reveal. */}
       <animated.div
-        className="absolute left-1/2 top-1/2 h-[300vh] w-[300vw] bg-black"
+        className="absolute left-1/2 top-1/2 h-[300vh] w-[300vw]"
         style={{
           ...maskStyle,
           WebkitMaskSize: p.to(starMaskSize),
           maskSize: p.to(starMaskSize),
           transform: p.to(blackScreenTransform),
+          backgroundColor: p.to(starPanelColor),
         }}
       >
         <animated.div
@@ -87,7 +90,7 @@ export const SphereCard = memo(({
 
           <animated.span
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 z-[3] h-[12vh] w-[12vh] bg-white"
+            className="absolute left-1/2 top-1/2 z-[3] h-[12vh] w-[12vh] bg-sphere-ink"
             style={{
               ...maskStyle,
               WebkitMaskSize: "contain",
@@ -105,7 +108,7 @@ export const SphereCard = memo(({
             }}
           />
 
-          <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-white max-sm:hidden">
+          <h2 className="pointer-events-none absolute bottom-[4vmin] right-[4vmin] z-[4] m-0 flex flex-col items-end whitespace-nowrap text-right text-[var(--sr-heading-2)] font-normal leading-[0.85] text-sphere-ink max-sm:hidden">
             {headingBottom.map((line, i) => (
               <span key={i}>
                 <ScrollLetters
@@ -122,7 +125,7 @@ export const SphereCard = memo(({
           {/* Supporting copy — bottom-left, fades/rises in just after the
               headings land. */}
           <animated.div
-            className="pointer-events-none absolute bottom-[5vmin] left-[4vmin] z-[4] flex max-w-[var(--sr-sphere-body-w)] flex-col gap-[1.8vmin] text-left text-[var(--sr-sphere-body-text)] font-light leading-[1.45] text-white"
+            className="pointer-events-none absolute bottom-[5vmin] left-[4vmin] z-[4] flex max-w-[var(--sr-sphere-body-w)] flex-col gap-[1.8vmin] text-left text-[var(--sr-sphere-body-text)] font-light leading-[1.45] text-sphere-ink"
             style={{
               opacity: p.to(sphereBodyReveal),
               transform: p.to((v) => `translateY(${(1 - sphereBodyReveal(v)) * 2.5}vmin)`),

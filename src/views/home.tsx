@@ -11,22 +11,39 @@ import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 import { MobilePortfolio } from "@/views/home/mobile-portfolio";
 import { MobileShowreel } from "@/views/home/mobile-showreel";
+import { CtaSection } from "@/views/home/cta-section";
 
-export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => (
-  <>
-    <PortfolioHeader lang={lang} />
-    <main className="bg-white">
-      <PortfolioHero lang={lang} />
-      
-      {/* The new immersive experience from AI Studio */}
-      <div className="relative z-20">
-        <div className="max-sm:hidden">
-          <ShowreelStage content={lang === "en" ? homeContentEn : homeContent} />
+export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => {
+  const content = lang === "en" ? homeContentEn : homeContent;
+  return (
+    <>
+      <PortfolioHeader lang={lang} />
+      <main className="bg-white">
+        <PortfolioHero lang={lang} />
+
+        {/* The new immersive experience from AI Studio */}
+        <div className="relative z-20">
+          <div className="max-sm:hidden">
+            <ShowreelStage content={content} />
+          </div>
+          {/* CTA — a normal section after the pinned stage (desktop/tablet; mobile
+              has it at the end of MobilePortfolio). */}
+          <div className="max-sm:hidden">
+            <CtaSection
+              lang={lang}
+              heading={content.cta.heading}
+              headingFaded={content.cta.headingFaded}
+              button={content.cta.button}
+              href={content.cta.href}
+              reviewsLabel={content.cta.reviewsLabel}
+              reviewsHref={content.cta.reviewsHref}
+            />
+          </div>
+          <MobileShowreel content={content} />
+          <MobilePortfolio content={content} lang={lang} />
         </div>
-        <MobileShowreel content={lang === "en" ? homeContentEn : homeContent} />
-        <MobilePortfolio content={lang === "en" ? homeContentEn : homeContent} lang={lang} />
-      </div>
-    </main>
-    <PortfolioFooter lang={lang} />
-  </>
-);
+      </main>
+      <PortfolioFooter lang={lang} />
+    </>
+  );
+};

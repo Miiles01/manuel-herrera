@@ -68,7 +68,7 @@ export const HeroCard = memo(({ lines, image, imageAlt, bottomBlock }: HeroCardP
           the hero shader is hidden in the final (carousel) state. */}
       <div className="pointer-events-none absolute inset-0 z-[6] [perspective:1400px]">
         <animated.div
-          className="absolute left-1/2 top-1/2 overflow-hidden rounded-slider shadow-2xl will-change-transform"
+          className="absolute left-1/2 top-1/2 overflow-hidden shadow-2xl will-change-transform"
           style={{
             width: "var(--hero-photo-w)",
             height: "var(--hero-photo-h)",

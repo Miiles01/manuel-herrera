@@ -61,7 +61,7 @@ export interface ShowreelGeo {
 }
 
 const DESKTOP: ShowreelGeo = {
-  trackVh: 1760,
+  trackVh: 742, // scroll gallery + star + "Piensa diferente" (timeline 0 → 1750)
   cardWVmin: 42,
   cardHVmin: 62,
   carouselRVmin: 27,
@@ -76,7 +76,7 @@ const DESKTOP: ShowreelGeo = {
 // Portrait tablet (~640–1024px). Cards grow toward the narrow width; headings
 // shrink so the nowrap sphere titles stop overflowing.
 const TABLET: ShowreelGeo = {
-  trackVh: 1500,
+  trackVh: 742, // same as desktop: the gallery entry is tuned to this ratio (timeline.ts VIEWPORT_V)
   cardWVmin: 54,
   cardHVmin: 80,
   carouselRVmin: 35,

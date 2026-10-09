@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import { animated, useTransition } from "@react-spring/web";
 import Image from "next/image";
 
-const TESTIMONIALS = [
+export interface Testimonial {
+  text: string;
+  author: string;
+  role: string;
+  image?: string;
+}
+
+export const TESTIMONIALS: Testimonial[] = [
   {
     text: "Manu es un apasionado del marketing que siempre va un paso más allá. Trabajamos juntos en varios proyectos académicos y su capacidad para aportar valor y superar las expectativas fue una constante. Su dedicación, creatividad y enfoque en resultados lo distinguen de los demás. Recomiendo totalmente su perfil para cualquier reto profesional en el área comercial o de mercadotecnia.",
     author: "Marlene Rodriguez",
@@ -49,7 +56,7 @@ const TESTIMONIALS = [
   }
 ];
 
-const TESTIMONIALS_EN = [
+export const TESTIMONIALS_EN: Testimonial[] = [
   {
     text: "Manuel is a professional in every sense of the word, very passionate about his work, dedicated, and organized. Without a doubt, he makes incredible designs that exceed any brand's expectations.",
     author: "Ana Laura Garcia",

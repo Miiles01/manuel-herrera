@@ -38,7 +38,6 @@ export const MobilePortfolio = ({ content, lang = "es" }: { content: any, lang?:
 
       <div className="w-full mt-24 relative">
         <CtaBlock
-          p={null as any}
           heading={content.cta.heading}
           headingFaded={content.cta.headingFaded}
           sub={content.cta.sub}

@@ -10,6 +10,53 @@ consequences. Use [[templates/adr-note]] for new entries. Newest first.
 
 ---
 
+## ADR-0025 — Page transitions on the View Transitions API (+ image reveal)
+
+- **Status:** Accepted
+- **Date:** 2026-10-08
+
+**Context.** Navigating between pages re-ran the intro loader (a "Manu" curtain
+with a per-letter split) — slow, and it read like a full reload. The goal was the
+Codrops *PageTransitions* "Different easing / from bottom" effect (current page
+`moveToTop .7s ease-in-out`, on top; new page `moveFromBottom .6s ease`) without
+showing a half-rendered page when a route is slow, and with images — the slow
+part of a portfolio — appearing as they load rather than blocking the page.
+
+**Decision.**
+1. **The intro loader stays for the first visit only.** Navigations
+   (`TransitionLink` → `usePageTransition`) go through `document.startViewTransition`
+   in `GlobalLoader`: the browser freezes a snapshot of the old page, `router.push`
+   renders the new route behind it, and the update resolves when `usePathname`
+   reports the target (not on a rAF — rendering is paused during the update).
+2. **The slide is driven from JS** with the Web Animations API on
+   `::view-transition-old(root)` / `::view-transition-new(root)`. First the Codrops
+   "from bottom" push; then, after Haven, a cover: the new page rises on top
+   (`SLIDE_IN`), the old one drifts up 20% and darkens underneath (`SLIDE_OUT`,
+   `brightness(OUT_DIM)` ≈ a 35% black overlay), 1s easeInOutQuart. `globals.css`
+   only switches off the UA cross-fade and puts the new page on top. The navbar has `view-transition-name: site-nav` so it stays put;
+   the logo slides with the page (its `mix-blend-difference` needs the page under it).
+3. **Slow routes don't freeze the screen:** after `NAV_BUDGET_MS` (3.5 s) the slide
+   is skipped and the page appears as soon as it is ready. No support / reduced
+   motion → plain navigation + image reveal.
+4. **Image reveal** (`components/common/image-reveal.ts`): the new page's `main img`
+   start hidden; cached ones fade up (32px, 0.9s, ease-out-quint) in a 75ms
+   stagger when the slide lands, the rest the moment each one loads (lazy ones as
+   you scroll to them). A MutationObserver picks up images rendered later. Text
+   keeps its own entrance animations.
+
+**Exception to ADR-0002 (spring-only motion).** Springs can't drive the
+view-transition pseudo-elements, and the reveal must run on arbitrary images
+across pages; both use WAAPI on compositor-only properties (transform/opacity).
+`GlobalLoader` already used GSAP for the intro curtain, so this stays within the
+one component that owns page-level motion. Elsewhere the spring rule still holds.
+
+**Consequences.** Browsers abort a view transition while the tab is hidden (so it
+can't be checked in a hidden preview pane). In `next dev` the first visit to a
+route compiles on demand and can exceed the budget — production prefetches
+`<Link>` targets, so the slide normally starts instantly there.
+
+---
+
 ## ADR-0024 — Responsive Showreel geometry (one table, CSS-var + numeric-`geo` delivery)
 
 - **Status:** Accepted

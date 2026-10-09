@@ -48,6 +48,19 @@ export interface ShowreelContent {
       avatars: string[];
     };
   };
+  /** Scroll gallery under the hero: a centred frame that grows with the scroll
+   *  while project covers flick through it; the star sits inside it. */
+  gallery: {
+    /** Labels at the frame's sides. */
+    left: string;
+    /** Word that replaces the mouse cursor over the frame. */
+    cursor: string;
+    /** Where a click on the frame goes (the work page). */
+    href: string;
+    right: string;
+    /** Covers shown in order as the frame grows (the last one stays). */
+    images: string[];
+  };
   catalistDark: CatalistContent;
   catalistLight: CatalistContent;
   /** CTA pinned under the 4-card carousel (the second block). */
@@ -69,6 +82,9 @@ export interface ShowreelContent {
     items: PortfolioItem[];
   };
   cta: {
+    /** Link under the testimonials carousel. */
+    reviewsLabel: string;
+    reviewsHref: string;
     heading: string;
     /** Second heading line, rendered semi-transparent (like the hero subtitle). */
     headingFaded: string;
@@ -106,6 +122,24 @@ export const homeContent: ShowreelContent = {
       rightText: "11 años creando",
       avatars: []
     }
+  },
+  gallery: {
+    left: "Crear",
+    cursor: "Ver",
+    href: "/es/trabajo",
+    right: "Escalar",
+    images: [
+      "/proyectos/Original/portada-1.webp",
+      "/proyectos/Colorfit/portada-1.webp",
+      "/proyectos/Erpxtender/portada-1.webp",
+      "/proyectos/Mar-Vic/portada-1.webp",
+      "/proyectos/Jambu/portada-1.webp",
+      "/proyectos/Tularosa/portada-1.webp",
+      "/proyectos/the-decant-society/portada-home.webp",
+      "/proyectos/virreinal-tepeyac/portada-home.webp",
+      "/proyectos/Miiles/portada-1.webp",
+      "/proyectos/Naabi-Kanabi/portada-home-v2.webp",
+    ],
   },
   catalistDark: {
     url: "estrategia",
@@ -184,6 +218,8 @@ export const homeContent: ShowreelContent = {
     sub: "",
     button: "Ver proyectos",
     href: "/es/trabajo",
+    reviewsLabel: "Reseñas de mi LinkedIn",
+    reviewsHref: "https://www.linkedin.com/in/manuel-herrera-perfil/details/recommendations/",
   },
 };
 
@@ -205,6 +241,24 @@ export const homeContentEn: ShowreelContent = {
       rightText: "11 years creating",
       avatars: []
     }
+  },
+  gallery: {
+    left: "Create",
+    cursor: "View",
+    href: "/en/work",
+    right: "Scale",
+    images: [
+      "/proyectos/Original/portada-1.webp",
+      "/proyectos/Colorfit/portada-1.webp",
+      "/proyectos/Erpxtender/portada-1.webp",
+      "/proyectos/Mar-Vic/portada-1.webp",
+      "/proyectos/Jambu/portada-1.webp",
+      "/proyectos/Tularosa/portada-1.webp",
+      "/proyectos/the-decant-society/portada-home.webp",
+      "/proyectos/virreinal-tepeyac/portada-home.webp",
+      "/proyectos/Miiles/portada-1.webp",
+      "/proyectos/Naabi-Kanabi/portada-home-v2.webp",
+    ],
   },
   catalistDark: {
     ...homeContent.catalistDark,
@@ -276,5 +330,7 @@ export const homeContentEn: ShowreelContent = {
     sub: "",
     button: "View projects",
     href: "/en/work",
+    reviewsLabel: "Reviews on my LinkedIn",
+    reviewsHref: "https://www.linkedin.com/in/manuel-herrera-perfil/details/recommendations/",
   },
 };

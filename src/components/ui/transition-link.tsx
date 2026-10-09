@@ -14,7 +14,15 @@ interface TransitionLinkProps extends LinkProps {
 export const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>(
   function TransitionLink({ children, href, className, ...props }, ref) {
   const pathname = usePathname();
+  const router = useRouter();
   const startTransition = usePageTransition((s) => s.startTransition);
+
+  // Warm the destination as soon as the visitor shows intent (hover / focus), so
+  // by the click its route is ready and the page transition starts right away
+  // instead of freezing on the old page while the route loads.
+  const warm = () => {
+    if (href.startsWith("/") && href !== pathname) router.prefetch(href);
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (pathname === href) {
@@ -32,7 +40,7 @@ export const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>
   };
 
   return (
-    <Link ref={ref} href={href} onClick={handleClick} className={className} {...props}>
+    <Link ref={ref} href={href} onClick={handleClick} onMouseEnter={warm} onFocus={warm} className={className} {...props}>
       {children}
     </Link>
   );

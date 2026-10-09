@@ -2,12 +2,11 @@
 
 import { animated, type SpringValue } from "@react-spring/web";
 import { memo } from "react";
-import { ctaReveal } from "@/utils/showreel/timeline";
 import { TransitionLink } from "@/components/ui/transition-link";
 
 export interface CtaBlockProps {
-  /** Global scroll spring (0→1). */
-  p: SpringValue<number>;
+  /** Unused since the CTA became a normal section (kept optional for callers). */
+  p?: SpringValue<number> | null;
   heading: string;
   /** Second heading line, rendered semi-transparent (like the hero subtitle). */
   headingFaded: string;
@@ -17,11 +16,10 @@ export interface CtaBlockProps {
 }
 
 /**
- * Call-to-action overlaid on the final chrome-star block. Left-aligned copy (the
- * star sits to the right of the frame) that fades + rises in as the camera flies
- * into the block — driven by the global spring (`ctaReveal`), no CSS transition.
- * Heading uses the hero-H1 scale (`7vw`) and breaks onto two lines, the second
- * one semi-transparent like the hero subtitle.
+ * Call-to-action: left-aligned copy + button, testimonials on the right. Fills
+ * its positioned parent on desktop (the CTA section in home.tsx); stacks on
+ * mobile. Heading uses the hero-H1 scale (`7vw`) and breaks onto two lines, the
+ * second one semi-transparent like the hero subtitle.
  */
 // `memo`: props are stable, so it mounts once and its interpolations are never
 // re-created by the stage's visibility re-renders (avoids a one-frame reset).

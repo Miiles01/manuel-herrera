@@ -24,12 +24,18 @@
 import { PERSP } from "@/utils/showreel/geometry";
 
 // ── Track / progress geometry ──────────────────────────────────────────────
-// The hero → carousel → sphere intro used to occupy virtual scroll 0..800vh. The
-// carousel is gone, so the timeline now STARTS at `VSCROLL_START` (the star
-// appearing on the hero photo) and every later threshold keeps its absolute value.
-const VSCROLL_START = 600;
-const VSCROLL_MAX = 4750; // virtual scroll (vh) reached at p = 1
-export const TRACK_VH = 1760; // total scroll-track height (vh) on desktop
+// The timeline starts at 0: the hero holds, then the scroll gallery grows out of
+// the centre (0..800vh of virtual scroll) with the star inside it, and from 800vh
+// on everything keeps its original absolute thresholds (star grows → sphere →
+// portfolio → camera flight). The track grew in proportion (geometry.ts) so the
+// later scenes keep their pace.
+const VSCROLL_START = 0;
+// The timeline now ENDS on the "Piensa diferente" block (fully revealed by ~1480,
+// then a short hold): the featured-projects carousel, the scattered image grid and
+// the camera flight to the CTA were removed — the CTA is a normal page section
+// after the stage. Their thresholds below are kept but never reached.
+const VSCROLL_MAX = 1750; // virtual scroll (vh) reached at p = 1
+export const TRACK_VH = 742; // total scroll-track height (vh) on desktop
 const SCROLL_COMPRESS = 0.4;
 
 // Virtual-scroll thresholds (vh), identical to the original derivation.
@@ -59,9 +65,27 @@ const vScroll = (p: number) => {
 };
 const gp = (p: number) => clamp01(vScroll(p) / OLD_MAX);
 
-// Phase progresses (gp-relative). Only the star phases remain: the star appears
-// on the hero photo (gp 30 – 40%), then grows to cover the screen (40 – 75%).
-const starAppear = (p: number) => clamp01((gp(p) - 0.3) / 0.1); // 30 – 40%
+// Phase progresses. The scroll gallery takes the first stretch (vScroll):
+//   0 – 273    the hero scrolls up and away while the gallery section (small
+//              frame + labels) scrolls in from below, at exactly the native
+//              scroll speed — no hold, so it never feels "caught" (see below)
+//   273 – 710  pinned: the frame grows to full size while covers flick through
+//   710 – 760  the last cover fills the screen, no star yet
+//   760 – 1500 the star is born at 0 and grows continuously over the screen
+//              (one motion: 0 → huge, no intermediate size or pause)
+/** Virtual vh that one viewport of real scroll covers. Progress runs "top top" →
+ *  "bottom bottom", i.e. over (trackVh − 100)vh of real scroll, so this is
+ *  VSCROLL_MAX / (742 − 100) × 100 ≈ 273. Moving the hero by 100vh over it keeps
+ *  it in step with the page, so entering the stage reads as ordinary scrolling.
+ *  Keep in sync with `trackVh` in geometry.ts (desktop and tablet share it). */
+const VIEWPORT_V = (VSCROLL_MAX / (742 - 100)) * 100;
+const galleryEnter = (p: number) => clamp01(vScroll(p) / VIEWPORT_V); // 0 – 273
+const galleryGrowRaw = (p: number) =>
+  clamp01((vScroll(p) - VIEWPORT_V) / (710 - VIEWPORT_V)); // 273 – 710
+export const galleryGrow = (p: number) => smooth(galleryGrowRaw(p));
+/** Star growth (0 → 1): starts once the last cover has filled the screen and
+ *  runs until the screen is covered (vScroll 760 → 1500). */
+const starGrow = (p: number) => clamp01((vScroll(p) - 760) / 740);
 export const phase4 = (p: number) => clamp01((gp(p) - 0.4) / 0.35); // 40 – 75%
 
 // ── Hero card ──────────────────────────────────────────────────────────────
@@ -70,30 +94,55 @@ export const phase4 = (p: number) => clamp01((gp(p) - 0.4) / 0.35); // 40 – 75
 export const HERO_CARD_WIDTH = "calc(100vw - var(--sr-hero-pad))";
 export const HERO_CARD_HEIGHT = "calc(100vh - var(--sr-hero-pad))";
 export const card1Opacity = (p: number) => (gp(p) >= 0.75 ? 0 : 1);
+/** Hero card scrolls up out of the stage as the gallery section comes in. */
+export const heroCardTransform = (p: number) => `translateY(${-galleryEnter(p) * 100}vh)`;
 
-/** Sphere panel (star mask + particle sphere) fades with the portfolio fly-in. */
-export const card4Opacity = (p: number) => {
-  const sphereFade = clamp01((vScroll(p) - PS) / 400);
-  return 1 - sphereFade;
+/** Sphere panel (star mask + "Piensa diferente"): always on — the star is simply
+ *  size 0 until it starts growing. The page then scrolls on to the CTA section. */
+export const card4Opacity = () => 1;
+
+// ── Scroll gallery (frame that grows from the centre) ──────────────────────
+/** Frame scale: small in the centre → the full screen (the last cover is
+ *  full-bleed). The frame is 100vw × 100dvh at scale 1. */
+const GALLERY_MIN_SCALE = 0.38;
+export const galleryScale = (p: number) =>
+  GALLERY_MIN_SCALE + (1 - GALLERY_MIN_SCALE) * galleryGrow(p);
+export const galleryOpacity = (p: number) => (gp(p) >= 0.75 ? 0 : 1);
+/** The whole gallery section scrolls in from below the stage, then pins. */
+export const galleryEnterTransform = (p: number) => `translateY(${(1 - galleryEnter(p)) * 100}vh)`;
+/** Which cover is showing (0 … count-1): flicks fast while the frame grows and
+ *  settles on the last one once it's full. */
+export const galleryIndex = (p: number, count: number) =>
+  Math.min(count - 1, Math.floor(galleryGrowRaw(p) * count));
+/** The "Ver" cursor works over the frame once the section is (mostly) in and
+ *  until the star starts covering it. */
+export const galleryCursorActive = (p: number) => galleryEnter(p) > 0.5 && starGrow(p) < 0.2;
+/** Side labels slide away from the frame as it grows, and fade near full size. */
+export const galleryLabelOpacity = (p: number) =>
+  1 - smooth(clamp01((galleryGrowRaw(p) - 0.75) / 0.2));
+
+// ── Star mask (appears on the last gallery cover, then grows over the screen) ─
+/** Star size (vmin): one continuous growth from 0 to past the screen edges —
+ *  slow at first, then accelerating (cubic). */
+const STAR_MAX_VMIN = 1500;
+export const starMaskSize = (p: number) => `${Math.pow(starGrow(p), 3) * STAR_MAX_VMIN}vmin`;
+
+/** Star colour: black as it starts growing, turning into --sphere-surface
+ *  (#FDFDFD) between 20% and 60% of its growth — fully light before the
+ *  "Piensa diferente" copy (dark ink) comes in. Mixed from the CSS tokens. */
+export const starPanelColor = (p: number) => {
+  const t = smooth(clamp01((starGrow(p) - 0.2) / 0.4));
+  return `color-mix(in srgb, var(--sphere-surface) ${(t * 100).toFixed(1)}%, var(--sphere-start))`;
 };
 
-// ── Star mask (grows out of the hero photo) ────────────────────────────────
-/** Star size (vmin) once it has appeared on the photo, before it grows. */
-const STAR_BASE_VMIN = 18;
-export const starMaskSize = (p: number) =>
-  `${STAR_BASE_VMIN * smooth(starAppear(p)) + Math.pow(phase4(p), 4) * 1500}vmin`;
+/** Star rotation (deg): turns 180° while it grows. */
+export const starSpin = (p: number) => smooth(starGrow(p)) * 180;
 
-/** Star rotation (deg): spins in as it appears, then turns 180° as it grows. */
-export const starSpin = (p: number) => (smooth(starAppear(p)) - 1) * 90 + smooth(phase4(p)) * 180;
-
-export const blackScreenTransform = (p: number) => {
-  const up = clamp01((vScroll(p) - PS) / 400);
-  const upY = smooth(up) * 100; // vh — sphere block scrolls up to meet portfolio
-  return `translate(-50%, calc(-50% - ${upY}vh)) rotate(${starSpin(p)}deg)`;
-};
+export const blackScreenTransform = (p: number) =>
+  `translate(-50%, -50%) rotate(${starSpin(p)}deg)`;
 export const sphereSceneTransform = (p: number) =>
   `translate(-50%, -50%) rotate(${-starSpin(p)}deg)`;
-export const sphereLogoEase = (p: number) => smooth(starAppear(p));
+export const sphereLogoEase = (p: number) => smooth(starGrow(p));
 
 /** Supporting copy in the sphere block fades/rises in just after the headings
  *  land (gp 0.64→0.74). */
@@ -129,15 +178,9 @@ export const sphereDisperse = (p: number) => smooth(clamp01((vScroll(p) - (PS - 
  * sphere fully opens (gp 0.72→0.75). Fades back to 1 (white) after the portfolio
  * ends (vScroll 3100→3300) so the camera flight happens over white.
  */
-export const stageBackdropOpacity = (p: number) => {
-  const v = vScroll(p);
-  // Fades out (white -> black) between 1440 and 1500
-  const fadeOutWhite = clamp01((1500 - v) / 60);
-  // Fades in (black -> white) between 3100 and 3300 (after portfolio)
-  const fadeInWhite = clamp01((v - 3100) / 200);
-  
-  return clamp01(fadeOutWhite + fadeInWhite);
-};
+export const stageBackdropOpacity = () => 1;
+// The stage used to fade to black under the (black) star panel. The panel is now
+// near-white (--sphere-surface), so the backdrop simply stays white throughout.
 
 // ── Unified aurora background (sphere + portfolio) ──────────────────────────
 // One pinned mesh-gradient ("northern lights") shared by the sphere scene and
@@ -226,8 +269,9 @@ export const sceneVisibility = (p: number): SceneVisibility => {
     // Unified aurora backdrop for the sphere + portfolio blocks (the portfolio
     // has no canvas of its own now, so this also covers its range).
     aurora: v > 1000 && v < PF_END + 350,
-    // Sphere is revealed from phase 3 and stays until the camera flies past it.
-    sphere: g > 0.28 && v < GRID_START + 400,
+    // The star (sphere panel) appears on the last gallery cover and stays until
+    // the camera flies past it.
+    sphere: v > 600 && v < GRID_START + 400,
     // Target star: the camera-flight + final block.
     target: v > GRID_START - 300,
     // Portfolio cards: live across the portfolio scroll range (with a lead-in
