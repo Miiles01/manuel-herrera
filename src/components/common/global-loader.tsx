@@ -39,6 +39,10 @@ const SLIDE_IN = { duration: 1000, easing: PAGE_EASE };
 const SLIDE_OUT = { duration: 1000, easing: PAGE_EASE };
 /** How far the outgoing page drifts up, and how dark it gets (1 = untouched). */
 const OUT_DRIFT = "-20%";
+/** Phones: the outgoing page stays put (only darkens). If it drifted up, a band
+ *  of the black backdrop would open between it and the incoming page — on a
+ *  white site that read as a flash. */
+const outDrift = () => (window.matchMedia("(max-width: 639px)").matches ? "0%" : OUT_DRIFT);
 const OUT_DIM = 0.65; // old page opacity over black ≈ a black overlay at 35%
 
 // ─── Intro timing (same choreography as before, now compositor-driven) ──────
@@ -247,7 +251,7 @@ export function GlobalLoader() {
         const root = document.documentElement;
         root.animate(
           {
-            transform: ["translateY(0)", `translateY(${OUT_DRIFT})`],
+            transform: ["translateY(0)", `translateY(${outDrift()})`],
             opacity: [1, OUT_DIM],
           },
           { ...SLIDE_OUT, fill: "both", pseudoElement: "::view-transition-old(root)" },

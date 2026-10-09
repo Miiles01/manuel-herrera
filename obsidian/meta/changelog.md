@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (No flash on page change, phones)
+
+- `::view-transition-new(root)` now starts at `translateY(100%)` in CSS, so the
+  incoming page is below the screen from the first frame — iOS Safari could show it
+  in place for a frame before GlobalLoader's animation attached (a quick flash).
+- On phones the outgoing page no longer drifts up (only darkens): its drift opened
+  a band of the black backdrop between the two pages. Desktop keeps the drift.
+
 ## 2026-10-09 (White page canvas — no black when over-scrolling)
 
 - `html`/`body` used `--background` (#000, from the original dark showreel), so on

@@ -242,4 +242,8 @@ html.lenis body {
 }
 ::view-transition-new(root) {
   z-index: 2;
+  /* Start state, so the incoming page is already below the screen on the very
+     first frame of the transition — before GlobalLoader's animation attaches
+     (on iOS Safari that can be a frame later, which flashed the new page). */
+  transform: translateY(100%);
 }
