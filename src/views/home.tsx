@@ -10,6 +10,8 @@ import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 import { CtaSection } from "@/views/home/cta-section";
+import { MobileShowreel } from "@/views/home/mobile-showreel";
+import { MobilePortfolio } from "@/views/home/mobile-portfolio";
 
 export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => {
   const content = lang === "en" ? homeContentEn : homeContent;
@@ -19,11 +21,17 @@ export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => {
       <main className="bg-white">
         <PortfolioHero lang={lang} />
 
-        {/* The scroll experience — same on phones, tablets and desktop (phones
-            used to get a separate static page). */}
         <div className="relative z-20">
-          <ShowreelStage content={content} />
-          {/* CTA — a normal section after the pinned stage. */}
+          {/* Tablet / desktop: the pinned scroll experience (gallery, star,
+              "Piensa diferente"). */}
+          <div className="max-sm:hidden">
+            <ShowreelStage content={content} />
+          </div>
+          {/* Phones: a plain white version, no animation — the hero card,
+              featured projects as an image list, and the experience. */}
+          <MobileShowreel content={content} />
+          <MobilePortfolio content={content} lang={lang} />
+          {/* CTA (testimonials carousel) — shared by every screen size. */}
           <CtaSection
             lang={lang}
             heading={content.cta.heading}
