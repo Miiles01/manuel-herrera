@@ -9,8 +9,6 @@ import { ShowreelStage } from "@/views/home/showreel-stage";
 import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
-import { MobilePortfolio } from "@/views/home/mobile-portfolio";
-import { MobileShowreel } from "@/views/home/mobile-showreel";
 import { CtaSection } from "@/views/home/cta-section";
 
 export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => {
@@ -21,26 +19,20 @@ export const HomeView = ({ lang = "es" }: { lang?: "es" | "en" }) => {
       <main className="bg-white">
         <PortfolioHero lang={lang} />
 
-        {/* The new immersive experience from AI Studio */}
+        {/* The scroll experience — same on phones, tablets and desktop (phones
+            used to get a separate static page). */}
         <div className="relative z-20">
-          <div className="max-sm:hidden">
-            <ShowreelStage content={content} />
-          </div>
-          {/* CTA — a normal section after the pinned stage (desktop/tablet; mobile
-              has it at the end of MobilePortfolio). */}
-          <div className="max-sm:hidden">
-            <CtaSection
-              lang={lang}
-              heading={content.cta.heading}
-              headingFaded={content.cta.headingFaded}
-              button={content.cta.button}
-              href={content.cta.href}
-              reviewsLabel={content.cta.reviewsLabel}
-              reviewsHref={content.cta.reviewsHref}
-            />
-          </div>
-          <MobileShowreel content={content} />
-          <MobilePortfolio content={content} lang={lang} />
+          <ShowreelStage content={content} />
+          {/* CTA — a normal section after the pinned stage. */}
+          <CtaSection
+            lang={lang}
+            heading={content.cta.heading}
+            headingFaded={content.cta.headingFaded}
+            button={content.cta.button}
+            href={content.cta.href}
+            reviewsLabel={content.cta.reviewsLabel}
+            reviewsHref={content.cta.reviewsHref}
+          />
         </div>
       </main>
       <PortfolioFooter lang={lang} />

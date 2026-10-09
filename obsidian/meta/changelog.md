@@ -8,6 +8,19 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (Phones get the same home as desktop)
+
+- Phones (<640px) used to get a separate static page (`MobileShowreel` + the dark
+  `MobilePortfolio`: featured-projects list + old CTA). They now get the same
+  experience as tablet/desktop: the pinned stage (hero → scroll gallery → star →
+  "Piensa diferente") and the new `CtaSection` with the testimonials carousel.
+- Adapted: the timeline no longer stops early on phones (one `vScroll` for all),
+  `trackVh` is 742 everywhere (the gallery entry is tuned to it), the gallery frame
+  starts narrower on phones (scale 0.3 → a tall strip, labels fit beside it), and
+  "Piensa diferente" shows on phones too, top-left above the experience list.
+- `MobileShowreel`, `MobilePortfolio`, `CtaBlock` and `Portfolio` are no longer
+  rendered by the home. Checked at 375px: no horizontal scroll anywhere.
+
 ## 2026-10-09 ("Ver" cursor fixes + on the work page)
 
 - **Home:** the "Ver" cursor no longer shows over the navbar, its open menu or the

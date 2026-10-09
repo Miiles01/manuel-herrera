@@ -56,13 +56,9 @@ const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** Smoothstep (cubic hermite). */
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-const vScroll = (p: number) => {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-  // On mobile, the 3D timeline stops entirely at OLD_MAX (2000), which is the end of the Sphere phase.
-  // The subsequent Portfolio and CTA phases are rendered statically in a standard scrolling flow.
-  if (isMobile) return clamp01(p) * OLD_MAX;
-  return VSCROLL_START + clamp01(p) * (VSCROLL_MAX - VSCROLL_START);
-};
+// Phones run the same timeline as desktop/tablet now (they used to stop at
+// OLD_MAX with a separate static mobile page).
+const vScroll = (p: number) => VSCROLL_START + clamp01(p) * (VSCROLL_MAX - VSCROLL_START);
 const gp = (p: number) => clamp01(vScroll(p) / OLD_MAX);
 
 // Phase progresses. The scroll gallery takes the first stretch (vScroll):
@@ -105,8 +101,13 @@ export const card4Opacity = () => 1;
 /** Frame scale: small in the centre → the full screen (the last cover is
  *  full-bleed). The frame is 100vw × 100dvh at scale 1. */
 const GALLERY_MIN_SCALE = 0.38;
+/** Phones start narrower (a tall strip, not a near-square) so the side labels
+ *  have room next to it. */
+const GALLERY_MIN_SCALE_PHONE = 0.3;
+const minScale = () =>
+  typeof window !== "undefined" && window.innerWidth < 640 ? GALLERY_MIN_SCALE_PHONE : GALLERY_MIN_SCALE;
 export const galleryScale = (p: number) =>
-  GALLERY_MIN_SCALE + (1 - GALLERY_MIN_SCALE) * galleryGrow(p);
+  minScale() + (1 - minScale()) * galleryGrow(p);
 export const galleryOpacity = (p: number) => (gp(p) >= 0.75 ? 0 : 1);
 /** The whole gallery section scrolls in from below the stage, then pins. */
 export const galleryEnterTransform = (p: number) => `translateY(${(1 - galleryEnter(p)) * 100}vh)`;
