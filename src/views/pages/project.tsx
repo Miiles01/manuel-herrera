@@ -64,7 +64,7 @@ export default function ProjectPage() {
         </header>
 
         <div className="px-4 md:px-8 lg:px-12 mb-8 project-fade-up opacity-0">
-          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl bg-gray-100 relative group">
+          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl relative group">
             {project.images[0].src.endsWith('.mp4') ? (
               <video src={basePath + project.images[0].src} className="w-full h-auto object-cover" autoPlay loop muted playsInline />
             ) : (
@@ -97,7 +97,7 @@ export default function ProjectPage() {
         <div className="space-y-6 md:space-y-8">
           {project.images.slice(1).map((img, i) => (
             <div key={i} className="px-4 md:px-8 lg:px-12 project-fade-up opacity-0">
-              <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl bg-gray-100 relative group">
+              <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl relative group">
                 {img.src.endsWith('.mp4') ? (
                   <video src={basePath + img.src} className="w-full h-auto object-cover" autoPlay loop muted playsInline />
                 ) : (

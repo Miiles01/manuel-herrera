@@ -151,7 +151,7 @@ export const ScrollGallery = memo(({ p, left, right, cursor, href, images }: Scr
     >
       <animated.div
         ref={frameRef}
-        className="absolute left-1/2 top-1/2 overflow-hidden bg-gray-100"
+        className="absolute left-1/2 top-1/2 overflow-hidden"
         style={{ width: FRAME_W, height: FRAME_H, transform: s.frame }}
       >
         {images.map((src, i) => (

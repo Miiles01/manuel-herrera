@@ -8,6 +8,13 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (No grey boxes while images load)
+
+- Image wrappers on the work page, project pages and the gallery frame lost their
+  `bg-gray-100` placeholder: while an image loads (and waits for its fade-up from
+  `image-reveal.ts`) the page shows nothing there instead of a grey box, then the
+  image fades in.
+
 ## 2026-10-09 (Phones get the same home as desktop)
 
 - Phones (<640px) used to get a separate static page (`MobileShowreel` + the dark

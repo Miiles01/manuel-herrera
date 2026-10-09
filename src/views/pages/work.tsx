@@ -88,7 +88,7 @@ export default function WorkPage() {
             
             return (
               <div key={slug} id={slug} className="mb-28 md:mb-40 group project-item">
-                <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-gray-100 transition-all project-fade-up opacity-0">
+                <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] transition-all project-fade-up opacity-0">
                   <div className="aspect-[16/9] w-full overflow-hidden">
                     <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${cover}`} alt={title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
                   </div>
@@ -96,12 +96,12 @@ export default function WorkPage() {
                 
                 {secondary[0] && secondary[1] && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
-                    <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block overflow-hidden rounded-[2rem] bg-gray-100 transition-all project-fade-up opacity-0">
+                    <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block overflow-hidden rounded-[2rem] transition-all project-fade-up opacity-0">
                       <div className="aspect-[4/5] overflow-hidden">
                         <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${secondary[0]}`} alt={`${title} preview 1`} className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
                       </div>
                     </TransitionLink>
-                    <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block overflow-hidden rounded-[2rem] bg-gray-100 transition-all project-fade-up opacity-0">
+                    <TransitionLink href={`/en/project/${slug}`} data-cursor-label="View" className="block overflow-hidden rounded-[2rem] transition-all project-fade-up opacity-0">
                       <div className="aspect-[4/5] overflow-hidden">
                         <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${secondary[1]}`} alt={`${title} preview 2`} className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
                       </div>
