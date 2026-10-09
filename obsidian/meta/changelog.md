@@ -8,6 +8,15 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-09 (Page transition smooth on phones)
+
+- The outgoing page's darkening was an animated `filter: brightness()` on the
+  full-page snapshot — re-rasterised every frame, it stuttered on phones. It now
+  fades its opacity toward a black `::view-transition` backdrop
+  (`--transition-shade`): same look, GPU-composited.
+- `TransitionLink` also prefetches on `touchstart`, so on phones the next page
+  starts loading as the finger lands (there's no hover to warm it earlier).
+
 ## 2026-10-09 (Phones back to a plain version — on white)
 
 - Phones (<640px) no longer get the pinned stage (it didn't work well there). They

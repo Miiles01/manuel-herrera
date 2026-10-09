@@ -32,7 +32,7 @@ part of a portfolio — appearing as they load rather than blocking the page.
    `::view-transition-old(root)` / `::view-transition-new(root)`. First the Codrops
    "from bottom" push; then, after Haven, a cover: the new page rises on top
    (`SLIDE_IN`), the old one drifts up 20% and darkens underneath (`SLIDE_OUT`,
-   `brightness(OUT_DIM)` ≈ a 35% black overlay), 1s easeInOutQuart. `globals.css`
+   its opacity → `OUT_DIM` over a black `::view-transition` backdrop ≈ a 35% black overlay; a `brightness()` filter was tried first and stuttered on phones), 1s easeInOutQuart. `globals.css`
    only switches off the UA cross-fade and puts the new page on top. The navbar has `view-transition-name: site-nav` so it stays put;
    the logo slides with the page (its `mix-blend-difference` needs the page under it).
 3. **Slow routes don't freeze the screen:** after `NAV_BUDGET_MS` (3.5 s) the slide

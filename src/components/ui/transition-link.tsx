@@ -17,7 +17,8 @@ export const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>
   const router = useRouter();
   const startTransition = usePageTransition((s) => s.startTransition);
 
-  // Warm the destination as soon as the visitor shows intent (hover / focus), so
+  // Warm the destination as soon as the visitor shows intent (hover / focus /
+  // touching it on a phone — before the finger lifts), so
   // by the click its route is ready and the page transition starts right away
   // instead of freezing on the old page while the route loads.
   const warm = () => {
@@ -40,7 +41,7 @@ export const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>
   };
 
   return (
-    <Link ref={ref} href={href} onClick={handleClick} onMouseEnter={warm} onFocus={warm} className={className} {...props}>
+    <Link ref={ref} href={href} onClick={handleClick} onMouseEnter={warm} onFocus={warm} onTouchStart={warm} className={className} {...props}>
       {children}
     </Link>
   );

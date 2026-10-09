@@ -19,6 +19,7 @@
   --paper: #f5f1ec; /* off-white card/UI text */
   --paper-alt: #f3f1ec; /* portfolio section ink */
   --nav-ink: #1a1a1a; /* nav-pill links (on light pill) */
+  --transition-shade: #000000; /* page-transition backdrop (old page darkens toward it) */
   --sphere-start: #000000; /* star colour as it starts growing… */
   --sphere-surface: #fdfdfd; /* …turning into this: star reveal + "Piensa diferente" block */
   --sphere-ink: #111111; /* headings, copy and star logo on that surface */
@@ -224,6 +225,11 @@ html.lenis body {
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+/* Backdrop the outgoing page fades toward (its darkening, done with opacity so
+   it stays GPU-composited — smooth on phones). */
+::view-transition {
+  background-color: var(--transition-shade);
 }
 ::view-transition-old(root) {
   z-index: 1;

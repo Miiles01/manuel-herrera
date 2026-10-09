@@ -30,14 +30,16 @@ const NAV_BUDGET_MS = 3500;
 
 /** Page transition (after Haven, havenconstructions.com.au): the incoming page
  *  rises from below ON TOP and covers the old one; the outgoing page stays
- *  underneath, drifts up a little (parallax) and darkens — a soft black overlay,
- *  done as `brightness()` on its snapshot so nothing is added to the DOM. */
+ *  underneath, drifts up a little (parallax) and darkens — its snapshot fades
+ *  toward the black view-transition backdrop (globals.css). Opacity, not a
+ *  `filter`, so the GPU composites it: an animated filter over a full-page
+ *  snapshot is re-rasterised every frame and stuttered on phones. */
 const PAGE_EASE = "cubic-bezier(0.76, 0, 0.24, 1)"; // easeInOutQuart
 const SLIDE_IN = { duration: 1000, easing: PAGE_EASE };
 const SLIDE_OUT = { duration: 1000, easing: PAGE_EASE };
 /** How far the outgoing page drifts up, and how dark it gets (1 = untouched). */
 const OUT_DRIFT = "-20%";
-const OUT_DIM = 0.65; // ≈ a black overlay at 35%
+const OUT_DIM = 0.65; // old page opacity over black ≈ a black overlay at 35%
 
 // ─── Intro timing (same choreography as before, now compositor-driven) ──────
 const INTRO_WORD = "Manu";
@@ -246,7 +248,7 @@ export function GlobalLoader() {
         root.animate(
           {
             transform: ["translateY(0)", `translateY(${OUT_DRIFT})`],
-            filter: ["brightness(1)", `brightness(${OUT_DIM})`],
+            opacity: [1, OUT_DIM],
           },
           { ...SLIDE_OUT, fill: "both", pseudoElement: "::view-transition-old(root)" },
         );
