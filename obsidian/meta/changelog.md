@@ -8,6 +8,12 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (Naabi Kanabi: corrected tablet mockup)
+
+- The "Diagnóstico facial" tablet mockup had a garbled address bar (text overlapping
+  "naabikanabi.com"). Replaced with the corrected render as `nk-7-v2.webp` (new name so
+  cached copies of the old file are not served); `nk-7.webp` removed.
+
 ## 2026-10-09 (Project pages: no pop at the end of the transition)
 
 - Project pages fade their content up from opacity 0 (GSAP). Arriving through the

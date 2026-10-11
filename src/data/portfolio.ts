@@ -203,7 +203,7 @@ export const portfolioProjects: Record<string, Project> = {
     images: [
       { src: "portada-v2.webp", alt: "Naabi Kanabi — Cover", aspect: "wide" },
       {
-        src: "nk-7.webp",
+        src: "nk-7-v2.webp",
         alt: "Naabi Kanabi — Diagnóstico facial en tablet",
         aspect: "wide",
         cta: {
