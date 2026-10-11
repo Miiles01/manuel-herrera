@@ -110,6 +110,15 @@ export const portfolioProjects: Record<string, Project> = {
     ],
     images: [
       { src: "portada-1.webp", alt: "Miiles — Cover", aspect: "wide" },
+      {
+        src: "mockup-miiles-app.jpg",
+        alt: "Miiles — Home de miiles.app en un monitor",
+        aspect: "wide",
+        cta: {
+          label: { es: "Ver página", en: "View site" },
+          href: "https://miiles.app/"
+        }
+      },
       { src: "about-miiles.webp", alt: "Miiles — About", aspect: "wide" },
       { src: "logo.webp", alt: "Miiles — Logo", aspect: "wide" },
       { src: "isotipo.webp", alt: "Miiles — Isotipo", aspect: "wide" },
