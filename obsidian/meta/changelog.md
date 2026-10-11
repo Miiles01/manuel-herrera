@@ -13,6 +13,7 @@ This is a human-curated log — not a mirror of `git log`.
 - Miiles project: new monitor mockup of the miiles.app home (`mockup-miiles-app.jpg`,
   2560px) as the 2nd image, with a "Ver página / View site" button to
   https://miiles.app/ (same `cta` mechanism as Naabi Kanabi and Tulum).
+- Miiles project: removed the `mockup-app-web-2.webp` image (and its file).
 
 ## 2026-10-11 (Naabi Kanabi: corrected tablet mockup)
 
