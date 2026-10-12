@@ -23,7 +23,7 @@ import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition } from "@/hooks/use-page-transition";
 import { prepareImageReveal } from "@/components/common/image-reveal";
-import { usesPageSlide } from "@/utils/page-entrance";
+import { pageTransitionKind } from "@/utils/page-entrance";
 
 /** Longest a page transition waits for the next route before giving up on the
  *  slide and just swapping (browsers abort view-transition updates after ~4s). */
@@ -41,6 +41,8 @@ const SLIDE_OUT = { duration: 1000, easing: PAGE_EASE };
 /** How far the outgoing page drifts up, and how dark it gets (1 = untouched). */
 const OUT_DRIFT = "-20%";
 const OUT_DIM = 0.65; // old page opacity over black ≈ a black overlay at 35%
+/** Leaving the home: no slide, the new page just fades in over the old one. */
+const FADE_IN = { duration: 600, easing: "cubic-bezier(0.33, 1, 0.68, 1)" }; // easeOutCubic
 
 // ─── Intro timing (same choreography as before, now compositor-driven) ──────
 const INTRO_WORD = "Manu";
@@ -230,10 +232,10 @@ export function GlobalLoader() {
       finishTransition();
     };
 
-    // Leaving the home, phones, reduced motion or no support: a plain swap.
-    const slide = usesPageSlide(pathname);
-    usePageTransition.getState().setSlide(slide);
-    if (!slide) {
+    // Phones, reduced motion or no support: a plain swap. Leaving the home: a fade.
+    const kind = pageTransitionKind(pathname);
+    usePageTransition.getState().setSlide(kind !== "none");
+    if (kind === "none") {
       navigate().then(() => {
         toTop();
         stopReveal = prepareImageReveal()();
@@ -243,6 +245,10 @@ export function GlobalLoader() {
     }
 
     let startReveal: (() => () => void) | null = null;
+    const root = document.documentElement;
+    // Picks the fade's start state in globals.css (instead of the slide's).
+    root.dataset.pageTransition = kind;
+    const anims: Animation[] = [];
     const vt = document.startViewTransition(async () => {
       await navigate();
       if (timedOut) return; // still the old page — nothing to prepare yet
@@ -254,22 +260,34 @@ export function GlobalLoader() {
     vt.ready
       .then(() => {
         if (timedOut) { vt.skipTransition(); return; }
-        const root = document.documentElement;
-        root.animate(
-          {
-            transform: ["translateY(0)", `translateY(${OUT_DRIFT})`],
-            opacity: [1, OUT_DIM],
-          },
-          { ...SLIDE_OUT, fill: "both", pseudoElement: "::view-transition-old(root)" },
-        );
-        root.animate(
-          { transform: ["translateY(100%)", "translateY(0)"] },
-          { ...SLIDE_IN, fill: "both", pseudoElement: "::view-transition-new(root)" },
+        if (kind === "fade") {
+          anims.push(root.animate(
+            { opacity: [0, 1] },
+            { ...FADE_IN, fill: "both", pseudoElement: "::view-transition-new(root)" },
+          ));
+          return;
+        }
+        anims.push(
+          root.animate(
+            {
+              transform: ["translateY(0)", `translateY(${OUT_DRIFT})`],
+              opacity: [1, OUT_DIM],
+            },
+            { ...SLIDE_OUT, fill: "both", pseudoElement: "::view-transition-old(root)" },
+          ),
+          root.animate(
+            { transform: ["translateY(100%)", "translateY(0)"] },
+            { ...SLIDE_IN, fill: "both", pseudoElement: "::view-transition-new(root)" },
+          ),
         );
       })
       .catch(() => { /* transition skipped — the page is already swapped */ });
 
     vt.finished.finally(() => {
+      delete root.dataset.pageTransition;
+      // Filled animations outlive their pseudo-elements and would otherwise
+      // apply to the next transition's snapshots (a fade after a slide).
+      anims.forEach((a) => a.cancel());
       stopReveal = startReveal?.() ?? null;
       finish();
     });

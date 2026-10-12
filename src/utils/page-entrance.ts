@@ -3,18 +3,20 @@ import { usePageTransition } from "@/hooks/use-page-transition";
 /** The home pages (one per language). */
 const isHome = (path: string) => path === "/es" || path === "/en" || path === "/";
 
+export type PageTransitionKind = "slide" | "fade" | "none";
+
 /**
- * Whether a navigation gets the page slide (View Transitions). Off when leaving
- * the home (a plain page change), on phones (< 640px), and when the browser
- * lacks support or the visitor prefers reduced motion. Between the other pages
- * (work ↔ projects, project ↔ project, back to the home) tablet / desktop
- * keep the slide.
+ * How a navigation is animated (View Transitions):
+ * - "fade": leaving the home — a simple cross-fade into the new page.
+ * - "slide": between the other pages (work ↔ projects, project ↔ project, back
+ *   to the home).
+ * - "none": phones (< 640px), no browser support, or reduced motion — a plain swap.
  */
-export function usesPageSlide(fromPath: string): boolean {
-  if (isHome(fromPath)) return false;
-  if (typeof document === "undefined" || !document.startViewTransition) return false;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return !window.matchMedia("(max-width: 639px)").matches;
+export function pageTransitionKind(fromPath: string): PageTransitionKind {
+  if (typeof document === "undefined" || !document.startViewTransition) return "none";
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return "none";
+  if (window.matchMedia("(max-width: 639px)").matches) return "none";
+  return isHome(fromPath) ? "fade" : "slide";
 }
 
 /**

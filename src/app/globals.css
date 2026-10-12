@@ -247,3 +247,12 @@ html.lenis body {
      (on iOS Safari that can be a frame later, which flashed the new page). */
   transform: translateY(100%);
 }
+/* Leaving the home: a cross-fade instead of the slide — the new page starts in
+   place, invisible, over the old one (no dark backdrop showing through). */
+:root[data-page-transition="fade"]::view-transition {
+  background-color: var(--page);
+}
+:root[data-page-transition="fade"]::view-transition-new(root) {
+  transform: none;
+  opacity: 0;
+}

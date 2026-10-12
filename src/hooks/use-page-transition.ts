@@ -19,9 +19,10 @@ interface TransitionState {
   isTransitioning: boolean;
   targetUrl: string | null;
   label: string;
-  /** Whether the current navigation plays the page slide (set by GlobalLoader
-   *  when it starts; see usesPageSlide). Pages read it to decide whether their
-   *  own entrance animation would be hidden under the slide. */
+  /** Whether the current navigation is animated with a page snapshot — the
+   *  slide or the fade (set by GlobalLoader when it starts; see pageTransitionKind).
+   *  Pages read it to decide whether their own entrance animation would be
+   *  hidden under it. */
   slide: boolean;
   setSlide: (slide: boolean) => void;
   startTransition: (url: string) => void;
