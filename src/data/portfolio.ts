@@ -29,60 +29,6 @@ export interface Project {
 }
 
 export const portfolioProjects: Record<string, Project> = {
-  tulum: {
-    slug: "tulum",
-    title: "Tulum",
-    folder: "Tulum",
-    subtitle: {
-      es: "Desarrollo de identidad visual y diseño estratégico.",
-      en: "Visual identity development and strategic design.",
-    },
-    industry: {
-      es: "Restaurante",
-      en: "Restaurant",
-    },
-    role: {
-      es: "Dirección de Arte y Diseño Web",
-      en: "Art Direction & Web Design",
-    },
-    description: {
-      es: "Trabajé en la creación de una identidad visual inmersiva que captura la esencia y energía del proyecto, desarrollando interfaces modernas y optimizadas para transmitir su propuesta de valor única.",
-      en: "I worked on creating an immersive visual identity that captures the project's essence and energy, developing modern and optimized interfaces to convey its unique value proposition.",
-    },
-    previewImages: [
-      "Portada.webp",
-      "Mini-1.webp",
-      "Mini-2.webp"
-    ],
-    images: [
-      { src: "Portada.webp", alt: "Tulum Portada", aspect: "wide" },
-      { 
-        src: "1.webp", 
-        alt: "Tulum 1", 
-        aspect: "wide",
-        cta: {
-          label: { es: "Ver demo", en: "View demo" },
-          href: "https://lightblue-wasp-875646.hostingersite.com/"
-        }
-      },
-      { src: "2.webp", alt: "Tulum 2", aspect: "wide" },
-      { src: "3.webp", alt: "Tulum 3", aspect: "wide" },
-      { src: "4.webp", alt: "Tulum 4", aspect: "wide" },
-      { src: "5.webp", alt: "Tulum 5", aspect: "wide" },
-      { src: "6.webp", alt: "Tulum 6", aspect: "wide" },
-      { src: "7.webp", alt: "Tulum 7", aspect: "wide" }
-    ],
-    participation: [
-      {
-        icon: "🎨",
-        text: { es: "Dirección de Arte", en: "Art Direction" }
-      },
-      {
-        icon: "💻",
-        text: { es: "Diseño Web", en: "Web Design" }
-      }
-    ]
-  },
   miiles: {
     slug: "miiles",
     title: "Miiles AI",
@@ -236,6 +182,60 @@ export const portfolioProjects: Record<string, Project> = {
     ],
   },
 
+  tulum: {
+    slug: "tulum",
+    title: "Tulum",
+    folder: "Tulum",
+    subtitle: {
+      es: "Desarrollo de identidad visual y diseño estratégico.",
+      en: "Visual identity development and strategic design.",
+    },
+    industry: {
+      es: "Restaurante",
+      en: "Restaurant",
+    },
+    role: {
+      es: "Dirección de Arte y Diseño Web",
+      en: "Art Direction & Web Design",
+    },
+    description: {
+      es: "Trabajé en la creación de una identidad visual inmersiva que captura la esencia y energía del proyecto, desarrollando interfaces modernas y optimizadas para transmitir su propuesta de valor única.",
+      en: "I worked on creating an immersive visual identity that captures the project's essence and energy, developing modern and optimized interfaces to convey its unique value proposition.",
+    },
+    previewImages: [
+      "Portada.webp",
+      "Mini-1.webp",
+      "Mini-2.webp"
+    ],
+    images: [
+      { src: "Portada.webp", alt: "Tulum Portada", aspect: "wide" },
+      { 
+        src: "1.webp", 
+        alt: "Tulum 1", 
+        aspect: "wide",
+        cta: {
+          label: { es: "Ver demo", en: "View demo" },
+          href: "https://lightblue-wasp-875646.hostingersite.com/"
+        }
+      },
+      { src: "2.webp", alt: "Tulum 2", aspect: "wide" },
+      { src: "3.webp", alt: "Tulum 3", aspect: "wide" },
+      { src: "4.webp", alt: "Tulum 4", aspect: "wide" },
+      { src: "5.webp", alt: "Tulum 5", aspect: "wide" },
+      { src: "6.webp", alt: "Tulum 6", aspect: "wide" },
+      { src: "7.webp", alt: "Tulum 7", aspect: "wide" }
+    ],
+    participation: [
+      {
+        icon: "🎨",
+        text: { es: "Dirección de Arte", en: "Art Direction" }
+      },
+      {
+        icon: "💻",
+        text: { es: "Diseño Web", en: "Web Design" }
+      }
+    ]
+  },
   tularosa: {
     slug: "tularosa",
     title: "Tularosa",

@@ -8,6 +8,12 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (Work page: Tulum moved down)
+
+- Tulum moved three places down in `portfolioProjects` (the work page and its
+  minimap follow that order): Miiles AI, Tapp Telcel, Naabi Kanabi, **Tulum**,
+  Tularosa…
+
 ## 2026-10-11 (Intro loader: letters no longer cut on iOS)
 
 - "Manu" was clipped by one `clip-path` exactly the size of the heading; with tight
