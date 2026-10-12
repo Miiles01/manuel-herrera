@@ -65,7 +65,7 @@ export default function ProyectoPage() {
               <p className="text-lg md:text-xl font-light leading-relaxed text-black/85">{project.industry.es}</p>
             </div>
             <div>
-              <p className="text-xs tracking-widest text-gray-400 mb-2 font-normal uppercase">Qué hicimos</p>
+              <p className="text-xs tracking-widest text-gray-400 mb-2 font-normal uppercase">Qué hice</p>
               <p className="text-lg md:text-xl font-light leading-relaxed text-black/85">{project.role.es}</p>
             </div>
           </div>

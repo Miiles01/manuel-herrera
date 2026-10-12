@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (Project pages in first person singular)
+
+- "Qué hicimos" / "What we did" → "Qué hice" / "What I did" on every project page.
+- Plural descriptions rewritten in the singular: Naabi Kanabi (Ejecuté, Fortalecí /
+  I executed, I strengthened), Tularosa (Digitalicé, Refiné, realicé / I digitized,
+  I refined), ERPXtender (Transformé, produje), and Virreinal Tepeyac EN ("when I
+  met them").
+
 ## 2026-10-11 (UI/UX design credited)
 
 - "Diseño UI/UX" / "UI/UX Design" added to the role of Miiles AI, Naabi Kanabi and

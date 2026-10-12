@@ -146,8 +146,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnels, Brand Identity Strategy, AI Automation & UI/UX Design",
     },
     description: {
-      es: "Ejecutamos el lanzamiento integral de la marca con una tienda en Shopify y agentes de IA conversacional para asesoría dermocosmética y cierre de ventas. Fortalecimos su presencia con una narrativa visual limpia, campañas de contenido estratégico y una conexión fluida entre el canal físico y digital.",
-      en: "We executed the comprehensive brand launch with a Shopify store and conversational AI agents for skincare consultation and automated sales closing. We strengthened its presence with a clean visual narrative, strategic content campaigns, and seamless alignment between physical and digital channels.",
+      es: "Ejecuté el lanzamiento integral de la marca con una tienda en Shopify y agentes de IA conversacional para asesoría dermocosmética y cierre de ventas. Fortalecí su presencia con una narrativa visual limpia, campañas de contenido estratégico y una conexión fluida entre el canal físico y digital.",
+      en: "I executed the comprehensive brand launch with a Shopify store and conversational AI agents for skincare consultation and automated sales closing. I strengthened its presence with a clean visual narrative, strategic content campaigns, and seamless alignment between physical and digital channels.",
     },
     previewImages: [
       "portada-v2.webp",
@@ -253,8 +253,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnels & Brand Identity Strategy",
     },
     description: {
-      es: "Digitalizamos la propuesta gastronómica de Tularosa mediante una plataforma web enfocada en reservas directas y conversión. Refinamos la base visual y realizamos dirección fotográfica profesional para destacar el atractivo visual de sus platillos y maximizar la ocupación del restaurante.",
-      en: "We digitized Tularosa's gastronomic offering through a web platform focused on direct bookings and conversion. We refined the visual foundation and conducted professional food photography direction to highlight culinary appeal and maximize restaurant occupancy.",
+      es: "Digitalicé la propuesta gastronómica de Tularosa mediante una plataforma web enfocada en reservas directas y conversión. Refiné la base visual y realicé dirección fotográfica profesional para destacar el atractivo visual de sus platillos y maximizar la ocupación del restaurante.",
+      en: "I digitized Tularosa's gastronomic offering through a web platform focused on direct bookings and conversion. I refined the visual foundation and conducted professional food photography direction to highlight culinary appeal and maximize restaurant occupancy.",
     },
     previewImages: [
       "portada-1.webp",
@@ -293,7 +293,7 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Sales Funnel & Brand Identity Strategy",
     },
     description: {
-      es: "Transformamos la identidad y estrategia visual de ERPXtender para posicionarlo como una solución ágil e innovadora en la industria corporativa. Diseñé una interfaz web centrada en UX y producimos activos visuales de alto impacto optimizados para un embudo de ventas B2B que acelera la toma de decisiones.",
+      es: "Transformé la identidad y estrategia visual de ERPXtender para posicionarlo como una solución ágil e innovadora en la industria corporativa. Diseñé una interfaz web centrada en UX y produje activos visuales de alto impacto optimizados para un embudo de ventas B2B que acelera la toma de decisiones.",
       en: "I transformed ERPXtender's visual identity and strategy to position it as an agile, innovative solution in the corporate industry. I designed a UX-centered web interface and produced high-impact visual assets optimized for a B2B sales funnel that accelerates decision-making.",
     },
     previewImages: [
@@ -412,7 +412,7 @@ export const portfolioProjects: Record<string, Project> = {
     },
     description: {
       es: "Diseñé toda la estrategia de la marca, construyendo su ADN desde cero a partir de sus valores. Ya contaban con un elemento gráfico cuando los conocí, el cual integré como isotipo principal para diseñar una identidad que se sintiera verdaderamente premium y transmitiera su esencia de salón de eventos boutique. El proyecto abarcó desde el manual de identidad y comunicación en redes sociales hasta la creación de su sitio web (https://virreinaltepeyac.com/).",
-      en: "I designed the entire brand strategy, building its DNA from scratch based on their core values. They already had a graphic element when we met, which I integrated as the main isotype to craft an identity that felt truly premium and conveyed its boutique venue essence. The project ranged from the identity manual and social media communication to the creation of their website (https://virreinaltepeyac.com/).",
+      en: "I designed the entire brand strategy, building its DNA from scratch based on their core values. They already had a graphic element when I met them, which I integrated as the main isotype to craft an identity that felt truly premium and conveyed its boutique venue essence. The project ranged from the identity manual and social media communication to the creation of their website (https://virreinaltepeyac.com/).",
     },
     previewImages: [
       "portada.webp",
