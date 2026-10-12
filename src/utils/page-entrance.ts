@@ -1,11 +1,17 @@
 import { usePageTransition } from "@/hooks/use-page-transition";
 
+/** The home pages (one per language). */
+const isHome = (path: string) => path === "/es" || path === "/en" || path === "/";
+
 /**
- * Whether navigations get the page slide (View Transitions). Off on phones
- * (< 640px) — there a page change is a plain swap — and when the browser lacks
- * support or the visitor prefers reduced motion. Tablet / desktop keep it.
+ * Whether a navigation gets the page slide (View Transitions). Off when leaving
+ * the home (a plain page change), on phones (< 640px), and when the browser
+ * lacks support or the visitor prefers reduced motion. Between the other pages
+ * (work ↔ projects, project ↔ project, back to the home) tablet / desktop
+ * keep the slide.
  */
-export function usesPageSlide(): boolean {
+export function usesPageSlide(fromPath: string): boolean {
+  if (isHome(fromPath)) return false;
   if (typeof document === "undefined" || !document.startViewTransition) return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
   return !window.matchMedia("(max-width: 639px)").matches;
@@ -26,7 +32,8 @@ export function usesPageSlide(): boolean {
  * may still be scrolled where the previous page was.
  */
 export function arrivesWithPageTransition(el: Element): boolean {
-  if (!usePageTransition.getState().isTransitioning || !usesPageSlide()) return false;
+  const { isTransitioning, slide } = usePageTransition.getState();
+  if (!isTransitioning || !slide) return false;
   const docTop = el.getBoundingClientRect().top + window.scrollY;
   return docTop < window.innerHeight;
 }

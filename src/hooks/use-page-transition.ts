@@ -19,6 +19,11 @@ interface TransitionState {
   isTransitioning: boolean;
   targetUrl: string | null;
   label: string;
+  /** Whether the current navigation plays the page slide (set by GlobalLoader
+   *  when it starts; see usesPageSlide). Pages read it to decide whether their
+   *  own entrance animation would be hidden under the slide. */
+  slide: boolean;
+  setSlide: (slide: boolean) => void;
   startTransition: (url: string) => void;
   finishTransition: () => void;
 }
@@ -27,11 +32,13 @@ export const usePageTransition = create<TransitionState>((set) => ({
   isTransitioning: false,
   targetUrl: null,
   label: "Hola",
+  slide: false,
+  setSlide: (slide) => set({ slide }),
   // Label is computed HERE, at click time, from the destination URL
   startTransition: (url) => set({
     isTransitioning: true,
     targetUrl: url,
     label: getLoaderLabel(url),
   }),
-  finishTransition: () => set({ isTransitioning: false, targetUrl: null }),
+  finishTransition: () => set({ isTransitioning: false, targetUrl: null, slide: false }),
 }));

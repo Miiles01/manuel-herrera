@@ -8,6 +8,15 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (No page slide when leaving the home)
+
+- Leaving the home (any link, the gallery "Ver" cursor included) is now a plain
+  page change on every size. The slide stays for the other pages on tablet and
+  desktop: work ↔ projects, project ↔ project, and back to the home.
+  `usesPageSlide(fromPath)` decides it; the choice is kept in the transition store
+  (`slide`) so `arrivesWithPageTransition()` only skips the project fade-up when a
+  slide actually plays.
+
 ## 2026-10-11 (Work page: Tulum moved down)
 
 - Tulum moved three places down in `portfolioProjects` (the work page and its

@@ -230,8 +230,10 @@ export function GlobalLoader() {
       finishTransition();
     };
 
-    // Phones, reduced motion or no support: a plain swap (no slide).
-    if (!usesPageSlide()) {
+    // Leaving the home, phones, reduced motion or no support: a plain swap.
+    const slide = usesPageSlide(pathname);
+    usePageTransition.getState().setSlide(slide);
+    if (!slide) {
       navigate().then(() => {
         toTop();
         stopReveal = prepareImageReveal()();
