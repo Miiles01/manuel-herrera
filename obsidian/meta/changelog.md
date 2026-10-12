@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (No page slide on phones)
+
+- Phones (< 640px) no longer get the page-transition slide: a page change is a
+  plain swap (images still fade up as they load, and project pages play their own
+  fade-up entrance again). Tablet and desktop keep the slide. One rule for both
+  sides: `usesPageSlide()` in `utils/page-entrance.ts` (also false without View
+  Transitions support or with reduced motion).
+
 ## 2026-10-11 (Miiles: miiles.app mockup with "View site")
 
 - Miiles project: new monitor mockup of the miiles.app home (`mockup-miiles-app.jpg`,

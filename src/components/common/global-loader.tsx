@@ -23,6 +23,7 @@ import { useLoaderStore } from "@/hooks/use-loader";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { usePageTransition } from "@/hooks/use-page-transition";
 import { prepareImageReveal } from "@/components/common/image-reveal";
+import { usesPageSlide } from "@/utils/page-entrance";
 
 /** Longest a page transition waits for the next route before giving up on the
  *  slide and just swapping (browsers abort view-transition updates after ~4s). */
@@ -39,10 +40,6 @@ const SLIDE_IN = { duration: 1000, easing: PAGE_EASE };
 const SLIDE_OUT = { duration: 1000, easing: PAGE_EASE };
 /** How far the outgoing page drifts up, and how dark it gets (1 = untouched). */
 const OUT_DRIFT = "-20%";
-/** Phones: the outgoing page stays put (only darkens). If it drifted up, a band
- *  of the black backdrop would open between it and the incoming page — on a
- *  white site that read as a flash. */
-const outDrift = () => (window.matchMedia("(max-width: 639px)").matches ? "0%" : OUT_DRIFT);
 const OUT_DIM = 0.65; // old page opacity over black ≈ a black overlay at 35%
 
 // ─── Intro timing (same choreography as before, now compositor-driven) ──────
@@ -226,8 +223,8 @@ export function GlobalLoader() {
       finishTransition();
     };
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!document.startViewTransition || reduced) {
+    // Phones, reduced motion or no support: a plain swap (no slide).
+    if (!usesPageSlide()) {
       navigate().then(() => {
         toTop();
         stopReveal = prepareImageReveal()();
@@ -251,7 +248,7 @@ export function GlobalLoader() {
         const root = document.documentElement;
         root.animate(
           {
-            transform: ["translateY(0)", `translateY(${outDrift()})`],
+            transform: ["translateY(0)", `translateY(${OUT_DRIFT})`],
             opacity: [1, OUT_DIM],
           },
           { ...SLIDE_OUT, fill: "both", pseudoElement: "::view-transition-old(root)" },
