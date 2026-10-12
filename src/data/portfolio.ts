@@ -42,8 +42,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Artificial Intelligence & Sales Consulting",
     },
     role: {
-      es: "Embudos de Ventas, Estrategia de Identidad de Marca y Automatización con IA",
-      en: "Sales Funnels, Brand Identity Strategy & AI Automation",
+      es: "Embudos de Ventas, Estrategia de Identidad de Marca, Automatización con IA y Diseño UI/UX",
+      en: "Sales Funnels, Brand Identity Strategy, AI Automation & UI/UX Design",
     },
     description: {
       es: "Lideré la creación y escalamiento de la marca mediante soluciones de prospección en frío y embudos de alta conversión impulsados por agentes de IA conversacional. Desarrollé la identidad visual completa, la arquitectura de ventas y las estrategias de crecimiento multicanal para posicionar a Miiles como referente en automatización comercial.",
@@ -142,8 +142,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Skincare & Dermocosmetics",
     },
     role: {
-      es: "Embudos de Ventas, Estrategia de Identidad de Marca y Automatización con IA",
-      en: "Sales Funnels, Brand Identity Strategy & AI Automation",
+      es: "Embudos de Ventas, Estrategia de Identidad de Marca, Automatización con IA y Diseño UI/UX",
+      en: "Sales Funnels, Brand Identity Strategy, AI Automation & UI/UX Design",
     },
     description: {
       es: "Ejecutamos el lanzamiento integral de la marca con una tienda en Shopify y agentes de IA conversacional para asesoría dermocosmética y cierre de ventas. Fortalecimos su presencia con una narrativa visual limpia, campañas de contenido estratégico y una conexión fluida entre el canal físico y digital.",
@@ -195,8 +195,8 @@ export const portfolioProjects: Record<string, Project> = {
       en: "Restaurant",
     },
     role: {
-      es: "Dirección de Arte y Diseño Web",
-      en: "Art Direction & Web Design",
+      es: "Dirección de Arte, Diseño Web y Diseño UI/UX",
+      en: "Art Direction, Web Design & UI/UX Design",
     },
     description: {
       es: "Trabajé en la creación de una identidad visual inmersiva que captura la esencia y energía del proyecto, desarrollando interfaces modernas y optimizadas para transmitir su propuesta de valor única.",

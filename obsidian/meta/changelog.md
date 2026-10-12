@@ -8,6 +8,11 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (UI/UX design credited)
+
+- "Diseño UI/UX" / "UI/UX Design" added to the role of Miiles AI, Naabi Kanabi and
+  Tulum (Tapp Telcel already had it).
+
 ## 2026-10-11 (Leaving the home: a fade instead of the slide)
 
 - Leaving the home (any link, the gallery "Ver" cursor included) now cross-fades:
