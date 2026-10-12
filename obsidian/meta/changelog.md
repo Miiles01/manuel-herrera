@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-10-11 (Intro loader: letters no longer cut on iOS)
+
+- "Manu" was clipped by one `clip-path` exactly the size of the heading; with tight
+  tracking and `leading-none` the glyph edges sat on that edge, and iOS Safari
+  clipped them once the letters animated. Each letter now rises inside its own
+  `overflow: hidden` window with room on every side (padding cancelled by negative
+  margins, so the layout is unchanged); travel is 130% so it stays hidden.
+
 ## 2026-10-11 (No page slide on phones)
 
 - Phones (< 640px) no longer get the page-transition slide: a page change is a

@@ -7,8 +7,8 @@
  * Intro, built not to stutter (it plays while React is still hydrating and the
  * home is mounting — the busiest moment of the page's life):
  * 1. The letters are rendered by the server ALREADY HIDDEN (each char is its own
- *    span at translateY(110%) inside a clipped heading), so nothing flashes in and
- *    out before the animation starts.
+ *    span, pushed below its own overflow-hidden window), so nothing flashes in
+ *    and out before the animation starts.
  * 2. Every movement runs on the Web Animations API with transform only, i.e. on
  *    the compositor — a long task on the main thread (hydration, the stage
  *    mounting) can't freeze it mid-way the way a JS-ticked tween would.
@@ -48,6 +48,9 @@ const EASE_OUT = "cubic-bezier(0.215, 0.61, 0.355, 1)"; // power3.out
 const EASE_IN = "cubic-bezier(0.55, 0.055, 0.675, 0.19)"; // power3.in
 const EASE_IN_OUT = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // power3.inOut
 const LETTER_IN = { duration: 650, stagger: 60 };
+/** Off-window letter position: the window has 0.15em of room below the glyph,
+ *  so the letter must start a bit further than 100% down to stay hidden. */
+const LETTER_HIDDEN = "130%";
 const LETTER_OUT = { duration: 500, stagger: 40 };
 const CURTAIN_UP_MS = 900;
 /** Hold after the letters land: once the page has loaded… */
@@ -68,14 +71,18 @@ const LoaderText = memo(
         ref={ref}
         aria-label={INTRO_WORD}
         className="flex text-black font-semibold tracking-tighter leading-none select-none"
-        style={{
-          fontSize: "clamp(3rem, 16vw, 14rem)",
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-        }}
+        style={{ fontSize: "clamp(3rem, 16vw, 14rem)" }}
       >
+        {/* Each letter rises inside its OWN window (overflow: hidden) with a
+            little room on every side (padding, cancelled by a negative margin so
+            the word keeps its layout). A single clip-path on the whole heading,
+            exactly the size of its box, clipped letter edges on iOS Safari once
+            the letters were animating. */}
         {[...INTRO_WORD].map((ch, i) => (
-          <span key={i} aria-hidden="true" data-char="" className="inline-block" style={{ transform: "translateY(110%)" }}>
-            {ch}
+          <span key={i} aria-hidden="true" className="-mx-[0.08em] -my-[0.15em] inline-block overflow-hidden px-[0.08em] py-[0.15em]">
+            <span data-char="" className="inline-block" style={{ transform: `translateY(${LETTER_HIDDEN})` }}>
+              {ch}
+            </span>
           </span>
         ))}
       </h2>
@@ -163,9 +170,9 @@ export function GlobalLoader() {
       });
 
     (async () => {
-      await animateChars(chars, "translateY(110%)", "translateY(0%)", LETTER_IN, EASE_OUT);
+      await animateChars(chars, `translateY(${LETTER_HIDDEN})`, "translateY(0%)", LETTER_IN, EASE_OUT);
       await waitForPage();
-      await animateChars(chars, "translateY(0%)", "translateY(-110%)", LETTER_OUT, EASE_IN);
+      await animateChars(chars, "translateY(0%)", `translateY(-${LETTER_HIDDEN})`, LETTER_OUT, EASE_IN);
       await loader.animate(
         { transform: ["translateY(0%)", "translateY(-100%)"] },
         { duration: CURTAIN_UP_MS, easing: EASE_IN_OUT, fill: "forwards" },
