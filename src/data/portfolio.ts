@@ -79,6 +79,7 @@ export const portfolioProjects: Record<string, Project> = {
       { icon: "eye", text: { es: "Automatización con IA", en: "AI Automation" } },
     ],
   },
+
   "tapp-telcel": {
     slug: "tapp-telcel",
     title: "Tapp Telcel",
@@ -236,6 +237,96 @@ export const portfolioProjects: Record<string, Project> = {
       }
     ]
   },
+
+  "the-decant-society": {
+    slug: "the-decant-society",
+    title: "The Decant Society",
+    folder: "the-decant-society",
+    subtitle: {
+      es: "Identidad de marca sofisticada y plataforma e-commerce para perfumería premium.",
+      en: "Sophisticated brand identity and e-commerce platform for premium perfumery.",
+    },
+    industry: {
+      es: "Perfumería, Belleza y E-commerce Premium",
+      en: "Perfumery, Beauty & Premium E-commerce",
+    },
+    role: {
+      es: "Estrategia de Identidad de Marca y E-commerce",
+      en: "Brand Identity Strategy & E-commerce",
+    },
+    description: {
+      es: "Desarrollé una identidad visual sofisticada y memorable para The Decant Society, elevando su presencia en el mercado de la perfumería y fragancias premium. Diseñé un sistema gráfico elegante y construí una plataforma de e-commerce optimizada, capturando la exclusividad de la marca. Visita el proyecto en https://thedecantsociety.com/",
+      en: "I developed a sophisticated and memorable visual identity for The Decant Society, elevating its presence in the premium perfumery and fragrance market. I designed an elegant graphic system and built an optimized e-commerce platform, capturing the brand's exclusivity. Visit the project at https://thedecantsociety.com/",
+    },
+    previewImages: [
+      "portada.webp",
+      "mini-1.webp",
+      "mini-2.webp",
+    ],
+    images: [
+      { src: "portada.webp", alt: "The Decant Society — Cover", aspect: "wide" },
+      { src: "1.webp", alt: "The Decant Society — 1", aspect: "wide" },
+      { src: "2.webp", alt: "The Decant Society — 2", aspect: "wide" },
+      { src: "3.webp", alt: "The Decant Society — 3", aspect: "wide" },
+      { src: "4.webp", alt: "The Decant Society — 4", aspect: "wide" },
+      { src: "5.webp", alt: "The Decant Society — 5", aspect: "wide" },
+      { src: "6.webp", alt: "The Decant Society — 6", aspect: "wide" },
+      { src: "7.webp", alt: "The Decant Society — 7", aspect: "wide" },
+    ],
+    participation: [
+      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
+      { icon: "star", text: { es: "E-commerce", en: "E-commerce" } },
+    ],
+  },
+
+  virreinal_tepeyac: {
+    slug: "virreinal-tepeyac",
+    title: "Virreinal Tepeyac",
+    folder: "virreinal-tepeyac",
+    subtitle: {
+      es: "Construcción de marca y diseño web para un venue boutique de alto calibre.",
+      en: "Brand building and web design for a high-caliber boutique venue.",
+    },
+    industry: {
+      es: "Eventos y Venue Boutique",
+      en: "Events & Boutique Venue",
+    },
+    role: {
+      es: "Estrategia de Marca y Diseño Web",
+      en: "Brand Strategy & Web Design",
+    },
+    description: {
+      es: "Diseñé toda la estrategia de la marca, construyendo su ADN desde cero a partir de sus valores. Ya contaban con un elemento gráfico cuando los conocí, el cual integré como isotipo principal para diseñar una identidad que se sintiera verdaderamente premium y transmitiera su esencia de salón de eventos boutique. El proyecto abarcó desde el manual de identidad y comunicación en redes sociales hasta la creación de su sitio web (https://virreinaltepeyac.com/).",
+      en: "I designed the entire brand strategy, building its DNA from scratch based on their core values. They already had a graphic element when I met them, which I integrated as the main isotype to craft an identity that felt truly premium and conveyed its boutique venue essence. The project ranged from the identity manual and social media communication to the creation of their website (https://virreinaltepeyac.com/).",
+    },
+    previewImages: [
+      "portada.webp",
+      "portada-mini-1.webp",
+      "portada-mini-2.webp",
+    ],
+    images: [
+      { src: "portada.webp", alt: "Virreinal Tepeyac — Cover", aspect: "wide" },
+      { src: "1.webp", alt: "Virreinal Tepeyac — 1", aspect: "wide" },
+      { src: "2.webp", alt: "Virreinal Tepeyac — 2", aspect: "wide" },
+      { src: "3.webp", alt: "Virreinal Tepeyac — 3", aspect: "wide" },
+      { src: "4.webp", alt: "Virreinal Tepeyac — 4", aspect: "wide" },
+      { src: "5.webp", alt: "Virreinal Tepeyac — 5", aspect: "wide" },
+      { src: "6.webp", alt: "Virreinal Tepeyac — Publicaciones en redes sociales 1", aspect: "wide" },
+      { src: "7.webp", alt: "Virreinal Tepeyac — Publicaciones en redes sociales 2", aspect: "wide" },
+      { src: "8.webp", alt: "Virreinal Tepeyac — 8", aspect: "wide" },
+      { src: "9.webp", alt: "Virreinal Tepeyac — 9", aspect: "wide" },
+      { src: "10.webp", alt: "Virreinal Tepeyac — 10", aspect: "wide" },
+      { src: "11.webp", alt: "Virreinal Tepeyac — 11", aspect: "wide" },
+      { src: "12.webp", alt: "Virreinal Tepeyac — 12", aspect: "wide" },
+      { src: "13.webp", alt: "Virreinal Tepeyac — 13", aspect: "wide" },
+    ],
+    participation: [
+      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
+      { icon: "star", text: { es: "Diseño Web", en: "Web Design" } },
+      { icon: "star", text: { es: "Estrategia de Redes Sociales", en: "Social Media Strategy" } },
+    ],
+  },
+
   tularosa: {
     slug: "tularosa",
     title: "Tularosa",
@@ -394,54 +485,6 @@ export const portfolioProjects: Record<string, Project> = {
     ],
   },
 
-  virreinal_tepeyac: {
-    slug: "virreinal-tepeyac",
-    title: "Virreinal Tepeyac",
-    folder: "virreinal-tepeyac",
-    subtitle: {
-      es: "Construcción de marca y diseño web para un venue boutique de alto calibre.",
-      en: "Brand building and web design for a high-caliber boutique venue.",
-    },
-    industry: {
-      es: "Eventos y Venue Boutique",
-      en: "Events & Boutique Venue",
-    },
-    role: {
-      es: "Estrategia de Marca y Diseño Web",
-      en: "Brand Strategy & Web Design",
-    },
-    description: {
-      es: "Diseñé toda la estrategia de la marca, construyendo su ADN desde cero a partir de sus valores. Ya contaban con un elemento gráfico cuando los conocí, el cual integré como isotipo principal para diseñar una identidad que se sintiera verdaderamente premium y transmitiera su esencia de salón de eventos boutique. El proyecto abarcó desde el manual de identidad y comunicación en redes sociales hasta la creación de su sitio web (https://virreinaltepeyac.com/).",
-      en: "I designed the entire brand strategy, building its DNA from scratch based on their core values. They already had a graphic element when I met them, which I integrated as the main isotype to craft an identity that felt truly premium and conveyed its boutique venue essence. The project ranged from the identity manual and social media communication to the creation of their website (https://virreinaltepeyac.com/).",
-    },
-    previewImages: [
-      "portada.webp",
-      "portada-mini-1.webp",
-      "portada-mini-2.webp",
-    ],
-    images: [
-      { src: "portada.webp", alt: "Virreinal Tepeyac — Cover", aspect: "wide" },
-      { src: "1.webp", alt: "Virreinal Tepeyac — 1", aspect: "wide" },
-      { src: "2.webp", alt: "Virreinal Tepeyac — 2", aspect: "wide" },
-      { src: "3.webp", alt: "Virreinal Tepeyac — 3", aspect: "wide" },
-      { src: "4.webp", alt: "Virreinal Tepeyac — 4", aspect: "wide" },
-      { src: "5.webp", alt: "Virreinal Tepeyac — 5", aspect: "wide" },
-      { src: "6.webp", alt: "Virreinal Tepeyac — Publicaciones en redes sociales 1", aspect: "wide" },
-      { src: "7.webp", alt: "Virreinal Tepeyac — Publicaciones en redes sociales 2", aspect: "wide" },
-      { src: "8.webp", alt: "Virreinal Tepeyac — 8", aspect: "wide" },
-      { src: "9.webp", alt: "Virreinal Tepeyac — 9", aspect: "wide" },
-      { src: "10.webp", alt: "Virreinal Tepeyac — 10", aspect: "wide" },
-      { src: "11.webp", alt: "Virreinal Tepeyac — 11", aspect: "wide" },
-      { src: "12.webp", alt: "Virreinal Tepeyac — 12", aspect: "wide" },
-      { src: "13.webp", alt: "Virreinal Tepeyac — 13", aspect: "wide" },
-    ],
-    participation: [
-      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
-      { icon: "star", text: { es: "Diseño Web", en: "Web Design" } },
-      { icon: "star", text: { es: "Estrategia de Redes Sociales", en: "Social Media Strategy" } },
-    ],
-  },
-
   colorfit: {
     slug: "colorfit",
     title: "Colorfit",
@@ -520,46 +563,4 @@ export const portfolioProjects: Record<string, Project> = {
       { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
     ],
   },
-
-  "the-decant-society": {
-    slug: "the-decant-society",
-    title: "The Decant Society",
-    folder: "the-decant-society",
-    subtitle: {
-      es: "Identidad de marca sofisticada y plataforma e-commerce para perfumería premium.",
-      en: "Sophisticated brand identity and e-commerce platform for premium perfumery.",
-    },
-    industry: {
-      es: "Perfumería, Belleza y E-commerce Premium",
-      en: "Perfumery, Beauty & Premium E-commerce",
-    },
-    role: {
-      es: "Estrategia de Identidad de Marca y E-commerce",
-      en: "Brand Identity Strategy & E-commerce",
-    },
-    description: {
-      es: "Desarrollé una identidad visual sofisticada y memorable para The Decant Society, elevando su presencia en el mercado de la perfumería y fragancias premium. Diseñé un sistema gráfico elegante y construí una plataforma de e-commerce optimizada, capturando la exclusividad de la marca. Visita el proyecto en https://thedecantsociety.com/",
-      en: "I developed a sophisticated and memorable visual identity for The Decant Society, elevating its presence in the premium perfumery and fragrance market. I designed an elegant graphic system and built an optimized e-commerce platform, capturing the brand's exclusivity. Visit the project at https://thedecantsociety.com/",
-    },
-    previewImages: [
-      "portada.webp",
-      "mini-1.webp",
-      "mini-2.webp",
-    ],
-    images: [
-      { src: "portada.webp", alt: "The Decant Society — Cover", aspect: "wide" },
-      { src: "1.webp", alt: "The Decant Society — 1", aspect: "wide" },
-      { src: "2.webp", alt: "The Decant Society — 2", aspect: "wide" },
-      { src: "3.webp", alt: "The Decant Society — 3", aspect: "wide" },
-      { src: "4.webp", alt: "The Decant Society — 4", aspect: "wide" },
-      { src: "5.webp", alt: "The Decant Society — 5", aspect: "wide" },
-      { src: "6.webp", alt: "The Decant Society — 6", aspect: "wide" },
-      { src: "7.webp", alt: "The Decant Society — 7", aspect: "wide" },
-    ],
-    participation: [
-      { icon: "star", text: { es: "Estrategia de Identidad de Marca", en: "Brand Identity Strategy" } },
-      { icon: "star", text: { es: "E-commerce", en: "E-commerce" } },
-    ],
-  },
-
 };

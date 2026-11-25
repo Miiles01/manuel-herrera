@@ -60,7 +60,7 @@ export function PortfolioFooter({ lang = 'es' }: { lang?: 'es' | 'en' }) {
   }, { scope: footerRef });
 
   return (
-    <footer ref={footerRef} className="bg-gradient-to-b from-[#FFFFFF] to-[#F8F9FD] py-24 md:py-32 px-8 md:px-12 overflow-hidden relative z-0">
+    <footer ref={footerRef} className="bg-gradient-to-b from-[#FFFFFF] to-[#F8F9FD] py-16 md:py-32 px-8 md:px-12 overflow-hidden relative z-0">
       <div className="w-full flex flex-col relative z-10 mix-blend-difference text-white">
         
         <div className="flex flex-wrap justify-center items-start gap-12 md:gap-24 w-full text-gray-400 text-lg mb-12 text-center pt-8">

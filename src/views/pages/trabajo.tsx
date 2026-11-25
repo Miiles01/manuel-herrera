@@ -69,7 +69,7 @@ export default function TrabajoPage() {
       <ScrollMinimap items={minimapItems} />
       <CursorLabel />
       
-      <main className="flex-1 pt-36 md:pt-48 pb-20">
+      <main className="flex-1 pt-36 md:pt-48 pb-8 md:pb-20">
         <section className="px-6 md:px-12 lg:px-20 container mx-auto mb-20 md:mb-32">
           <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight max-w-3xl mb-6 text-black leading-relaxed fade-up-hero opacity-0">
             Pienso con propósito para marcas que buscan autenticidad y escalabilidad.
@@ -79,14 +79,14 @@ export default function TrabajoPage() {
           </h1>
         </section>
 
-        <section className="px-4 md:px-8 lg:px-12 pb-12">
+        <section className="px-4 md:px-8 lg:px-12 pb-4 md:pb-12">
           {projects.map(proj => {
             const slug = proj.slug;
             const title = proj.title;
             const subtitle = proj.subtitle.es;
             
             return (
-              <div key={slug} id={slug} className="mb-28 md:mb-40 group project-item">
+              <div key={slug} id={slug} className="mb-20 md:mb-40 last:mb-0 group project-item">
                 <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[1rem] md:rounded-[2.5rem] transition-all project-fade-up opacity-0">
                   <ProjectHoverPreview project={proj} />
                 </TransitionLink>

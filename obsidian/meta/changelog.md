@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-25 (Work order + tighter mobile spacing)
+
+- Work page order: The Decant Society and Virreinal Tepeyac now sit right
+  above Tularosa (after Tulum).
+- Mobile: less space between projects (mb-28 → mb-20), none after the last
+  one, smaller bottom padding on main/section, footer py-24 → py-16.
+  Desktop unchanged.
+
 ## 2026-11-25 (Hover: straight cuts + background preload; softer mobile corners)
 
 - Work-page hover swaps images with a straight cut (no fade).
