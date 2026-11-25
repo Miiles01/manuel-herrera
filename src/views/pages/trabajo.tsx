@@ -11,6 +11,7 @@ import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
 import { useLoaderStore } from "@/hooks/use-loader";
 import { ScrollMinimap } from "@/components/ui/scroll-minimap";
 import { CursorLabel } from "@/components/ui/cursor-label";
+import { ProjectHoverPreview } from "@/components/portfolio/ProjectHoverPreview";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,8 +81,6 @@ export default function TrabajoPage() {
 
         <section className="px-4 md:px-8 lg:px-12 pb-12">
           {projects.map(proj => {
-            const cover = proj.previewImages[0];
-            const secondary = [proj.previewImages[1], proj.previewImages[2]];
             const slug = proj.slug;
             const title = proj.title;
             const subtitle = proj.subtitle.es;
@@ -89,25 +88,8 @@ export default function TrabajoPage() {
             return (
               <div key={slug} id={slug} className="mb-28 md:mb-40 group project-item">
                 <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] transition-all project-fade-up opacity-0">
-                  <div className="aspect-[16/9] w-full overflow-hidden">
-                    <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${cover}`} alt={title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-                  </div>
+                  <ProjectHoverPreview project={proj} />
                 </TransitionLink>
-                
-                {secondary[0] && secondary[1] && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
-                    <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block overflow-hidden rounded-[2rem] transition-all project-fade-up opacity-0">
-                      <div className="aspect-[4/5] overflow-hidden">
-                        <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${secondary[0]}`} alt={`${title} preview 1`} className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
-                      </div>
-                    </TransitionLink>
-                    <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block overflow-hidden rounded-[2rem] transition-all project-fade-up opacity-0">
-                      <div className="aspect-[4/5] overflow-hidden">
-                        <img loading="lazy" decoding="async" src={`/proyectos/${proj.folder}/${secondary[1]}`} alt={`${title} preview 2`} className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]" />
-                      </div>
-                    </TransitionLink>
-                  </div>
-                )}
                 
                 <div className="px-2 md:px-4 flex flex-col md:flex-row md:items-end justify-between gap-4 project-fade-up opacity-0">
                   <div className="max-w-2xl">

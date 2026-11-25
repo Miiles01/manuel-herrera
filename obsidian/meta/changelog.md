@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-25 (Work page: hover flips through the project)
+
+- The two small preview images under each project cover are gone.
+- Hovering the cover now cycles through the project's gallery images in place
+  (every 450 ms, videos skipped) and returns to the cover on leave —
+  `src/components/portfolio/ProjectHoverPreview.tsx`, used by both `/es/trabajo`
+  and `/en/work`.
+
 ## 2026-10-11 (Project pages in first person singular)
 
 - "Qué hicimos" / "What we did" → "Qué hice" / "What I did" on every project page.
