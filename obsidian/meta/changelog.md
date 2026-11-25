@@ -8,6 +8,16 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-25 (Hover: straight cuts + background preload; softer mobile corners)
+
+- Work-page hover swaps images with a straight cut (no fade).
+- All hover images of a project preload in the background (2 at a time, in
+  display order) once its card is within 600 px of the viewport — desktop
+  pointers only, skipped with Save-Data. Hover images are capped at the
+  1920 px optimiser size; the cover keeps full quality.
+- Mobile corner radius halved: work-page covers 2rem → 1rem, home featured
+  cards (mobile) 24px → 12px. Desktop unchanged.
+
 ## 2026-11-25 (Home experience list: brands only)
 
 - Removed the role titles ("— Co-Fundador | Marketing Manager", "— CEO", …) from

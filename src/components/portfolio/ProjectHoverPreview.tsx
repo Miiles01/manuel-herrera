@@ -6,30 +6,33 @@ import type { Project } from "@/data/portfolio";
 
 /** Minimum time each gallery image stays on screen while hovering (ms). */
 const FRAME_MS = 1400;
-/** Fade-in of each new image over the previous one (ms). */
-const FADE_MS = 500;
-const SIZES = "(min-width: 768px) 92vw, 100vw";
+/** Cover: full quality. */
+const COVER_SIZES = "(min-width: 768px) 92vw, 100vw";
+/** Hover images: capped so a retina screen fetches at most the 1920 px file. */
+const HOVER_SIZES = "(min-width: 768px) min(92vw, 960px), 100vw";
+/** How many hover images download at the same time per project. */
+const PRELOAD_CONCURRENCY = 2;
 const IMAGE_EXT = /\.(webp|png|jpe?g|avif)$/i;
 
-type Frame = { src: string; srcSet?: string };
+type Frame = { src: string; srcSet?: string; sizes: string };
 
 /** Optimised (resized, WebP/AVIF) URLs via the Next image optimiser. */
-function optimised(path: string): Frame {
+function optimised(path: string, sizes: string): Frame {
   const { props } = getImageProps({
     src: path,
     alt: "",
     width: 1920,
     height: 1080,
-    sizes: SIZES,
+    sizes,
     quality: 75,
   });
-  return { src: props.src, srcSet: props.srcSet };
+  return { src: props.src, srcSet: props.srcSet, sizes };
 }
 
 /** Download + decode a frame so showing it never flashes a blank. */
 function loadFrame(frame: Frame): Promise<void> {
   const img = new Image();
-  img.sizes = SIZES;
+  img.sizes = frame.sizes;
   if (frame.srcSet) img.srcset = frame.srcSet;
   img.src = frame.src;
   return img.decode().catch(() => undefined);
@@ -40,10 +43,10 @@ const IMG_CLASS =
 
 /**
  * Work-page cover. Shows the project's cover; while the pointer is over it,
- * it steps through the project's gallery images in place (videos skipped),
- * each one fading in over the last, and fades back to the cover on leave.
- * The next image is always downloaded and decoded before it's shown — and
- * the one after starts loading right away — so nothing flashes. Images come
+ * it steps through the project's gallery images in place (videos skipped) —
+ * a straight cut, no animation — and goes back to the cover on leave.
+ * All hover images preload in the background as the card nears the viewport,
+ * and each is decoded before it's shown, so nothing flashes. Images come
  * from the Next optimiser (resized WebP/AVIF), not the original files.
  * Touch screens just see the cover.
  */
@@ -53,16 +56,16 @@ export function ProjectHoverPreview({ project }: { project: Project }) {
     const gallery = project.images
       .map((img) => img.src)
       .filter((src) => IMAGE_EXT.test(src) && src !== cover);
-    return [cover, ...Array.from(new Set(gallery))].map((src) =>
-      optimised(`/proyectos/${project.folder}/${src}`),
+    return [cover, ...Array.from(new Set(gallery))].map((src, i) =>
+      optimised(`/proyectos/${project.folder}/${src}`, i === 0 ? COVER_SIZES : HOVER_SIZES),
     );
   }, [project.images, project.folder, cover]);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const topRef = useRef<HTMLImageElement>(null);
   const loads = useRef(new Map<number, Promise<void>>());
   const [hovering, setHovering] = useState(false);
-  // `current` is on top; `under` stays fully opaque beneath it while it fades in.
+  // `current` is on top; `under` (the previous image) stays beneath it so the
+  // swap never shows a blank while the new <img> paints.
   const [{ current, under }, setLayers] = useState({ current: 0, under: -1 });
 
   const ensureLoaded = (i: number) => {
@@ -77,18 +80,30 @@ export function ProjectHoverPreview({ project }: { project: Project }) {
   const show = (next: number) =>
     setLayers((l) => (l.current === next ? l : { current: next, under: l.current }));
 
-  // Warm up the first hover image once the card is near the viewport.
+  // Background preload: once the card is near the viewport, download every
+  // hover image in the order they'll be shown, PRELOAD_CONCURRENCY at a time,
+  // so they're ready before the pointer arrives. Mouse/trackpad devices only,
+  // and never when the visitor asked to save data.
   useEffect(() => {
     const el = rootRef.current;
     if (!el || frames.length < 2) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (conn?.saveData) return;
+    const preloadAll = () => {
+      let nextUp = 1;
+      const worker = (): Promise<void> =>
+        nextUp < frames.length ? ensureLoaded(nextUp++).then(worker) : Promise.resolve();
+      for (let k = 0; k < PRELOAD_CONCURRENCY; k++) void worker();
+    };
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          void ensureLoaded(1);
+          preloadAll();
           io.disconnect();
         }
       },
-      { rootMargin: "300px" },
+      { rootMargin: "600px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -121,17 +136,6 @@ export function ProjectHoverPreview({ project }: { project: Project }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hovering, frames]);
 
-  // Fade the new top image in over the one underneath.
-  useEffect(() => {
-    const el = topRef.current;
-    if (!el || under < 0) return;
-    const anim = el.animate(
-      { opacity: [0, 1] },
-      { duration: FADE_MS, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "backwards" },
-    );
-    return () => anim.cancel();
-  }, [current, under]);
-
   return (
     <div
       ref={rootRef}
@@ -147,7 +151,7 @@ export function ProjectHoverPreview({ project }: { project: Project }) {
           key={`under-${under}`}
           src={frames[under].src}
           srcSet={frames[under].srcSet}
-          sizes={SIZES}
+          sizes={frames[under].sizes}
           alt=""
           aria-hidden
           decoding="async"
@@ -156,10 +160,9 @@ export function ProjectHoverPreview({ project }: { project: Project }) {
       )}
       <img
         key={`top-${current}`}
-        ref={topRef}
         src={frames[current].src}
         srcSet={frames[current].srcSet}
-        sizes={SIZES}
+        sizes={frames[current].sizes}
         alt={project.title}
         loading={current === 0 && under < 0 ? "lazy" : "eager"}
         decoding="async"

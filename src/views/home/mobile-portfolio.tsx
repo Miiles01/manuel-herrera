@@ -36,7 +36,7 @@ export const MobilePortfolio = ({ content, lang = "es" }: { content: ShowreelCon
                 </div>
               </>
             );
-            const cls = "relative flex w-full aspect-[4/3] overflow-hidden rounded-[24px] p-6 text-white";
+            const cls = "relative flex w-full aspect-[4/3] overflow-hidden rounded-[12px] p-6 text-white";
             return href ? (
               <TransitionLink key={item.title} href={href} className={`${cls} block cursor-pointer`}>
                 {card}

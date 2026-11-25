@@ -87,7 +87,7 @@ export default function TrabajoPage() {
             
             return (
               <div key={slug} id={slug} className="mb-28 md:mb-40 group project-item">
-                <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[2rem] md:rounded-[2.5rem] transition-all project-fade-up opacity-0">
+                <TransitionLink href={`/es/proyecto/${slug}`} data-cursor-label="Ver" className="block w-full mb-6 md:mb-8 overflow-hidden rounded-[1rem] md:rounded-[2.5rem] transition-all project-fade-up opacity-0">
                   <ProjectHoverPreview project={proj} />
                 </TransitionLink>
                 
