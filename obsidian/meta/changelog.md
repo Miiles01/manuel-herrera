@@ -8,6 +8,16 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-25 (Work page hover: slower, preloaded, no flashing)
+
+- Each image stays 1.4 s and fades in over the previous one (0.5 s); the one
+  underneath stays opaque, so nothing blinks.
+- The next image is downloaded + decoded before it's shown and the one after
+  starts loading immediately; the first hover image preloads when the card
+  nears the viewport.
+- Hover frames come from the Next image optimiser (resized WebP/AVIF) instead
+  of the original files (e.g. Tapp Telcel 8 MB PNG → ~45 KB).
+
 ## 2026-11-25 (Work page: hover flips through the project)
 
 - The two small preview images under each project cover are gone.
