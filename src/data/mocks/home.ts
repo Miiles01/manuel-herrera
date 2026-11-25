@@ -162,11 +162,11 @@ export const homeContent: ShowreelContent = {
     headingTop: "",
     headingBottom: ["Piensa", "diferente"],
     body: [
-      "Naabi Kanabi <span class=\"opacity-50\">—</span> <strong>Co-Fundador | Marketing Manager</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.</span>",
-      "Miiles AI <span class=\"opacity-50\">—</span> <strong>CEO</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Ads, A/B testing, lifecycle marketing y configuración email.</span>",
-      "Claro Pay <span class=\"opacity-50\">—</span> <strong>Diseñador de Experiencia del Usuario</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Investigación UX para app de pagos, benchmarking, pruebas de usabilidad.</span>",
-      "BRIX Agency <span class=\"opacity-50\">—</span> <strong>Diseñador de Experiencia del Usuario</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Diseño UX/UI en Figma, pruebas de usabilidad.</span>",
-      "Fiverr <span class=\"opacity-50\">—</span> <strong>Branding Freelancer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">+50 clientes en LATAM, identidad visual, colaboraciones con influencers.</span>"
+      "Naabi Kanabi<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Posicionamiento de marca, SEO/SEM y paid media, contenido para redes, vibe coding.</span>",
+      "Miiles AI<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Funnels de adquisición con IA, ventas corporativas B2B, vibe coding y automatización. Campañas en Ads, A/B testing, lifecycle marketing y configuración email.</span>",
+      "Claro Pay<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Investigación UX para app de pagos, benchmarking, pruebas de usabilidad.</span>",
+      "BRIX Agency<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Diseño UX/UI en Figma, pruebas de usabilidad.</span>",
+      "Fiverr<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">+50 clientes en LATAM, identidad visual, colaboraciones con influencers.</span>"
     ],
     cardLabel: "",
     cardUrl: "",
@@ -276,11 +276,11 @@ export const homeContentEn: ShowreelContent = {
     ...homeContent.sphere,
     headingBottom: ["Think", "different"],
     body: [
-      "Naabi Kanabi <span class=\"opacity-50\">—</span> <strong>Co-Founder | Marketing Manager</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Brand positioning, SEO/SEM and paid media, social content, vibe coding.</span>",
-      "Miiles AI <span class=\"opacity-50\">—</span> <strong>CEO</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">AI-powered acquisition funnels, B2B corporate sales, vibe coding and automation. Ads campaigns, A/B testing, lifecycle marketing and email setup.</span>",
-      "Claro Pay <span class=\"opacity-50\">—</span> <strong>User Experience Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX research for a payments app, benchmarking, usability testing.</span>",
-      "BRIX Agency <span class=\"opacity-50\">—</span> <strong>User Experience Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX/UI design in Figma, usability testing.</span>",
-      "Fiverr <span class=\"opacity-50\">—</span> <strong>Freelance Branding Designer</strong><br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">50+ clients across LATAM, visual identity, influencer collaborations.</span>",
+      "Naabi Kanabi<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">Brand positioning, SEO/SEM and paid media, social content, vibe coding.</span>",
+      "Miiles AI<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">AI-powered acquisition funnels, B2B corporate sales, vibe coding and automation. Ads campaigns, A/B testing, lifecycle marketing and email setup.</span>",
+      "Claro Pay<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX research for a payments app, benchmarking, usability testing.</span>",
+      "BRIX Agency<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">UX/UI design in Figma, usability testing.</span>",
+      "Fiverr<br/><span class=\"opacity-75 block mt-1 leading-snug text-[0.9em]\">50+ clients across LATAM, visual identity, influencer collaborations.</span>",
     ],
     cardHeading: "From idea to execution",
   },

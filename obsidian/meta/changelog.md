@@ -8,6 +8,12 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-25 (Home experience list: brands only)
+
+- Removed the role titles ("— Co-Fundador | Marketing Manager", "— CEO", …) from
+  the experience list in the home sphere scene (ES + EN); each entry now shows
+  only the brand and its description.
+
 ## 2026-11-25 (Work page hover: slower, preloaded, no flashing)
 
 - Each image stays 1.4 s and fades in over the previous one (0.5 s); the one
