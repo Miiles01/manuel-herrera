@@ -8,6 +8,14 @@ updated: 2026-06-27
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
 
+## 2026-11-26 (New project: Aalto Studio)
+
+- Added Aalto Studio (architecture studio — logo design + web design) to
+  `src/data/portfolio.ts`, placed after Virreinal Tepeyac / above Tularosa.
+- Images in `public/proyectos/Aalto-Studio/` (converted from 4K PNG to WebP,
+  30–370 KB each). "Ver página / View site" CTA on the website mockup links to
+  https://aquatic-coral-yak-81.hostingersite.com/.
+
 ## 2026-11-25 (Work order + tighter mobile spacing)
 
 - Work page order: The Decant Society and Virreinal Tepeyac now sit right

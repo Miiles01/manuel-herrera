@@ -327,6 +327,52 @@ export const portfolioProjects: Record<string, Project> = {
     ],
   },
 
+  "aalto-studio": {
+    slug: "aalto-studio",
+    title: "Aalto Studio",
+    folder: "Aalto-Studio",
+    subtitle: {
+      es: "Diseño de logotipo y sitio web para un estudio de arquitectura.",
+      en: "Logo design and website for an architecture studio.",
+    },
+    industry: {
+      es: "Arquitectura",
+      en: "Architecture",
+    },
+    role: {
+      es: "Diseño de Logotipo y Diseño Web",
+      en: "Logo Design & Web Design",
+    },
+    description: {
+      es: "Diseñé el logotipo de Aalto Studio, un estudio de arquitectura: un símbolo construido a partir de techos y curvas que dialoga con el paisaje, acompañado de una tipografía limpia y contemporánea. Después llevé la identidad a su sitio web, con una experiencia sobria y espaciosa que pone la arquitectura al centro.",
+      en: "I designed the logo for Aalto Studio, an architecture studio: a symbol built from rooflines and curves that speaks to the landscape, paired with clean, contemporary typography. I then carried the identity into their website, with a calm, spacious experience that puts the architecture first.",
+    },
+    previewImages: [
+      "portada.webp",
+      "pagina-web.webp",
+      "posters.webp",
+    ],
+    images: [
+      { src: "portada.webp", alt: "Aalto Studio — Logotipo", aspect: "wide" },
+      {
+        src: "pagina-web.webp",
+        alt: "Aalto Studio — Sitio web",
+        aspect: "wide",
+        cta: {
+          label: { es: "Ver página", en: "View site" },
+          href: "https://aquatic-coral-yak-81.hostingersite.com/"
+        }
+      },
+      { src: "isotipo.webp", alt: "Aalto Studio — Isotipo", aspect: "wide" },
+      { src: "posters.webp", alt: "Aalto Studio — Pósters", aspect: "wide" },
+      { src: "uniforme.webp", alt: "Aalto Studio — Aplicaciones de marca", aspect: "wide" },
+    ],
+    participation: [
+      { icon: "star", text: { es: "Diseño de Logotipo", en: "Logo Design" } },
+      { icon: "eye", text: { es: "Diseño Web", en: "Web Design" } },
+    ],
+  },
+
   tularosa: {
     slug: "tularosa",
     title: "Tularosa",
